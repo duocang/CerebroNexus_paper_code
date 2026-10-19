@@ -1,0 +1,43 @@
+name: Figures
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  figures:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Create this folder to silence warning
+        run: mkdir -p ~/.nix-defexpr/channels
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Configure osmzhlab Attic cache
+        run: bash .github/scripts/setup-osmzhlab-cache.sh
+
+      - name: Install Arial
+        run: |
+          echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
+          sudo apt-get update
+          sudo apt-get install -y ttf-mscorefonts-installer
+
+      - name: Redraw figures
+        env:
+          ARIAL_DIR: /usr/share/fonts/truetype/msttcorefonts
+        run: nix-shell nix/figures/default.nix -A shell --run "Rscript make.R"
+
+      - name: Upload figures
+        uses: actions/upload-artifact@v4
+        with:
+          name: figures
+          path: topics/*/figures/

@@ -1,0 +1,17 @@
+.DS_Store
+.Rhistory
+.Rproj.user
+*.Rproj
+Rplots.pdf
+result
+
+# targets stores
+topics/*/_targets/
+
+# Raw benchmark runs: kept locally, archived as release assets
+topics/*/results/
+
+# local tool state
+.claude/
+.codex/
+.loci/

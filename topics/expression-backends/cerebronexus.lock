@@ -1,0 +1,4 @@
+# CerebroNexus commit the expression-backend benchmark installs and measures.
+# Bump commit when the benchmark should measure a newer CerebroNexus.
+repo=https://github.com/duocang/CerebroNexus.git
+commit=17a6a35266915953e01389b231237652ebad6438

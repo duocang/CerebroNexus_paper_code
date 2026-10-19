@@ -1,0 +1,12 @@
+# One targets project per topic. Run one with
+#   Rscript make.R expression_backends
+# or all of them with `Rscript make.R`.
+main:
+  script: topics/expression-backends/_targets.R
+  store: topics/expression-backends/_targets
+expression_backends:
+  script: topics/expression-backends/_targets.R
+  store: topics/expression-backends/_targets
+viewer_performance:
+  script: topics/viewer-performance/_targets.R
+  store: topics/viewer-performance/_targets
