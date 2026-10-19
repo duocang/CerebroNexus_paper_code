@@ -52,5 +52,6 @@ Create `topics/<name>/_targets.R` and add `<name>` to `_targets.yaml`.
 ## Notes
 
 - Figures need Arial; set `ARIAL_DIR` if it is not found. GitHub Actions redraws all figures on every push.
+- Redrawn PDFs differ from the committed ones only by their creation date; commit them when a figure really changed.
 - macOS: use `bash run.sh` (your R) for the PDFs; with `--nix` the font audit fails because Nix's cairo writes spaces as Type 3 fonts.
 - To rebuild the Nix files, run `nix-shell -p rPackages.rix R --run "Rscript nix/<env>/create_env.R"`; on macOS run `export R_LIBS_USER=/nonexistent` first.

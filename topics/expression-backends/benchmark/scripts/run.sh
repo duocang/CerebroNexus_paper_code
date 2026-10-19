@@ -446,8 +446,11 @@ show_status() {
 
 require_clean() {
   local dirty
+  # Redrawn figures differ only in their PDF timestamps; they are outputs,
+  # not benchmark code, so they do not block a run.
   dirty=$(git -C "$REPO" status --porcelain --untracked-files=all -- \
-    . ":(exclude,glob)topics/expression-backends/results/**")
+    . ":(exclude,glob)topics/expression-backends/results/**" \
+    ":(exclude,glob)topics/*/figures/**")
   [ -z "$dirty" ] || {
     printf '%s\n' "$dirty" >&2
     printf 'benchmark requires a clean Git worktree\n' >&2
