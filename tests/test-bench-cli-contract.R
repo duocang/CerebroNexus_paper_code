@@ -157,7 +157,7 @@ test_that("manifest CLI records the run identity", {
     readLines(file.path(bench_root, "benchmark_cli.R"), warn = FALSE),
     collapse = "\n"
   )
-  expect_match(cli, ":(exclude,glob)topics/expression-backends/results/**", fixed = TRUE)
+  expect_match(cli, ":(exclude,glob)benchmark/results/**", fixed = TRUE)
   expect_false(grepl("<<-", cli, fixed = TRUE))
   expect_match(
     cli,

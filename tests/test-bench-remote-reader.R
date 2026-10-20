@@ -1,4 +1,4 @@
-# Guards for the pure planning/ordering logic in topics/expression-backends/benchmark/scripts/benchmark.R.
+# Guards for the pure planning/ordering logic in benchmark/scripts/benchmark.R.
 #
 # Only the functions that need no network are exercised here. The benchmark tree
 # is .Rbuildignore'd, so these skip when running against a built tarball.

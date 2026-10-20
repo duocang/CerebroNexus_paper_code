@@ -2,56 +2,52 @@
 
 Code, result tables and figures for the CerebroNexus manuscript. The package itself lives in [CerebroNexus](https://github.com/mihem/CerebroNexus).
 
-## Quick start
+## Redraw the figures
+
+With Nix (the pinned environment in `default.nix`):
 
 ```bash
-bash run.sh install    # install the R packages into your own library
-bash run.sh            # redraw all figures with your R
-bash run.sh --nix      # or redraw them in the pinned Nix environment
+nix-shell --run "Rscript -e 'targets::tar_make()'"
 ```
 
-One topic only: `bash run.sh expression_backends`. All options: `bash run.sh --help`.
+With your own R:
+
+```bash
+Rscript install.R
+Rscript -e 'targets::tar_make()'
+```
+
+Figures are written to `figures/<topic>/`. GitHub Actions redraws them on every push and uploads them as the `figures` artifact.
 
 ## Layout
 
 ```
-topics/
-  expression-backends/   H5 / BPCells / embedded storage: benchmark + figures
-  viewer-performance/    million-cell viewer: figures only (benchmark scripts live in CerebroNexus)
-nix/                     pinned environments (figures, benchmark)
+_targets.R      the pipeline: sources functions/ and combines the target lists in scripts/
+functions/      helper functions, one file per topic
+scripts/        one target list per topic (expression_backends.R, viewer_performance.R)
+data/           result tables the figures are drawn from
+figures/        the figures
+benchmark/      the expression-backend benchmark (runs outside targets)
+tests/          tests of the benchmark harness
+generate_env.R  regenerates default.nix with rix
+install.R       installs the R packages without Nix
 ```
-
-Each topic holds `_targets.R` (figure pipeline), `R/`, `data/` (tables the figures use), `figures/`, and optionally `benchmark/` and `tests/`.
 
 ## Run the benchmark
 
-Only `expression-backends` has a benchmark here (`bash run.sh benchmark` lists them).
-
-CerebroNexus is installed from the commit in `topics/expression-backends/cerebronexus.lock` (GitHub `duocang/CerebroNexus`); no local copy is needed.
+The H5 / BPCells / embedded storage benchmark needs Linux, lots of RAM and disk, and downloads about 18 GB of data on first use. It installs CerebroNexus from the commit in `benchmark/cerebronexus.lock` and runs in the Nix environment (`BENCH_NIX=0` uses your own R after `Rscript install.R benchmark`).
 
 ```bash
-bash run.sh install benchmark                      # once; includes BPCells
-bash run.sh benchmark expression-backends quick    # small correctness check (first run downloads ~18 GB of data)
-bash run.sh benchmark expression-backends scale    # full study: Linux, lots of RAM and disk
-bash run.sh benchmark expression-backends status   # running? where is the log?
+bash benchmark/run.sh quick    # small correctness check
+bash benchmark/run.sh scale    # full study
+bash benchmark/run.sh status   # progress and log
 ```
 
-To check the whole pipeline in about a minute, run `quick` on a small synthetic matrix instead of the published datasets:
-
-```bash
-Rscript topics/expression-backends/benchmark/scripts/make_smoke_source.R /tmp/smoke.h5
-BENCH_SMOKE_SOURCE=/tmp/smoke.h5 bash run.sh benchmark expression-backends quick
-```
-
-Results go to `topics/expression-backends/results/` (not tracked). To test a local CerebroNexus checkout instead: `CEREBRONEXUS_SRC=/path/to/CerebroNexus bash run.sh benchmark expression-backends quick`. This repository must have at least one commit and no uncommitted changes (the run records its commit and the CerebroNexus commit). Add `--nix` (`bash run.sh --nix benchmark expression-backends quick`) to use the pinned Nix environment. Details: [benchmark README](topics/expression-backends/benchmark/README.md).
-
-## Add a topic
-
-Create `topics/<name>/_targets.R` and add `<name>` to `_targets.yaml`.
+Results go to `benchmark/results/` (not tracked); copy a published run to `data/expression_backends/scale/` and point `CURRENT` at it to draw figures from it. Details: [benchmark/README.md](benchmark/README.md). Tests: `cd tests && Rscript -e 'testthat::test_dir(".")'`.
 
 ## Notes
 
-- Figures need Arial; set `ARIAL_DIR` if it is not found. GitHub Actions redraws all figures on every push.
+- Figures need Arial; set `ARIAL_DIR` if it is not found.
 - Redrawn PDFs differ from the committed ones only by their creation date; commit them when a figure really changed.
-- macOS: use `bash run.sh` (your R) for the PDFs; with `--nix` the font audit fails because Nix's cairo writes spaces as Type 3 fonts.
-- To rebuild the Nix files, run `nix-shell -p rPackages.rix R --run "Rscript nix/<env>/create_env.R"`; on macOS run `export R_LIBS_USER=/nonexistent` first.
+- macOS: use your own R for the PDFs; in Nix the font audit fails because Nix's cairo writes spaces as Type 3 fonts.
+- To update `default.nix`: `nix-shell -p rPackages.rix R --run "Rscript generate_env.R"` (on macOS run `export R_LIBS_USER=/nonexistent` first).

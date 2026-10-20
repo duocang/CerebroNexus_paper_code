@@ -1,4 +1,4 @@
-# Shared by the vignette and repository figure-reproduction command.
+# Ren v2 BPCells/H5 comparison: one bar panel per timing metric.
 plotRenBackendBenchmark <- function(data) {
   stopifnot(
     all(data$correctness == "OK"),
@@ -47,4 +47,14 @@ plotRenBackendBenchmark <- function(data) {
     cex = 1.1
   )
   invisible(NULL)
+}
+
+# Draw the Ren backend comparison from its result table to a PNG and return
+# the file.
+plot_ren_backends <- function(table, out) {
+  dir.create(dirname(out), recursive = TRUE, showWarnings = FALSE)
+  data <- utils::read.delim(table, check.names = FALSE)
+  grDevices::png(out, width = 1800, height = 600, res = 150)
+  tryCatch(plotRenBackendBenchmark(data), finally = grDevices::dev.off())
+  out
 }

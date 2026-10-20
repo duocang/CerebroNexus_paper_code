@@ -2,11 +2,11 @@
 
 set -euo pipefail
 
-REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd -P)"
-BENCH_ROOT="$REPO/topics/expression-backends/benchmark/scripts"
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd -P)"
+BENCH_ROOT="$REPO/benchmark/scripts"
 # CerebroNexus under test: the commit in cerebronexus.lock, fetched from GitHub
 # into the cache, unless CEREBRONEXUS_SRC names a local checkout.
-CEREBRONEXUS_LOCK="$REPO/topics/expression-backends/cerebronexus.lock"
+CEREBRONEXUS_LOCK="$REPO/benchmark/cerebronexus.lock"
 if [ -n "${CEREBRONEXUS_SRC:-}" ]; then
   export CEREBRONEXUS_SOURCE="${CEREBRONEXUS_SOURCE:-local}"
 else
@@ -183,9 +183,9 @@ finish_profile() {
 run_profile_engine() (
 set +e
 
-REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
-export BENCH_ROOT="$REPO/topics/expression-backends/benchmark/scripts"
-RESULT_ROOT="${BENCH_RESULT_ROOT:-$REPO/topics/expression-backends/results}"
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+export BENCH_ROOT="$REPO/benchmark/scripts"
+RESULT_ROOT="${BENCH_RESULT_ROOT:-$REPO/benchmark/results}"
 export BENCH_PROFILE="${BENCH_PROFILE:-quick}"
 export BENCH_THREADS="${BENCH_THREADS:-1}"
 
@@ -449,8 +449,8 @@ require_clean() {
   # Redrawn figures differ only in their PDF timestamps; they are outputs,
   # not benchmark code, so they do not block a run.
   dirty=$(git -C "$REPO" status --porcelain --untracked-files=all -- \
-    . ":(exclude,glob)topics/expression-backends/results/**" \
-    ":(exclude,glob)topics/*/figures/**")
+    . ":(exclude,glob)benchmark/results/**" \
+    ":(exclude,glob)figures/**")
   [ -z "$dirty" ] || {
     printf '%s\n' "$dirty" >&2
     printf 'benchmark requires a clean Git worktree\n' >&2
@@ -474,7 +474,7 @@ run_profile() {
   local head_sha study_id memory_snapshot result_root
   require_clean
   head_sha=$(git -C "$REPO" rev-parse HEAD)
-  result_root="$REPO/topics/expression-backends/results/$result_name"
+  result_root="$REPO/benchmark/results/$result_name"
   study_id="$(date -u +%Y%m%dT%H%M%SZ)-${head_sha:0:12}-$result_name"
   printf '==> running %s\n' "$result_name"
   if [ "$profile" = "scale" ]; then
@@ -525,7 +525,7 @@ resume_inside() {
     return 1
   }
 
-  export BENCH_ROOT="$REPO/topics/expression-backends/benchmark/scripts"
+  export BENCH_ROOT="$REPO/benchmark/scripts"
   export BENCH_SCRATCH="$scratch"
   export BENCH_LIB="$scratch/rlib"
   export R_LIBS_USER="$scratch/r-user-library"
@@ -543,7 +543,7 @@ resume_inside() {
       return 1
       ;;
   esac
-  local result_root="$REPO/topics/expression-backends/results/$result_name"
+  local result_root="$REPO/benchmark/results/$result_name"
 
   finish_profile "$stage" "$result_root" "$BENCH_RUN_ID"
   printf '0\n' > "$EXIT_FILE"
@@ -579,7 +579,7 @@ bench_isolate_r() {
   export R_LIBS_USER=/nonexistent R_ENVIRON_USER=/dev/null R_PROFILE_USER=/dev/null
 }
 
-# BENCH_NIX=0 runs in your own R installation instead of nix/benchmark. The
+# BENCH_NIX=0 runs in your own R installation instead of the Nix environment in default.nix. The
 # library paths your R uses now are pinned in R_LIBS, because the runner later
 # hides ~/.Renviron and the user library from its R processes.
 bench_require_env() {
@@ -598,7 +598,7 @@ bench_enter_env() {
     R_LIBS="$(Rscript -e 'cat(.libPaths(), sep = ":")')" BENCH_ENVIRONMENT=local bash -c "$1"
   else
     bench_isolate_r
-    BENCH_ENVIRONMENT=nix nix-shell "$REPO/nix/benchmark/default.nix" -A shell --run "$1"
+    BENCH_ENVIRONMENT=nix nix-shell "$REPO/default.nix" -A shell --run "$1"
   fi
 }
 

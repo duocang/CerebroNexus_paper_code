@@ -34,10 +34,10 @@ jobs:
       - name: Redraw figures
         env:
           ARIAL_DIR: /usr/share/fonts/truetype/msttcorefonts
-        run: nix-shell nix/figures/default.nix -A shell --run "Rscript make.R"
+        run: nix-shell --run "Rscript -e 'targets::tar_make()'"
 
       - name: Upload figures
         uses: actions/upload-artifact@v4
         with:
           name: figures
-          path: topics/*/figures/
+          path: figures/

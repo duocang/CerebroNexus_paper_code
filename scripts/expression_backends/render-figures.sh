@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 # Render the expression-backend figures for Genome Biology with Arial embedded,
 # then audit every PDF: fonts embedded and Arial only, width 170 mm, height
-# <= 225 mm. Run inside the project Nix shell from the repository root:
+# <= 225 mm. The targets pipeline calls it; by hand, from the repository root:
 #
-#   nix-shell nix/figures/default.nix -A shell --run \
-#     'bash topics/expression-backends/R/render-figures.sh'
+#   bash scripts/expression_backends/render-figures.sh
 #
 # Arial is taken from ARIAL_DIR, or from the first standard location holding
 # arial.ttf (Windows fonts seen from WSL, Linux msttcorefonts, macOS). Only that
@@ -13,7 +12,7 @@
 set -euo pipefail
 
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
-repo="$(cd "$here/../../.." && pwd -P)"
+repo="$(cd "$here/../.." && pwd -P)"
 
 font_src=""
 for dir in "${ARIAL_DIR:-}" /mnt/c/Windows/Fonts /usr/share/fonts/truetype/msttcorefonts \
@@ -42,7 +41,7 @@ CONF
 export FONTCONFIG_FILE="$fonts/fonts.conf"
 echo "Arial from: $font_src"
 
-out_dir="$repo/topics/expression-backends/figures"
+out_dir="$repo/figures/expression_backends"
 for arg in "$@"; do
   case "$arg" in --out=*) out_dir="${arg#--out=}" ;; esac
 done

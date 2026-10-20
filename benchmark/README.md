@@ -1,30 +1,30 @@
 # H5 / BPCells / embedded benchmark
 
-Compare expression-storage backends by build time, file size, memory, startup and gene-read speed. Use the commands below from the repository root on Linux or WSL, with a clean Git checkout. CerebroNexus is installed from the commit in `topics/expression-backends/cerebronexus.lock`, fetched from GitHub into the cache; set `CEREBRONEXUS_SRC=/path/to/CerebroNexus` to test a clean local checkout instead (the manifest records `cerebronexus_source` as `lock` or `local`). They use `nix-shell` by default; with `BENCH_NIX=0` they use your own R instead (install its packages with `bash run.sh install benchmark`). The full run needs a machine with substantial memory and disk space; the runner checks capacity before downloading the data.
+Compare expression-storage backends by build time, file size, memory, startup and gene-read speed. Use the commands below from the repository root on Linux or WSL, with a clean Git checkout. CerebroNexus is installed from the commit in `benchmark/cerebronexus.lock`, fetched from GitHub into the cache; set `CEREBRONEXUS_SRC=/path/to/CerebroNexus` to test a clean local checkout instead (the manifest records `cerebronexus_source` as `lock` or `local`). They use `nix-shell` with the root `default.nix` by default; with `BENCH_NIX=0` they use your own R instead (install its packages with `Rscript install.R benchmark`). The full run needs a machine with substantial memory and disk space; the runner checks capacity before downloading the data.
 
 ## Start and monitor
 
 ```bash
 # Small correctness run: 1,000 cells per source, all three backends.
-bash topics/expression-backends/benchmark/run.sh quick
+bash benchmark/run.sh quick
 
 # Independent size comparison, including both full-dataset endpoints.
-bash topics/expression-backends/benchmark/run.sh scale
+bash benchmark/run.sh scale
 # No argument (or run) also runs Scale.
 
 # Check progress.
-bash topics/expression-backends/benchmark/run.sh status
+bash benchmark/run.sh status
 
 # Follow the log (default cache location).
 tail -f "${XDG_CACHE_HOME:-$HOME/.cache}/cerebronexus-benchmark/runner/benchmark.log"
 ```
 
-Both commands start in the background and enter the project Nix environment. The runner ignores your personal R setup (`R_LIBS`, `R_LIBS_SITE`, user library, `~/.Renviron`, `~/.Rprofile`), so only the Nix packages are loaded. With `BENCH_NIX=0` the library paths of your own R are used instead (startup files stay disabled), and the manifest records `r_environment=local`. Run one at a time. `quick` builds and opens each backend once; it checks correctness and is not enough for performance conclusions. It still downloads the complete source files on first use (about 4.2 GB mouse and 14.2 GB human). For a one-minute pipeline check without downloads, write a synthetic 10x matrix with `Rscript topics/expression-backends/benchmark/scripts/make_smoke_source.R /tmp/smoke.h5` and start with `BENCH_SMOKE_SOURCE=/tmp/smoke.h5`; its numbers are not benchmark results. To try only mouse data, use `BENCH_SOURCES_ONLY=mouse_brain_e18 bash topics/expression-backends/benchmark/run.sh quick`. Downloads are checked and reused. Temporary work and logs use `${XDG_CACHE_HOME:-$HOME/.cache}/cerebronexus-benchmark/` by default.
+Both commands start in the background and enter the project Nix environment. The runner ignores your personal R setup (`R_LIBS`, `R_LIBS_SITE`, user library, `~/.Renviron`, `~/.Rprofile`), so only the Nix packages are loaded. With `BENCH_NIX=0` the library paths of your own R are used instead (startup files stay disabled), and the manifest records `r_environment=local`. Run one at a time. `quick` builds and opens each backend once; it checks correctness and is not enough for performance conclusions. It still downloads the complete source files on first use (about 4.2 GB mouse and 14.2 GB human). For a one-minute pipeline check without downloads, write a synthetic 10x matrix with `Rscript benchmark/scripts/make_smoke_source.R /tmp/smoke.h5` and start with `BENCH_SMOKE_SOURCE=/tmp/smoke.h5`; its numbers are not benchmark results. To try only mouse data, use `BENCH_SOURCES_ONLY=mouse_brain_e18 bash benchmark/run.sh quick`. Downloads are checked and reused. Temporary work and logs use `${XDG_CACHE_HOME:-$HOME/.cache}/cerebronexus-benchmark/` by default.
 
 If measurements finished but validation or reporting failed, retry those final steps using the scratch directory printed in the log. This does not restart an interrupted measurement run:
 
 ```bash
-bash topics/expression-backends/benchmark/run.sh resume /path/to/cerebro-bench.XXXXXX
+bash benchmark/run.sh resume /path/to/cerebro-bench.XXXXXX
 ```
 
 ## What runs
@@ -35,7 +35,7 @@ bash topics/expression-backends/benchmark/run.sh resume /path/to/cerebro-bench.X
 
 The complete matrices exceed the sparse-index limit of embedded storage, so full-dataset embedded results are unavailable. They are not replaced with smaller samples.
 
-`h5` is the 10x H5 sidecar at the package exporter's compression level (`HDF5Array::getHDF5DumpCompressionLevel()`, 6 by default), i.e. what CerebroNexus ships. `h5_uncompressed` is the same file written at gzip level 0, a storage/read trade-off reference that the package does not produce by default; both are opened through the package's `h5` backend. Both are built in the same run and interleaved with BPCells (and embedded in Scale), so they share host conditions. The manifest records both levels (`h5_gzip_level`, `h5_uncompressed_gzip_level`). Full/scale runs without these keys predate the fix: their `h5` rows were written at gzip level 0 and are uncompressed results; `topics/expression-backends/R/rebuild-figures.R` labels them accordingly. Uncompressed H5 needs about 12 bytes per nonzero on disk, so the preflight requires the cached source plus 18 bytes per nonzero of free scratch space (about 125 GB for the full human matrix) within 80% of free disk.
+`h5` is the 10x H5 sidecar at the package exporter's compression level (`HDF5Array::getHDF5DumpCompressionLevel()`, 6 by default), i.e. what CerebroNexus ships. `h5_uncompressed` is the same file written at gzip level 0, a storage/read trade-off reference that the package does not produce by default; both are opened through the package's `h5` backend. Both are built in the same run and interleaved with BPCells (and embedded in Scale), so they share host conditions. The manifest records both levels (`h5_gzip_level`, `h5_uncompressed_gzip_level`). Full/scale runs without these keys predate the fix: their `h5` rows were written at gzip level 0 and are uncompressed results; `scripts/expression_backends/rebuild-figures.R` labels them accordingly. Uncompressed H5 needs about 12 bytes per nonzero on disk, so the preflight requires the cached source plus 18 bytes per nonzero of free scratch space (about 125 GB for the full human matrix) within 80% of free disk.
 
 In Scale runs, each source, size and backend gets five independent builds. Each successful build is opened in two fresh R processes. Runs use the same cells, gene names and fixed 12-gene queries, including full-cell reads and non-contiguous subsets of up to 100,000 cells. Reading a lazy matrix fully into memory is included in the timer; value checks happen afterward. Processes run sequentially with one thread by default.
 
@@ -51,20 +51,20 @@ Scale has no 1M tier: 1M sits next to the 1.31M and 1.49M endpoints on the log a
 
 ## Reruns and saved files
 
-Every run gets a timestamp-and-commit directory under `results/expression-backends/<quick|scale>/runs/`. Existing runs are never overwritten by a later run. The CSV measurements, source checksums, environment, report and stage logs stay together. After a run passes validation and is archived, publication points that study's `CURRENT` at it; a failed run leaves `CURRENT` unchanged.
+Every run gets a timestamp-and-commit directory under `benchmark/results/<quick|scale>/runs/`. Existing runs are never overwritten by a later run. The CSV measurements, source checksums, environment, report and stage logs stay together. After a run passes validation and is archived, publication points that study's `CURRENT` at it; a failed run leaves `CURRENT` unchanged.
 
-Verified source downloads stay in the external cache. Failed runs keep their scratch directory by default; `resume` retries validation, reporting and publication only; if the run was already archived before activation failed, it skips regeneration and only re-verifies and activates the archive. It does not resume measurements. Generated CRB/backend files are temporary and normally removed after measurement; start with `BENCH_KEEP=1 bash topics/expression-backends/benchmark/run.sh` if you need to retain them too. Starting another run archives the previous launcher log under `runner/logs/` in the cache.
+Verified source downloads stay in the external cache. Failed runs keep their scratch directory by default; `resume` retries validation, reporting and publication only; if the run was already archived before activation failed, it skips regeneration and only re-verifies and activates the archive. It does not resume measurements. Generated CRB/backend files are temporary and normally removed after measurement; start with `BENCH_KEEP=1 bash benchmark/run.sh` if you need to retain them too. Starting another run archives the previous launcher log under `runner/logs/` in the cache.
 
 ## Figures
 
-Runs do not draw figures. The article and paper figures are drawn from a run's `10_export.csv` and `20_access.csv` by `topics/expression-backends/R/rebuild-figures.R` (`render-figures.sh` supplies the fonts): the Scale figure, the full-size figure (from the Scale run's own full-size endpoints) and the embedded build-memory figure (peak R heap against nonzero elements). Plotting does not rerun measurements.
+Runs do not draw figures. The article and paper figures are drawn from a run's `10_export.csv` and `20_access.csv` by `scripts/expression_backends/rebuild-figures.R` (`render-figures.sh` supplies the fonts), run as part of `targets::tar_make()`: the Scale figure, the full-size figure (from the Scale run's own full-size endpoints) and the embedded build-memory figure (peak R heap against nonzero elements). Plotting does not rerun measurements.
 
 ## Read results
 
-Results are stored in [../results/expression-backends/](../results/expression-backends/), with separate `quick/` and `scale/` directories. Quick runs do not replace Scale results. To open the selected Scale report:
+Results are stored in `benchmark/results/` (not tracked), with separate `quick/` and `scale/` directories. Quick runs do not replace Scale results. To open the selected Scale report:
 
 ```bash
-RESULTS=topics/expression-backends/results/scale
+RESULTS=benchmark/results/scale
 RUN="$RESULTS/runs/$(cat "$RESULTS/CURRENT")"
 cat "$RUN/summary.md"
 ```
@@ -81,7 +81,7 @@ Numbers are medians with observed ranges, not confidence intervals. The two acce
 
 ## Keep it simple
 
-Use `run.sh scale` (or the default `run.sh`) for normal work; it runs the Scale study and publishes it automatically.
+Use `benchmark/run.sh scale` (or the default `benchmark/run.sh`) for normal work; it runs the Scale study and publishes it automatically.
 All implementation lives in `scripts/`:
 
 - `run.sh`: environment, cached downloads, independent measurement processes and finalization.

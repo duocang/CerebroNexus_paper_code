@@ -8,7 +8,7 @@ command <- command_args[[1L]]
 command_args <- command_args[-1L]
 here <- Sys.getenv("BENCH_ROOT", "")
 if (!nzchar(here)) {
-  here <- normalizePath("topics/expression-backends/benchmark/scripts")
+  here <- normalizePath("benchmark/scripts")
 }
 source(file.path(here, "benchmark.R"))
 
@@ -26,12 +26,12 @@ if (identical(command, "inspect")) {
   result <- if (length(args) >= 1) {
     args[1]
   } else {
-    "topics/expression-backends/results/00_probe.csv"
+    "benchmark/results/00_probe.csv"
   }
 
   here <- Sys.getenv("BENCH_ROOT", "")
   if (!nzchar(here)) {
-    here <- normalizePath("topics/expression-backends/benchmark/scripts")
+    here <- normalizePath("benchmark/scripts")
   }
 
   for (nm in bench_active_sources()) {
@@ -84,9 +84,9 @@ if (identical(command, "inspect")) {
   result <- args[1]
   here <- Sys.getenv("BENCH_ROOT", "")
   if (!nzchar(here)) {
-    here <- normalizePath("topics/expression-backends/benchmark/scripts")
+    here <- normalizePath("benchmark/scripts")
   }
-  repo <- normalizePath(file.path(here, "..", "..", "..", ".."))
+  repo <- normalizePath(file.path(here, "..", ".."))
 
   if (nzchar(Sys.getenv("BENCH_LIB"))) {
     .libPaths(c(Sys.getenv("BENCH_LIB"), .libPaths()))
@@ -158,7 +158,7 @@ if (identical(command, "inspect")) {
     "--untracked-files=no",
     "--",
     ".",
-    ":(exclude,glob)topics/expression-backends/results/**"
+    ":(exclude,glob)benchmark/results/**"
   )
   untracked_status <- git_value(
     "ls-files",
@@ -166,7 +166,7 @@ if (identical(command, "inspect")) {
     "--exclude-standard",
     "--",
     ".",
-    ":(exclude,glob)topics/expression-backends/results/**"
+    ":(exclude,glob)benchmark/results/**"
   )
   status <- paste0(tracked_status, untracked_status)
   scratch <- Sys.getenv("BENCH_SCRATCH")
@@ -262,7 +262,7 @@ if (identical(command, "inspect")) {
   tsv_result <- if (length(args) >= 2L) args[2] else NULL
   here <- Sys.getenv("BENCH_ROOT", "")
   if (!nzchar(here)) {
-    here <- normalizePath("topics/expression-backends/benchmark/scripts")
+    here <- normalizePath("benchmark/scripts")
   }
 
   profile <- bench_profile(Sys.getenv("BENCH_PROFILE", "quick"))
@@ -418,7 +418,7 @@ if (identical(command, "inspect")) {
   output_path <- args[4]
   here <- Sys.getenv("BENCH_ROOT", "")
   if (!nzchar(here)) {
-    here <- normalizePath("topics/expression-backends/benchmark/scripts")
+    here <- normalizePath("benchmark/scripts")
   }
 
   free_disk_bytes <- function(path) {
@@ -497,7 +497,7 @@ if (identical(command, "inspect")) {
 
   here <- Sys.getenv("BENCH_ROOT", "")
   if (!nzchar(here)) {
-    here <- normalizePath("topics/expression-backends/benchmark/scripts")
+    here <- normalizePath("benchmark/scripts")
   }
 
   spec <- BENCH_SOURCES[[src_name]]
@@ -650,7 +650,7 @@ if (identical(command, "inspect")) {
 
   here <- Sys.getenv("BENCH_ROOT", "")
   if (!nzchar(here)) {
-    here <- normalizePath("topics/expression-backends/benchmark/scripts")
+    here <- normalizePath("benchmark/scripts")
   }
   # BENCH_LIB holds the branch under test, installed into the scratch directory so
   # the numbers describe this worktree rather than whatever version happens to be
@@ -886,7 +886,7 @@ if (identical(command, "inspect")) {
 
   here <- Sys.getenv("BENCH_ROOT", "")
   if (!nzchar(here)) {
-    here <- normalizePath("topics/expression-backends/benchmark/scripts")
+    here <- normalizePath("benchmark/scripts")
   }
   if (nzchar(Sys.getenv("BENCH_LIB"))) {
     .libPaths(c(Sys.getenv("BENCH_LIB"), .libPaths()))
@@ -1045,7 +1045,7 @@ if (identical(command, "inspect")) {
 
   here <- Sys.getenv("BENCH_ROOT", "")
   if (!nzchar(here)) {
-    here <- normalizePath("topics/expression-backends/benchmark/scripts")
+    here <- normalizePath("benchmark/scripts")
   }
   if (nzchar(Sys.getenv("BENCH_LIB"))) {
     .libPaths(c(Sys.getenv("BENCH_LIB"), .libPaths()))
@@ -1189,7 +1189,7 @@ if (identical(command, "inspect")) {
   result_dir <- args[1]
   here <- Sys.getenv("BENCH_ROOT", "")
   if (!nzchar(here)) {
-    here <- normalizePath("topics/expression-backends/benchmark/scripts")
+    here <- normalizePath("benchmark/scripts")
   }
 
   read_required <- function(name) {
@@ -1498,20 +1498,13 @@ if (identical(command, "inspect")) {
   args <- command_args
   here <- Sys.getenv("BENCH_ROOT", "")
   if (!nzchar(here)) {
-    here <- normalizePath("topics/expression-backends/benchmark/scripts")
+    here <- normalizePath("benchmark/scripts")
   }
 
   result_dir <- if (length(args) >= 1L) {
     normalizePath(args[1], mustWork = TRUE)
   } else {
-    bench_current_result_dir(file.path(
-      here,
-      "..",
-      "..",
-      "results",
-      "expression-backends",
-      "full"
-    ))
+    bench_current_result_dir(file.path(here, "..", "results", "full"))
   }
 
   read_if <- function(name) {

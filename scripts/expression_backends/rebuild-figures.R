@@ -2,7 +2,7 @@
 # style (Genome Biology submission target).
 #
 # Data inputs (read-only): {10_export,20_access}.csv and run_manifest.csv of the
-# run that topics/expression-backends/data/scale/CURRENT points to, or --scale=DIR.
+# run that data/expression_backends/scale/CURRENT points to, or --scale=DIR.
 # The Full figure is drawn from that run's exact full-size endpoints, which are
 # the same cells, builds and reads a separate Full study measures; --full=DIR
 # draws it from a separate Full run instead. Both single runs and assembled
@@ -42,13 +42,13 @@ for (a in args) {
 }
 
 current_run <- function(study) {
-  study_root <- file.path(root, "topics/expression-backends/data", study)
+  study_root <- file.path(root, "data/expression_backends", study)
   run_id <- trimws(readLines(file.path(study_root, "CURRENT"), warn = FALSE)[1])
   file.path(study_root, run_id)
 }
 scale_dir <- if (is.null(opts$scale)) current_run("scale") else opts$scale
 full_dir <- opts$full  # NULL: use the Scale run's full endpoints
-out_dir <- if (is.null(opts$out)) file.path(root, "topics/expression-backends/figures") else opts$out
+out_dir <- if (is.null(opts$out)) file.path(root, "figures/expression_backends") else opts$out
 cat(sprintf("scale input: %s\nfull input:  %s\n", scale_dir,
             if (is.null(full_dir)) "full endpoints of the Scale input" else full_dir))
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)

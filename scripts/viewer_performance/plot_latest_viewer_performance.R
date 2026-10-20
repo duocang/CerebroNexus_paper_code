@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 
 # Historical three-launch Viewer figure; not the general page benchmark report.
-# Usage: Rscript topics/viewer-performance/benchmark/scripts/plot_latest_viewer_performance.R INPUT_TSV OUTPUT_DIR
+# Usage: Rscript scripts/viewer_performance/plot_latest_viewer_performance.R INPUT_TSV OUTPUT_DIR
 
 args <- commandArgs(trailingOnly = TRUE)
 options(warn = 1)

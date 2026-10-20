@@ -5,11 +5,11 @@
 Rplots.pdf
 result
 
-# targets stores
-topics/*/_targets/
+# targets store
+_targets/
 
 # Raw benchmark runs: kept locally, archived as release assets
-topics/*/results/
+benchmark/results/
 
 # local tool state
 .claude/
