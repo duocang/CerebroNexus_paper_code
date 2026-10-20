@@ -28,7 +28,8 @@ scripts/        one target list per topic (expression_backends.R, viewer_perform
 data/           result tables the figures are drawn from
 figures/        the figures
 benchmark/      the expression-backend benchmark (runs outside targets)
-tests/          tests of the benchmark harness
+viewer/         Viewer page, startup, renderer and smoke benchmarks (run outside targets)
+tests/          tests of the benchmark harnesses
 generate_env.R  regenerates default.nix with rix
 install.R       installs the R packages without Nix
 ```
@@ -44,6 +45,10 @@ bash benchmark/run.sh status   # progress and log
 ```
 
 Results go to `benchmark/results/` (not tracked); copy a published run to `data/expression_backends/scale/` and point `CURRENT` at it to draw figures from it. Details: [benchmark/README.md](benchmark/README.md). Tests: `cd tests && Rscript -e 'testthat::test_dir(".")'`.
+
+## Viewer benchmarks
+
+Page speed, startup, renderer and smoke checks of the CerebroNexus Viewer, plus the Ren backend figure, are in `viewer/`. They run against a CerebroNexus checkout; see [viewer/README.md](viewer/README.md).
 
 ## Notes
 
