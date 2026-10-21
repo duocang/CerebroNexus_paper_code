@@ -29,6 +29,7 @@ data/           result tables the figures are drawn from
 figures/        the figures
 benchmark/      the expression-backend benchmark (runs outside targets)
 viewer/         Viewer page, startup, renderer and smoke benchmarks (run outside targets)
+builder/        Builder builds from a SpatialData zip and a CITE-seq MuData file
 tests/          tests of the benchmark harnesses
 generate_env.R  regenerates default.nix with rix
 install.R       installs the R packages without Nix
@@ -49,6 +50,14 @@ Results go to `benchmark/results/` (not tracked); copy a published run to `data/
 ## Viewer benchmarks
 
 Page speed, startup, renderer and smoke checks of the CerebroNexus Viewer, plus the Ren backend figure, are in `viewer/`. They run against a CerebroNexus checkout; see [viewer/README.md](viewer/README.md).
+
+## Builder builds
+
+`builder/` rebuilds the two multi-format Builder examples cited in the manuscript, a Visium SpatialData sample store packed as a `.zip` (6,484 spots, two sections) and the minipbcite CITE-seq MuData file (411 cells, 29 antibody features), with CerebroNexus 6.0.0. It records the input URLs and SHA-256 checksums, the output CRB checksums and counts, and the console log with `sessionInfo()`; see [builder/README.md](builder/README.md).
+
+```bash
+Rscript --vanilla builder/build_crbs.R <library with CerebroNexus 6.0.0> <folder with the two inputs> <output folder>
+```
 
 ## Notes
 

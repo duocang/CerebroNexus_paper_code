@@ -1,0 +1,238 @@
+# date: 2026-10-21T12:32:34Z
+# source: feat/multi-format-on-builder @ 27ac995e983a3ff1c79a2d051c9a4374dde37ec6 (chore: bump version to 6.0.0)
+# command: Rscript --vanilla build_crbs.R <lib> <inputs> <out>
+CerebroNexus 6.0.0 from /Users/nuioi/projects/2026_07_01_cerebreNexus/builder_test/multi-format-builder-lib/CerebroNexus 
+
+==== visium_spatialdata (visium_spatialdata_0.7.1.zip) ====
+Builder reader: SpatialData (zip) 
+Seurat object: 6484 cells x 31053 features; assays RNA ; images ST8059048,ST8059050 
+Group candidates: region, library_id 
+Reductions: spatial_xy 
+  default organism:  mm
+  default assay:     RNA
+  default layer:     counts
+  default groups:    region
+  default default_group: region
+  default reductions: spatial_xy
+  default default_reduction: <none>
+Source pictures placed for sections: ST8059048, ST8059050 
+[14:33:01] Start collecting data...
+[14:33:01] Adding expression data (embedded)...
+[14:33:01] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: Visium SpatialData sample
+organism: mm
+date of analysis: 
+date of export: 2026-10-21
+number of cells: 6,484
+number of genes: 31,053
+grouping variables (1): region
+cell cycle variables (0): 
+projections (1): spatial_xy
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:ST8059048, ST8059050
+
+[14:33:01] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/builder_test/multi-format-builder-out/work/visium_spatialdata/stage/01-visium-spatiald-c58d04f2-visium-spatialdata.crb
+[14:33:02] Done!
+Output: CRB files + Viewer App 
+Build state: success ; publishable: TRUE 
+List of 11
+ $ input           : chr "visium_spatialdata_0.7.1.zip"
+ $ input_sha256    : chr "aabaabe06cdaf41472d8718eeba2fb44cf516a1952b63165cb408b1f4f222a3b"
+ $ file            : chr "visium_spatialdata.crb"
+ $ bytes           : num 95765691
+ $ sha256          : chr "7794eeec83188d76505ad65a8340b64f2a6650076f9be0d693d5115c946c4123"
+ $ cells           : int 6484
+ $ features        : int 31053
+ $ prot_features   : int 0
+ $ spatial_sections: int 2
+ $ section_names   : chr "ST8059048;ST8059050"
+ $ projections     : chr "spatial_xy"
+
+==== minipbcite (minipbcite.h5mu) ====
+Warnung: Feature names cannot have underscores ('_'), replacing with dashes ('-')
+Warnung: No layers found matching search pattern provided
+Builder reader: h5mu 
+Seurat object: 411 cells x 56 features; assays RNA ; images  
+Group candidates: leiden, celltype 
+Reductions: PCA, UMAP 
+  default organism:  <none>
+  default assay:     RNA
+  default layer:     data
+  default groups:    celltype
+  default default_group: celltype
+  default reductions: UMAP
+  default default_reduction: <none>
+  configured organism: hg
+  configured assay:  RNA
+  configured layer:  data
+  configured groups: celltype
+  configured default_group: celltype
+  configured reductions: UMAP
+  configured default_reduction: <none>
+[14:33:10] Start collecting data...
+[14:33:10] Adding expression data (embedded)...
+[14:33:10] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: minipbcite CITE-seq
+organism: hg
+date of analysis: 
+date of export: 2026-10-21
+number of cells: 411
+number of genes: 56
+grouping variables (1): celltype
+cell cycle variables (0): 
+projections (1): UMAP
+trees (0): 
+most expressed genes: 
+marker genes:
+  - scanpy: t-test_overestim_var (1): leiden
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+[14:33:10] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/builder_test/multi-format-builder-out/work/minipbcite/stage/01-minipbcite-cite-seq-minipbcite.crb
+[14:33:10] Done!
+Output: CRB only 
+Build state: success ; publishable: TRUE 
+List of 11
+ $ input           : chr "minipbcite.h5mu"
+ $ input_sha256    : chr "44b665aeb174acfa585d0775ee926c74219a9a68f0bfb66c5a9aad9f5da12167"
+ $ file            : chr "minipbcite.crb"
+ $ bytes           : num 5529732
+ $ sha256          : chr "79275e909544d2e50f8dacf63a8ecf943f899aa8dd347496139ab06bdc68a8a9"
+ $ cells           : int 411
+ $ features        : int 56
+ $ prot_features   : int 29
+ $ spatial_sections: int 0
+ $ section_names   : chr ""
+ $ projections     : chr "UMAP"
+                                          input
+visium_spatialdata visium_spatialdata_0.7.1.zip
+minipbcite                      minipbcite.h5mu
+                                                                       input_sha256
+visium_spatialdata aabaabe06cdaf41472d8718eeba2fb44cf516a1952b63165cb408b1f4f222a3b
+minipbcite         44b665aeb174acfa585d0775ee926c74219a9a68f0bfb66c5a9aad9f5da12167
+                                     file    bytes
+visium_spatialdata visium_spatialdata.crb 95765691
+minipbcite                 minipbcite.crb  5529732
+                                                                             sha256
+visium_spatialdata 7794eeec83188d76505ad65a8340b64f2a6650076f9be0d693d5115c946c4123
+minipbcite         79275e909544d2e50f8dacf63a8ecf943f899aa8dd347496139ab06bdc68a8a9
+                   cells features prot_features spatial_sections
+visium_spatialdata  6484    31053             0                2
+minipbcite           411       56            29                0
+                         section_names projections
+visium_spatialdata ST8059048;ST8059050  spatial_xy
+minipbcite                                    UMAP
+
+R version 4.5.0 (2025-04-11)
+Platform: aarch64-apple-darwin20
+Running under: macOS 27.0.1
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+
+locale:
+[1] C
+
+time zone: Europe/Berlin
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] CerebroNexus_6.0.0
+
+loaded via a namespace (and not attached):
+  [1] RColorBrewer_1.1-3          jsonlite_2.0.0             
+  [3] magrittr_2.0.4              spatstat.utils_3.2-1       
+  [5] farver_2.1.2                fs_1.6.6                   
+  [7] vctrs_0.7.1                 ROCR_1.0-12                
+  [9] spatstat.explore_3.7-0      base64enc_0.1-3            
+ [11] htmltools_0.5.9             S4Arrays_1.10.1            
+ [13] curl_7.0.0                  Rhdf5lib_1.32.0            
+ [15] SparseArray_1.10.8          rhdf5_2.54.1               
+ [17] sctransform_0.4.3           sass_0.4.10                
+ [19] parallelly_1.46.1           KernSmooth_2.23-26         
+ [21] bslib_0.10.0                htmlwidgets_1.6.4          
+ [23] ica_1.0-3                   plyr_1.8.9                 
+ [25] zoo_1.8-15                  plotly_4.12.0              
+ [27] cachem_1.1.0                igraph_2.2.1               
+ [29] mime_0.13                   lifecycle_1.0.5            
+ [31] pkgconfig_2.0.3             colourpicker_1.3.0         
+ [33] Matrix_1.7-3                R6_2.6.1                   
+ [35] fastmap_1.2.0               MatrixGenerics_1.22.0      
+ [37] fitdistrplus_1.2-6          future_1.69.0              
+ [39] shiny_1.12.1                digest_0.6.39              
+ [41] patchwork_1.3.2             S4Vectors_0.48.0           
+ [43] shinycssloaders_1.1.0       tensor_1.5.1               
+ [45] Seurat_5.4.0                RSpectra_0.16-2            
+ [47] irlba_2.3.7                 GenomicRanges_1.62.1       
+ [49] progressr_0.18.0            spatstat.sparse_3.1-0      
+ [51] polyclip_1.10-7             httr_1.4.7                 
+ [53] abind_1.4-8                 compiler_4.5.0             
+ [55] bit64_4.6.0-1               S7_0.2.1                   
+ [57] fastDummies_1.7.5           MASS_7.3-65                
+ [59] DelayedArray_0.36.0         tools_4.5.0                
+ [61] lmtest_0.9-40               otel_0.2.0                 
+ [63] httpuv_1.6.16               msigdbr_25.1.1             
+ [65] future.apply_1.20.1         goftest_1.2-3              
+ [67] glue_1.8.0                  nlme_3.1-168               
+ [69] rhdf5filters_1.22.0         promises_1.5.0             
+ [71] grid_4.5.0                  Rtsne_0.17                 
+ [73] reshape2_1.4.5              cluster_2.1.8.1            
+ [75] generics_0.1.4              spatstat.data_3.1-9        
+ [77] gtable_0.3.6                tidyr_1.3.2                
+ [79] data.table_1.18.2.1         sp_2.2-0                   
+ [81] stringfish_0.18.0           XVector_0.50.0             
+ [83] spatstat.geom_3.7-0         BiocGenerics_0.56.0        
+ [85] RcppAnnoy_0.0.23            ggrepel_0.9.6              
+ [87] RANN_2.6.2                  pillar_1.11.1              
+ [89] stringr_1.6.0               spam_2.11-3                
+ [91] babelgene_22.9              RcppHNSW_0.6.0             
+ [93] later_1.4.5                 splines_4.5.0              
+ [95] dplyr_1.1.4                 lattice_0.22-6             
+ [97] deldir_2.0-4                survival_3.8-3             
+ [99] bit_4.6.0                   tidyselect_1.2.1           
+[101] SingleCellExperiment_1.32.0 pbapply_1.7-4              
+[103] miniUI_0.1.2                gridExtra_2.3              
+[105] IRanges_2.44.0              Seqinfo_1.0.0              
+[107] SummarizedExperiment_1.40.0 scattermore_1.2            
+[109] stats4_4.5.0                shinydashboard_0.7.3       
+[111] Biobase_2.70.0              matrixStats_1.5.0          
+[113] DT_0.34.0                   visNetwork_2.1.4           
+[115] stringi_1.8.7               lazyeval_0.2.2             
+[117] shinyWidgets_0.9.0          codetools_0.2-20           
+[119] tibble_3.3.1                cli_3.6.5                  
+[121] uwot_0.2.4                  RcppParallel_5.1.11-1      
+[123] reticulate_1.44.1           arrow_25.0.1               
+[125] xtable_1.8-4                jquerylib_0.1.4            
+[127] mirai_2.5.3                 dichromat_2.0-0.1          
+[129] Rcpp_1.1.1                  spatstat.random_3.4-4      
+[131] globals_0.18.0              png_0.1-8                  
+[133] spatstat.univar_3.1-6       nanonext_1.7.2             
+[135] parallel_4.5.0              ggplot2_4.0.1              
+[137] assertthat_0.2.1            dotCall64_1.2              
+[139] listenv_0.10.0              viridisLite_0.4.2          
+[141] scales_1.4.0                ggridges_0.5.7             
+[143] SeuratObject_5.3.0          purrr_1.2.1                
+[145] rlang_1.1.7                 cowplot_1.2.0              
+[147] qs2_0.2.1                   shinyjs_2.1.1              
+# exit: 0
