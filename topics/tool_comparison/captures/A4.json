@@ -1,0 +1,74 @@
+{
+  "id": "A4",
+  "tool": "cellxgene",
+  "tool_version": "cellxgene 1.3.0",
+  "dataset": "I1 pbmc3k, 2,638 cells",
+  "input_file": "data/pbmc3k.h5ad",
+  "input_sha256": "0db367b991dd95809732b218539ede489bea99113807f62ebd7ccc970025fe38",
+  "view": "umap embedding",
+  "colour_by": "louvain",
+  "status": "ok",
+  "started_at": "2026-10-23T01:35:14+02:00",
+  "build": {
+    "reused": true,
+    "note": "cellxgene reads the .h5ad directly"
+  },
+  "server_cmd": [
+    "env\\py\\Scripts\\cellxgene.exe",
+    "launch",
+    "data\\pbmc3k.h5ad",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8815",
+    "--disable-gene-sets-save",
+    "--disable-annotations"
+  ],
+  "chrome_version": "155.0.8059.85",
+  "changed_from_default": [
+    "launched with --disable-annotations (no annotation dialog), upgrade check blocked (D12)",
+    "Color by set to the 'louvain' category (click on its colour button)"
+  ],
+  "read_back": {
+    "embedding_label": "umap: 2638 out of 2638 cells",
+    "colorby_active": [
+      "colorby-louvain"
+    ],
+    "dialogs": 0
+  },
+  "element": {
+    "selector": "canvas.graph-canvas",
+    "bbox_css_px": {
+      "x": 366,
+      "y": 0,
+      "width": 508,
+      "height": 720
+    }
+  },
+  "hidden_overlay_selectors": [
+    "div#root > div.container > div > div (edge sliver)",
+    "div.container > div > div > div",
+    "div.container > div > div > div.bp3-button-group",
+    "div > div > div#graph-wrapper > svg",
+    "div > div > div#graph-wrapper > svg#lasso-layer.graph-svg[data-testid=layout-overlay]"
+  ],
+  "text_boxes_in_element": [],
+  "viewport": {
+    "width": 1024,
+    "height": 720
+  },
+  "device_scale_factor": 3,
+  "browser_settings": {
+    "channel": "chrome",
+    "headless": true,
+    "color_scheme": "light",
+    "reduced_motion": "reduce",
+    "locale": "en-US"
+  },
+  "png": "captures/A4.png",
+  "png_width_px": 1524,
+  "png_height_px": 2160,
+  "png_bytes": 142660,
+  "png_sha256": "0b5752ea0bc6fa9ebad0872e96afdd20e056e86f22e0ef1c30e8bcbb62f0f7e5",
+  "finished_at": "2026-10-23T01:35:36+02:00"
+}

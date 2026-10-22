@@ -1,0 +1,64 @@
+{
+  "id": "A3",
+  "tool": "isee",
+  "tool_version": "iSEE 2.22.0",
+  "dataset": "I1 pbmc3k, 2,638 cells",
+  "input_file": "inputs/I1_rewritten.h5ad",
+  "input_sha256": "4451252b97b25441d720e9d3b9b830c418b12ba77be8d1e88151c0ea40b3a943",
+  "view": "Reduced dimension plot, X_umap",
+  "colour_by": "louvain",
+  "status": "ok",
+  "started_at": "2026-10-23T01:34:57+02:00",
+  "build": {
+    "reused": true
+  },
+  "server_cmd": [
+    "C:\\Program Files\\R\\R-4.5.0\\bin\\Rscript.exe",
+    "--vanilla",
+    "artifacts\\fig_A3\\serve_initial.R",
+    "artifacts\\fig_A3\\sce.rds",
+    "8814"
+  ],
+  "chrome_version": "155.0.8059.85",
+  "changed_from_default": [
+    "iSEE started with initial = list(ReducedDimensionPlot(Type = 'X_umap', ColorBy = 'Column data', ColorByColumnData = 'louvain', PanelWidth = 6L)); its default panel opens on X_pca; PanelWidth 6 (default 4 of 12) because at 4 the plot is 313 px wide and the legend loses its last two labels"
+  ],
+  "read_back": {
+    "type": "X_umap",
+    "colour_by_mode": "Column data",
+    "colour_by_column": "louvain",
+    "plot_title_text": 1
+  },
+  "element": {
+    "selector": "#ReducedDimensionPlot1",
+    "bbox_css_px": {
+      "x": 14,
+      "y": 119,
+      "width": 484,
+      "height": 500
+    }
+  },
+  "hidden_overlay_selectors": [
+    "div.box.box-solid > div.box-body > div > div.spinner.loading-spinner",
+    "div > div.box.box-solid > div.box-body > div.panel-group (edge sliver)"
+  ],
+  "text_boxes_in_element": [],
+  "viewport": {
+    "width": 1024,
+    "height": 720
+  },
+  "device_scale_factor": 3,
+  "browser_settings": {
+    "channel": "chrome",
+    "headless": true,
+    "color_scheme": "light",
+    "reduced_motion": "reduce",
+    "locale": "en-US"
+  },
+  "png": "captures/A3.png",
+  "png_width_px": 1452,
+  "png_height_px": 1500,
+  "png_bytes": 70999,
+  "png_sha256": "215ffaa3a2f573aef2ece9ae93b1e21449f209c7ed9334063443f4cd4ad9b8f2",
+  "finished_at": "2026-10-23T01:35:14+02:00"
+}

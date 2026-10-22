@@ -1,0 +1,63 @@
+{
+  "id": "A5",
+  "tool": "vitessce",
+  "tool_version": "Vitessce 3.8.4 (Python) / vitessce@3.9.9 (JS)",
+  "dataset": "I1 pbmc3k, 2,638 cells",
+  "input_file": "data/pbmc3k.h5ad",
+  "input_sha256": "0db367b991dd95809732b218539ede489bea99113807f62ebd7ccc970025fe38",
+  "view": "Scatterplot, UMAP",
+  "colour_by": "louvain (cell sets)",
+  "status": "ok",
+  "started_at": "2026-10-23T01:35:36+02:00",
+  "build": {
+    "reused": true
+  },
+  "server_cmd": [
+    "env\\py\\Scripts\\python.exe",
+    "scripts\\serve_vitessce.py",
+    "artifacts\\fig_A5",
+    "8816"
+  ],
+  "chrome_version": "155.0.8059.85",
+  "changed_from_default": [],
+  "read_back": {
+    "title": "Scatterplot (UMAP)",
+    "count_text": "2,638 cells",
+    "config_embedding_path": "obsm/X_umap",
+    "config_cell_sets": "obs/louvain",
+    "cell_set_group": "louvain"
+  },
+  "element": {
+    "selector": "canvas#deckgl-overlay-A",
+    "bbox_css_px": {
+      "x": 11,
+      "y": 38.390625,
+      "width": 488,
+      "height": 655.21875
+    }
+  },
+  "hidden_overlay_selectors": [
+    "div.react-grid-layout.layout > div.react-grid-item.react-draggable > div.tooltip-ancestor.vit-2s9tds-card > div.vit-vh79z9-tool",
+    "div.react-grid-item.react-draggable > div.tooltip-ancestor.vit-2s9tds-card > div#deckgl-overlay-A-wrapper > div#view-ortho",
+    "div.vitessce-container.vit-6psllo-vitessceContainer > div.react-grid-layout.layout > div.react-grid-item.react-draggable > span.react-resizable-handle.react-resizable-handle-se"
+  ],
+  "text_boxes_in_element": [],
+  "viewport": {
+    "width": 1024,
+    "height": 720
+  },
+  "device_scale_factor": 3,
+  "browser_settings": {
+    "channel": "chrome",
+    "headless": true,
+    "color_scheme": "light",
+    "reduced_motion": "reduce",
+    "locale": "en-US"
+  },
+  "png": "captures/A5.png",
+  "png_width_px": 1464,
+  "png_height_px": 1968,
+  "png_bytes": 354226,
+  "png_sha256": "9e8f2e0216770a45efc7d8959d4790b6c331269f3b1702bae92d0fc5493c0d22",
+  "finished_at": "2026-10-23T01:35:48+02:00"
+}

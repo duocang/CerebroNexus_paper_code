@@ -1,0 +1,70 @@
+{
+  "id": "B1",
+  "tool": "cerebronexus_default",
+  "tool_version": "CerebroNexus 6.0.0 (27ac995e), embedded backend",
+  "dataset": "I3 Visium H&E mouse brain, 2,688 spots",
+  "input_file": "data/visium_hne_adata.h5ad",
+  "input_sha256": "3571e6b84dd32c73ece8ae0bebbd4758e77c6fdd321b2bbe0d4ffa8ed56e1cbe",
+  "view": "Spatial, ImageDimPlot with the H&E image",
+  "colour_by": "cluster",
+  "status": "ok",
+  "started_at": "2026-10-23T01:35:48+02:00",
+  "build": {
+    "reused": true
+  },
+  "server_cmd": [
+    "C:\\Program Files\\R\\R-4.5.0\\bin\\Rscript.exe",
+    "--vanilla",
+    "scripts\\tools\\cerebronexus_serve.R",
+    "artifacts\\fig_B1\\cerebro_visium_hne_adata.crb",
+    "8811",
+    "embedded"
+  ],
+  "chrome_version": "155.0.8059.85",
+  "changed_from_default": [],
+  "viewport_enlarged_from": {
+    "width": 1024,
+    "height": 720
+  },
+  "read_back": {
+    "fov": "spatial",
+    "plot_type": "ImageDimPlot",
+    "colour_by": "cluster",
+    "split_by": "None",
+    "background": true,
+    "page_heading": [
+      "Spatial"
+    ]
+  },
+  "element": {
+    "selector": ".cv-canvas-wrap:has(#cv-cv-a)",
+    "bbox_css_px": {
+      "x": 265,
+      "y": 454.75,
+      "width": 714,
+      "height": 300
+    }
+  },
+  "hidden_overlay_selectors": [
+    "div#spatial_projection_cell_view_host.coordviews-page.cerebro-cell-view-host > div.cerebro-cell-view-surface > div.cv-panes > div#cv-card-pos.cv-card-pos"
+  ],
+  "text_boxes_in_element": [],
+  "viewport": {
+    "width": 1024,
+    "height": 778
+  },
+  "device_scale_factor": 3,
+  "browser_settings": {
+    "channel": "chrome",
+    "headless": true,
+    "color_scheme": "light",
+    "reduced_motion": "reduce",
+    "locale": "en-US"
+  },
+  "png": "captures/B1.png",
+  "png_width_px": 2142,
+  "png_height_px": 903,
+  "png_bytes": 776420,
+  "png_sha256": "37383c245f3b55f93a3e32c95c18769a5b4c7bdff76f8f4f0892ea0f1717e9e6",
+  "finished_at": "2026-10-23T01:36:09+02:00"
+}
