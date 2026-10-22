@@ -8,6 +8,8 @@ Same-task comparison of five single-cell viewers: CerebroNexus 6.0.0 (default an
 
 Results: [results/SUMMARY.md](results/SUMMARY.md) and [results/summary_task3.md](results/summary_task3.md); raw rows in `results/task1_raw/`, `results/task2_raw/`, `results/task3_builds.csv`, `results/task3_starts.csv`. Superseded runs are kept under `results/superseded_*` and `logs/superseded_v1/` and are not in the tables.
 
+The quantitative figure, [figures/fig-tool-comparison.pdf](figures/fig-tool-comparison.pdf) (a: Task 1 capability matrix, b: Task 2 Jaccard index per route, c: Task 3 build time, artifact size, start to first plot and server peak memory at 10k / 100k / 500k cells, median with min-max), is redrawn from `results/` by the root targets pipeline (`functions.R`, `targets.R`) and checked with `topics/interface_figures/scripts/check_figures.R`.
+
 The screenshots in `logs/` are measurement evidence, not figure panels. What the paper needs, and how to capture it on the Windows host, is in [FIGURES.md](FIGURES.md).
 
 ## Layout
@@ -15,6 +17,9 @@ The screenshots in `logs/` are measurement evidence, not figure panels. What the
 ```
 PROTOCOL.md     pre-registered protocol and Deviations D1-D13
 PROGRESS.md     run diary
+functions.R     plotting helpers for the quantitative figure
+targets.R       its target list (targets_tool_comparison)
+figures/        the quantitative figure and its check (qa/)
 FIGURES.md      which figure panels are needed and how to capture them
 scripts/        harness (harness.py, task3.py), per-task scripts, tool builders, summaries
 results/        result tables, environment.json, inputs.csv, protocol hashes
