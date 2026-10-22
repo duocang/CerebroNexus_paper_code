@@ -1,4 +1,4 @@
-# Installs the comparison R library into comparison/env/rlib (run with env set by run_r.sh / harness).
+# Installs the comparison R library into env/rlib (run with env set by run_r.sh / harness).
 # Usage: Rscript --vanilla scripts/setup_r.R
 lib <- normalizePath("env/rlib", winslash = "/", mustWork = TRUE)
 .libPaths(lib)
