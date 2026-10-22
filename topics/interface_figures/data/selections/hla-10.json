@@ -1,0 +1,75 @@
+{
+  "schema": "cerebronexus-linked-view",
+  "version": 1,
+  "created_at": "2026-10-14T21:52:11Z",
+  "dataset": {
+    "cell_count": 12000,
+    "cell_fingerprint": "md5-cell-set-v1:9bbf86fb3ea3103e700e23d7d18432dc"
+  },
+  "selection": {
+    "cells": ["donor1_GAATAAGCAGATGGGT-12", "donor1_TTGGAACTCGTACCGG-16", "donor2_AGACGTTTCATCATTC-32", "donor2_ATTCTACCATGGTTGT-16", "donor2_ATTCTACGTGTTCTTT-26", "donor2_CCTTTCTAGCGTCAAG-22", "donor2_CGGAGCTGTTCCCGAG-5", "donor2_GACTGCGTCTGGTATG-33", "donor2_GGGAATGCAATCCGAT-37", "donor2_TAAGAGAGTCGGATCC-20"],
+    "source": "Clonal expansion (TCR)",
+    "geometry": {
+      "space": "clone",
+      "mode": "box",
+      "polygon": [
+        [4.55, -0.5],
+        [5.45, -0.5],
+        [5.45, 292.5],
+        [4.55, 292.5]
+      ]
+    }
+  },
+  "view": {
+    "colour": {
+      "mode": "sample",
+      "genes": [],
+      "gene": null,
+      "rgb_genes": [],
+      "clip": 0
+    },
+    "projections": ["umap"],
+    "spatial_sections": [],
+    "active_spatial": null,
+    "filters": {},
+    "hidden_levels": [],
+    "display": {
+      "percentage_cells": 100,
+      "point_size": 3,
+      "point_opacity": 0.8,
+      "group_labels": true,
+      "cell_borders": false,
+      "background_images": true,
+      "selection_mode": "box",
+      "clone_layout": "stack",
+      "keep_square": false
+    },
+    "focus_space": "clone",
+    "lenses": [
+      {
+        "space": "projection::umap",
+        "viewport": {
+          "cx": 0.5,
+          "cy": 0.5,
+          "span": 1
+        },
+        "rotation": null
+      },
+      {
+        "space": "clone",
+        "viewport": {
+          "cx": 0.5,
+          "cy": 0.5,
+          "span": 1
+        },
+        "rotation": null
+      }
+    ],
+    "spatial_backgrounds": [],
+    "trekker": {
+      "dissolve_percentage": 0,
+      "evidence": false,
+      "niche_radius": 250
+    }
+  }
+}

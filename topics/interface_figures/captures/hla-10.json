@@ -1,0 +1,491 @@
+{
+  "name": "hla-10",
+  "file": "hla-10.png",
+  "sha256": "24ff7c533c368710598616fb343d55a84062d1b17600a53ede6e0379d3c1e2a6",
+  "viewport": {
+    "width": 1024,
+    "height": 720,
+    "dpr": 3
+  },
+  "text": [
+    {
+      "x": 239.5,
+      "y": 362.5,
+      "w": 174.4219,
+      "h": 14,
+      "px": 14,
+      "text": "Toggle navigation"
+    },
+    {
+      "x": 181.0781,
+      "y": 46.8594,
+      "w": 26.9219,
+      "h": 11,
+      "px": 9,
+      "text": "v5.2.0"
+    },
+    {
+      "x": 14,
+      "y": 65.8594,
+      "w": 52.5312,
+      "h": 17,
+      "px": 14,
+      "text": "Dataset"
+    },
+    {
+      "x": 27,
+      "y": 101.8594,
+      "w": 71.8906,
+      "h": 17,
+      "px": 14,
+      "text": "HLA & TCR"
+    },
+    {
+      "x": 60.7344,
+      "y": 168.8594,
+      "w": 58.6094,
+      "h": 17,
+      "px": 14,
+      "text": "Data info"
+    },
+    {
+      "x": 60.7344,
+      "y": 209.8594,
+      "w": 66.0781,
+      "h": 17,
+      "px": 14,
+      "text": "Projection"
+    },
+    {
+      "x": 60.5781,
+      "y": 250.8594,
+      "w": 86.5312,
+      "h": 17,
+      "px": 14,
+      "text": "Linked views"
+    },
+    {
+      "x": 60.7344,
+      "y": 291.8594,
+      "w": 47.5156,
+      "h": 17,
+      "px": 14,
+      "text": "Groups"
+    },
+    {
+      "x": 60.7344,
+      "y": 332.8594,
+      "w": 120.3906,
+      "h": 17,
+      "px": 14,
+      "text": "Immune repertoire"
+    },
+    {
+      "x": 60.7344,
+      "y": 373.8594,
+      "w": 116.8906,
+      "h": 17,
+      "px": 14,
+      "text": "HLA & TCR Motifs"
+    },
+    {
+      "x": 60.7344,
+      "y": 414.8594,
+      "w": 108.625,
+      "h": 17,
+      "px": 14,
+      "text": "Gene expression"
+    },
+    {
+      "x": 60.7344,
+      "y": 455.8594,
+      "w": 126.6562,
+      "h": 17,
+      "px": 14,
+      "text": "Gene ID conversion"
+    },
+    {
+      "x": 60.7344,
+      "y": 496.8594,
+      "w": 132.2344,
+      "h": 17,
+      "px": 14,
+      "text": "Colour management"
+    },
+    {
+      "x": 60.7344,
+      "y": 537.8594,
+      "w": 39.3281,
+      "h": 17,
+      "px": 14,
+      "text": "About"
+    },
+    {
+      "x": 14,
+      "y": 614,
+      "w": 71.3906,
+      "h": 15,
+      "px": 12,
+      "text": "Preferences"
+    },
+    {
+      "x": 14,
+      "y": 646.25,
+      "w": 105.1875,
+      "h": 16,
+      "px": 13,
+      "text": "GPU acceleration"
+    },
+    {
+      "x": 13,
+      "y": 673,
+      "w": 1051.75,
+      "h": 17,
+      "px": 14,
+      "text": "Automatically uses WebGPU or WebGL for supported plots. Turn"
+    },
+    {
+      "x": 14,
+      "y": 680.25,
+      "w": 71.9375,
+      "h": 16,
+      "px": 13,
+      "text": "Cell tooltips"
+    },
+    {
+      "x": 13,
+      "y": 707,
+      "w": 1284.6719,
+      "h": 17,
+      "px": 14,
+      "text": "Show brief information on hover in all cell views and the HL"
+    },
+    {
+      "x": 256,
+      "y": 38.75,
+      "w": 106.6562,
+      "h": 21,
+      "px": 18,
+      "text": "Linked views"
+    },
+    {
+      "x": 371.6562,
+      "y": 41.625,
+      "w": 732.5156,
+      "h": 15,
+      "px": 12.5,
+      "text": "12,000 cells · 2 linked spaces (umap (expression) · Clonal e"
+    },
+    {
+      "x": 945.0312,
+      "y": 41,
+      "w": 25.9688,
+      "h": 17,
+      "px": 14,
+      "text": "Info"
+    },
+    {
+      "x": 256,
+      "y": 81,
+      "w": 74.1406,
+      "h": 15,
+      "px": 12,
+      "text": "UMAP layout"
+    },
+    {
+      "x": 372.1406,
+      "y": 80.7969,
+      "w": 29.3906,
+      "h": 15,
+      "px": 12,
+      "text": "Wide"
+    },
+    {
+      "x": 442.5312,
+      "y": 80.7969,
+      "w": 40.8125,
+      "h": 15,
+      "px": 12,
+      "text": "Square"
+    },
+    {
+      "x": 269,
+      "y": 126,
+      "w": 64.8125,
+      "h": 17,
+      "px": 14,
+      "text": "Colour by"
+    },
+    {
+      "x": 282,
+      "y": 158,
+      "w": 46.4219,
+      "h": 17,
+      "px": 14,
+      "text": "sample"
+    },
+    {
+      "x": 507.6562,
+      "y": 126,
+      "w": 68.7344,
+      "h": 17,
+      "px": 14,
+      "text": "Projection"
+    },
+    {
+      "x": 529.6562,
+      "y": 159,
+      "w": 33.7031,
+      "h": 16,
+      "px": 13,
+      "text": "umap"
+    },
+    {
+      "x": 577.3594,
+      "y": 159,
+      "w": 8.75,
+      "h": 16,
+      "px": 13,
+      "text": "×"
+    },
+    {
+      "x": 746.3281,
+      "y": 126,
+      "w": 87.3438,
+      "h": 17,
+      "px": 14,
+      "text": "Clonal layout"
+    },
+    {
+      "x": 786.875,
+      "y": 150.3125,
+      "w": 33.7188,
+      "h": 17,
+      "px": 14,
+      "text": "Rank"
+    },
+    {
+      "x": 785.3281,
+      "y": 165,
+      "w": 36.8125,
+      "h": 17,
+      "px": 14,
+      "text": "stack"
+    },
+    {
+      "x": 884.5781,
+      "y": 150.3125,
+      "w": 66,
+      "h": 17,
+      "px": 14,
+      "text": "Expansion"
+    },
+    {
+      "x": 897.7344,
+      "y": 165,
+      "w": 39.6719,
+      "h": 17,
+      "px": 14,
+      "text": "bands"
+    },
+    {
+      "x": 269,
+      "y": 198,
+      "w": 134.25,
+      "h": 17,
+      "px": 14,
+      "text": "Cross-view highlight"
+    },
+    {
+      "x": 485.0469,
+      "y": 198,
+      "w": 128.9531,
+      "h": 17,
+      "px": 14,
+      "text": "Background images"
+    },
+    {
+      "x": 807.6562,
+      "y": 200.25,
+      "w": 34.9219,
+      "h": 16,
+      "px": 13,
+      "text": "Share"
+    },
+    {
+      "x": 896.5781,
+      "y": 200.25,
+      "w": 54.4219,
+      "h": 16,
+      "px": 13,
+      "text": "Settings"
+    },
+    {
+      "x": 277,
+      "y": 253.375,
+      "w": 13.8281,
+      "h": 13,
+      "px": 11.5,
+      "text": "10"
+    },
+    {
+      "x": 298.8281,
+      "y": 253.375,
+      "w": 93.7031,
+      "h": 13,
+      "px": 11.5,
+      "text": "/ 12,000 selected"
+    },
+    {
+      "x": 409.5312,
+      "y": 253.375,
+      "w": 79.5312,
+      "h": 13,
+      "px": 11.5,
+      "text": "CD8 T · 100%"
+    },
+    {
+      "x": 506.0625,
+      "y": 253.375,
+      "w": 53.7969,
+      "h": 13,
+      "px": 11.5,
+      "text": "From TCR"
+    },
+    {
+      "x": 576.8594,
+      "y": 252.75,
+      "w": 49.4062,
+      "h": 13,
+      "px": 11,
+      "text": "UMAP 10"
+    },
+    {
+      "x": 845.25,
+      "y": 251.5,
+      "w": 38.6094,
+      "h": 16,
+      "px": 13,
+      "text": "Focus"
+    },
+    {
+      "x": 929.7656,
+      "y": 251.5,
+      "w": 34.2344,
+      "h": 16,
+      "px": 13,
+      "text": "Clear"
+    },
+    {
+      "x": 276,
+      "y": 294.375,
+      "w": 37.2812,
+      "h": 13,
+      "px": 11.5,
+      "text": "donor1"
+    },
+    {
+      "x": 318.2812,
+      "y": 294.375,
+      "w": 37.9375,
+      "h": 13,
+      "px": 11.5,
+      "text": "(3000)"
+    },
+    {
+      "x": 392.2188,
+      "y": 294.375,
+      "w": 38.8906,
+      "h": 13,
+      "px": 11.5,
+      "text": "donor2"
+    },
+    {
+      "x": 436.1094,
+      "y": 294.375,
+      "w": 37.9375,
+      "h": 13,
+      "px": 11.5,
+      "text": "(3000)"
+    },
+    {
+      "x": 510.0469,
+      "y": 294.375,
+      "w": 39.1562,
+      "h": 13,
+      "px": 11.5,
+      "text": "donor3"
+    },
+    {
+      "x": 554.2031,
+      "y": 294.375,
+      "w": 37.9375,
+      "h": 13,
+      "px": 11.5,
+      "text": "(3000)"
+    },
+    {
+      "x": 628.1406,
+      "y": 294.375,
+      "w": 39.125,
+      "h": 13,
+      "px": 11.5,
+      "text": "donor4"
+    },
+    {
+      "x": 672.2656,
+      "y": 294.375,
+      "w": 37.9375,
+      "h": 13,
+      "px": 11.5,
+      "text": "(3000)"
+    },
+    {
+      "x": 265,
+      "y": 329.25,
+      "w": 149.3438,
+      "h": 16,
+      "px": 13,
+      "text": "Clonal expansion (TCR)"
+    },
+    {
+      "x": 430.3438,
+      "y": 332.25,
+      "w": 37.3594,
+      "h": 11,
+      "px": 9.5,
+      "text": "FOCUS"
+    },
+    {
+      "x": 908.375,
+      "y": 337.375,
+      "w": 56.625,
+      "h": 13,
+      "px": 11.5,
+      "text": "Exit focus"
+    }
+  ],
+  "surfaces": [
+    {
+      "tag": "canvas",
+      "id": "cv-cv-b",
+      "cls": "",
+      "x": 265,
+      "y": 357,
+      "w": 714,
+      "h": 482,
+      "pixel_width": 2142
+    },
+    {
+      "tag": "canvas",
+      "id": "",
+      "cls": "cv-interaction-layer",
+      "x": 265,
+      "y": 357,
+      "w": 714,
+      "h": 482,
+      "pixel_width": 2142
+    }
+  ],
+  "page_text": "Skip to main content\nToggle navigation\nv5.2.0\nDataset\nHLA & TCR\n Data info\n Projection\n Linked views\n Groups\n Immune repertoire\n HLA & TCR Motifs\n Gene expression\n Gene ID conversion\n Colour management\n About\nPreferences\nGPU acceleration\nAutomatically uses WebGPU or WebGL for supported plots. Turn off to use CPU rendering. Small or unsupported cell views may use Canvas. Current plots: Canvas.\nCell tooltips\nShow brief information on hover in all cell views and the HLA motif network. Click a cell to pin its summary and open Details, even when tooltips are off. Cross-view highlighting is controlled separately.\nLinked views\n12,000 cells · 2 linked spaces (umap (expression) · Clonal expansion (TCR)) · 12,000 receptor-bearing cells, 3,667 clonotypes\nInfo\nUMAP layout\nWide\nSquare\nColour by\nsample\nProjection\numap\n×\nClonal layout\nRank\nstack\nExpansion\nbands\nCross-view highlight \nBackground images \nShare\nSettings\n10\n/ 12,000 selected\nCD8 T · 100%\nFrom TCR\nUMAP 10\n Focus\n Clear\ndonor1\n(3000)\ndonor2\n(3000)\ndonor3\n(3000)\ndonor4\n(3000)\numap (expression)\nCONTEXT\nFocus\numap (expression) view with 12000 points; 10 selected.\nClonal expansion (TCR)\nFOCUS\nExit focus\nClonal expansion (TCR) view with 12000 points; 10 selected.\nComposition by cell_type\nCD8 T\n10\nTop clonotypes in selection 10 of 10 carry a receptor\n#\tCLONOTYPE\tIN SEL.\tCLONE SIZE\t% OF SEL.\n1\tCAGGGQGGSQGNLIF_CASSIYSNQPQHF +2\t7\t9\t70.0%\n2\tCAAALYNNAGNMLTF_CASSIYSNQPQHF\t2\t2\t20.0%\n3\tCAGAVGGFGNVLHC_CASSIYSNQPQHF\t1\t1\t10.0%\nClick a clonotype row to select all its cells across every panel.\n\nPlot of selected cells\n\n info\nVariable to compare:\nsample\ndonor1\ndonor2\n0\n1\n2\n3\n4\n5\n6\n7\n8\nNumber of cells\n\nTable of selected cells\n\n info\nAutomatically format numbers: \n \nHighlight values with colours: \nColumn visibility\nDownload\ncell_barcode\tsample\tcell_type\tdextramer_antigen\tdextramer_peptide\tdextramer_allele\trestriction_in_genotype\n\t\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\ndonor2_AGACGTTTCATCATTC-32\tdonor2\tCD8 T\tFlu-MP_Influenza\tGILGFVFTL\tHLA-A*02:01\tyes\ndonor2_ATTCTACCATGGTTGT-16\tdonor2\tCD8 T\tFlu-MP_Influenza\tGILGFVFTL\tHLA-A*02:01\tyes\ndonor2_ATTCTACGTGTTCTTT-26\tdonor2\tCD8 T\tFlu-MP_Influenza\tGILGFVFTL\tHLA-A*02:01\tyes\ndonor2_CCTTTCTAGCGTCAAG-22\tdonor2\tCD8 T\tFlu-MP_Influenza\tGILGFVFTL\tHLA-A*02:01\tyes\ndonor2_CGGAGCTGTTCCCGAG-5\tdonor2\tCD8 T\tFlu-MP_Influenza\tGILGFVFTL\tHLA-A*02:01\tyes\ndonor1_GAATAAGCAGATGGGT-12\tdonor1\tCD8 T\tFlu-MP_Influenza\tGILGFVFTL\tHLA-A*02:01\tyes\ndonor2_GACTGCGTCTGGTATG-33\tdonor2\tCD8 T\tFlu-MP_Influenza\tGILGFVFTL\tHLA-A*02:01\tyes\ndonor2_GGGAATGCAATCCGAT-37\tdonor2\tCD8 T\tFlu-MP_Influenza\tGILGFVFTL\tHLA-A*02:01\tyes\ndonor2_TAAGAGAGTCGGATCC-20\tdonor2\tCD8 T\tFlu-MP_Influenza\tGILGFVFTL\tHLA-A*02:01\tyes\ndonor1_TTGGAACTCGTACCGG-16\tdonor1\tCD8 T\tFlu-MP_Influenza\tGILGFVFTL\tHLA-A*02:01\tyes\nShow \n15\n30\n50\n100\n1,000\n entries\nShowing 1 to 10 of 10 entries\nPrevious\n1\nNext\nSelect…"
+}

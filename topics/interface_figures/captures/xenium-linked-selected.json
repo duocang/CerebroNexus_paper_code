@@ -1,0 +1,883 @@
+{
+  "name": "xenium-linked-selected",
+  "file": "xenium-linked-selected.png",
+  "sha256": "16977c633bdebd9ccff8ba68f0e5f667f75abaf641fa302f429bde0301b45ffc",
+  "viewport": {
+    "width": 1024,
+    "height": 960,
+    "dpr": 3
+  },
+  "text": [
+    {
+      "x": 239.5,
+      "y": 482.5,
+      "w": 174.4219,
+      "h": 14,
+      "px": 14,
+      "text": "Toggle navigation"
+    },
+    {
+      "x": 181.0781,
+      "y": 46.8594,
+      "w": 26.9219,
+      "h": 11,
+      "px": 9,
+      "text": "v5.2.0"
+    },
+    {
+      "x": 14,
+      "y": 65.8594,
+      "w": 52.5312,
+      "h": 17,
+      "px": 14,
+      "text": "Dataset"
+    },
+    {
+      "x": 27,
+      "y": 101.8594,
+      "w": 141.8594,
+      "h": 17,
+      "px": 14,
+      "text": "Mouse brain (Xenium)"
+    },
+    {
+      "x": 60.7344,
+      "y": 168.8594,
+      "w": 58.6094,
+      "h": 17,
+      "px": 14,
+      "text": "Data info"
+    },
+    {
+      "x": 60.7344,
+      "y": 209.8594,
+      "w": 66.0781,
+      "h": 17,
+      "px": 14,
+      "text": "Projection"
+    },
+    {
+      "x": 60.5781,
+      "y": 250.8594,
+      "w": 86.5312,
+      "h": 17,
+      "px": 14,
+      "text": "Linked views"
+    },
+    {
+      "x": 60.7344,
+      "y": 291.8594,
+      "w": 47.5156,
+      "h": 17,
+      "px": 14,
+      "text": "Groups"
+    },
+    {
+      "x": 60.7344,
+      "y": 332.8594,
+      "w": 44.6094,
+      "h": 17,
+      "px": 14,
+      "text": "Spatial"
+    },
+    {
+      "x": 60.7344,
+      "y": 373.8594,
+      "w": 108.625,
+      "h": 17,
+      "px": 14,
+      "text": "Gene expression"
+    },
+    {
+      "x": 60.7344,
+      "y": 414.8594,
+      "w": 126.6562,
+      "h": 17,
+      "px": 14,
+      "text": "Gene ID conversion"
+    },
+    {
+      "x": 60.7344,
+      "y": 455.8594,
+      "w": 132.2344,
+      "h": 17,
+      "px": 14,
+      "text": "Colour management"
+    },
+    {
+      "x": 60.7344,
+      "y": 496.8594,
+      "w": 39.3281,
+      "h": 17,
+      "px": 14,
+      "text": "About"
+    },
+    {
+      "x": 14,
+      "y": 854,
+      "w": 71.3906,
+      "h": 15,
+      "px": 12,
+      "text": "Preferences"
+    },
+    {
+      "x": 14,
+      "y": 886.25,
+      "w": 105.1875,
+      "h": 16,
+      "px": 13,
+      "text": "GPU acceleration"
+    },
+    {
+      "x": 13,
+      "y": 913,
+      "w": 1051.75,
+      "h": 17,
+      "px": 14,
+      "text": "Automatically uses WebGPU or WebGL for supported plots. Turn"
+    },
+    {
+      "x": 14,
+      "y": 920.25,
+      "w": 71.9375,
+      "h": 16,
+      "px": 13,
+      "text": "Cell tooltips"
+    },
+    {
+      "x": 13,
+      "y": 947,
+      "w": 1284.6719,
+      "h": 17,
+      "px": 14,
+      "text": "Show brief information on hover in all cell views and the HL"
+    },
+    {
+      "x": 256,
+      "y": 38.75,
+      "w": 106.6562,
+      "h": 21,
+      "px": 18,
+      "text": "Linked views"
+    },
+    {
+      "x": 371.6562,
+      "y": 41.625,
+      "w": 367.1562,
+      "h": 15,
+      "px": 12.5,
+      "text": "5,000 cells · 2 linked spaces (umap (expression) · fov (spat"
+    },
+    {
+      "x": 945.0312,
+      "y": 41,
+      "w": 25.9688,
+      "h": 17,
+      "px": 14,
+      "text": "Info"
+    },
+    {
+      "x": 256,
+      "y": 81,
+      "w": 74.1406,
+      "h": 15,
+      "px": 12,
+      "text": "UMAP layout"
+    },
+    {
+      "x": 372.1406,
+      "y": 80.7969,
+      "w": 29.3906,
+      "h": 15,
+      "px": 12,
+      "text": "Wide"
+    },
+    {
+      "x": 442.5312,
+      "y": 80.7969,
+      "w": 40.8125,
+      "h": 15,
+      "px": 12,
+      "text": "Square"
+    },
+    {
+      "x": 269,
+      "y": 126,
+      "w": 64.8125,
+      "h": 17,
+      "px": 14,
+      "text": "Colour by"
+    },
+    {
+      "x": 282,
+      "y": 158,
+      "w": 44.0781,
+      "h": 17,
+      "px": 14,
+      "text": "cluster"
+    },
+    {
+      "x": 627,
+      "y": 126,
+      "w": 68.7344,
+      "h": 17,
+      "px": 14,
+      "text": "Projection"
+    },
+    {
+      "x": 649,
+      "y": 159,
+      "w": 33.7031,
+      "h": 16,
+      "px": 13,
+      "text": "umap"
+    },
+    {
+      "x": 696.7031,
+      "y": 159,
+      "w": 8.75,
+      "h": 16,
+      "px": 13,
+      "text": "×"
+    },
+    {
+      "x": 269,
+      "y": 196,
+      "w": 80.2031,
+      "h": 17,
+      "px": 14,
+      "text": "Spatial data"
+    },
+    {
+      "x": 291,
+      "y": 229,
+      "w": 18.6719,
+      "h": 16,
+      "px": 13,
+      "text": "fov"
+    },
+    {
+      "x": 323.6719,
+      "y": 229,
+      "w": 8.75,
+      "h": 16,
+      "px": 13,
+      "text": "×"
+    },
+    {
+      "x": 351.4219,
+      "y": 229,
+      "w": 62.7812,
+      "h": 16,
+      "px": 13,
+      "text": "fov_colour"
+    },
+    {
+      "x": 428.2031,
+      "y": 229,
+      "w": 8.75,
+      "h": 16,
+      "px": 13,
+      "text": "×"
+    },
+    {
+      "x": 269,
+      "y": 268,
+      "w": 134.25,
+      "h": 17,
+      "px": 14,
+      "text": "Cross-view highlight"
+    },
+    {
+      "x": 485.0469,
+      "y": 268,
+      "w": 128.9531,
+      "h": 17,
+      "px": 14,
+      "text": "Background images"
+    },
+    {
+      "x": 807.6562,
+      "y": 270.25,
+      "w": 34.9219,
+      "h": 16,
+      "px": 13,
+      "text": "Share"
+    },
+    {
+      "x": 896.5781,
+      "y": 270.25,
+      "w": 54.4219,
+      "h": 16,
+      "px": 13,
+      "text": "Settings"
+    },
+    {
+      "x": 277,
+      "y": 323.375,
+      "w": 23.4844,
+      "h": 13,
+      "px": 11.5,
+      "text": "500"
+    },
+    {
+      "x": 308.4844,
+      "y": 323.375,
+      "w": 88.2812,
+      "h": 13,
+      "px": 11.5,
+      "text": "/ 5,000 selected"
+    },
+    {
+      "x": 413.7656,
+      "y": 323.375,
+      "w": 52.7031,
+      "h": 13,
+      "px": 11.5,
+      "text": "C2 · 76%"
+    },
+    {
+      "x": 483.4688,
+      "y": 323.375,
+      "w": 64.7188,
+      "h": 13,
+      "px": 11.5,
+      "text": "From UMAP"
+    },
+    {
+      "x": 565.1875,
+      "y": 322.75,
+      "w": 90.8906,
+      "h": 13,
+      "px": 11,
+      "text": "fov (spatial) 500"
+    },
+    {
+      "x": 845.25,
+      "y": 321.5,
+      "w": 38.6094,
+      "h": 16,
+      "px": 13,
+      "text": "Focus"
+    },
+    {
+      "x": 929.7656,
+      "y": 321.5,
+      "w": 34.2344,
+      "h": 16,
+      "px": 13,
+      "text": "Clear"
+    },
+    {
+      "x": 276,
+      "y": 361,
+      "w": 13.6406,
+      "h": 13,
+      "px": 11.5,
+      "text": "C1"
+    },
+    {
+      "x": 294.6406,
+      "y": 361,
+      "w": 26.9219,
+      "h": 13,
+      "px": 11.5,
+      "text": "(411)"
+    },
+    {
+      "x": 357.5625,
+      "y": 361,
+      "w": 20.9219,
+      "h": 13,
+      "px": 11.5,
+      "text": "C10"
+    },
+    {
+      "x": 383.4844,
+      "y": 361,
+      "w": 29.5938,
+      "h": 13,
+      "px": 11.5,
+      "text": "(276)"
+    },
+    {
+      "x": 449.0781,
+      "y": 361,
+      "w": 19.0156,
+      "h": 13,
+      "px": 11.5,
+      "text": "C11"
+    },
+    {
+      "x": 473.0938,
+      "y": 361,
+      "w": 30.3594,
+      "h": 13,
+      "px": 11.5,
+      "text": "(258)"
+    },
+    {
+      "x": 539.4531,
+      "y": 361,
+      "w": 20.6094,
+      "h": 13,
+      "px": 11.5,
+      "text": "C12"
+    },
+    {
+      "x": 565.0625,
+      "y": 361,
+      "w": 28.0469,
+      "h": 13,
+      "px": 11.5,
+      "text": "(179)"
+    },
+    {
+      "x": 629.1094,
+      "y": 361,
+      "w": 20.8906,
+      "h": 13,
+      "px": 11.5,
+      "text": "C13"
+    },
+    {
+      "x": 655,
+      "y": 361,
+      "w": 28.9375,
+      "h": 13,
+      "px": 11.5,
+      "text": "(169)"
+    },
+    {
+      "x": 719.9375,
+      "y": 361,
+      "w": 21.0781,
+      "h": 13,
+      "px": 11.5,
+      "text": "C14"
+    },
+    {
+      "x": 746.0156,
+      "y": 361,
+      "w": 26.9531,
+      "h": 13,
+      "px": 11.5,
+      "text": "(161)"
+    },
+    {
+      "x": 808.9688,
+      "y": 361,
+      "w": 20.7812,
+      "h": 13,
+      "px": 11.5,
+      "text": "C15"
+    },
+    {
+      "x": 834.75,
+      "y": 361,
+      "w": 29.0156,
+      "h": 13,
+      "px": 11.5,
+      "text": "(149)"
+    },
+    {
+      "x": 899.7656,
+      "y": 361,
+      "w": 21,
+      "h": 13,
+      "px": 11.5,
+      "text": "C16"
+    },
+    {
+      "x": 925.7656,
+      "y": 361,
+      "w": 28.6094,
+      "h": 13,
+      "px": 11.5,
+      "text": "(135)"
+    },
+    {
+      "x": 276,
+      "y": 384.25,
+      "w": 20.2188,
+      "h": 13,
+      "px": 11.5,
+      "text": "C17"
+    },
+    {
+      "x": 301.2188,
+      "y": 384.25,
+      "w": 26.875,
+      "h": 13,
+      "px": 11.5,
+      "text": "(110)"
+    },
+    {
+      "x": 364.0938,
+      "y": 384.25,
+      "w": 21.0156,
+      "h": 13,
+      "px": 11.5,
+      "text": "C18"
+    },
+    {
+      "x": 390.1094,
+      "y": 384.25,
+      "w": 28.8594,
+      "h": 13,
+      "px": 11.5,
+      "text": "(106)"
+    },
+    {
+      "x": 454.9688,
+      "y": 384.25,
+      "w": 21,
+      "h": 13,
+      "px": 11.5,
+      "text": "C19"
+    },
+    {
+      "x": 480.9688,
+      "y": 384.25,
+      "w": 28.9375,
+      "h": 13,
+      "px": 11.5,
+      "text": "(104)"
+    },
+    {
+      "x": 545.9062,
+      "y": 384.25,
+      "w": 15.25,
+      "h": 13,
+      "px": 11.5,
+      "text": "C2"
+    },
+    {
+      "x": 566.1562,
+      "y": 384.25,
+      "w": 30.8125,
+      "h": 13,
+      "px": 11.5,
+      "text": "(399)"
+    },
+    {
+      "x": 632.9688,
+      "y": 384.25,
+      "w": 22.5312,
+      "h": 13,
+      "px": 11.5,
+      "text": "C20"
+    },
+    {
+      "x": 660.5,
+      "y": 384.25,
+      "w": 23.5625,
+      "h": 13,
+      "px": 11.5,
+      "text": "(96)"
+    },
+    {
+      "x": 720.0625,
+      "y": 384.25,
+      "w": 20.6094,
+      "h": 13,
+      "px": 11.5,
+      "text": "C21"
+    },
+    {
+      "x": 745.6719,
+      "y": 384.25,
+      "w": 23.4844,
+      "h": 13,
+      "px": 11.5,
+      "text": "(83)"
+    },
+    {
+      "x": 805.1562,
+      "y": 384.25,
+      "w": 22.2188,
+      "h": 13,
+      "px": 11.5,
+      "text": "C22"
+    },
+    {
+      "x": 832.375,
+      "y": 384.25,
+      "w": 23.4531,
+      "h": 13,
+      "px": 11.5,
+      "text": "(63)"
+    },
+    {
+      "x": 891.8281,
+      "y": 384.25,
+      "w": 22.4844,
+      "h": 13,
+      "px": 11.5,
+      "text": "C23"
+    },
+    {
+      "x": 919.3125,
+      "y": 384.25,
+      "w": 23.6406,
+      "h": 13,
+      "px": 11.5,
+      "text": "(49)"
+    },
+    {
+      "x": 276,
+      "y": 407.5,
+      "w": 22.5156,
+      "h": 13,
+      "px": 11.5,
+      "text": "C24"
+    },
+    {
+      "x": 303.5156,
+      "y": 407.5,
+      "w": 23.1875,
+      "h": 13,
+      "px": 11.5,
+      "text": "(26)"
+    },
+    {
+      "x": 362.7031,
+      "y": 407.5,
+      "w": 15.5156,
+      "h": 13,
+      "px": 11.5,
+      "text": "C3"
+    },
+    {
+      "x": 383.2188,
+      "y": 407.5,
+      "w": 30.8281,
+      "h": 13,
+      "px": 11.5,
+      "text": "(389)"
+    },
+    {
+      "x": 450.0469,
+      "y": 407.5,
+      "w": 15.7031,
+      "h": 13,
+      "px": 11.5,
+      "text": "C4"
+    },
+    {
+      "x": 470.75,
+      "y": 407.5,
+      "w": 30.9688,
+      "h": 13,
+      "px": 11.5,
+      "text": "(344)"
+    },
+    {
+      "x": 537.7188,
+      "y": 407.5,
+      "w": 15.4219,
+      "h": 13,
+      "px": 11.5,
+      "text": "C5"
+    },
+    {
+      "x": 558.1406,
+      "y": 407.5,
+      "w": 30.3438,
+      "h": 13,
+      "px": 11.5,
+      "text": "(324)"
+    },
+    {
+      "x": 624.4844,
+      "y": 407.5,
+      "w": 15.625,
+      "h": 13,
+      "px": 11.5,
+      "text": "C6"
+    },
+    {
+      "x": 645.1094,
+      "y": 407.5,
+      "w": 28.7188,
+      "h": 13,
+      "px": 11.5,
+      "text": "(313)"
+    },
+    {
+      "x": 709.8281,
+      "y": 407.5,
+      "w": 14.8594,
+      "h": 13,
+      "px": 11.5,
+      "text": "C7"
+    },
+    {
+      "x": 729.6875,
+      "y": 407.5,
+      "w": 30.5469,
+      "h": 13,
+      "px": 11.5,
+      "text": "(296)"
+    },
+    {
+      "x": 796.2344,
+      "y": 407.5,
+      "w": 15.6562,
+      "h": 13,
+      "px": 11.5,
+      "text": "C8"
+    },
+    {
+      "x": 816.8906,
+      "y": 407.5,
+      "w": 30.6406,
+      "h": 13,
+      "px": 11.5,
+      "text": "(284)"
+    },
+    {
+      "x": 883.5312,
+      "y": 407.5,
+      "w": 15.625,
+      "h": 13,
+      "px": 11.5,
+      "text": "C9"
+    },
+    {
+      "x": 904.1562,
+      "y": 407.5,
+      "w": 29.5938,
+      "h": 13,
+      "px": 11.5,
+      "text": "(276)"
+    },
+    {
+      "x": 265,
+      "y": 437.75,
+      "w": 119.4062,
+      "h": 16,
+      "px": 13,
+      "text": "umap (expression)"
+    },
+    {
+      "x": 559.3594,
+      "y": 447.125,
+      "w": 34.3281,
+      "h": 13,
+      "px": 11.5,
+      "text": "Focus"
+    },
+    {
+      "x": 264,
+      "y": 923.25,
+      "w": 362.1406,
+      "h": 17,
+      "px": 14,
+      "text": "umap (expression) view with 5000 points; 500 selected."
+    },
+    {
+      "x": 635,
+      "y": 437.75,
+      "w": 76.9375,
+      "h": 16,
+      "px": 13,
+      "text": "fov (spatial)"
+    },
+    {
+      "x": 929.3594,
+      "y": 447.125,
+      "w": 34.3281,
+      "h": 13,
+      "px": 11.5,
+      "text": "Focus"
+    },
+    {
+      "x": 634,
+      "y": 923.25,
+      "w": 318.8594,
+      "h": 17,
+      "px": 14,
+      "text": "fov (spatial) view with 5000 points; 500 selected."
+    },
+    {
+      "x": 256,
+      "y": 943.25,
+      "w": 79.7969,
+      "h": 15,
+      "px": 12.5,
+      "text": "Composition"
+    },
+    {
+      "x": 335.7969,
+      "y": 944.25,
+      "w": 50.3281,
+      "h": 13,
+      "px": 11,
+      "text": "by cluster"
+    }
+  ],
+  "surfaces": [
+    {
+      "tag": "canvas",
+      "id": "cv-cv-a",
+      "cls": "cv-layer-overlay",
+      "x": 265,
+      "y": 464.25,
+      "w": 344,
+      "h": 458,
+      "pixel_width": 1032
+    },
+    {
+      "tag": "canvas",
+      "id": "",
+      "cls": "cv-underlay-layer",
+      "x": 265,
+      "y": 464.25,
+      "w": 344,
+      "h": 458,
+      "pixel_width": 1032
+    },
+    {
+      "tag": "canvas",
+      "id": "",
+      "cls": "cv-interaction-layer",
+      "x": 265,
+      "y": 464.25,
+      "w": 344,
+      "h": 458,
+      "pixel_width": 1032
+    },
+    {
+      "tag": "canvas",
+      "id": "cv-cv-b",
+      "cls": "cv-layer-overlay",
+      "x": 635,
+      "y": 464.25,
+      "w": 344,
+      "h": 458,
+      "pixel_width": 1032
+    },
+    {
+      "tag": "canvas",
+      "id": "",
+      "cls": "cv-underlay-layer",
+      "x": 635,
+      "y": 464.25,
+      "w": 344,
+      "h": 458,
+      "pixel_width": 1032
+    },
+    {
+      "tag": "canvas",
+      "id": "",
+      "cls": "cv-interaction-layer",
+      "x": 635,
+      "y": 464.25,
+      "w": 344,
+      "h": 458,
+      "pixel_width": 1032
+    }
+  ],
+  "page_text": "Skip to main content\nToggle navigation\nv5.2.0\nDataset\nMouse brain (Xenium)\n Data info\n Projection\n Linked views\n Groups\n Spatial\n Gene expression\n Gene ID conversion\n Colour management\n About\nPreferences\nGPU acceleration\nAutomatically uses WebGPU or WebGL for supported plots. Turn off to use CPU rendering. Small or unsupported cell views may use Canvas. Current plots: Canvas.\nCell tooltips\nShow brief information on hover in all cell views and the HLA motif network. Click a cell to pin its summary and open Details, even when tooltips are off. Cross-view highlighting is controlled separately.\nLinked views\n5,000 cells · 2 linked spaces (umap (expression) · fov (spatial))\nInfo\nUMAP layout\nWide\nSquare\nColour by\ncluster\nProjection\numap\n×\nSpatial data\nfov\n×\nfov_colour\n×\nCross-view highlight \nBackground images \nShare\nSettings\n500\n/ 5,000 selected\nC2 · 76%\nFrom UMAP\nfov (spatial) 500\n Focus\n Clear\nC1\n(411)\nC10\n(276)\nC11\n(258)\nC12\n(179)\nC13\n(169)\nC14\n(161)\nC15\n(149)\nC16\n(135)\nC17\n(110)\nC18\n(106)\nC19\n(104)\nC2\n(399)\nC20\n(96)\nC21\n(83)\nC22\n(63)\nC23\n(49)\nC24\n(26)\nC3\n(389)\nC4\n(344)\nC5\n(324)\nC6\n(313)\nC7\n(296)\nC8\n(284)\nC9\n(276)\numap (expression)\nFocus\numap (expression) view with 5000 points; 500 selected.\nfov (spatial)\nFocus\nfov (spatial) view with 5000 points; 500 selected.\nComposition by cluster\nC2\n381\nC10\n111\nC5\n3\nC1\n2\nC16\n2\nC23\n1\n\nPlot of selected cells\n\n info\nVariable to compare:\ncluster\nC1\nC10\nC16\nC2\nC23\nC5\n0\n50\n100\n150\n200\n250\n300\n350\n400\nNumber of cells\n\nTable of selected cells\n\n info\nAutomatically format numbers: \n \nHighlight values with colours: \nColumn visibility\nDownload\ncell_barcode\tcluster\tnUMI\tnGene\torig.ident\tnCount_Spatial\tnFeature_Spatial\tSpatial_snn_res.0.5\tseurat_clusters\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\n181\tC10\t420\t85\tSeuratProject\t420\t85\t9\t9\n188\tC10\t254\t74\tSeuratProject\t254\t74\t9\t9\n194\tC10\t587\t99\tSeuratProject\t587\t99\t9\t9\n256\tC10\t419\t89\tSeuratProject\t419\t89\t9\t9\n709\tC2\t503\t94\tSeuratProject\t503\t94\t1\t1\n717\tC2\t524\t108\tSeuratProject\t524\t108\t1\t1\n722\tC2\t276\t96\tSeuratProject\t276\t96\t1\t1\n745\tC2\t615\t102\tSeuratProject\t615\t102\t1\t1\n794\tC2\t534\t105\tSeuratProject\t534\t105\t1\t1\n795\tC2\t381\t93\tSeuratProject\t381\t93\t1\t1\n809\tC2\t242\t80\tSeuratProject\t242\t80\t1\t1\n819\tC2\t159\t74\tSeuratProject\t159\t74\t1\t1\n841\tC2\t340\t102\tSeuratProject\t340\t102\t1\t1\n852\tC2\t328\t90\tSeuratProject\t328\t90\t1\t1\n1035\tC2\t468\t98\tSeuratProject\t468\t98\t1\t1\nShow \n15\n30\n50\n100\n1,000\n entries\nShowing 1 to 15 of 500 entries\nPrevious\n1\n2\n3\n4\n5\n…\n34\nNext\nSelect…\n2010300C02Rik\n2010300C02Rik\n2010300C02Rik\n2010300C02Rik"
+}

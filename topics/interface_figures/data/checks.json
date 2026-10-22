@@ -1,0 +1,36 @@
+{
+  "cerebronexus_src": "/private/tmp/claude-501/-Users-nuioi-projects-2026-07-01-cerebreNexus-CerebroNexus--claude-worktrees-vigorous-colden-10c602/f7cacb28-9b17-410d-9953-c1cd9de33521/scratchpad/work/src-d7b773d6b020",
+  "ren": {
+    "cells": 1462702,
+    "tcr_cells": 220968,
+    "receptor_records": 503432,
+    "selected": 13556,
+    "selected_tcr": 6569,
+    "selected_no_tcr": 6987,
+    "trb_sharing": {
+      "Private": 157507,
+      "Public (within-group)": 1462,
+      "Public (cross-group)": 553
+    }
+  },
+  "hla": {
+    "cells": 12000,
+    "strict": 10,
+    "gene": 293,
+    "strict_by_donor": {
+      "donor1": 2,
+      "donor2": 8
+    },
+    "gene_by_donor": {
+      "donor1": 142,
+      "donor2": 151
+    },
+    "gene_trb_cdr3": 10,
+    "largest_cdr3": 227
+  },
+  "xenium": {
+    "cells": 5000,
+    "selected": 500,
+    "clusters": 24
+  }
+}

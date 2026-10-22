@@ -1,0 +1,8 @@
+# CerebroNexus commits the interface figures are captured from.
+# viewer: the Viewer and the large demo data recipe (data-raw/large-demo, run-demo.R).
+# builder: the Builder, which is not yet on the viewer commit (mihem/CerebroNexus#216).
+# Re-capture after a release by pointing both at the release commit.
+viewer_repo=https://github.com/mihem/CerebroNexus.git
+viewer_commit=d7b773d6b0207c2456ee12e26d57a07a33825e89
+builder_repo=https://github.com/duocang/CerebroNexus.git
+builder_commit=13682caeb9909907515ee839063601f3cb685116

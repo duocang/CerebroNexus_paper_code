@@ -1,0 +1,2 @@
+# SVG twins for check_figures.R; they embed the screenshots and are rebuilt by run.sh.
+figures/qa/*.svg

@@ -1,0 +1,622 @@
+{
+  "name": "builder-configure",
+  "file": "builder-configure.png",
+  "sha256": "36699fbbd410fdbb2ab8040a1faeff8ae4d290833142386a88e40e7a7220f13b",
+  "viewport": {
+    "width": 1024,
+    "height": 720,
+    "dpr": 3
+  },
+  "text": [
+    {
+      "x": 134.5625,
+      "y": 48.4531,
+      "w": 32.375,
+      "h": 10,
+      "px": 8.96,
+      "text": "v6.0.0"
+    },
+    {
+      "x": 32,
+      "y": 38.5,
+      "w": 146.3594,
+      "h": 17,
+      "px": 14,
+      "text": "CerebroNexus Builder"
+    },
+    {
+      "x": 689.3594,
+      "y": 31.5,
+      "w": 111.4531,
+      "h": 17,
+      "px": 14,
+      "text": "No project saved"
+    },
+    {
+      "x": 845.7812,
+      "y": 31,
+      "w": 36.2031,
+      "h": 17,
+      "px": 14,
+      "text": "Open"
+    },
+    {
+      "x": 933.8594,
+      "y": 31,
+      "w": 32.5312,
+      "h": 17,
+      "px": 14,
+      "text": "Save"
+    },
+    {
+      "x": 116.875,
+      "y": 89.1406,
+      "w": 10.0156,
+      "h": 13,
+      "px": 11,
+      "text": "✓"
+    },
+    {
+      "x": 166.0938,
+      "y": 78.7656,
+      "w": 29.4375,
+      "h": 16,
+      "px": 13,
+      "text": "Data"
+    },
+    {
+      "x": 146.2812,
+      "y": 99.5312,
+      "w": 69.0625,
+      "h": 13,
+      "px": 11,
+      "text": "Add datasets"
+    },
+    {
+      "x": 338.0469,
+      "y": 89.7969,
+      "w": 7.0781,
+      "h": 13,
+      "px": 11,
+      "text": "2"
+    },
+    {
+      "x": 365.9844,
+      "y": 80.375,
+      "w": 62.5469,
+      "h": 16,
+      "px": 13,
+      "text": "Configure"
+    },
+    {
+      "x": 365.9844,
+      "y": 98.2344,
+      "w": 88.4219,
+      "h": 13,
+      "px": 11,
+      "text": "Set each dataset"
+    },
+    {
+      "x": 573.0312,
+      "y": 89.7969,
+      "w": 7.3594,
+      "h": 13,
+      "px": 11,
+      "text": "3"
+    },
+    {
+      "x": 601.1094,
+      "y": 80.375,
+      "w": 44.9531,
+      "h": 16,
+      "px": 13,
+      "text": "Review"
+    },
+    {
+      "x": 601.1094,
+      "y": 98.2344,
+      "w": 76.9688,
+      "h": 13,
+      "px": 11,
+      "text": "Resolve issues"
+    },
+    {
+      "x": 804.5938,
+      "y": 89.7969,
+      "w": 7.5469,
+      "h": 13,
+      "px": 11,
+      "text": "4"
+    },
+    {
+      "x": 832.7656,
+      "y": 80.375,
+      "w": 31.9688,
+      "h": 16,
+      "px": 13,
+      "text": "Build"
+    },
+    {
+      "x": 832.7656,
+      "y": 98.2344,
+      "w": 72.4375,
+      "h": 13,
+      "px": 11,
+      "text": "Create output"
+    },
+    {
+      "x": 33,
+      "y": 142.7969,
+      "w": 69.625,
+      "h": 13,
+      "px": 11,
+      "text": "Datasets"
+    },
+    {
+      "x": 239.25,
+      "y": 142.7969,
+      "w": 8.75,
+      "h": 13,
+      "px": 11,
+      "text": "3"
+    },
+    {
+      "x": 44.1094,
+      "y": 188.5,
+      "w": 7.375,
+      "h": 13,
+      "px": 11,
+      "text": "1"
+    },
+    {
+      "x": 70.5938,
+      "y": 185.2031,
+      "w": 147.25,
+      "h": 16,
+      "px": 13,
+      "text": "Complete Viewer demo"
+    },
+    {
+      "x": 70.5938,
+      "y": 204.7031,
+      "w": 125.8438,
+      "h": 13,
+      "px": 11,
+      "text": "180 cells · Example"
+    },
+    {
+      "x": 90.5938,
+      "y": 225.6094,
+      "w": 87.4219,
+      "h": 13,
+      "px": 11,
+      "text": "Needs checking"
+    },
+    {
+      "x": 44.1094,
+      "y": 270.4062,
+      "w": 7.375,
+      "h": 13,
+      "px": 11,
+      "text": "2"
+    },
+    {
+      "x": 70.5938,
+      "y": 267.1094,
+      "w": 133.0312,
+      "h": 16,
+      "px": 13,
+      "text": "Trekker spatial demo"
+    },
+    {
+      "x": 70.5938,
+      "y": 286.6094,
+      "w": 139.0781,
+      "h": 13,
+      "px": 11,
+      "text": "5,020 cells · Example"
+    },
+    {
+      "x": 90.5938,
+      "y": 307.5156,
+      "w": 87.4219,
+      "h": 13,
+      "px": 11,
+      "text": "Needs checking"
+    },
+    {
+      "x": 44.1094,
+      "y": 352.3125,
+      "w": 7.375,
+      "h": 13,
+      "px": 11,
+      "text": "3"
+    },
+    {
+      "x": 70.5938,
+      "y": 349.0156,
+      "w": 149.4688,
+      "h": 16,
+      "px": 13,
+      "text": "Spatial alignment demo"
+    },
+    {
+      "x": 70.5938,
+      "y": 368.5156,
+      "w": 125.8438,
+      "h": 13,
+      "px": 11,
+      "text": "159 cells · Example"
+    },
+    {
+      "x": 90.5938,
+      "y": 389.4219,
+      "w": 87.4219,
+      "h": 13,
+      "px": 11,
+      "text": "Needs checking"
+    },
+    {
+      "x": 118.4062,
+      "y": 455.9219,
+      "w": 67.9375,
+      "h": 18,
+      "px": 16,
+      "text": "Add files"
+    },
+    {
+      "x": 42,
+      "y": 479.1094,
+      "w": 244.3906,
+      "h": 13,
+      "px": 11,
+      "text": "RDS, H5AD, H5MU, QS2, SPATIALDATA (ZIP)"
+    },
+    {
+      "x": 35.375,
+      "y": 518.4062,
+      "w": 210.2344,
+      "h": 42.6875,
+      "px": 11,
+      "text": "QS files are deprecated and support will end soon. Save as R"
+    },
+    {
+      "x": 289.5625,
+      "y": 149.3594,
+      "w": 125.2188,
+      "h": 33,
+      "px": 28,
+      "text": "Configure"
+    },
+    {
+      "x": 414.7812,
+      "y": 149.3594,
+      "w": 282.2344,
+      "h": 33,
+      "px": 28,
+      "text": "Complete Viewer demo"
+    },
+    {
+      "x": 289.5625,
+      "y": 191.7188,
+      "w": 252.4688,
+      "h": 17,
+      "px": 14,
+      "text": "Set essentials, then check this dataset."
+    },
+    {
+      "x": 289.5625,
+      "y": 236.7188,
+      "w": 133.2656,
+      "h": 18,
+      "px": 16,
+      "text": "Dataset summary"
+    },
+    {
+      "x": 289.5625,
+      "y": 272.1094,
+      "w": 45.6719,
+      "h": 28,
+      "px": 24,
+      "text": "180"
+    },
+    {
+      "x": 289.5625,
+      "y": 301.0938,
+      "w": 40.5781,
+      "h": 15,
+      "px": 12,
+      "text": "cells"
+    },
+    {
+      "x": 359.2344,
+      "y": 272.1094,
+      "w": 45.6719,
+      "h": 28,
+      "px": 24,
+      "text": "164"
+    },
+    {
+      "x": 359.2344,
+      "y": 301.0938,
+      "w": 43.2656,
+      "h": 15,
+      "px": 12,
+      "text": "genes"
+    },
+    {
+      "x": 428.9062,
+      "y": 275.1094,
+      "w": 130.75,
+      "h": 13,
+      "px": 11,
+      "text": "Detected content"
+    },
+    {
+      "x": 874.9375,
+      "y": 274.1094,
+      "w": 96.5,
+      "h": 15,
+      "px": 12,
+      "text": "18 content types"
+    },
+    {
+      "x": 437.9062,
+      "y": 298.25,
+      "w": 63.1406,
+      "h": 15,
+      "px": 12,
+      "text": "Expression"
+    },
+    {
+      "x": 523.0469,
+      "y": 298.25,
+      "w": 54.5469,
+      "h": 15,
+      "px": 12,
+      "text": "Metadata"
+    },
+    {
+      "x": 599.5938,
+      "y": 298.25,
+      "w": 41.9531,
+      "h": 15,
+      "px": 12,
+      "text": "Groups"
+    },
+    {
+      "x": 663.5469,
+      "y": 298.25,
+      "w": 24.5469,
+      "h": 15,
+      "px": 12,
+      "text": "PCA"
+    },
+    {
+      "x": 710.0938,
+      "y": 298.25,
+      "w": 35.6562,
+      "h": 15,
+      "px": 12,
+      "text": "UMAP"
+    },
+    {
+      "x": 767.75,
+      "y": 298.25,
+      "w": 31.7812,
+      "h": 15,
+      "px": 12,
+      "text": "TSNE"
+    },
+    {
+      "x": 821.5312,
+      "y": 298.25,
+      "w": 78.6875,
+      "h": 15,
+      "px": 12,
+      "text": "Marker genes"
+    },
+    {
+      "x": 437.9062,
+      "y": 327.0469,
+      "w": 129.9688,
+      "h": 15,
+      "px": 12,
+      "text": "Most expressed genes"
+    },
+    {
+      "x": 589.875,
+      "y": 327.0469,
+      "w": 97.4375,
+      "h": 15,
+      "px": 12,
+      "text": "Mean expression"
+    },
+    {
+      "x": 709.3125,
+      "y": 327.0469,
+      "w": 108.9375,
+      "h": 15,
+      "px": 12,
+      "text": "Enriched pathways"
+    },
+    {
+      "x": 840.25,
+      "y": 327.0469,
+      "w": 58.7344,
+      "h": 15,
+      "px": 12,
+      "text": "Trajectory"
+    },
+    {
+      "x": 437.9062,
+      "y": 355.8438,
+      "w": 57.0625,
+      "h": 15,
+      "px": 12,
+      "text": "Gene lists"
+    },
+    {
+      "x": 516.9688,
+      "y": 355.8438,
+      "w": 79.9531,
+      "h": 15,
+      "px": 12,
+      "text": "Extra material"
+    },
+    {
+      "x": 618.9219,
+      "y": 355.8438,
+      "w": 106.7656,
+      "h": 15,
+      "px": 12,
+      "text": "Immune repertoire"
+    },
+    {
+      "x": 747.6875,
+      "y": 355.8438,
+      "w": 103.1875,
+      "h": 15,
+      "px": 12,
+      "text": "HLA & TCR motifs"
+    },
+    {
+      "x": 872.875,
+      "y": 355.8438,
+      "w": 24.3125,
+      "h": 15,
+      "px": 12,
+      "text": "HLA"
+    },
+    {
+      "x": 919.1875,
+      "y": 355.8438,
+      "w": 39.7031,
+      "h": 15,
+      "px": 12,
+      "text": "Spatial"
+    },
+    {
+      "x": 437.9062,
+      "y": 384.6406,
+      "w": 43.4375,
+      "h": 15,
+      "px": 12,
+      "text": "Trekker"
+    },
+    {
+      "x": 289.5625,
+      "y": 427.1406,
+      "w": 131.7656,
+      "h": 17,
+      "px": 14,
+      "text": "Available metadata"
+    },
+    {
+      "x": 433.3281,
+      "y": 429.1406,
+      "w": 68.875,
+      "h": 15,
+      "px": 12,
+      "text": "12 columns"
+    },
+    {
+      "x": 289.5625,
+      "y": 485.1406,
+      "w": 76.2969,
+      "h": 18,
+      "px": 16,
+      "text": "Essentials"
+    },
+    {
+      "x": 289.5625,
+      "y": 517.5312,
+      "w": 81.75,
+      "h": 15,
+      "px": 12,
+      "text": "Dataset name"
+    },
+    {
+      "x": 636.5,
+      "y": 517.5312,
+      "w": 120.4375,
+      "h": 15,
+      "px": 12,
+      "text": "Organism (required)"
+    },
+    {
+      "x": 649.5,
+      "y": 546.7188,
+      "w": 76.5312,
+      "h": 17,
+      "px": 14,
+      "text": "Human (hg)"
+    },
+    {
+      "x": 636.5,
+      "y": 583.9219,
+      "w": 153.6562,
+      "h": 15,
+      "px": 12,
+      "text": "Detected from gene names"
+    },
+    {
+      "x": 809.7188,
+      "y": 583.9219,
+      "w": 133.8281,
+      "h": 15,
+      "px": 12,
+      "text": "Apply to all unchecked"
+    },
+    {
+      "x": 289.5625,
+      "y": 604.1094,
+      "w": 35.4062,
+      "h": 15,
+      "px": 12,
+      "text": "Assay"
+    },
+    {
+      "x": 302.5625,
+      "y": 633.2969,
+      "w": 28.5312,
+      "h": 17,
+      "px": 14,
+      "text": "RNA"
+    },
+    {
+      "x": 636.5,
+      "y": 604.1094,
+      "w": 32.7188,
+      "h": 15,
+      "px": 12,
+      "text": "Layer"
+    },
+    {
+      "x": 649.5,
+      "y": 633.2969,
+      "w": 28.5469,
+      "h": 17,
+      "px": 14,
+      "text": "data"
+    },
+    {
+      "x": 289.5625,
+      "y": 676,
+      "w": 272.7188,
+      "h": 18,
+      "px": 16,
+      "text": "0 of 3 datasets checked · 3 remaining"
+    },
+    {
+      "x": 846.9219,
+      "y": 676,
+      "w": 107.5156,
+      "h": 17,
+      "px": 14,
+      "text": "Finish Checking"
+    }
+  ],
+  "surfaces": [],
+  "page_text": "Skip to workspace\nv6.0.0\nCerebroNexus Builder\nNo project saved\nOpen\nSave\n✓\nData\nAdd datasets\n2\nConfigure\nSet each dataset\n3\nReview\nResolve issues\n4\nBuild\nCreate output\nDATASETS\n3\n1\nComplete Viewer demo\n180 cells · Example\nNeeds checking\n2\nTrekker spatial demo\n5,020 cells · Example\nNeeds checking\n3\nSpatial alignment demo\n159 cells · Example\nNeeds checking\nAdd files\nRDS, H5AD, H5MU, QS2, SPATIALDATA (ZIP)\nQS files are deprecated and support will end soon. Save as RDS or H5AD or H5MU or QS2 or SPATIALDATA (ZIP).\nConfigure Complete Viewer demo\n\nSet essentials, then check this dataset.\n\nDataset summary\n180\nCELLS\n164\nGENES\nDETECTED CONTENT\n18 content types\nExpression\nMetadata\nGroups\nPCA\nUMAP\nTSNE\nMarker genes\nMost expressed genes\nMean expression\nEnriched pathways\nTrajectory\nGene lists\nExtra material\nImmune repertoire\nHLA & TCR motifs\nHLA\nSpatial\nTrekker\nAvailable metadata 12 columns\nEssentials\nDataset name\nOrganism (required)\nHuman (hg)\nDetected from gene names\nApply to all unchecked\nAssay\nRNA\nLayer\ndata\nViewer content\n\nChoose what appears in the Viewer. Metadata is retained automatically.\n\nSpecialized content\n6 included\nGroups\n1 included · Default: cell_type\nCell cycle\n1 included\nAnalysis results\n4 detected or planned\nOptional analyses\n1 included\nExtra material\n3 included\nAdvanced settings\n3 settings\nViews\n\nChoose the trajectories, projections, and spatial views to show.\n\nTrajectories\n1 included · Default: lineage\nProjections\n2 included · 1 shown initially · Default: UMAP\nSpatial alignment\n7 sections\nViewer appearance\n\n0 of 3 datasets checked · 3 remaining\n\nFinish Checking\nSelect organism"
+}

@@ -1,0 +1,358 @@
+{
+  "name": "hla-associations",
+  "file": "hla-associations.png",
+  "sha256": "7e04f3bbb5caf3a5624f6cbd002833caa72557786bf7988409c7c67760cd7fb3",
+  "viewport": {
+    "width": 1024,
+    "height": 720,
+    "dpr": 3
+  },
+  "text": [
+    {
+      "x": 239.5,
+      "y": 362.5,
+      "w": 174.4219,
+      "h": 14,
+      "px": 14,
+      "text": "Toggle navigation"
+    },
+    {
+      "x": 181.0781,
+      "y": 46.8594,
+      "w": 26.9219,
+      "h": 11,
+      "px": 9,
+      "text": "v5.2.0"
+    },
+    {
+      "x": 14,
+      "y": 65.8594,
+      "w": 52.5312,
+      "h": 17,
+      "px": 14,
+      "text": "Dataset"
+    },
+    {
+      "x": 27,
+      "y": 101.8594,
+      "w": 71.8906,
+      "h": 17,
+      "px": 14,
+      "text": "HLA & TCR"
+    },
+    {
+      "x": 60.7344,
+      "y": 168.8594,
+      "w": 58.6094,
+      "h": 17,
+      "px": 14,
+      "text": "Data info"
+    },
+    {
+      "x": 60.7344,
+      "y": 209.8594,
+      "w": 66.0781,
+      "h": 17,
+      "px": 14,
+      "text": "Projection"
+    },
+    {
+      "x": 60.7344,
+      "y": 250.8594,
+      "w": 83.5781,
+      "h": 17,
+      "px": 14,
+      "text": "Linked views"
+    },
+    {
+      "x": 60.7344,
+      "y": 291.8594,
+      "w": 47.5156,
+      "h": 17,
+      "px": 14,
+      "text": "Groups"
+    },
+    {
+      "x": 60.7344,
+      "y": 332.8594,
+      "w": 120.3906,
+      "h": 17,
+      "px": 14,
+      "text": "Immune repertoire"
+    },
+    {
+      "x": 60.5781,
+      "y": 373.8594,
+      "w": 119.9062,
+      "h": 17,
+      "px": 14,
+      "text": "HLA & TCR Motifs"
+    },
+    {
+      "x": 60.7344,
+      "y": 414.8594,
+      "w": 108.625,
+      "h": 17,
+      "px": 14,
+      "text": "Gene expression"
+    },
+    {
+      "x": 60.7344,
+      "y": 455.8594,
+      "w": 126.6562,
+      "h": 17,
+      "px": 14,
+      "text": "Gene ID conversion"
+    },
+    {
+      "x": 60.7344,
+      "y": 496.8594,
+      "w": 132.2344,
+      "h": 17,
+      "px": 14,
+      "text": "Colour management"
+    },
+    {
+      "x": 60.7344,
+      "y": 537.8594,
+      "w": 39.3281,
+      "h": 17,
+      "px": 14,
+      "text": "About"
+    },
+    {
+      "x": 14,
+      "y": 614,
+      "w": 71.3906,
+      "h": 15,
+      "px": 12,
+      "text": "Preferences"
+    },
+    {
+      "x": 14,
+      "y": 646.25,
+      "w": 105.1875,
+      "h": 16,
+      "px": 13,
+      "text": "GPU acceleration"
+    },
+    {
+      "x": 13,
+      "y": 673,
+      "w": 904.3906,
+      "h": 17,
+      "px": 14,
+      "text": "Automatically uses WebGPU or WebGL for supported plots. Turn"
+    },
+    {
+      "x": 14,
+      "y": 680.25,
+      "w": 71.9375,
+      "h": 16,
+      "px": 13,
+      "text": "Cell tooltips"
+    },
+    {
+      "x": 13,
+      "y": 707,
+      "w": 1284.6719,
+      "h": 17,
+      "px": 14,
+      "text": "Show brief information on hover in all cell views and the HL"
+    },
+    {
+      "x": 256,
+      "y": 38.75,
+      "w": 147.6875,
+      "h": 21,
+      "px": 18,
+      "text": "HLA & TCR Motifs"
+    },
+    {
+      "x": 412.6875,
+      "y": 41.625,
+      "w": 390.2031,
+      "h": 15,
+      "px": 12.5,
+      "text": "Exploratory HLA context and association — not inferred restr"
+    },
+    {
+      "x": 945.0312,
+      "y": 41,
+      "w": 25.9688,
+      "h": 17,
+      "px": 14,
+      "text": "Info"
+    },
+    {
+      "x": 269,
+      "y": 86,
+      "w": 43.1406,
+      "h": 17,
+      "px": 14,
+      "text": "Chain:"
+    },
+    {
+      "x": 282,
+      "y": 119,
+      "w": 26.7812,
+      "h": 17,
+      "px": 14,
+      "text": "TRB"
+    },
+    {
+      "x": 507.6562,
+      "y": 86,
+      "w": 105.9688,
+      "h": 17,
+      "px": 14,
+      "text": "Network scope:"
+    },
+    {
+      "x": 520.6562,
+      "y": 119,
+      "w": 49.3438,
+      "h": 17,
+      "px": 14,
+      "text": "All cells"
+    },
+    {
+      "x": 746.3281,
+      "y": 86,
+      "w": 64.8125,
+      "h": 17,
+      "px": 14,
+      "text": "Colour by"
+    },
+    {
+      "x": 759.3281,
+      "y": 119,
+      "w": 81.2188,
+      "h": 17,
+      "px": 14,
+      "text": "Motif cluster"
+    },
+    {
+      "x": 805.9688,
+      "y": 160.5,
+      "w": 37.6094,
+      "h": 16,
+      "px": 13,
+      "text": "Share"
+    },
+    {
+      "x": 896.5781,
+      "y": 160.25,
+      "w": 54.4219,
+      "h": 16,
+      "px": 13,
+      "text": "Settings"
+    },
+    {
+      "x": 281.0469,
+      "y": 212.125,
+      "w": 143.4688,
+      "h": 12,
+      "px": 10.5,
+      "text": "Selection workspace"
+    },
+    {
+      "x": 432.5156,
+      "y": 212.375,
+      "w": 234.9062,
+      "h": 13,
+      "px": 11.5,
+      "text": "Drag on the plot to create an active cohort."
+    },
+    {
+      "x": 271,
+      "y": 256,
+      "w": 93.6562,
+      "h": 17,
+      "px": 14,
+      "text": "Motif Network"
+    },
+    {
+      "x": 396.6562,
+      "y": 256,
+      "w": 88.6562,
+      "h": 17,
+      "px": 14,
+      "text": "Network data"
+    },
+    {
+      "x": 517.3125,
+      "y": 256,
+      "w": 119.5156,
+      "h": 17,
+      "px": 14,
+      "text": "HLA Associations"
+    },
+    {
+      "x": 668.8281,
+      "y": 256,
+      "w": 68.7969,
+      "h": 17,
+      "px": 14,
+      "text": "Data & QC"
+    },
+    {
+      "x": 272,
+      "y": 311,
+      "w": 436.2656,
+      "h": 16,
+      "px": 13,
+      "text": "Selected repertoire - read the contrast as suggestive, not a"
+    },
+    {
+      "x": 272,
+      "y": 311,
+      "w": 694.6562,
+      "h": 250,
+      "px": 13,
+      "text": "Cells were sorted for binding to a pooled dCODE dextramer pa"
+    },
+    {
+      "x": 272,
+      "y": 616.5,
+      "w": 159.2188,
+      "h": 16,
+      "px": 13,
+      "text": "Descriptive overlap only."
+    },
+    {
+      "x": 272,
+      "y": 616.5,
+      "w": 692.1562,
+      "h": 55,
+      "px": 13,
+      "text": "The selected node/motif is locked to the Hamming-1 graph ove"
+    },
+    {
+      "x": 256,
+      "y": 712,
+      "w": 72.0781,
+      "h": 17,
+      "px": 14,
+      "text": "HLA allele:"
+    },
+    {
+      "x": 510,
+      "y": 712,
+      "w": 90.3125,
+      "h": 17,
+      "px": 14,
+      "text": "Feature type:"
+    },
+    {
+      "x": 700.5,
+      "y": 712,
+      "w": 108.75,
+      "h": 17,
+      "px": 14,
+      "text": "Locked feature:"
+    }
+  ],
+  "surfaces": [],
+  "page_text": "Skip to main content\nToggle navigation\nv5.2.0\nDataset\nHLA & TCR\n Data info\n Projection\n Linked views\n Groups\n Immune repertoire\n HLA & TCR Motifs\n Gene expression\n Gene ID conversion\n Colour management\n About\nPreferences\nGPU acceleration\nAutomatically uses WebGPU or WebGL for supported plots. Turn off to use CPU rendering. Small or unsupported cell views may use Canvas.\nCell tooltips\nShow brief information on hover in all cell views and the HLA motif network. Click a cell to pin its summary and open Details, even when tooltips are off. Cross-view highlighting is controlled separately.\nHLA & TCR Motifs\nExploratory HLA context and association — not inferred restriction.\nInfo\nChain:\nTRB\nNetwork scope:\nAll cells\nColour by\nMotif cluster\nShare\nSettings\nSELECTION WORKSPACE\nDrag on the plot to create an active cohort.\nMotif Network\nNetwork data\nHLA Associations\nData & QC\nSelected repertoire - read the contrast as suggestive, not as a test. Cells were sorted for binding to a pooled dCODE dextramer panel, so this repertoire is antigen-SELECTED -- which is exactly why its motif network is legible where an unselected repertoire's is not. It is therefore not an unbiased sample of the donors' repertoires: which receptors are present was decided by the panel. The donor HLA genotypes are the published ones (table S1 of the source paper), measured independently of these cells, so they are not circular with the selection -- but that is a narrower claim than it sounds. Independent genotypes remove circularity; they do not remove ASCERTAINMENT: the repertoire being compared was itself captured by the panel, the panel's reagents are restricted by particular alleles, and there are four donors, so donor and panel remain confounded with genotype. Read a carrier contrast here as suggestive, not as a test. IMPORTANT: the per-cell dextramer_* columns are 10x's RAW BINDER CALLS for a reagent, not validated peptide specificity. Dextramer staining is strongly cross-reactive here -- for most cells the bound reagent's HLA restriction is not even among the alleles that donor carries (see the restriction_in_genotype column, and colour the projection by it). Treat them as a reagent label, not as biology, and do not read the HLA associations as being driven by them.\nDescriptive overlap only. The selected node/motif is locked to the Hamming-1 graph over ALL cells, whatever the network scope. Counts are donor-level only with complete donor mapping, otherwise sample-level. No p-value or restriction claim is produced.\nHLA allele:\nHLA-A*02:01\nFeature type: \nMotif component\nCDR3 node\nLocked feature: \nTRBV19::M13_15 (30 CDR3)\nObserved overlap summary \nHLA status\tAnalysis units\tUnits with feature\tObserved feature prevalence\n\t\t\t\ncarrier\t2\t2\t100.0%\nnon-carrier\t2\t0\t0.0%\nuntyped\t0\t0\t—\nPer-unit breadth and cell fraction \n\nFractions are of the cells and clonotypes present IN THIS DATA SET for each unit, which holds only receptors that bound a reagent in the panel - not of the unit's full repertoire.\n\nanalysis_unit\tunit_type\thla_status\tfeature_present\tn_cells\tn_feature_cells\tn_unique_clonotypes\tn_feature_clonotypes\tunique_clonotype_fraction\tcell_fraction\n\t\t\t\t\t\t\t\t\t\ndonor1\tdonor\tcarrier\ttrue\t3000\t306\t828\t21\t0.0254\t0.102\ndonor2\tdonor\tcarrier\ttrue\t3000\t316\t507\t20\t0.0394\t0.1053\ndonor3\tdonor\tnon-carrier\tfalse\t3000\t0\t1495\t0\t0\t0\ndonor4\tdonor\tnon-carrier\tfalse\t3000\t0\t507\t0\t0\t0\nShowing 1 to 4 of 4 entries\nPrevious\n1\nNext\nAnalysis-unit × HLA allele matrix \n\n1 = carrier, 0 = locus-typed non-carrier, blank = locus untyped.\n\nanalysis_unit\tunit_type\tHLA-A*01:01\tHLA-A*02:01\tHLA-A*03:01\tHLA-A*11:01\tHLA-A*24:02\tHLA-A*29:02\tHLA-B*07:02\tHLA-B*08:01\tHLA-B*35:01\tHLA-B*35:02\tHLA-B*44:03\tHLA-B*57:01\n\t\t\t\t\t\t\t\t\t\t\t\t\t\ndonor1\tdonor\t0\t1\t0\t1\t0\t0\t\t\t1\t\t\t\ndonor2\tdonor\t1\t1\t0\t0\t0\t0\t\t1\t\t\t\t\ndonor3\tdonor\t0\t0\t0\t0\t1\t1\t0\t0\t0\t1\t1\t0\ndonor4\tdonor\t0\t0\t1\t0\t0\t0\t1\t0\t0\t0\t0\t1\nShowing 1 to 4 of 4 entries\nPrevious\n1\nNext\nType to search a motif or CDR3..."
+}

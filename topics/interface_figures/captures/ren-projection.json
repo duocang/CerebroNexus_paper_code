@@ -1,0 +1,511 @@
+{
+  "name": "ren-projection",
+  "file": "ren-projection.png",
+  "sha256": "b36bf9a3b5f864aaa243099bd91d1afd71004fa00a7f322640779ef32f6610c0",
+  "viewport": {
+    "width": 1024,
+    "height": 720,
+    "dpr": 3
+  },
+  "text": [
+    {
+      "x": 239.5,
+      "y": 362.5,
+      "w": 174.4219,
+      "h": 14,
+      "px": 14,
+      "text": "Toggle navigation"
+    },
+    {
+      "x": 181.0781,
+      "y": 46.8594,
+      "w": 26.9219,
+      "h": 11,
+      "px": 9,
+      "text": "v5.2.0"
+    },
+    {
+      "x": 14,
+      "y": 65.8594,
+      "w": 52.5312,
+      "h": 17,
+      "px": 14,
+      "text": "Dataset"
+    },
+    {
+      "x": 27,
+      "y": 101.8594,
+      "w": 291.7969,
+      "h": 17,
+      "px": 14,
+      "text": "Ren et al. COVID-19 atlas (1.46M + TCR/BCR)"
+    },
+    {
+      "x": 60.7344,
+      "y": 168.8594,
+      "w": 58.6094,
+      "h": 17,
+      "px": 14,
+      "text": "Data info"
+    },
+    {
+      "x": 60.5781,
+      "y": 209.8594,
+      "w": 68.7344,
+      "h": 17,
+      "px": 14,
+      "text": "Projection"
+    },
+    {
+      "x": 60.7344,
+      "y": 250.8594,
+      "w": 83.5781,
+      "h": 17,
+      "px": 14,
+      "text": "Linked views"
+    },
+    {
+      "x": 60.7344,
+      "y": 291.8594,
+      "w": 47.5156,
+      "h": 17,
+      "px": 14,
+      "text": "Groups"
+    },
+    {
+      "x": 60.7344,
+      "y": 332.8594,
+      "w": 89.875,
+      "h": 17,
+      "px": 14,
+      "text": "Extra material"
+    },
+    {
+      "x": 60.7344,
+      "y": 373.8594,
+      "w": 120.3906,
+      "h": 17,
+      "px": 14,
+      "text": "Immune repertoire"
+    },
+    {
+      "x": 60.7344,
+      "y": 414.8594,
+      "w": 116.8906,
+      "h": 17,
+      "px": 14,
+      "text": "HLA & TCR Motifs"
+    },
+    {
+      "x": 60.7344,
+      "y": 455.8594,
+      "w": 108.625,
+      "h": 17,
+      "px": 14,
+      "text": "Gene expression"
+    },
+    {
+      "x": 60.7344,
+      "y": 496.8594,
+      "w": 126.6562,
+      "h": 17,
+      "px": 14,
+      "text": "Gene ID conversion"
+    },
+    {
+      "x": 60.7344,
+      "y": 537.8594,
+      "w": 132.2344,
+      "h": 17,
+      "px": 14,
+      "text": "Colour management"
+    },
+    {
+      "x": 60.7344,
+      "y": 578.8594,
+      "w": 39.3281,
+      "h": 17,
+      "px": 14,
+      "text": "About"
+    },
+    {
+      "x": 14,
+      "y": 614,
+      "w": 71.3906,
+      "h": 15,
+      "px": 12,
+      "text": "Preferences"
+    },
+    {
+      "x": 14,
+      "y": 646.25,
+      "w": 105.1875,
+      "h": 16,
+      "px": 13,
+      "text": "GPU acceleration"
+    },
+    {
+      "x": 13,
+      "y": 673,
+      "w": 1062.5312,
+      "h": 17,
+      "px": 14,
+      "text": "Automatically uses WebGPU or WebGL for supported plots. Turn"
+    },
+    {
+      "x": 14,
+      "y": 680.25,
+      "w": 71.9375,
+      "h": 16,
+      "px": 13,
+      "text": "Cell tooltips"
+    },
+    {
+      "x": 13,
+      "y": 707,
+      "w": 1284.6719,
+      "h": 17,
+      "px": 14,
+      "text": "Show brief information on hover in all cell views and the HL"
+    },
+    {
+      "x": 256,
+      "y": 38.75,
+      "w": 84.6406,
+      "h": 21,
+      "px": 18,
+      "text": "Projection"
+    },
+    {
+      "x": 349.6406,
+      "y": 41.625,
+      "w": 488.7344,
+      "h": 15,
+      "px": 12.5,
+      "text": "Explore cells in dimensional-reduction space and colour them"
+    },
+    {
+      "x": 945.0312,
+      "y": 41,
+      "w": 25.9688,
+      "h": 17,
+      "px": 14,
+      "text": "Info"
+    },
+    {
+      "x": 269,
+      "y": 86,
+      "w": 68.7344,
+      "h": 17,
+      "px": 14,
+      "text": "Projection"
+    },
+    {
+      "x": 282,
+      "y": 119,
+      "w": 27.8438,
+      "h": 17,
+      "px": 14,
+      "text": "tsne"
+    },
+    {
+      "x": 627,
+      "y": 86,
+      "w": 64.8125,
+      "h": 17,
+      "px": 14,
+      "text": "Colour by"
+    },
+    {
+      "x": 640,
+      "y": 119,
+      "w": 72.3906,
+      "h": 17,
+      "px": 14,
+      "text": "major_type"
+    },
+    {
+      "x": 805.9688,
+      "y": 160.5,
+      "w": 37.6094,
+      "h": 16,
+      "px": 13,
+      "text": "Share"
+    },
+    {
+      "x": 896.5781,
+      "y": 160.25,
+      "w": 54.4219,
+      "h": 16,
+      "px": 13,
+      "text": "Settings"
+    },
+    {
+      "x": 281.0469,
+      "y": 212.125,
+      "w": 143.4688,
+      "h": 12,
+      "px": 10.5,
+      "text": "Selection workspace"
+    },
+    {
+      "x": 432.5156,
+      "y": 212.375,
+      "w": 234.9062,
+      "h": 13,
+      "px": 11.5,
+      "text": "Drag on the plot to create an active cohort."
+    },
+    {
+      "x": 276,
+      "y": 251,
+      "w": 7.5938,
+      "h": 13,
+      "px": 11.5,
+      "text": "B"
+    },
+    {
+      "x": 288.5938,
+      "y": 251,
+      "w": 51.7812,
+      "h": 13,
+      "px": 11.5,
+      "text": "(403700)"
+    },
+    {
+      "x": 376.375,
+      "y": 251,
+      "w": 24.0938,
+      "h": 13,
+      "px": 11.5,
+      "text": "CD4"
+    },
+    {
+      "x": 405.4688,
+      "y": 251,
+      "w": 48.5156,
+      "h": 13,
+      "px": 11.5,
+      "text": "(260141)"
+    },
+    {
+      "x": 489.9844,
+      "y": 251,
+      "w": 24.0469,
+      "h": 13,
+      "px": 11.5,
+      "text": "CD8"
+    },
+    {
+      "x": 519.0312,
+      "y": 251,
+      "w": 51.4531,
+      "h": 13,
+      "px": 11.5,
+      "text": "(374454)"
+    },
+    {
+      "x": 606.4844,
+      "y": 251,
+      "w": 16.6562,
+      "h": 13,
+      "px": 11.5,
+      "text": "DC"
+    },
+    {
+      "x": 628.1406,
+      "y": 251,
+      "w": 43.6406,
+      "h": 13,
+      "px": 11.5,
+      "text": "(13684)"
+    },
+    {
+      "x": 707.7812,
+      "y": 251,
+      "w": 16.8125,
+      "h": 13,
+      "px": 11.5,
+      "text": "Epi"
+    },
+    {
+      "x": 729.5938,
+      "y": 251,
+      "w": 37.4688,
+      "h": 13,
+      "px": 11.5,
+      "text": "(5652)"
+    },
+    {
+      "x": 803.0625,
+      "y": 251,
+      "w": 34.0156,
+      "h": 13,
+      "px": 11.5,
+      "text": "Macro"
+    },
+    {
+      "x": 842.0781,
+      "y": 251,
+      "w": 40.5781,
+      "h": 13,
+      "px": 11.5,
+      "text": "(21471)"
+    },
+    {
+      "x": 918.6562,
+      "y": 251,
+      "w": 26.6875,
+      "h": 13,
+      "px": 11.5,
+      "text": "Mast"
+    },
+    {
+      "x": 950.3438,
+      "y": 251,
+      "w": 20.8125,
+      "h": 13,
+      "px": 11.5,
+      "text": "(17)"
+    },
+    {
+      "x": 276,
+      "y": 274.25,
+      "w": 30.1094,
+      "h": 13,
+      "px": 11.5,
+      "text": "Mega"
+    },
+    {
+      "x": 311.1094,
+      "y": 274.25,
+      "w": 43.25,
+      "h": 13,
+      "px": 11.5,
+      "text": "(13056)"
+    },
+    {
+      "x": 390.3594,
+      "y": 274.25,
+      "w": 30.5,
+      "h": 13,
+      "px": 11.5,
+      "text": "Mono"
+    },
+    {
+      "x": 425.8594,
+      "y": 274.25,
+      "w": 51.7969,
+      "h": 13,
+      "px": 11.5,
+      "text": "(294788)"
+    },
+    {
+      "x": 513.6562,
+      "y": 274.25,
+      "w": 16.1875,
+      "h": 13,
+      "px": 11.5,
+      "text": "NK"
+    },
+    {
+      "x": 534.8438,
+      "y": 274.25,
+      "w": 44.9688,
+      "h": 13,
+      "px": 11.5,
+      "text": "(59062)"
+    },
+    {
+      "x": 615.8125,
+      "y": 274.25,
+      "w": 21.9219,
+      "h": 13,
+      "px": 11.5,
+      "text": "Neu"
+    },
+    {
+      "x": 642.7344,
+      "y": 274.25,
+      "w": 35.8594,
+      "h": 13,
+      "px": 11.5,
+      "text": "(3531)"
+    },
+    {
+      "x": 714.5938,
+      "y": 274.25,
+      "w": 39.1406,
+      "h": 13,
+      "px": 11.5,
+      "text": "Plasma"
+    },
+    {
+      "x": 758.7344,
+      "y": 274.25,
+      "w": 41.625,
+      "h": 13,
+      "px": 11.5,
+      "text": "(13146)"
+    },
+    {
+      "x": 269,
+      "y": 305.75,
+      "w": 27.9531,
+      "h": 16,
+      "px": 13,
+      "text": "tsne"
+    },
+    {
+      "x": 264,
+      "y": 689.5,
+      "w": 275.4375,
+      "h": 17,
+      "px": 14,
+      "text": "tsne view with 1462702 points; 0 selected."
+    }
+  ],
+  "surfaces": [
+    {
+      "tag": "canvas",
+      "id": "cv-cv-a",
+      "cls": "cv-layer-overlay",
+      "x": 265,
+      "y": 333.5,
+      "w": 714,
+      "h": 355,
+      "pixel_width": 2142
+    },
+    {
+      "tag": "canvas",
+      "id": "",
+      "cls": "cv-interaction-layer",
+      "x": 265,
+      "y": 333.5,
+      "w": 714,
+      "h": 355,
+      "pixel_width": 2142
+    },
+    {
+      "tag": "canvas",
+      "id": "",
+      "cls": "cv-gpu-layer",
+      "x": 265,
+      "y": 333.5,
+      "w": 714,
+      "h": 355,
+      "pixel_width": 2142
+    },
+    {
+      "tag": "canvas",
+      "id": "cv-mini-a",
+      "cls": "cv-mini",
+      "x": 885,
+      "y": 594.5,
+      "w": 84,
+      "h": 84,
+      "pixel_width": 252
+    }
+  ],
+  "page_text": "Skip to main content\nToggle navigation\nv5.2.0\nDataset\nRen et al. COVID-19 atlas (1.46M + TCR/BCR)\n Data info\n Projection\n Linked views\n Groups\n Extra material\n Immune repertoire\n HLA & TCR Motifs\n Gene expression\n Gene ID conversion\n Colour management\n About\nPreferences\nGPU acceleration\nAutomatically uses WebGPU or WebGL for supported plots. Turn off to use CPU rendering. Small or unsupported cell views may use Canvas. Current plots: WebGPU.\nCell tooltips\nShow brief information on hover in all cell views and the HLA motif network. Click a cell to pin its summary and open Details, even when tooltips are off. Cross-view highlighting is controlled separately.\nProjection\nExplore cells in dimensional-reduction space and colour them by registered groups.\nInfo\nProjection\ntsne\nColour by\nmajor_type\nShare\nSettings\nSELECTION WORKSPACE\nDrag on the plot to create an active cohort.\nB\n(403700)\nCD4\n(260141)\nCD8\n(374454)\nDC\n(13684)\nEpi\n(5652)\nMacro\n(21471)\nMast\n(17)\nMega\n(13056)\nMono\n(294788)\nNK\n(59062)\nNeu\n(3531)\nPlasma\n(13146)\ntsne\ntsne view with 1462702 points; 0 selected.\nSelect…"
+}

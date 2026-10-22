@@ -1,0 +1,438 @@
+{
+  "name": "builder-review",
+  "file": "builder-review.png",
+  "sha256": "0951e95f092dc1faf1be1bea536347a5e1e0638187628b0e1a478636c528c671",
+  "viewport": {
+    "width": 1024,
+    "height": 720,
+    "dpr": 3
+  },
+  "text": [
+    {
+      "x": 134.5625,
+      "y": 48.4531,
+      "w": 32.375,
+      "h": 10,
+      "px": 8.96,
+      "text": "v6.0.0"
+    },
+    {
+      "x": 32,
+      "y": 38.5,
+      "w": 146.3594,
+      "h": 17,
+      "px": 14,
+      "text": "CerebroNexus Builder"
+    },
+    {
+      "x": 689.3594,
+      "y": 31.5,
+      "w": 111.4531,
+      "h": 17,
+      "px": 14,
+      "text": "No project saved"
+    },
+    {
+      "x": 845.7812,
+      "y": 31,
+      "w": 36.2031,
+      "h": 17,
+      "px": 14,
+      "text": "Open"
+    },
+    {
+      "x": 933.8594,
+      "y": 31,
+      "w": 32.5312,
+      "h": 17,
+      "px": 14,
+      "text": "Save"
+    },
+    {
+      "x": 116.875,
+      "y": 89.1406,
+      "w": 10.0156,
+      "h": 13,
+      "px": 11,
+      "text": "✓"
+    },
+    {
+      "x": 166.0938,
+      "y": 78.7656,
+      "w": 29.4375,
+      "h": 16,
+      "px": 13,
+      "text": "Data"
+    },
+    {
+      "x": 146.2812,
+      "y": 99.5312,
+      "w": 69.0625,
+      "h": 13,
+      "px": 11,
+      "text": "Add datasets"
+    },
+    {
+      "x": 336.5781,
+      "y": 89.1406,
+      "w": 10.0156,
+      "h": 13,
+      "px": 11,
+      "text": "✓"
+    },
+    {
+      "x": 378.9219,
+      "y": 78.7656,
+      "w": 62.5469,
+      "h": 16,
+      "px": 13,
+      "text": "Configure"
+    },
+    {
+      "x": 365.9844,
+      "y": 99.5312,
+      "w": 88.4219,
+      "h": 13,
+      "px": 11,
+      "text": "Set each dataset"
+    },
+    {
+      "x": 573.0312,
+      "y": 89.7969,
+      "w": 7.3594,
+      "h": 13,
+      "px": 11,
+      "text": "3"
+    },
+    {
+      "x": 601.1094,
+      "y": 80.375,
+      "w": 44.9531,
+      "h": 16,
+      "px": 13,
+      "text": "Review"
+    },
+    {
+      "x": 601.1094,
+      "y": 98.2344,
+      "w": 76.9688,
+      "h": 13,
+      "px": 11,
+      "text": "Resolve issues"
+    },
+    {
+      "x": 804.5938,
+      "y": 89.7969,
+      "w": 7.5469,
+      "h": 13,
+      "px": 11,
+      "text": "4"
+    },
+    {
+      "x": 832.7656,
+      "y": 80.375,
+      "w": 31.9688,
+      "h": 16,
+      "px": 13,
+      "text": "Build"
+    },
+    {
+      "x": 832.7656,
+      "y": 98.2344,
+      "w": 72.4375,
+      "h": 13,
+      "px": 11,
+      "text": "Create output"
+    },
+    {
+      "x": 33,
+      "y": 142.7969,
+      "w": 69.625,
+      "h": 13,
+      "px": 11,
+      "text": "Datasets"
+    },
+    {
+      "x": 239.25,
+      "y": 142.7969,
+      "w": 8.75,
+      "h": 13,
+      "px": 11,
+      "text": "3"
+    },
+    {
+      "x": 44.1094,
+      "y": 188.5,
+      "w": 7.375,
+      "h": 13,
+      "px": 11,
+      "text": "1"
+    },
+    {
+      "x": 70.5938,
+      "y": 185.2031,
+      "w": 147.25,
+      "h": 16,
+      "px": 13,
+      "text": "Complete Viewer demo"
+    },
+    {
+      "x": 70.5938,
+      "y": 204.7031,
+      "w": 125.8438,
+      "h": 13,
+      "px": 11,
+      "text": "180 cells · Example"
+    },
+    {
+      "x": 90.5938,
+      "y": 224,
+      "w": 51.6406,
+      "h": 15,
+      "px": 12,
+      "text": "Checked"
+    },
+    {
+      "x": 160.9531,
+      "y": 225.2969,
+      "w": 62.375,
+      "h": 13,
+      "px": 11,
+      "text": "Not cached"
+    },
+    {
+      "x": 44.1094,
+      "y": 270.4062,
+      "w": 7.375,
+      "h": 13,
+      "px": 11,
+      "text": "2"
+    },
+    {
+      "x": 70.5938,
+      "y": 267.1094,
+      "w": 133.0312,
+      "h": 16,
+      "px": 13,
+      "text": "Trekker spatial demo"
+    },
+    {
+      "x": 70.5938,
+      "y": 286.6094,
+      "w": 139.0781,
+      "h": 13,
+      "px": 11,
+      "text": "5,020 cells · Example"
+    },
+    {
+      "x": 90.5938,
+      "y": 305.9062,
+      "w": 51.6406,
+      "h": 15,
+      "px": 12,
+      "text": "Checked"
+    },
+    {
+      "x": 160.9531,
+      "y": 307.2031,
+      "w": 62.375,
+      "h": 13,
+      "px": 11,
+      "text": "Not cached"
+    },
+    {
+      "x": 44.1094,
+      "y": 352.3125,
+      "w": 7.375,
+      "h": 13,
+      "px": 11,
+      "text": "3"
+    },
+    {
+      "x": 70.5938,
+      "y": 349.0156,
+      "w": 149.4688,
+      "h": 16,
+      "px": 13,
+      "text": "Spatial alignment demo"
+    },
+    {
+      "x": 70.5938,
+      "y": 368.5156,
+      "w": 125.8438,
+      "h": 13,
+      "px": 11,
+      "text": "159 cells · Example"
+    },
+    {
+      "x": 90.5938,
+      "y": 387.8125,
+      "w": 51.6406,
+      "h": 15,
+      "px": 12,
+      "text": "Checked"
+    },
+    {
+      "x": 160.9531,
+      "y": 389.1094,
+      "w": 62.375,
+      "h": 13,
+      "px": 11,
+      "text": "Not cached"
+    },
+    {
+      "x": 118.4062,
+      "y": 455.9219,
+      "w": 67.9375,
+      "h": 18,
+      "px": 16,
+      "text": "Add files"
+    },
+    {
+      "x": 42,
+      "y": 479.1094,
+      "w": 244.3906,
+      "h": 13,
+      "px": 11,
+      "text": "RDS, H5AD, H5MU, QS2, SPATIALDATA (ZIP)"
+    },
+    {
+      "x": 35.375,
+      "y": 518.4062,
+      "w": 210.2344,
+      "h": 42.6875,
+      "px": 11,
+      "text": "QS files are deprecated and support will end soon. Save as R"
+    },
+    {
+      "x": 289.5625,
+      "y": 149.3594,
+      "w": 272.2969,
+      "h": 33,
+      "px": 28,
+      "text": "Review before building"
+    },
+    {
+      "x": 289.5625,
+      "y": 191.7188,
+      "w": 380.3281,
+      "h": 17,
+      "px": 14,
+      "text": "Resolve blocking issues, then confirm the output summary."
+    },
+    {
+      "x": 306.5625,
+      "y": 252.7188,
+      "w": 59.5312,
+      "h": 15,
+      "px": 12,
+      "text": "3 datasets"
+    },
+    {
+      "x": 386.0938,
+      "y": 252.7188,
+      "w": 175.7656,
+      "h": 15,
+      "px": 12,
+      "text": "Creates CRB files + Viewer app"
+    },
+    {
+      "x": 312.9688,
+      "y": 314.9688,
+      "w": 11.1875,
+      "h": 16,
+      "px": 13,
+      "text": "✓"
+    },
+    {
+      "x": 342.5625,
+      "y": 314.7188,
+      "w": 210.7656,
+      "h": 18,
+      "px": 16,
+      "text": "Everything is ready to build"
+    },
+    {
+      "x": 289.5625,
+      "y": 371.7188,
+      "w": 67.0781,
+      "h": 18,
+      "px": 16,
+      "text": "Datasets"
+    },
+    {
+      "x": 306.5625,
+      "y": 421.7969,
+      "w": 159.7812,
+      "h": 17,
+      "px": 14,
+      "text": "Complete Viewer demo"
+    },
+    {
+      "x": 482.3438,
+      "y": 422.2969,
+      "w": 121.4844,
+      "h": 15,
+      "px": 12,
+      "text": "180 cells · 164 genes"
+    },
+    {
+      "x": 306.5625,
+      "y": 486.1875,
+      "w": 144.5938,
+      "h": 17,
+      "px": 14,
+      "text": "Trekker spatial demo"
+    },
+    {
+      "x": 467.1562,
+      "y": 486.6875,
+      "w": 134.9375,
+      "h": 15,
+      "px": 12,
+      "text": "5,020 cells · 200 genes"
+    },
+    {
+      "x": 306.5625,
+      "y": 550.5781,
+      "w": 162.375,
+      "h": 17,
+      "px": 14,
+      "text": "Spatial alignment demo"
+    },
+    {
+      "x": 484.9375,
+      "y": 551.0781,
+      "w": 115.2344,
+      "h": 15,
+      "px": 12,
+      "text": "159 cells · 30 genes"
+    },
+    {
+      "x": 289.5625,
+      "y": 628.2812,
+      "w": 52.8125,
+      "h": 18,
+      "px": 16,
+      "text": "Output"
+    },
+    {
+      "x": 289.5625,
+      "y": 663.6719,
+      "w": 402.1719,
+      "h": 18,
+      "px": 16,
+      "text": "Creates a new release folder. Existing releases are kept."
+    },
+    {
+      "x": 289.5625,
+      "y": 702.6719,
+      "w": 57.7812,
+      "h": 18,
+      "px": 16,
+      "text": "Creates"
+    }
+  ],
+  "surfaces": [],
+  "page_text": "Skip to workspace\nv6.0.0\nCerebroNexus Builder\nNo project saved\nOpen\nSave\n✓\nData\nAdd datasets\n✓\nConfigure\nSet each dataset\n3\nReview\nResolve issues\n4\nBuild\nCreate output\nDATASETS\n3\n1\nComplete Viewer demo\n180 cells · Example\nChecked\nNot cached\n2\nTrekker spatial demo\n5,020 cells · Example\nChecked\nNot cached\n3\nSpatial alignment demo\n159 cells · Example\nChecked\nNot cached\nAdd files\nRDS, H5AD, H5MU, QS2, SPATIALDATA (ZIP)\nQS files are deprecated and support will end soon. Save as RDS or H5AD or H5MU or QS2 or SPATIALDATA (ZIP).\nReview before building\n\nResolve blocking issues, then confirm the output summary.\n\n3 datasets\nCreates CRB files + Viewer app\n✓\nEverything is ready to build\nDatasets\nComplete Viewer demo\n180 cells · 164 genes\nTrekker spatial demo\n5,020 cells · 200 genes\nSpatial alignment demo\n159 cells · 30 genes\nOutput\n\nCreates a new release folder. Existing releases are kept.\n\nCreates\n3 CRB files + Viewer app\n\nConfiguration checked\n\nBack to Configure\nContinue to Build"
+}

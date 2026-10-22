@@ -1,0 +1,10 @@
+"figure","width_mm","height_mm","file_mb","fonts","all_fonts_embedded","text_sizes_pt","min_text_pt","min_stroke_pt"
+"fig01-cerebronexus-overview",169.7,183.8,2.07,"ZCLOCQ+Arial-BoldMT WFWNMU+ArialMT OUHZRJ+ArialMT",TRUE,"7 8",7,0.38
+"fig02-builder-workflow",169.7,191.9,0.24,"MUXCWS+Arial-BoldMT",TRUE,"8",8,1.07
+"fig03-linked-views",169.7,135.1,1.08,"HUGQUT+ArialMT AETMAY+Arial-BoldMT",TRUE,"7 8",7,0.38
+"fig04-spatial-images",169.7,126.6,4.97,"GRMKLM+Arial-BoldMT LCUYCT+ArialMT",TRUE,"7 8",7,0.27
+"fig05-hla-tcr-strict",169.7,119.9,0.35,"FDFUJR+ArialMT ZAODWY+Arial-BoldMT",TRUE,"7 8",7,0.38
+"fig06-hla-tcr-context",169.7,114.7,0.3,"MKPXVN+Arial-BoldMT ZELVUI+ArialMT",TRUE,"7 8",7,0.38
+"fig07-hla-tcr-expanded",169.7,124.9,0.32,"KXFMZB+ArialMT ZAODWY+Arial-BoldMT",TRUE,"7 8",7,0.38
+"figS01-immune-repertoire",169.7,112.9,0.04,"PFKYYR+ArialMT MUXCWS+Arial-BoldMT",TRUE,"7 8",7,0.38
+"figS02-million-cell-view",169.7,159.5,0.84,"",TRUE,"",NA,NA

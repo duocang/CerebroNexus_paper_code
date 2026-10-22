@@ -1,0 +1,415 @@
+{
+  "name": "hla-motif",
+  "file": "hla-motif.png",
+  "sha256": "7acdd339eb029c84c5ba552c6d887e924d36e147b6bd660bd86a853335af32f6",
+  "viewport": {
+    "width": 1024,
+    "height": 720,
+    "dpr": 3
+  },
+  "text": [
+    {
+      "x": 239.5,
+      "y": 362.5,
+      "w": 174.4219,
+      "h": 14,
+      "px": 14,
+      "text": "Toggle navigation"
+    },
+    {
+      "x": 181.0781,
+      "y": 46.8594,
+      "w": 26.9219,
+      "h": 11,
+      "px": 9,
+      "text": "v5.2.0"
+    },
+    {
+      "x": 14,
+      "y": 65.8594,
+      "w": 52.5312,
+      "h": 17,
+      "px": 14,
+      "text": "Dataset"
+    },
+    {
+      "x": 27,
+      "y": 101.8594,
+      "w": 71.8906,
+      "h": 17,
+      "px": 14,
+      "text": "HLA & TCR"
+    },
+    {
+      "x": 60.7344,
+      "y": 168.8594,
+      "w": 58.6094,
+      "h": 17,
+      "px": 14,
+      "text": "Data info"
+    },
+    {
+      "x": 60.7344,
+      "y": 209.8594,
+      "w": 66.0781,
+      "h": 17,
+      "px": 14,
+      "text": "Projection"
+    },
+    {
+      "x": 60.7344,
+      "y": 250.8594,
+      "w": 83.5781,
+      "h": 17,
+      "px": 14,
+      "text": "Linked views"
+    },
+    {
+      "x": 60.7344,
+      "y": 291.8594,
+      "w": 47.5156,
+      "h": 17,
+      "px": 14,
+      "text": "Groups"
+    },
+    {
+      "x": 60.7344,
+      "y": 332.8594,
+      "w": 120.3906,
+      "h": 17,
+      "px": 14,
+      "text": "Immune repertoire"
+    },
+    {
+      "x": 60.5781,
+      "y": 373.8594,
+      "w": 119.9062,
+      "h": 17,
+      "px": 14,
+      "text": "HLA & TCR Motifs"
+    },
+    {
+      "x": 60.7344,
+      "y": 414.8594,
+      "w": 108.625,
+      "h": 17,
+      "px": 14,
+      "text": "Gene expression"
+    },
+    {
+      "x": 60.7344,
+      "y": 455.8594,
+      "w": 126.6562,
+      "h": 17,
+      "px": 14,
+      "text": "Gene ID conversion"
+    },
+    {
+      "x": 60.7344,
+      "y": 496.8594,
+      "w": 132.2344,
+      "h": 17,
+      "px": 14,
+      "text": "Colour management"
+    },
+    {
+      "x": 60.7344,
+      "y": 537.8594,
+      "w": 39.3281,
+      "h": 17,
+      "px": 14,
+      "text": "About"
+    },
+    {
+      "x": 14,
+      "y": 614,
+      "w": 71.3906,
+      "h": 15,
+      "px": 12,
+      "text": "Preferences"
+    },
+    {
+      "x": 14,
+      "y": 646.25,
+      "w": 105.1875,
+      "h": 16,
+      "px": 13,
+      "text": "GPU acceleration"
+    },
+    {
+      "x": 13,
+      "y": 673,
+      "w": 1051.75,
+      "h": 17,
+      "px": 14,
+      "text": "Automatically uses WebGPU or WebGL for supported plots. Turn"
+    },
+    {
+      "x": 14,
+      "y": 680.25,
+      "w": 71.9375,
+      "h": 16,
+      "px": 13,
+      "text": "Cell tooltips"
+    },
+    {
+      "x": 13,
+      "y": 707,
+      "w": 1284.6719,
+      "h": 17,
+      "px": 14,
+      "text": "Show brief information on hover in all cell views and the HL"
+    },
+    {
+      "x": 256,
+      "y": 38.75,
+      "w": 147.6875,
+      "h": 21,
+      "px": 18,
+      "text": "HLA & TCR Motifs"
+    },
+    {
+      "x": 412.6875,
+      "y": 41.625,
+      "w": 390.2031,
+      "h": 15,
+      "px": 12.5,
+      "text": "Exploratory HLA context and association — not inferred restr"
+    },
+    {
+      "x": 945.0312,
+      "y": 41,
+      "w": 25.9688,
+      "h": 17,
+      "px": 14,
+      "text": "Info"
+    },
+    {
+      "x": 269,
+      "y": 86,
+      "w": 43.1406,
+      "h": 17,
+      "px": 14,
+      "text": "Chain:"
+    },
+    {
+      "x": 282,
+      "y": 119,
+      "w": 26.7812,
+      "h": 17,
+      "px": 14,
+      "text": "TRB"
+    },
+    {
+      "x": 507.6562,
+      "y": 86,
+      "w": 105.9688,
+      "h": 17,
+      "px": 14,
+      "text": "Network scope:"
+    },
+    {
+      "x": 520.6562,
+      "y": 119,
+      "w": 49.3438,
+      "h": 17,
+      "px": 14,
+      "text": "All cells"
+    },
+    {
+      "x": 746.3281,
+      "y": 86,
+      "w": 64.8125,
+      "h": 17,
+      "px": 14,
+      "text": "Colour by"
+    },
+    {
+      "x": 759.3281,
+      "y": 119,
+      "w": 81.2188,
+      "h": 17,
+      "px": 14,
+      "text": "Motif cluster"
+    },
+    {
+      "x": 805.9688,
+      "y": 160.5,
+      "w": 37.6094,
+      "h": 16,
+      "px": 13,
+      "text": "Share"
+    },
+    {
+      "x": 896.5781,
+      "y": 160.25,
+      "w": 54.4219,
+      "h": 16,
+      "px": 13,
+      "text": "Settings"
+    },
+    {
+      "x": 281.0469,
+      "y": 212.125,
+      "w": 143.4688,
+      "h": 12,
+      "px": 10.5,
+      "text": "Selection workspace"
+    },
+    {
+      "x": 432.5156,
+      "y": 212.375,
+      "w": 234.9062,
+      "h": 13,
+      "px": 11.5,
+      "text": "Drag on the plot to create an active cohort."
+    },
+    {
+      "x": 271,
+      "y": 256,
+      "w": 97.0625,
+      "h": 17,
+      "px": 14,
+      "text": "Motif Network"
+    },
+    {
+      "x": 400.0625,
+      "y": 256,
+      "w": 88.6562,
+      "h": 17,
+      "px": 14,
+      "text": "Network data"
+    },
+    {
+      "x": 520.7188,
+      "y": 256,
+      "w": 115.4375,
+      "h": 17,
+      "px": 14,
+      "text": "HLA Associations"
+    },
+    {
+      "x": 668.1562,
+      "y": 256,
+      "w": 68.7969,
+      "h": 17,
+      "px": 14,
+      "text": "Data & QC"
+    },
+    {
+      "x": 256,
+      "y": 295,
+      "w": 71.3594,
+      "h": 13,
+      "px": 11,
+      "text": "Motif cluster"
+    },
+    {
+      "x": 353.3594,
+      "y": 295,
+      "w": 35.4688,
+      "h": 13,
+      "px": 11,
+      "text": "Motif 1"
+    },
+    {
+      "x": 416.8281,
+      "y": 295,
+      "w": 37,
+      "h": 13,
+      "px": 11,
+      "text": "Motif 2"
+    },
+    {
+      "x": 481.8281,
+      "y": 295,
+      "w": 37.25,
+      "h": 13,
+      "px": 11,
+      "text": "Motif 3"
+    },
+    {
+      "x": 547.0781,
+      "y": 295,
+      "w": 37.4375,
+      "h": 13,
+      "px": 11,
+      "text": "Motif 4"
+    },
+    {
+      "x": 612.5156,
+      "y": 295,
+      "w": 37.1562,
+      "h": 13,
+      "px": 11,
+      "text": "Motif 5"
+    },
+    {
+      "x": 269,
+      "y": 339.25,
+      "w": 89.0938,
+      "h": 16,
+      "px": 13,
+      "text": "Motif network"
+    },
+    {
+      "x": 264,
+      "y": 690,
+      "w": 297.5,
+      "h": 17,
+      "px": 14,
+      "text": "Motif network view with 94 points; 0 selected."
+    },
+    {
+      "x": 256,
+      "y": 715,
+      "w": 710.9844,
+      "h": 33,
+      "px": 12,
+      "text": "Node AREA is proportional to the number of cells carrying th"
+    }
+  ],
+  "surfaces": [
+    {
+      "tag": "canvas",
+      "id": "cv-cv-a",
+      "cls": "cv-layer-overlay",
+      "x": 265,
+      "y": 367,
+      "w": 714,
+      "h": 322,
+      "pixel_width": 2142
+    },
+    {
+      "tag": "canvas",
+      "id": "",
+      "cls": "cv-underlay-layer",
+      "x": 265,
+      "y": 367,
+      "w": 714,
+      "h": 322,
+      "pixel_width": 2142
+    },
+    {
+      "tag": "canvas",
+      "id": "",
+      "cls": "cv-interaction-layer",
+      "x": 265,
+      "y": 367,
+      "w": 714,
+      "h": 322,
+      "pixel_width": 2142
+    },
+    {
+      "tag": "canvas",
+      "id": "cv-mini-a",
+      "cls": "cv-mini",
+      "x": 885,
+      "y": 595,
+      "w": 84,
+      "h": 84,
+      "pixel_width": 252
+    }
+  ],
+  "page_text": "Skip to main content\nToggle navigation\nv5.2.0\nDataset\nHLA & TCR\n Data info\n Projection\n Linked views\n Groups\n Immune repertoire\n HLA & TCR Motifs\n Gene expression\n Gene ID conversion\n Colour management\n About\nPreferences\nGPU acceleration\nAutomatically uses WebGPU or WebGL for supported plots. Turn off to use CPU rendering. Small or unsupported cell views may use Canvas. Current plots: Canvas.\nCell tooltips\nShow brief information on hover in all cell views and the HLA motif network. Click a cell to pin its summary and open Details, even when tooltips are off. Cross-view highlighting is controlled separately.\nHLA & TCR Motifs\nExploratory HLA context and association — not inferred restriction.\nInfo\nChain:\nTRB\nNetwork scope:\nAll cells\nColour by\nMotif cluster\nShare\nSettings\nSELECTION WORKSPACE\nDrag on the plot to create an active cohort.\nMotif Network\nNetwork data\nHLA Associations\nData & QC\nMotif cluster\nMotif 1\nMotif 2\nMotif 3\nMotif 4\nMotif 5\nMotif network\nMotif network view with 94 points; 0 selected.\n\nNode AREA is proportional to the number of cells carrying that CDR3, up to 25; above that every node is the same size — read the tooltip for the exact count.\n\n Download analysis (tables + manifest)\nSelect…"
+}
