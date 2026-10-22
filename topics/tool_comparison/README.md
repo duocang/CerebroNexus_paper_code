@@ -21,6 +21,7 @@ functions.R     plotting helpers for the quantitative figure
 targets.R       its target list (targets_tool_comparison)
 figures/        the quantitative figure and its check (qa/)
 FIGURES.md      which figure panels are needed and how to capture them
+TASK2_RERUN.md  rerun of the CerebroNexus attribute route (Group filters) missed in Task 2
 scripts/        harness (harness.py, task3.py), per-task scripts, tool builders, summaries
 results/        result tables, environment.json, inputs.csv, protocol hashes
 logs/           run logs and screenshots
