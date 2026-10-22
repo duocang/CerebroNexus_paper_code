@@ -1,0 +1,95 @@
+{
+  "recorded_at": "2026-10-22T15:24:23+02:00",
+  "host": {
+    "cpu": "12th Gen Intel(R) Core(TM) i9-12900K",
+    "physical_cores": 16,
+    "logical_cores": 24,
+    "ram_gb": 127.7,
+    "os": "Microsoft Windows 11 Pro 10.0.26300",
+    "power_plan": "电源方案 GUID: 4e8b97b5-0b7d-455c-8253-cbf4409f3c98  (卓越性能)",
+    "disk_free_gb": 1004.8,
+    "wsl": false
+  },
+  "r": {
+    "version": "Rscript (R) version 4.5.0 (2025-04-11)",
+    "packages": {
+      "CerebroNexus": "6.0.0",
+      "ShinyCell": "2.1.0",
+      "iSEE": "2.22.0",
+      "anndataR": "1.0.2",
+      "SingleCellExperiment": "1.32.0",
+      "Seurat": "5.6.0",
+      "SeuratObject": "5.4.0",
+      "scRepertoire": "2.6.2",
+      "HDF5Array": "1.38.0",
+      "rhdf5": "2.54.1",
+      "hdf5r": "1.3.16",
+      "shiny": "1.14.0",
+      "DT": "0.34.0",
+      "shinyhelper": "0.3.2",
+      "ggrepel": "0.9.8",
+      "ggdendro": "0.2.0",
+      "gridExtra": "2.3.1",
+      "data.table": "1.18.6.1",
+      "Matrix": "1.7.6",
+      "reticulate": "1.47.0",
+      "BiocManager": "1.30.27",
+      "arrow": "25.0.1",
+      "qs2": "0.3.1"
+    }
+  },
+  "python": {
+    "version": "3.11.15",
+    "executable": "C:\\Users\\wangx\\Projects\\CerebroNexus_paper_code\\comparison\\env\\py\\Scripts\\python.exe",
+    "packages": {
+      "cellxgene": "1.3.0",
+      "vitessce": "3.8.4",
+      "anndata": "0.12.19",
+      "scanpy": "1.11.5",
+      "numpy": "2.0.1",
+      "pandas": "2.3.3",
+      "scipy": "1.17.1",
+      "zarr": "2.18.7",
+      "h5py": "3.16.0",
+      "numba": "0.68.0",
+      "umap-learn": "0.5.12",
+      "scikit-learn": "1.9.1",
+      "playwright": "1.64.0",
+      "psutil": "7.2.2",
+      "requests": "2.34.2",
+      "flask": "3.1.3",
+      "werkzeug": "3.1.9"
+    }
+  },
+  "chrome": "155.0.8059.85",
+  "node": {
+    "node": "v22.23.1",
+    "packages": {
+      "vitessce": "3.9.9",
+      "react": "18.2.0",
+      "react-dom": "18.2.0",
+      "esbuild": "0.28.2"
+    }
+  },
+  "tools": {
+    "CerebroNexus": {
+      "version": "6.0.0",
+      "commit": "27ac995e983a3ff1c79a2d051c9a4374dde37ec6"
+    },
+    "ShinyCell": {
+      "version": "2.1.0",
+      "commit": "5c61db78cdd624636e161406d5d42aeb2c0f1205"
+    },
+    "iSEE": {
+      "version": "2.22.0",
+      "source": "Bioconductor 3.22"
+    },
+    "cellxgene": {
+      "version": "1.3.0"
+    },
+    "Vitessce": {
+      "python": "3.8.4",
+      "js": "vitessce@3.9.9"
+    }
+  }
+}

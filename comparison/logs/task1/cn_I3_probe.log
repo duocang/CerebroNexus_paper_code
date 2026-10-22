@@ -1,0 +1,42 @@
+[15:31:23] Calculating most expressed genes and mean expression for each group...
+[15:31:23] Processing group: cluster
+[15:31:24] Most expressed genes and mean expression calculation completed.
+[15:31:24] Initializing Cerebro object...
+[15:31:24] Adding expression data (embedded)...
+[15:31:24] Extracting all meta data columns...
+[15:31:24] Extracting dimensional reductions...
+[15:31:24] Will export the following dimensional reductions: UMAP, spatial
+[15:31:24] Extracting tables of most expressed genes...
+[15:31:24] Extracting tables of mean expression...
+[15:31:24] Extracting marker genes table...
+[15:31:24] No trajectories to extract...
+[15:31:24] Added spatial data: spatial (2688 cells)
+[15:31:24] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: visium_hne_adata
+organism: Human
+date of analysis: 
+date of export: 2026-10-22
+number of cells: 2,688
+number of genes: 18,078
+grouping variables (1): cluster
+cell cycle variables (0): 
+projections (2): UMAP, spatial
+trees (0): 
+most expressed genes: cluster
+marker genes:
+  - scanpy: t-test (1): leiden
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:spatial
+
+[15:31:24] Saving Cerebro object to: artifacts/t1/cn_I3/cerebro_visium_hne_adata.crb
+[15:31:25] Done!
+Successfully exported: cerebro_visium_hne_adata.crb 
+RESULT: [1] "artifacts/t1/cn_I3/cerebro_visium_hne_adata.crb" 
+FILES: cerebro_visium_hne_adata.crb 

@@ -1,0 +1,51 @@
+hard deps: callr digest data.table ggdendro patchwork htmltools processx ps readxl base64enc biomaRt colourpicker dplyr DT fs future.apply ggplot2 glue GSVA htmlwidgets httr igraph jsonlite later Matrix mirai msigdbr pbapply plotly qvalue qs2 R6 rlang scales scRepertoire shiny shinycssloaders shinydashboard shinyjs shinyWidgets stringdist stringr tibble tidyr tidyselect visNetwork 
+'getOption("repos")' replaces Bioconductor standard repositories, see
+'help("repositories", package = "BiocManager")' for details.
+Replacement repositories:
+    CRAN: https://cloud.r-project.org
+Bioconductor version 3.22 (BiocManager 1.30.27), R 4.5.0 (2025-04-11 ucrt)
+Installing package(s) 'callr', 'processx', 'ps', 'readxl', 'mirai',
+  'shinycssloaders', 'stringdist', 'visNetwork'
+also installing the dependencies 'rematch', 'cellranger', 'nanonext'
+
+trying URL 'https://cloud.r-project.org/bin/windows/contrib/4.5/rematch_2.0.0.zip'
+trying URL 'https://cloud.r-project.org/bin/windows/contrib/4.5/cellranger_1.1.0.zip'
+trying URL 'https://cloud.r-project.org/bin/windows/contrib/4.5/nanonext_1.10.3.zip'
+trying URL 'https://cloud.r-project.org/bin/windows/contrib/4.5/callr_3.8.0.zip'
+trying URL 'https://cloud.r-project.org/bin/windows/contrib/4.5/processx_3.9.0.zip'
+trying URL 'https://cloud.r-project.org/bin/windows/contrib/4.5/ps_1.9.3.zip'
+trying URL 'https://cloud.r-project.org/bin/windows/contrib/4.5/readxl_1.6.0.zip'
+trying URL 'https://cloud.r-project.org/bin/windows/contrib/4.5/mirai_2.7.3.zip'
+trying URL 'https://cloud.r-project.org/bin/windows/contrib/4.5/shinycssloaders_1.1.0.zip'
+trying URL 'https://cloud.r-project.org/bin/windows/contrib/4.5/stringdist_0.9.17.zip'
+trying URL 'https://cloud.r-project.org/bin/windows/contrib/4.5/visNetwork_2.1.4.zip'
+package 'rematch' successfully unpacked and MD5 sums checked
+package 'cellranger' successfully unpacked and MD5 sums checked
+package 'nanonext' successfully unpacked and MD5 sums checked
+package 'callr' successfully unpacked and MD5 sums checked
+package 'processx' successfully unpacked and MD5 sums checked
+package 'ps' successfully unpacked and MD5 sums checked
+package 'readxl' successfully unpacked and MD5 sums checked
+package 'mirai' successfully unpacked and MD5 sums checked
+package 'shinycssloaders' successfully unpacked and MD5 sums checked
+package 'stringdist' successfully unpacked and MD5 sums checked
+package 'visNetwork' successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\wangx\AppData\Local\Temp\RtmpGKgTSX\downloaded_packages
+* installing *source* package 'CerebroNexus' ...
+** this is package 'CerebroNexus' version '6.0.0'
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (CerebroNexus)
+---- done

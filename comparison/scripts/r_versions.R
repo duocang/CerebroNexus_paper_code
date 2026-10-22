@@ -1,0 +1,10 @@
+pk <- c("CerebroNexus","ShinyCell","iSEE","anndataR","SingleCellExperiment","Seurat","SeuratObject","scRepertoire","HDF5Array","rhdf5","hdf5r","shiny","DT","shinyhelper","ggrepel","ggdendro","gridExtra","data.table","Matrix","reticulate","BiocManager","arrow","qs2")
+out <- lapply(pk, function(p) {
+  v <- tryCatch(as.character(packageVersion(p)), error = function(e) NA_character_)
+  ok <- tryCatch({suppressMessages(suppressWarnings(loadNamespace(p))); TRUE}, error = function(e) conditionMessage(e))
+  data.frame(package = p, version = v, loads = as.character(ok))
+})
+out <- do.call(rbind, out)
+print(out, row.names = FALSE)
+cat("libPaths:", .libPaths(), "\n")
+cat("R:", R.version.string, "Bioc:", as.character(BiocManager::version()), "\n")

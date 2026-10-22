@@ -1,0 +1,3 @@
+TIMING read_input=1.00
+TIMING tool_step=8.22
+FILES: ['config.json', 'data.zarr']

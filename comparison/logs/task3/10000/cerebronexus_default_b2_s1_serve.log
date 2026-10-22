@@ -1,0 +1,56 @@
+##---------------------------------------------------------------------------##
+## Launching CerebroNexus
+##---------------------------------------------------------------------------##
+Loading required package: shiny
+Warning: package 'shiny' was built under R version 4.5.3
+
+Listening on http://127.0.0.1:8811
+[2026-10-22 18:51:17.238553] CRB cache hit: cerebro_e18_10000.crb
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: e18_10000
+organism: Human
+date of analysis: 
+date of export: 2026-10-22
+number of cells: 10,000
+number of genes: 27,998
+grouping variables (1): cluster
+cell cycle variables (0): 
+projections (1): UMAP
+trees (0): 
+most expressed genes: cluster
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+
+[2026-10-22 18:51:17.302665] Format of expression data: dgCMatrix
+[2026-10-22 18:51:17.462217] Show hover info status: TRUE
+[2026-10-22 18:51:17.775098] CRB cache hit: cerebro_e18_10000.crb
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: e18_10000
+organism: Human
+date of analysis: 
+date of export: 2026-10-22
+number of cells: 10,000
+number of genes: 27,998
+grouping variables (1): cluster
+cell cycle variables (0): 
+projections (1): UMAP
+trees (0): 
+most expressed genes: cluster
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+
+[2026-10-22 18:51:17.923291] Format of expression data: dgCMatrix

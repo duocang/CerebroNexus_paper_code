@@ -1,0 +1,16 @@
+{
+ "tool": "shinycell",
+ "dataset": "I2",
+ "route": "seurat",
+ "input": "orig",
+ "workaround": false,
+ "ui_status": "plot drawn",
+ "ink_fraction": 0.015036912803583227,
+ "ui_embedding_choices": [
+  "umap1",
+  "umap2"
+ ],
+ "console_errors": [
+  "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+ ]
+}

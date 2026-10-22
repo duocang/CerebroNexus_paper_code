@@ -1,0 +1,12 @@
+{
+  "tool": "ShinyCell",
+  "dataset": "I1",
+  "route": "seurat",
+  "input": "rewritten",
+  "workaround": false,
+  "status": "error",
+  "error_message": "argument is of length zero",
+  "failed_stage": "makeShinyApp",
+  "warnings": ["package 'Seurat' was built under R version 4.5.3", "package 'SeuratObject' was built under R version 4.5.3", "package 'sp' was built under R version 4.5.3", "Data is of class matrix. Coercing to dgCMatrix."],
+  "required_args": "makeShinyApp(obj, scConf); createConfig(obj)"
+}

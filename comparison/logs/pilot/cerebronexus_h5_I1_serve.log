@@ -1,0 +1,60 @@
+##---------------------------------------------------------------------------##
+## Launching CerebroNexus
+##---------------------------------------------------------------------------##
+Loading required package: shiny
+Warning: package 'shiny' was built under R version 4.5.3
+
+Listening on http://127.0.0.1:8812
+[2026-10-22 15:17:40.639484] CRB cache hit: cerebro_pbmc3k.crb
+[2026-10-22 15:17:40.666863] Attaching h5 backend (lazy TENxMatrix): C:/Users/wangx/Projects/CerebroNexus_paper_code/comparison/artifacts/pilot_cerebronexus_h5_I1/cerebro_pbmc3k.h5
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: pbmc3k
+organism: Human
+date of analysis: 
+date of export: 2026-10-22
+number of cells: 2,638
+number of genes: 1,838
+grouping variables (1): louvain
+cell cycle variables (0): 
+projections (3): TSNE, UMAP, draw_graph_fr
+trees (0): 
+most expressed genes: louvain
+marker genes:
+  - scanpy: t-test_overestim_var (1): louvain
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+
+[2026-10-22 15:17:40.754348] Format of expression data: DelayedMatrix
+[2026-10-22 15:17:40.950903] Show hover info status: TRUE
+[2026-10-22 15:17:41.697839] CRB cache hit: cerebro_pbmc3k.crb
+[2026-10-22 15:17:41.826908] Attaching h5 backend (lazy TENxMatrix): C:/Users/wangx/Projects/CerebroNexus_paper_code/comparison/artifacts/pilot_cerebronexus_h5_I1/cerebro_pbmc3k.h5
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: pbmc3k
+organism: Human
+date of analysis: 
+date of export: 2026-10-22
+number of cells: 2,638
+number of genes: 1,838
+grouping variables (1): louvain
+cell cycle variables (0): 
+projections (3): TSNE, UMAP, draw_graph_fr
+trees (0): 
+most expressed genes: louvain
+marker genes:
+  - scanpy: t-test_overestim_var (1): louvain
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+
+[2026-10-22 15:17:41.903092] Format of expression data: DelayedMatrix

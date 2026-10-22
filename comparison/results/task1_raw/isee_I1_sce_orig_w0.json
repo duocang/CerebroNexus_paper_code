@@ -1,0 +1,12 @@
+{
+  "tool": "iSEE",
+  "dataset": "I1",
+  "route": "sce",
+  "input": "orig",
+  "workaround": false,
+  "status": "error",
+  "error_message": "File\n'C:\\Users\\wangx\\Projects\\CerebroNexus_paper_code\\comparison\\data\\pbmc3k.h5ad'\nis not a valid H5AD file.\nℹ Either the file is not an H5AD file or it was created with anndata<0.8.0.",
+  "failed_stage": "read",
+  "warnings": [],
+  "required_args": "iSEE(se)"
+}

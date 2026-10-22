@@ -1,0 +1,5 @@
+There were 12 warnings (use warnings() to see them)
+Loading required package: shiny
+Warning: package 'shiny' was built under R version 4.5.3
+
+Listening on http://127.0.0.1:8814

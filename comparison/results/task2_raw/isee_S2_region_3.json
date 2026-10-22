@@ -1,0 +1,93 @@
+{
+ "tool": "iSEE",
+ "set": "S2",
+ "set_definition": "CTaa == 'CVVSDNTGGFKTIF_CASSVRRERANTGELFF'",
+ "route": "region (lasso, Shift+click waypoints)",
+ "export_route": "Export > Download panel output (table CSV)",
+ "route_steps": [
+  "Data parameters of 'Reduced dimension plot 1': embedding = UMAP",
+  "calibrate data->pixel on a screenshot of the plot (fit quality recorded)",
+  "Shift+click the vertices of the margin-expanded convex hull of the target cells, Shift+click the first vertex to close",
+  "Selection parameters of 'Column data table 1': column selection source = Reduced dimension plot 1",
+  "Export > Download panel output > tick 'Column data table 1' > Download (browser download)"
+ ],
+ "repeat": 3,
+ "status": "ok",
+ "calibration": {
+  "ax": 29.8501,
+  "bx": 241.166,
+  "ay": -24.0125,
+  "by": 236.3253,
+  "quality": 0.8936,
+  "y_flipped": false,
+  "dot_radius": 1.0,
+  "quality_dilated": 1.0
+ },
+ "margin_px": 4.0,
+ "polygon_px": [
+  [
+   259,
+   319
+  ],
+  [
+   261,
+   316
+  ],
+  [
+   263,
+   315
+  ],
+  [
+   281,
+   314
+  ],
+  [
+   342,
+   329
+  ],
+  [
+   345,
+   331
+  ],
+  [
+   346,
+   333
+  ],
+  [
+   345,
+   336
+  ],
+  [
+   327,
+   349
+  ],
+  [
+   324,
+   350
+  ],
+  [
+   313,
+   352
+  ],
+  [
+   310,
+   351
+  ],
+  [
+   261,
+   321
+  ]
+ ],
+ "n_vertices": 13,
+ "ui_selected_text": null,
+ "export_file": "logs\\task2\\isee_S2_region_3_iSEE_exports.zip",
+ "zip_members": [
+  "ColumnDataTable1.csv"
+ ],
+ "n_exported": 500,
+ "n_truth": 11,
+ "n_intersection": 11,
+ "jaccard": 0.022,
+ "precision": 0.022,
+ "recall": 1.0
+}

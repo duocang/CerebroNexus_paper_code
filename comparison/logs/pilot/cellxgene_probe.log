@@ -1,0 +1,43 @@
+[cellxgene] Starting the CLI...
+[cellxgene] Warning: `__version__` is deprecated, use `importlib.metadata.version('anndata')` instead. 
+[cellxgene] Loading data from pbmc3k.h5ad.
+[cellxgene] Warning: Moving element from .uns['neighbors']['distances'] to .obsp['distances'].
+
+This is where adjacency matrices should go now. 
+[cellxgene] Warning: Moving element from .uns['neighbors']['connectivities'] to .obsp['connectivities'].
+
+This is where adjacency matrices should go now. 
+[cellxgene] Warning: The method obsm_keys is deprecated and will be removed in the future. Use obsm instead of obsm_keys. (e.g. `k in adata.obsm` or `adata.obsm.keys() | {'u'}`) 
+[cellxgene] Warning: The method obsm_keys is deprecated and will be removed in the future. Use obsm instead of obsm_keys. (e.g. `k in adata.obsm` or `adata.obsm.keys() | {'u'}`) 
+[cellxgene] Launching! Please go to http://127.0.0.1:8801 in your browser.
+[cellxgene] Type CTRL-C at any time to exit.
+ * Serving Flask app 'server.app.app'
+ * Debug mode: off
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:8801
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:02] "GET /api/v0.2/schema HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "[33mGET /obsolete.js HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "GET /static/main-6835a9ad4754cf2ffc45.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "GET /static/main-1d9b57a05a93155621b5.js HTTP/1.1" 200 -
+[cellxgene] Warning: `__version__` is deprecated, use `importlib.metadata.version('anndata')` instead. 
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "GET /api/v0.2/schema HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "GET /api/v0.2/colors HTTP/1.1" 200 -
+[cellxgene] Warning: The method uns_keys is deprecated and will be removed in the future. Use uns instead of uns_keys. (e.g. `k in adata.uns` or `sorted(adata.uns)`) 
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "GET /api/v0.2/config HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "GET /static/assets/RobotoCondensed-Regular-db6d916952fb988edac1e531d47ff83a.ttf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "GET /api/v0.2/genesets HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "GET /api/v0.2/layout/obs?layout-name=pca HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "GET /api/v0.2/layout/obs?layout-name=tsne HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "GET /api/v0.2/layout/obs?layout-name=umap HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "GET /api/v0.2/layout/obs?layout-name=draw_graph_fr HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "GET /api/v0.2/annotations/obs?annotation-name=louvain HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "GET /static/assets/icon-25c81dcb04bb17fa0e8ad26da31ac22b.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "GET /static/assets/RobotoCondensed-Bold-89a396525c0de98da36505cb04eb9373.ttf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "GET /static/assets/RobotoCondensed-Italic-aca8cfe6a0fd2abecaa6e21a19f66eba.ttf HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "GET /api/v0.2/annotations/var?annotation-name=name_0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "GET /api/v0.2/annotations/obs?annotation-name=n_counts HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "GET /api/v0.2/annotations/obs?annotation-name=n_genes HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "GET /api/v0.2/annotations/obs?annotation-name=percent_mito HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/Oct/2026 14:30:13] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -

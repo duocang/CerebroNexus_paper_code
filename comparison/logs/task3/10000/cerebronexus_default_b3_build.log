@@ -1,0 +1,39 @@
+[19:00:21] Calculating most expressed genes and mean expression for each group...
+[19:00:21] Processing group: cluster
+[19:00:22] Most expressed genes and mean expression calculation completed.
+[19:00:22] Initializing Cerebro object...
+[19:00:22] Adding expression data (embedded)...
+[19:00:22] Extracting all meta data columns...
+[19:00:22] Extracting dimensional reductions...
+[19:00:22] Will export the following dimensional reductions: UMAP
+[19:00:22] Extracting tables of most expressed genes...
+[19:00:22] Extracting tables of mean expression...
+[19:00:22] No trajectories to extract...
+[19:00:22] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: e18_10000
+organism: Human
+date of analysis: 
+date of export: 2026-10-22
+number of cells: 10,000
+number of genes: 27,998
+grouping variables (1): cluster
+cell cycle variables (0): 
+projections (1): UMAP
+trees (0): 
+most expressed genes: cluster
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+[19:00:22] Saving Cerebro object to: C:\Users\wangx\Projects\CerebroNexus_paper_code\comparison\artifacts\t3\10000\cerebronexus_default_b3/cerebro_e18_10000.crb
+[19:00:23] Done!
+Successfully exported: cerebro_e18_10000.crb 
+RESULT: [1] "C:\\Users\\wangx\\Projects\\CerebroNexus_paper_code\\comparison\\artifacts\\t3\\10000\\cerebronexus_default_b3/cerebro_e18_10000.crb" 
+FILES: cerebro_e18_10000.crb 

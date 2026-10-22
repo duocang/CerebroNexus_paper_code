@@ -1,0 +1,38 @@
+{
+ "tool": "cellxgene",
+ "dataset": "I1",
+ "route": "cellxgene launch <h5ad>",
+ "required_args": "<path to .h5ad>",
+ "status": "ok",
+ "n_cells": 2638,
+ "n_genes": 1838,
+ "embeddings": [
+  "pca",
+  "tsne",
+  "umap",
+  "draw_graph_fr"
+ ],
+ "obs_columns": [
+  "name_0",
+  "n_genes",
+  "percent_mito",
+  "n_counts",
+  "louvain"
+ ],
+ "categorical_annotations": [
+  "louvain"
+ ],
+ "ctaa_column_in_metadata": false,
+ "obs_index_name": "name_0",
+ "unique_cell_names_in_file": true,
+ "screenshot": "logs\\task1\\cellxgene_I1.png",
+ "error_message": null,
+ "warnings": [
+  "[cellxgene] Warning: `__version__` is deprecated, use `importlib.metadata.version('anndata')` instead. ",
+  "[cellxgene] Warning: Moving element from .uns['neighbors']['distances'] to .obsp['distances'].",
+  "[cellxgene] Warning: Moving element from .uns['neighbors']['connectivities'] to .obsp['connectivities'].",
+  "[cellxgene] Warning: The method obsm_keys is deprecated and will be removed in the future. Use obsm instead of obsm_keys. (e.g. `k in adata.obsm` or `adata.obsm",
+  "[cellxgene] Warning: The method obsm_keys is deprecated and will be removed in the future. Use obsm instead of obsm_keys. (e.g. `k in adata.obsm` or `adata.obsm",
+  "[cellxgene] Warning: `__version__` is deprecated, use `importlib.metadata.version('anndata')` instead. "
+ ]
+}

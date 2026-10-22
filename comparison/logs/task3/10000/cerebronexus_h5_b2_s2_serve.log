@@ -1,0 +1,58 @@
+##---------------------------------------------------------------------------##
+## Launching CerebroNexus
+##---------------------------------------------------------------------------##
+Loading required package: shiny
+Warning: package 'shiny' was built under R version 4.5.3
+
+Listening on http://127.0.0.1:8812
+[2026-10-22 18:54:21.182552] CRB cache hit: cerebro_e18_10000.crb
+[2026-10-22 18:54:21.203547] Attaching h5 backend (lazy TENxMatrix): C:/Users/wangx/Projects/CerebroNexus_paper_code/comparison/artifacts/t3/10000/cerebronexus_h5_b2/cerebro_e18_10000.h5
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: e18_10000
+organism: Human
+date of analysis: 
+date of export: 2026-10-22
+number of cells: 10,000
+number of genes: 27,998
+grouping variables (1): cluster
+cell cycle variables (0): 
+projections (1): UMAP
+trees (0): 
+most expressed genes: cluster
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+
+[2026-10-22 18:54:21.270729] Format of expression data: DelayedMatrix
+[2026-10-22 18:54:21.415218] Show hover info status: TRUE
+[2026-10-22 18:54:21.730516] CRB cache hit: cerebro_e18_10000.crb
+[2026-10-22 18:54:21.859493] Attaching h5 backend (lazy TENxMatrix): C:/Users/wangx/Projects/CerebroNexus_paper_code/comparison/artifacts/t3/10000/cerebronexus_h5_b2/cerebro_e18_10000.h5
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: e18_10000
+organism: Human
+date of analysis: 
+date of export: 2026-10-22
+number of cells: 10,000
+number of genes: 27,998
+grouping variables (1): cluster
+cell cycle variables (0): 
+projections (1): UMAP
+trees (0): 
+most expressed genes: cluster
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+
+[2026-10-22 18:54:21.938841] Format of expression data: DelayedMatrix

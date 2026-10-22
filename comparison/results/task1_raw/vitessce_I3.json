@@ -1,0 +1,61 @@
+{
+ "tool": "Vitessce",
+ "dataset": "I3",
+ "route": "optimize_adata -> write_zarr -> AnnDataWrapper (paths by hand)",
+ "workaround": false,
+ "n_cells": 2688,
+ "n_genes": 18078,
+ "unique_cell_names": true,
+ "obsm_keys_in_file": [
+  "X_pca",
+  "X_umap",
+  "spatial"
+ ],
+ "notes": "Spatial view added with obs_spots_path='obsm/spatial' written by hand; with no spot-layer coordination the view stays black. A hand-written 'spotLayer' coordination (python enum has no spot-layer type in 3.8.4) failed config validation ('Expected string, received object'); not pursued further.",
+ "status": "ok",
+ "paths_written_by_hand": [
+  "obsm/X_pca",
+  "obsm/X_umap",
+  "obsm/spatial",
+  "obs/cluster",
+  "X",
+  "obsm/spatial (obs_spots_path)"
+ ],
+ "embeddings_offered_in_config": [
+  "PCA",
+  "UMAP",
+  "SPATIAL"
+ ],
+ "categorical_annotations": [
+  "cluster"
+ ],
+ "obs_columns_in_file": [
+  "in_tissue",
+  "array_row",
+  "array_col",
+  "n_genes_by_counts",
+  "log1p_n_genes_by_counts",
+  "total_counts",
+  "log1p_total_counts",
+  "pct_counts_in_top_50_genes",
+  "pct_counts_in_top_100_genes",
+  "pct_counts_in_top_200_genes",
+  "pct_counts_in_top_500_genes",
+  "total_counts_mt",
+  "log1p_total_counts_mt",
+  "pct_counts_mt",
+  "n_counts",
+  "leiden",
+  "cluster"
+ ],
+ "spatial_in_file": true,
+ "images_in_file": true,
+ "screenshot": "logs\\task1\\vitessce_I3.png",
+ "page_text": "Scatterplot (PCA)\n2,688 cells\nCell Sets\ncluster\n+\nGene List\n0610005C13Rik\n0610009B22Rik\n0610009O20Rik\n0610010F05Rik\n0610010K14Rik\n0610012G03Rik\n0610025J13Rik\n0610030E20Rik\n0610033M10Rik\n0610037L13Rik\n0610038B21Rik\n0610040B10Rik\n0610040F04Rik\n0610040J01Rik\n0610043K17Rik\n1110002E22Rik\n1110002L01Rik\n1110002O04Rik\n1110004E09Rik\n1110004F10Rik\n1110006O24Rik\n1110008F13Rik\n1110008L16Rik\n1110008P14Rik\n1110012L19Rik\n1110015O18Rik\n1110017D15Rik\n1110019D14Rik\n18,078 genes\nSpatial\n2,688 cells",
+ "console_errors": [
+  "error: Failed to load resource: the server responded with a status of 404 (File not found)",
+  "error: Failed to load resource: the server responded with a status of 404 (File not found)",
+  "error: Failed to load resource: the server responded with a status of 404 (File not found)",
+  "error: Failed to load resource: the server responded with a status of 404 (File not found)"
+ ]
+}

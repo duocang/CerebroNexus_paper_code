@@ -1,0 +1,348 @@
+[
+ {
+  "tool": "cerebronexus_default",
+  "dataset": "e18_10000",
+  "build_status": "ok",
+  "build_wall_s": 12.602517799998168,
+  "build_peak_rss_bytes": 1762635776,
+  "build_exit_code": 0,
+  "artifact_bytes": 44218858,
+  "start_status": "ok",
+  "start_t_ready_s": 4.912912299998425,
+  "start_plot_status": "ok",
+  "start_t_first_plot_s": 2.3772173000033945,
+  "start_frames": 4,
+  "start_ink_fraction": 0.11708399076170223,
+  "start_frame_series": [
+   [
+    "exc",
+    "Locator.click: Timeout 400ms exceeded.\nCall log:\n  - waiting for get_by_text(\"Projection\", exact=True).first\n"
+   ],
+   [
+    "exc",
+    "Locator.click: Timeout 400ms exceeded.\nCall log:\n  - waiting for get_by_text(\"Projection\", exact=True).first\n    - locat"
+   ],
+   [
+    2.377,
+    0.1171,
+    1290,
+    678,
+    0.226
+   ],
+   [
+    3.107,
+    0.1171,
+    1290,
+    678,
+    0.206
+   ]
+  ],
+  "start_screenshot_s": 0.20601349999924423,
+  "start_elem_w": 1290,
+  "start_elem_h": 678,
+  "start_t_total_s": 7.290129600001819,
+  "start_peak_rss_bytes": 675962880,
+  "start_browser_peak_rss_bytes": 863825920
+ },
+ {
+  "tool": "cerebronexus_h5",
+  "dataset": "e18_10000",
+  "build_status": "ok",
+  "build_wall_s": 15.271819600002345,
+  "build_peak_rss_bytes": 1824890880,
+  "build_exit_code": 0,
+  "artifact_bytes": 250888915,
+  "start_status": "ok",
+  "start_t_ready_s": 7.609651200000371,
+  "start_plot_status": "ok",
+  "start_t_first_plot_s": 2.7488907999977528,
+  "start_frames": 4,
+  "start_ink_fraction": 0.11708399076170223,
+  "start_frame_series": [
+   [
+    "exc",
+    "Locator.click: Timeout 400ms exceeded.\nCall log:\n  - waiting for get_by_text(\"Projection\", exact=True).first\n"
+   ],
+   [
+    "exc",
+    "Locator.click: Timeout 400ms exceeded.\nCall log:\n  - waiting for get_by_text(\"Projection\", exact=True).first\n    - locat"
+   ],
+   [
+    2.749,
+    0.1171,
+    1290,
+    678,
+    0.277
+   ],
+   [
+    3.275,
+    0.1171,
+    1290,
+    678,
+    0.173
+   ]
+  ],
+  "start_screenshot_s": 0.17268669999975828,
+  "start_elem_w": 1290,
+  "start_elem_h": 678,
+  "start_t_total_s": 10.358541999998124,
+  "start_peak_rss_bytes": 960393216,
+  "start_browser_peak_rss_bytes": 818716672
+ },
+ {
+  "tool": "shinycell",
+  "dataset": "e18_10000",
+  "build_status": "ok",
+  "build_wall_s": 26.48575890000211,
+  "build_peak_rss_bytes": 1641316352,
+  "build_exit_code": 0,
+  "build_read_input": 7.74,
+  "build_tool_step": 12.89,
+  "artifact_bytes": 95481723,
+  "start_status": "ok",
+  "start_t_ready_s": 2.3319506000007095,
+  "start_plot_status": "ok",
+  "start_t_first_plot_s": 3.5905617000025813,
+  "start_frames": 5,
+  "start_ink_fraction": 0.0808877634221848,
+  "start_frame_series": [
+   [
+    2.192,
+    0.0,
+    753,
+    601,
+    0.185
+   ],
+   [
+    2.667,
+    0.0,
+    753,
+    601,
+    0.137
+   ],
+   [
+    3.119,
+    0.0,
+    753,
+    601,
+    0.138
+   ],
+   [
+    3.591,
+    0.0809,
+    753,
+    601,
+    0.16
+   ],
+   [
+    4.024,
+    0.0809,
+    753,
+    601,
+    0.129
+   ]
+  ],
+  "start_screenshot_s": 0.12930729999789037,
+  "start_elem_w": 753,
+  "start_elem_h": 601,
+  "start_t_total_s": 5.922512300003291,
+  "start_peak_rss_bytes": 480505856,
+  "start_browser_peak_rss_bytes": 697131008
+ },
+ {
+  "tool": "isee",
+  "dataset": "e18_10000",
+  "build_status": "ok",
+  "build_wall_s": 11.61293619999924,
+  "build_peak_rss_bytes": 1572601856,
+  "build_exit_code": 0,
+  "build_read_input": 7.31,
+  "build_tool_step": 0.3,
+  "artifact_bytes": 251084315,
+  "start_status": "ok",
+  "start_t_ready_s": 8.730878200000006,
+  "start_plot_status": "ok",
+  "start_t_first_plot_s": 8.95940519999931,
+  "start_frames": 13,
+  "start_ink_fraction": 0.12624505928853755,
+  "start_frame_series": [
+   [
+    3.475,
+    0.0,
+    506,
+    500,
+    0.194
+   ],
+   [
+    4.018,
+    0.0,
+    506,
+    500,
+    0.179
+   ],
+   [
+    4.491,
+    0.0,
+    506,
+    500,
+    0.147
+   ],
+   [
+    4.94,
+    0.0,
+    506,
+    500,
+    0.149
+   ],
+   [
+    5.373,
+    0.0,
+    506,
+    500,
+    0.15
+   ],
+   [
+    5.92,
+    0.0,
+    506,
+    500,
+    0.181
+   ],
+   [
+    6.367,
+    0.0,
+    506,
+    500,
+    0.146
+   ],
+   [
+    6.808,
+    0.0,
+    506,
+    500,
+    0.152
+   ],
+   [
+    7.27,
+    0.0,
+    506,
+    500,
+    0.163
+   ],
+   [
+    7.737,
+    0.0,
+    506,
+    500,
+    0.185
+   ],
+   [
+    8.224,
+    0.0,
+    506,
+    500,
+    0.184
+   ],
+   [
+    8.959,
+    0.1262,
+    506,
+    500,
+    0.424
+   ],
+   [
+    9.549,
+    0.1262,
+    506,
+    500,
+    0.24
+   ]
+  ],
+  "start_screenshot_s": 0.24016409999967436,
+  "start_elem_w": 506,
+  "start_elem_h": 500,
+  "start_t_total_s": 17.690283399999316,
+  "start_peak_rss_bytes": 1634967552,
+  "start_browser_peak_rss_bytes": 758407168
+ },
+ {
+  "tool": "cellxgene",
+  "dataset": "e18_10000",
+  "build_status": "n/a",
+  "artifact_bytes": 168376200,
+  "start_status": "ok",
+  "start_t_ready_s": 8.63083469999765,
+  "start_plot_status": "ok",
+  "start_t_first_plot_s": 0.883333900001162,
+  "start_frames": 2,
+  "start_ink_fraction": 0.08835138248847926,
+  "start_frame_series": [
+   [
+    0.883,
+    0.0884,
+    868,
+    1000,
+    0.2
+   ],
+   [
+    1.47,
+    0.0884,
+    868,
+    1000,
+    0.139
+   ]
+  ],
+  "start_screenshot_s": 0.13939969999773894,
+  "start_elem_w": 868,
+  "start_elem_h": 1000,
+  "start_t_total_s": 9.514168599998811,
+  "start_peak_rss_bytes": 432635904,
+  "start_browser_peak_rss_bytes": 675704832
+ },
+ {
+  "tool": "vitessce",
+  "dataset": "e18_10000",
+  "build_status": "ok",
+  "build_wall_s": 5.999241199999233,
+  "build_peak_rss_bytes": 486170624,
+  "build_exit_code": 0,
+  "build_read_input": 0.16,
+  "build_tool_step": 1.69,
+  "artifact_bytes": 87169737,
+  "start_status": "ok",
+  "start_t_ready_s": 0.5961207000000286,
+  "start_plot_status": "ok",
+  "start_t_first_plot_s": 1.9964441000010993,
+  "start_frames": 3,
+  "start_ink_fraction": 0.01675120054630364,
+  "start_frame_series": [
+   [
+    1.497,
+    0.002,
+    776,
+    936,
+    0.661
+   ],
+   [
+    1.996,
+    0.0168,
+    776,
+    936,
+    0.162
+   ],
+   [
+    2.562,
+    0.0168,
+    776,
+    936,
+    0.168
+   ]
+  ],
+  "start_screenshot_s": 0.16762200000084704,
+  "start_elem_w": 776,
+  "start_elem_h": 936,
+  "start_t_total_s": 2.592564800001128,
+  "start_peak_rss_bytes": 30834688,
+  "start_browser_peak_rss_bytes": 843083776
+ }
+]

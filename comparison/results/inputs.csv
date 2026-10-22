@@ -1,0 +1,4 @@
+file,url,bytes,sha256
+pbmc3k.h5ad,https://raw.githubusercontent.com/chanzuckerberg/cellxgene/main/example-dataset/pbmc3k.h5ad,24653425,0db367b991dd95809732b218539ede489bea99113807f62ebd7ccc970025fe38
+visium_hne_adata.h5ad,https://ndownloader.figshare.com/files/26098397,329316778,3571e6b84dd32c73ece8ae0bebbd4758e77c6fdd321b2bbe0d4ffa8ed56e1cbe
+1M_neurons_filtered_gene_bc_matrices_h5.h5,https://cf.10xgenomics.com/samples/cell-exp/1.3.0/1M_neurons/1M_neurons_filtered_gene_bc_matrices_h5.h5,4216018749,255a36ee92de25cb3568faa2c27d31fe6d0db30f285c5c977be8d6245de14044

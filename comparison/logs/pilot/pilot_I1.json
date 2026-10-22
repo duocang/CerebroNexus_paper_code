@@ -1,0 +1,317 @@
+[
+ {
+  "tool": "cerebronexus_default",
+  "dataset": "I1",
+  "build_status": "ok",
+  "build_wall_s": 10.352487400003156,
+  "build_peak_rss_bytes": 856383488,
+  "build_exit_code": 0,
+  "artifact_bytes": 21551716,
+  "start_status": "ok",
+  "start_t_ready_s": 5.241778100000374,
+  "start_plot_status": "ok",
+  "start_t_first_plot_s": 2.782623399998556,
+  "start_frames": 4,
+  "start_ink_fraction": 0.04543372874919018,
+  "start_frame_series": [
+   [
+    "exc",
+    "Locator.click: Timeout 400ms exceeded.\nCall log:\n  - waiting for get_by_text(\"Projection\", exact=True).first\n"
+   ],
+   [
+    "exc",
+    "Locator.click: Timeout 400ms exceeded.\nCall log:\n  - waiting for get_by_text(\"Projection\", exact=True).first\n    - locat"
+   ],
+   [
+    2.783,
+    0.0454,
+    1290,
+    694,
+    0.222
+   ],
+   [
+    3.443,
+    0.0454,
+    1290,
+    694,
+    0.161
+   ]
+  ],
+  "start_screenshot_s": 0.1613508999980695,
+  "start_elem_w": 1290,
+  "start_elem_h": 694,
+  "start_t_total_s": 8.02440149999893,
+  "start_peak_rss_bytes": 470626304,
+  "start_browser_peak_rss_bytes": 866029568
+ },
+ {
+  "tool": "cerebronexus_h5",
+  "dataset": "I1",
+  "build_status": "ok",
+  "build_wall_s": 15.38607950000005,
+  "build_peak_rss_bytes": 1108836352,
+  "build_exit_code": 0,
+  "artifact_bytes": 58761909,
+  "start_status": "ok",
+  "start_t_ready_s": 9.296439899997495,
+  "start_plot_status": "ok",
+  "start_t_first_plot_s": 2.923046299998532,
+  "start_frames": 5,
+  "start_ink_fraction": 0.04543372874919018,
+  "start_frame_series": [
+   [
+    "exc",
+    "Locator.click: Timeout 400ms exceeded.\nCall log:\n  - waiting for get_by_text(\"Projection\", exact=True).first\n"
+   ],
+   [
+    "exc",
+    "Locator.click: Timeout 400ms exceeded.\nCall log:\n  - waiting for get_by_text(\"Projection\", exact=True).first\n    - locat"
+   ],
+   [
+    "exc",
+    "Locator.click: Timeout 400ms exceeded.\nCall log:\n  - waiting for get_by_text(\"Projection\", exact=True).first\n    - locat"
+   ],
+   [
+    2.923,
+    0.0454,
+    1290,
+    694,
+    0.18
+   ],
+   [
+    3.487,
+    0.0454,
+    1290,
+    694,
+    0.191
+   ]
+  ],
+  "start_screenshot_s": 0.19137160000173026,
+  "start_elem_w": 1290,
+  "start_elem_h": 694,
+  "start_t_total_s": 12.219486199996027,
+  "start_peak_rss_bytes": 911654912,
+  "start_browser_peak_rss_bytes": 818446336
+ },
+ {
+  "tool": "shinycell",
+  "dataset": "I1",
+  "build_status": "ok",
+  "build_wall_s": 11.652021899997635,
+  "build_peak_rss_bytes": 1159634944,
+  "build_exit_code": 0,
+  "build_read_input": 3.93,
+  "build_tool_step": 1.17,
+  "artifact_bytes": 17373151,
+  "start_status": "ok",
+  "start_t_ready_s": 2.5323788999994576,
+  "start_plot_status": "ok",
+  "start_t_first_plot_s": 3.299828900002467,
+  "start_frames": 4,
+  "start_ink_fraction": 0.020413078689125914,
+  "start_frame_series": [
+   [
+    2.315,
+    0.0,
+    753,
+    601,
+    0.188
+   ],
+   [
+    2.828,
+    0.0,
+    753,
+    601,
+    0.163
+   ],
+   [
+    3.3,
+    0.0204,
+    753,
+    601,
+    0.161
+   ],
+   [
+    3.773,
+    0.0204,
+    753,
+    601,
+    0.158
+   ]
+  ],
+  "start_screenshot_s": 0.1577885000006063,
+  "start_elem_w": 753,
+  "start_elem_h": 601,
+  "start_t_total_s": 5.832207800001925,
+  "start_peak_rss_bytes": 476995584,
+  "start_browser_peak_rss_bytes": 699670528
+ },
+ {
+  "tool": "isee",
+  "dataset": "I1",
+  "build_status": "ok",
+  "build_wall_s": 8.41015089999928,
+  "build_peak_rss_bytes": 995840000,
+  "build_exit_code": 0,
+  "build_read_input": 4.25,
+  "build_tool_step": 0.1,
+  "artifact_bytes": 42362171,
+  "start_status": "ok",
+  "start_t_ready_s": 7.576443099998869,
+  "start_plot_status": "ok",
+  "start_t_first_plot_s": 6.831195400001889,
+  "start_frames": 8,
+  "start_ink_fraction": 0.057936758893280635,
+  "start_frame_series": [
+   [
+    3.582,
+    0.0,
+    506,
+    500,
+    0.198
+   ],
+   [
+    4.125,
+    0.0,
+    506,
+    500,
+    0.238
+   ],
+   [
+    4.588,
+    0.0,
+    506,
+    500,
+    0.154
+   ],
+   [
+    5.083,
+    0.0,
+    506,
+    500,
+    0.142
+   ],
+   [
+    5.603,
+    0.0,
+    506,
+    500,
+    0.184
+   ],
+   [
+    6.092,
+    0.0,
+    506,
+    500,
+    0.176
+   ],
+   [
+    6.831,
+    0.0579,
+    506,
+    500,
+    0.45
+   ],
+   [
+    7.393,
+    0.0579,
+    506,
+    500,
+    0.199
+   ]
+  ],
+  "start_screenshot_s": 0.1989248999998381,
+  "start_elem_w": 506,
+  "start_elem_h": 500,
+  "start_t_total_s": 14.407638500000758,
+  "start_peak_rss_bytes": 1232785408,
+  "start_browser_peak_rss_bytes": 773566464
+ },
+ {
+  "tool": "cellxgene",
+  "dataset": "I1",
+  "build_status": "n/a",
+  "artifact_bytes": 24653425,
+  "start_status": "ok",
+  "start_t_ready_s": 9.078215599998657,
+  "start_plot_status": "ok",
+  "start_t_first_plot_s": 1.0269752999993216,
+  "start_frames": 2,
+  "start_ink_fraction": 0.04538133640552995,
+  "start_frame_series": [
+   [
+    1.027,
+    0.0442,
+    868,
+    1000,
+    0.282
+   ],
+   [
+    1.554,
+    0.0454,
+    868,
+    1000,
+    0.147
+   ]
+  ],
+  "start_screenshot_s": 0.14732919999732985,
+  "start_elem_w": 868,
+  "start_elem_h": 1000,
+  "start_t_total_s": 10.105190899997979,
+  "start_peak_rss_bytes": 298442752,
+  "start_browser_peak_rss_bytes": 674123776
+ },
+ {
+  "tool": "vitessce",
+  "dataset": "I1",
+  "build_status": "ok",
+  "build_wall_s": 5.0086290999970515,
+  "build_peak_rss_bytes": 181153792,
+  "build_exit_code": 0,
+  "build_read_input": 0.2,
+  "build_tool_step": 0.7,
+  "artifact_bytes": 17599272,
+  "start_status": "timeout",
+  "start_t_ready_s": 0.5764269999999669,
+  "start_plot_status": "timeout",
+  "start_frames": 109,
+  "start_last_frames": [
+   [
+    58.271,
+    0.005,
+    776,
+    936,
+    0.162
+   ],
+   [
+    58.777,
+    0.005,
+    776,
+    936,
+    0.159
+   ],
+   [
+    59.303,
+    0.005,
+    776,
+    936,
+    0.165
+   ],
+   [
+    59.792,
+    0.005,
+    776,
+    936,
+    0.154
+   ]
+  ],
+  "start_console": [
+   "error: Failed to load resource: the server responded with a status of 404 (File not found)",
+   "error: Failed to load resource: the server responded with a status of 404 (File not found)",
+   "error: Failed to load resource: the server responded with a status of 404 (File not found)",
+   "error: Failed to load resource: the server responded with a status of 404 (File not found)"
+  ],
+  "start_peak_rss_bytes": 29761536,
+  "start_browser_peak_rss_bytes": 820916224
+ }
+]

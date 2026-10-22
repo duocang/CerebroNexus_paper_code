@@ -1,0 +1,42 @@
+Warning: stack imbalance in '::', 8 then 10
+Warning: stack imbalance in '{', 4 then 6
+Warning: stack imbalance in 'if', 2 then 4
+[22:16:53] Calculating most expressed genes and mean expression for each group...
+[22:16:53] Processing group: cluster
+[22:17:22] Most expressed genes and mean expression calculation completed.
+[22:17:22] Initializing Cerebro object...
+[22:17:39] Writing expression matrix to TENx HDF5 file: C:/Users/wangx/Projects/CerebroNexus_paper_code/comparison/artifacts/t3/500000/cerebronexus_h5_b3\.crb-stage-9d0c1d727c8b/cerebro_e18_500000.h5
+[22:31:23] Extracting all meta data columns...
+[22:31:23] Extracting dimensional reductions...
+[22:31:23] Will export the following dimensional reductions: UMAP
+[22:31:23] Extracting tables of most expressed genes...
+[22:31:23] Extracting tables of mean expression...
+[22:31:23] No trajectories to extract...
+[22:31:23] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: e18_500000
+organism: Human
+date of analysis: 
+date of export: 2026-10-22
+number of cells: NULL
+number of genes: NULL
+grouping variables (1): cluster
+cell cycle variables (0): 
+projections (1): UMAP
+trees (0): 
+most expressed genes: cluster
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+[22:31:23] Saving Cerebro object to: C:\Users\wangx\Projects\CerebroNexus_paper_code\comparison\artifacts\t3\500000\cerebronexus_h5_b3/cerebro_e18_500000.crb
+[22:31:26] Done!
+Successfully exported: cerebro_e18_500000.crb 
+RESULT: [1] "C:\\Users\\wangx\\Projects\\CerebroNexus_paper_code\\comparison\\artifacts\\t3\\500000\\cerebronexus_h5_b3/cerebro_e18_500000.crb" 
+FILES: cerebro_e18_500000.crb, cerebro_e18_500000.h5, cerebro_e18_500000.viewer/common/cell_order.qs2, cerebro_e18_500000.viewer/groups/001.qs2, cerebro_e18_500000.viewer/groups/002.qs2, cerebro_e18_500000.viewer/manifest.json, cerebro_e18_500000.viewer/metadata/001.codes.bin, cerebro_e18_500000.viewer/metadata/001.dictionary.json, cerebro_e18_500000.viewer/metadata/002.bin, cerebro_e18_500000.viewer/metadata/003.bin, cerebro_e18_500000.viewer/projections/001.bin 

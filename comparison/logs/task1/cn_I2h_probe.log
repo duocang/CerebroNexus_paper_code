@@ -1,0 +1,39 @@
+[15:31:39] Calculating most expressed genes and mean expression for each group...
+[15:31:39] Processing group: seurat_clusters
+[15:31:39] Most expressed genes and mean expression calculation completed.
+[15:31:39] Initializing Cerebro object...
+[15:31:39] Adding expression data (embedded)...
+[15:31:39] Extracting all meta data columns...
+[15:31:39] Extracting dimensional reductions...
+[15:31:39] Will export the following dimensional reductions: UMAP
+[15:31:39] Extracting tables of most expressed genes...
+[15:31:39] Extracting tables of mean expression...
+[15:31:39] No trajectories to extract...
+[15:31:39] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: I2
+organism: Human
+date of analysis: 
+date of export: 2026-10-22
+number of cells: 500
+number of genes: 2,000
+grouping variables (1): seurat_clusters
+cell cycle variables (0): 
+projections (1): UMAP
+trees (0): 
+most expressed genes: seurat_clusters
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+[15:31:39] Saving Cerebro object to: artifacts/t1/cn_I2h/cerebro_I2.crb
+[15:31:40] Done!
+Successfully exported: cerebro_I2.crb 
+RESULT: [1] "artifacts/t1/cn_I2h/cerebro_I2.crb" 
+FILES: cerebro_I2.crb 

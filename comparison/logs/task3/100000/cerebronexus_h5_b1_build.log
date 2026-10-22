@@ -1,0 +1,42 @@
+Warning: stack imbalance in '::', 8 then 10
+Warning: stack imbalance in '{', 4 then 6
+Warning: stack imbalance in 'if', 2 then 4
+[19:44:17] Calculating most expressed genes and mean expression for each group...
+[19:44:17] Processing group: cluster
+[19:44:26] Most expressed genes and mean expression calculation completed.
+[19:44:26] Initializing Cerebro object...
+[19:44:29] Writing expression matrix to TENx HDF5 file: C:/Users/wangx/Projects/CerebroNexus_paper_code/comparison/artifacts/t3/100000/cerebronexus_h5_b1\.crb-stage-2520ef7c8/cerebro_e18_100000.h5
+[19:45:29] Extracting all meta data columns...
+[19:45:29] Extracting dimensional reductions...
+[19:45:29] Will export the following dimensional reductions: UMAP
+[19:45:29] Extracting tables of most expressed genes...
+[19:45:29] Extracting tables of mean expression...
+[19:45:29] No trajectories to extract...
+[19:45:29] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: e18_100000
+organism: Human
+date of analysis: 
+date of export: 2026-10-22
+number of cells: NULL
+number of genes: NULL
+grouping variables (1): cluster
+cell cycle variables (0): 
+projections (1): UMAP
+trees (0): 
+most expressed genes: cluster
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+[19:45:29] Saving Cerebro object to: C:\Users\wangx\Projects\CerebroNexus_paper_code\comparison\artifacts\t3\100000\cerebronexus_h5_b1/cerebro_e18_100000.crb
+[19:45:29] Done!
+Successfully exported: cerebro_e18_100000.crb 
+RESULT: [1] "C:\\Users\\wangx\\Projects\\CerebroNexus_paper_code\\comparison\\artifacts\\t3\\100000\\cerebronexus_h5_b1/cerebro_e18_100000.crb" 
+FILES: cerebro_e18_100000.crb, cerebro_e18_100000.h5 

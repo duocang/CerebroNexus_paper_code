@@ -1,0 +1,12 @@
+{
+  "tool": "ShinyCell",
+  "dataset": "I4",
+  "route": "sce-dup",
+  "input": "constructed",
+  "workaround": false,
+  "status": "error",
+  "error_message": "cannot coerce class 'structure(\"LinearEmbeddingMatrix\", package = \"SingleCellExperiment\")' to a data.frame",
+  "failed_stage": "makeShinyApp",
+  "warnings": [],
+  "required_args": "makeShinyApp(obj, scConf); createConfig(obj)"
+}

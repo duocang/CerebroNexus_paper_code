@@ -1,0 +1,20 @@
+{
+  "tool": "iSEE",
+  "dataset": "I2",
+  "route": "sce",
+  "input": "orig",
+  "workaround": false,
+  "status": "ok",
+  "error_message": null,
+  "failed_stage": null,
+  "warnings": ["package 'Seurat' was built under R version 4.5.3", "package 'SeuratObject' was built under R version 4.5.3", "package 'sp' was built under R version 4.5.3"],
+  "required_args": "iSEE(se)",
+  "n_cells": 500,
+  "n_genes": 2000,
+  "unique_cell_names": true,
+  "embeddings": "UMAP",
+  "categorical_annotations": ["orig.ident", "RNA_snn_res.0.8", "seurat_clusters", "CTgene", "CTnt", "CTaa", "CTstrict", "cloneSize", "sample", "ident"],
+  "ctaa_column_in_metadata": true,
+  "reduced_dim_classes": "matrix",
+  "app_built": true
+}
