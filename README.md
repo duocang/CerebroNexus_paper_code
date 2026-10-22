@@ -17,47 +17,70 @@ Rscript install.R
 Rscript -e 'targets::tar_make()'
 ```
 
-Figures are written to `figures/<topic>/`. GitHub Actions redraws them on every push and uploads them as the `figures` artifact.
+Figures are written to `topics/<topic>/figures/`. GitHub Actions redraws them on every push and uploads them as the `figures` artifact.
 
 ## Layout
 
+Everything for one topic lives in `topics/<topic>/`; only the pipeline and the environment are shared.
+
 ```
-_targets.R      the pipeline: sources functions/ and combines the target lists in scripts/
-functions/      helper functions, one file per topic
-scripts/        one target list per topic (expression_backends.R, viewer_performance.R)
+_targets.R      the pipeline: sources topics/*/functions.R and topics/*/targets.R
+default.nix     the one Nix environment (regenerate with generate_env.R)
+install.R       installs the R packages without Nix
+topics/
+  expression_backends/   H5 / BPCells / embedded storage benchmark and its figures
+  viewer_performance/    Viewer page, startup, renderer and smoke benchmarks, Ren backend figure
+  builder/               Builder builds from a SpatialData zip and a CITE-seq MuData file
+  interface_figures/     scripted Viewer/Builder captures and Figures 1-7, S1-S2 (run.sh; not in targets)
+  tool_comparison/       same-task comparison with ShinyCell, iSEE, cellxgene and Vitessce (Windows; not in targets)
+```
+
+A topic folder holds what it needs of:
+
+```
+README.md       what the topic measures and how to run it
+targets.R       its target list (targets_<topic>), combined in _targets.R
+functions.R     helpers for those targets
+run.sh          entry point for measurements that run outside targets
+scripts/        benchmark harness and plotting scripts
 data/           result tables the figures are drawn from
 figures/        the figures
-benchmark/      the expression-backend benchmark (runs outside targets)
-viewer/         Viewer page, startup, renderer and smoke benchmarks (run outside targets)
-builder/        Builder builds from a SpatialData zip and a CITE-seq MuData file
-tests/          tests of the benchmark harnesses
-generate_env.R  regenerates default.nix with rix
-install.R       installs the R packages without Nix
+tests/          tests of the harness
+```
+
+Run all tests from the repository root:
+
+```bash
+Rscript -e 'for (d in Sys.glob("topics/*/tests")) testthat::test_dir(d)'
 ```
 
 ## Run the benchmark
 
-The H5 / BPCells / embedded storage benchmark needs Linux, lots of RAM and disk, and downloads about 18 GB of data on first use. It installs CerebroNexus from the commit in `benchmark/cerebronexus.lock` and runs in the Nix environment (`BENCH_NIX=0` uses your own R after `Rscript install.R benchmark`).
+The H5 / BPCells / embedded storage benchmark needs Linux, lots of RAM and disk, and downloads about 18 GB of data on first use. It installs CerebroNexus from the commit in `topics/expression_backends/cerebronexus.lock` and runs in the Nix environment (`BENCH_NIX=0` uses your own R after `Rscript install.R benchmark`).
 
 ```bash
-bash benchmark/run.sh quick    # small correctness check
-bash benchmark/run.sh scale    # full study
-bash benchmark/run.sh status   # progress and log
+bash topics/expression_backends/run.sh quick    # small correctness check
+bash topics/expression_backends/run.sh scale    # full study
+bash topics/expression_backends/run.sh status   # progress and log
 ```
 
-Results go to `benchmark/results/` (not tracked); copy a published run to `data/expression_backends/scale/` and point `CURRENT` at it to draw figures from it. Details: [benchmark/README.md](benchmark/README.md). Tests: `cd tests && Rscript -e 'testthat::test_dir(".")'`.
+Results go to `topics/expression_backends/results/` (not tracked); copy a published run to `topics/expression_backends/data/scale/` and point `CURRENT` at it to draw figures from it. Details: [topics/expression_backends/README.md](topics/expression_backends/README.md).
 
 ## Viewer benchmarks
 
-Page speed, startup, renderer and smoke checks of the CerebroNexus Viewer, plus the Ren backend figure, are in `viewer/`. They run against a CerebroNexus checkout; see [viewer/README.md](viewer/README.md).
+Page speed, startup, renderer and smoke checks of the CerebroNexus Viewer, plus the Ren backend figure, are in `topics/viewer_performance/`. They run against a CerebroNexus checkout; see [topics/viewer_performance/README.md](topics/viewer_performance/README.md).
 
 ## Builder builds
 
-`builder/` rebuilds the two multi-format Builder examples cited in the manuscript, a Visium SpatialData sample store packed as a `.zip` (6,484 spots, two sections) and the minipbcite CITE-seq MuData file (411 cells, 29 antibody features), with CerebroNexus 6.0.0. It records the input URLs and SHA-256 checksums, the output CRB checksums and counts, and the console log with `sessionInfo()`; see [builder/README.md](builder/README.md).
+`topics/builder/` rebuilds the two multi-format Builder examples cited in the manuscript, a Visium SpatialData sample store packed as a `.zip` (6,484 spots, two sections) and the minipbcite CITE-seq MuData file (411 cells, 29 antibody features), with CerebroNexus 6.0.0. It records the input URLs and SHA-256 checksums, the output CRB checksums and counts, and the console log with `sessionInfo()`; see [topics/builder/README.md](topics/builder/README.md).
 
 ```bash
-Rscript --vanilla builder/build_crbs.R <library with CerebroNexus 6.0.0> <folder with the two inputs> <output folder>
+Rscript --vanilla topics/builder/build_crbs.R <library with CerebroNexus 6.0.0> <folder with the two inputs> <output folder>
 ```
+
+## Tool comparison
+
+`topics/tool_comparison/` compares CerebroNexus 6.0.0 with ShinyCell, iSEE, cellxgene and Vitessce on the same tasks (import and capability recognition, selection retrieval, and build and start cost at 10k / 100k / 500k cells), run on one native Windows host under a pre-registered protocol. Results are in [topics/tool_comparison/results/SUMMARY.md](topics/tool_comparison/results/SUMMARY.md); see [topics/tool_comparison/README.md](topics/tool_comparison/README.md).
 
 ## Notes
 

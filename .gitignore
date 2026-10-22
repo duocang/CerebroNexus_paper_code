@@ -9,7 +9,7 @@ result
 _targets/
 
 # Raw benchmark runs: kept locally, archived as release assets
-benchmark/results/
+topics/expression_backends/results/
 
 # local tool state
 .claude/

@@ -3,7 +3,7 @@
 #   Rscript install.R figures     redraw the figures
 #   Rscript install.R benchmark   also run the expression-backend benchmark
 # The benchmark set reads CerebroNexus' Imports from the commit in
-# benchmark/cerebronexus.lock, or from $CEREBRONEXUS_SRC.
+# topics/expression_backends/cerebronexus.lock, or from $CEREBRONEXUS_SRC.
 what <- commandArgs(TRUE)
 what <- if (length(what)) what[1] else "figures"
 if (!what %in% c("figures", "benchmark")) {
@@ -32,7 +32,7 @@ if (what == "benchmark") {
   if (nzchar(src)) {
     desc <- file.path(src, "DESCRIPTION")
   } else {
-    lock <- readLines("benchmark/cerebronexus.lock")
+    lock <- readLines("topics/expression_backends/cerebronexus.lock")
     lock_value <- function(key) sub(paste0("^", key, "="), "", grep(paste0("^", key, "="), lock, value = TRUE))
     repo <- sub("\\.git$", "", sub("^https://github.com/", "", lock_value("repo")))
     desc <- tempfile(fileext = ".dcf")

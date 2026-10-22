@@ -2,7 +2,7 @@
 # figure pipeline (targets, ggplot2, patchwork, poppler) and the
 # expression-backend benchmark (CerebroNexus' Imports, the storage backends
 # including BPCells, and the harness tests). CerebroNexus itself is not in it:
-# the benchmark installs the commit in benchmark/cerebronexus.lock into a
+# the benchmark installs the commit in topics/expression_backends/cerebronexus.lock into a
 # scratch library. Run from the repository root:
 #   nix-shell -p rPackages.rix R --run "Rscript generate_env.R"
 # On macOS run `export R_LIBS_USER=/nonexistent` first.
