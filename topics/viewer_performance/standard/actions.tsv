@@ -1,0 +1,4 @@
+action	page	what
+overview.colour_by	overview	Colour the projection by the next column in "Colour by"
+overview.zoom	overview	Zoom in once with the projection's zoom button
+geneExpression.gene	geneExpression	Show one gene: the alphabetically first gene the gene box offers that is not shown

@@ -1,0 +1,33 @@
+# Samples the memory of two process trees (the R server and Chrome) every 200 ms from /proc.
+# usage: sampler.R SERVER_PID CHROME_PID OUT.csv STOP_FILE
+# Columns are bytes. rss counts shared pages once per process; pss divides them between the
+# processes that share them, so pss is the one to add up across a Chrome process tree.
+a <- commandArgs(trailingOnly = TRUE)
+server_pid <- a[[1L]]; chrome_pid <- a[[2L]]; out <- a[[3L]]; stop_file <- a[[4L]]
+page <- 4096
+here <- dirname(normalizePath(sub("^--file=", "", grep("^--file=", commandArgs(), value = TRUE)[[1L]])))
+source(file.path(here, "proc.R"))
+
+mem_of <- function(pids) {
+  rss <- 0; pss <- 0
+  for (p in pids) {
+    st <- tryCatch(readLines(file.path("/proc", p, "statm"), n = 1L, warn = FALSE), error = function(e) character())
+    if (length(st)) rss <- rss + as.numeric(strsplit(st, " ", fixed = TRUE)[[1L]][[2L]]) * page
+    sm <- tryCatch(readLines(file.path("/proc", p, "smaps_rollup"), warn = FALSE), error = function(e) character())
+    l <- grep("^Pss:", sm, value = TRUE)
+    if (length(l)) pss <- pss + as.numeric(strsplit(trimws(sub("^Pss:", "", l[[1L]])), " ", fixed = TRUE)[[1L]][[1L]]) * 1024
+  }
+  c(rss, pss)
+}
+
+con <- file(out, "w")
+writeLines("t_ms,r_rss,r_pss,c_rss,c_pss", con)
+while (!file.exists(stop_file)) {
+  t <- round(as.numeric(Sys.time()) * 1000)
+  kids <- proc_children()
+  r <- mem_of(proc_tree(server_pid, kids)); c <- mem_of(proc_tree(chrome_pid, kids))
+  writeLines(sprintf("%.0f,%.0f,%.0f,%.0f,%.0f", t, r[[1L]], r[[2L]], c[[1L]], c[[2L]]), con)
+  flush(con)
+  Sys.sleep(0.15)
+}
+close(con)

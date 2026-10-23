@@ -1,0 +1,5 @@
+name	env	default_path	what
+mouse1m	PERF_MOUSE1M_CRB	.cache/R/CerebroNexus/large-examples/1m/cerebro-v2/cerebro_mouse_brain_1m.crb	10x E18 mouse brain, 1.3 M cells, with a marker-guided trajectory. Main fixture: most pages run here. Needs the current (v2, H5) format.
+ren	PERF_REN_CRB	.cache/R/CerebroNexus/large-examples/ren/cerebro-v2/cerebro_ren_covid_1.46m.crb	Ren et al. COVID-19 immune atlas, 1.46 M cells, TCR and BCR. Only for the pages the mouse brain does not have: Immune repertoire, Extra material.
+cosmx	PERF_COSMX_CRB		NanoString CosMx NSCLC, 800 k+ cells, 8 samples. Only for Spatial. Not built yet: set PERF_COSMX_CRB.
+tcell	PERF_TCELL_CRB		Pan-cancer T cell atlas (Zheng 2021), 398 k cells. No page is assigned to it: the mouse brain already has the Trajectory and Ren the Immune repertoire. Registered for later use.
