@@ -1,0 +1,22 @@
+{
+ "tool": "CerebroNexus",
+ "set": "S2",
+ "set_definition": "CTaa == 'CVVSDNTGGFKTIF_CASSVRRERANTGELFF'",
+ "route": "attribute (group filter + lasso)",
+ "export_route": "Table of selected cells > Download > CSV",
+ "route_steps": [
+  "open Projection tab",
+  "set Projection = umap",
+  "Settings > Group filters",
+  "open the 'CTaa' filter, click None, tick 'CVVSDNTGGFKTIF_CASSVRRERANTGELFF' only, close Settings",
+  "lasso drag around the whole plot area, inset 2 px from the canvas edge (the filter decides which cells can be selected)",
+  "scroll to 'Table of selected cells', set 'Show' = 1,000 entries",
+  "Download > CSV (browser download)"
+ ],
+ "repeat": 3,
+ "status": "route not found",
+ "group_filters_offered": [
+  "seurat_clusters 17/17"
+ ],
+ "error": "the Group filters offer only: ['seurat_clusters 17/17']; 'CTaa' is not a registered grouping variable of this CRB"
+}

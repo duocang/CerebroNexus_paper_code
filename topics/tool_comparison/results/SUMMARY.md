@@ -37,9 +37,9 @@ S1 = I1 cells with louvain == 'B cells' (342); S2 = I2 cells with the most frequ
 
 | Tool | Set | Route | Result | Jaccard | Exported | Precision | Recall |
 |---|---|---|---|---|---|---|---|
-| CerebroNexus | S1 | attribute (legend / group filter) | route not found | - | - | - | - |
+| CerebroNexus | S1 | attribute (group filter + lasso) | ok | 1.0 | 342 | 1.0 | 1.0 |
 | CerebroNexus | S1 | region (lasso) | ok | 0.9771 | 350 | 0.9771 | 1.0 |
-| CerebroNexus | S2 | attribute (legend / group filter) | route not found | - | - | - | - |
+| CerebroNexus | S2 | attribute (group filter + lasso) | route not found | - | - | - | - |
 | CerebroNexus | S2 | region (lasso) | ok | 0.6111 | 18 | 0.6111 | 1.0 |
 | ShinyCell | S1 | none available (region or attribute) | no export route | - | - | - | - |
 | ShinyCell | S2 | none available (region or attribute) | no export route | - | - | - | - |

@@ -54,3 +54,9 @@ Observations to keep in mind: Vitessce's server is a static file server, so its 
 - The run needed three restarts (Deviations D11-D13): ink rule (saturation 0.1), cellxgene upgrade check (GitHub rate limit), and one invalid unit caused by my cleanup. Every superseded row is kept in `results/superseded_*` and `logs/superseded_v1/`; none is in a table.
 - Largest values at 500,000 cells: build CerebroNexus h5 1,048 s and ShinyCell 1,016 s, iSEE first plot 47 s, iSEE server peak RSS 14.6 GB, CerebroNexus default 12.1 GB, cellxgene 8.0 GB; Vitessce server 0.03 GB (its data work happens in Chrome, 1.4 GB).
 - Not committed. Untracked deliverables: `PROTOCOL.md`, `PROGRESS.md`, `scripts/`, `results/`, `logs/` (about 64 MB, 1,200 files, of which 36 MB screenshots in `logs/screens` and 14 MB superseded runs).
+
+## 2026-10-23: CerebroNexus attribute route of Task 2
+
+- The first Task 2 run said CerebroNexus has no attribute route; that was wrong, only the legend had been tried. The Group filters (Projection > Settings) make filtered cells unselectable, so filter plus lasso selects by attribute (Deviation D14).
+- Run with `scripts/task2/t2_cerebronexus.py <set> 3 attribute`: S1 selects exactly the 342 B cells, Jaccard 1.0 (three runs). S2: the Group filters of the I2 CRB list only `seurat_clusters`, so the route is `route not found` for `CTaa`; the CRB was not rebuilt.
+- `results/task2_cerebronexus.csv`, `results/task2_summary.csv` and `results/SUMMARY.md` regenerated; the previous summaries are in `results/superseded_task2_attribute/`. The region rows did not change.

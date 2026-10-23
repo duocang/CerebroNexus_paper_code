@@ -12,14 +12,23 @@ for sname, label in (("S1", "louvain == 'B cells'"), ("S2", None)):
 CN_NOTE = ("legend click only toggles the visibility of a group; no selection by attribute value exists in the Projection tab, so no cohort and no table of selected cells "
            "is produced (evidence: logs/task2/cerebronexus_attribute_legend_click.png)")
 sets = {r["set"]: r["set_definition"] for r in raw if r.get("set_definition")}
+# The legend-only 'route not found' row is added only for a set without CerebroNexus attribute rows (rows through the Group filters replace it, see TASK2_RERUN.md)
 for s in ("S1", "S2"):
-    extra.append(dict(tool="CerebroNexus", set=s, set_definition=sets.get(s), route="attribute (legend / group filter)", status="route_not_found", repeat="n/a",
-                      export_route="n/a", jaccard=None, note=CN_NOTE))
+    if not any(r["tool"] == "CerebroNexus" and r["set"] == s and (r.get("route") or "").startswith("attribute") for r in raw):
+        extra.append(dict(tool="CerebroNexus", set=s, set_definition=sets.get(s), route="attribute (legend / group filter)", status="route_not_found", repeat="n/a",
+                          export_route="n/a", jaccard=None, note=CN_NOTE))
 rows = raw + extra
 def note(r):
     n = r.get("note", "") or ""
     if r["tool"] == "CerebroNexus" and r.get("export_route", "").startswith("Table"):
         n = "export covers the displayed page only (max 1,000 rows per page); page length was set to 1,000 before Download"
+    if r["tool"] == "CerebroNexus" and (r.get("route") or "").startswith("attribute (group filter"):
+        if r["status"] == "route not found":
+            n = ("Group filters offer only " + ", ".join(r.get("group_filters_offered", [])) + "; CTaa is not a registered grouping variable in the I2 CRB (groups = seurat_clusters at export), "
+                 "and the CRB was not rebuilt for this run (it would change the Task 1 import route); evidence: logs/task2/cerebronexus_S2_attribute_*_groupfilters.png")
+        else:
+            n = ("the selection is made by the Group filter (only '" + ", ".join(r.get("group_filter_values_set", [])) + "' kept; cells removed by a filter are not selectable) and the lasso only encloses "
+                 "the kept cells; export covers the displayed page only (page length 1,000)")
     if r["tool"] == "iSEE" and (r.get("route") or "").startswith("region (lasso") and r.get("set") == "S2":
         n = "lasso did not close for this small polygon (iSEE closes on a click near the first waypoint), so no selection was formed and the table exported all 500 cells; see logs/task2/isee_S2_region_*_selection.png"
     if r["tool"] == "iSEE" and (r.get("route") or "").startswith("attribute"):
