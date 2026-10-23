@@ -1,6 +1,6 @@
 # Tool comparison figure, redrawn from the result tables of the Windows run.
-# The measurements themselves run outside targets (scripts/harness.py,
-# scripts/task3.py); see topics/tool_comparison/README.md.
+# The measurements themselves run outside targets (scripts/run/harness.py,
+# scripts/run/task3/run.py); see topics/tool_comparison/README.md.
 targets_tool_comparison <- list(
   tar_target(
     tool_comparison_results,
@@ -16,7 +16,7 @@ targets_tool_comparison <- list(
       tool_comparison_results[[1]],
       tool_comparison_results[[2]],
       tool_comparison_results[[3]],
-      "topics/tool_comparison/figures"
+      "topics/tool_comparison/results/figures"
     ),
     format = "file"
   )

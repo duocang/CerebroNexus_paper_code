@@ -1,0 +1,117 @@
+{
+ "tool": "iSEE",
+ "set": "S1",
+ "set_definition": "louvain == 'B cells'",
+ "route": "region (lasso, Shift+click waypoints)",
+ "export_route": "Export > Download panel output (table CSV)",
+ "route_steps": [
+  "Data parameters of 'Reduced dimension plot 1': embedding = X_umap",
+  "calibrate data->pixel on a screenshot of the plot (fit quality recorded)",
+  "Shift+click the vertices of the margin-expanded convex hull of the target cells, Shift+click the first vertex to close",
+  "Selection parameters of 'Column data table 1': column selection source = Reduced dimension plot 1",
+  "Export > Download panel output > tick 'Column data table 1' > Download (browser download)"
+ ],
+ "repeat": 1,
+ "status": "ok",
+ "calibration": {
+  "ax": 31.5838,
+  "bx": 350.6179,
+  "ay": -25.8969,
+  "by": 300.6495,
+  "quality": 0.8926,
+  "y_flipped": false,
+  "dot_radius": 1.0,
+  "quality_dilated": 1.0
+ },
+ "margin_px": 4.0,
+ "polygon_px": [
+  [
+   318,
+   78
+  ],
+  [
+   325,
+   60
+  ],
+  [
+   327,
+   57
+  ],
+  [
+   344,
+   45
+  ],
+  [
+   347,
+   44
+  ],
+  [
+   359,
+   40
+  ],
+  [
+   378,
+   42
+  ],
+  [
+   381,
+   43
+  ],
+  [
+   397,
+   53
+  ],
+  [
+   399,
+   57
+  ],
+  [
+   400,
+   60
+  ],
+  [
+   406,
+   84
+  ],
+  [
+   401,
+   99
+  ],
+  [
+   400,
+   102
+  ],
+  [
+   394,
+   116
+  ],
+  [
+   326,
+   252
+  ],
+  [
+   324,
+   253
+  ],
+  [
+   321,
+   252
+  ],
+  [
+   320,
+   249
+  ]
+ ],
+ "n_vertices": 19,
+ "ui_selected_text": "351 of 2638 columns in active selection (13.3%)",
+ "export_file": "results\\evidence\\task2\\isee_S1_region_1_iSEE_exports.zip",
+ "zip_members": [
+  "ColumnDataTable1.csv"
+ ],
+ "n_exported": 351,
+ "n_truth": 342,
+ "n_intersection": 342,
+ "jaccard": 0.9743589743589743,
+ "precision": 0.9743589743589743,
+ "recall": 1.0
+}

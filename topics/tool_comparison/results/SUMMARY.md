@@ -1,6 +1,6 @@
 # Comparative evaluation: summary of results
 
-Host: native Windows 11, i9-12900K (24 threads), 127.7 GB RAM, R 4.5.0, Python 3.11.15, Chrome 155 (see `environment.json`). Protocol: `../PROTOCOL.md` (frozen text, deviations D1-D13 at its end). Raw rows: `task1_raw/`, `task2_raw/`, `task3_builds.csv`, `task3_starts.csv`.
+Host: native Windows 11, i9-12900K (24 threads), 127.7 GB RAM, R 4.5.0, Python 3.11.15, Chrome 155 (see `environment.json`). Protocol: `../PROTOCOL.md` (frozen text, deviations D1-D15 at its end). Raw rows: `task1/`, `task2/`, `task3/`.
 
 ## Task 1: import and capability recognition
 

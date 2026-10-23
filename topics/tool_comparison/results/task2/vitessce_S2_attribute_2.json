@@ -1,0 +1,21 @@
+{
+ "tool": "Vitessce",
+ "set": "S2",
+ "set_definition": "CTaa == 'CVVSDNTGGFKTIF_CASSVRRERANTGELFF'",
+ "route": "attribute (cell set)",
+ "export_route": "Cell Sets > set menu > Export set (to JSON file)",
+ "route_steps": [
+  "Cell Sets: expand 'CTaa'",
+  "three-dot menu of the set 'CVVSDNTGGFKTIF_CASSVRRERANTGELFF' > 'Export set (to JSON file)' (browser download)"
+ ],
+ "repeat": 2,
+ "status": "ok",
+ "export_json_keys": "<class 'list'>",
+ "n_exported": 11,
+ "n_truth": 11,
+ "n_intersection": 11,
+ "jaccard": 1.0,
+ "precision": 1.0,
+ "recall": 1.0,
+ "export_file": "results\\evidence\\task2\\vitessce_S2_attribute_2.json"
+}

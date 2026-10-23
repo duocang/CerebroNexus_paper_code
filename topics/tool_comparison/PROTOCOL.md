@@ -190,3 +190,25 @@ Bookkeeping for D11: a first attempt to restart Task 3 started a second runner b
 **D13. One invalid unit re-run (2026-10-22).** When the runner was restarted for D12 I deleted `artifacts/t3`, which held the finished build of `cerebronexus_h5` build 1 in tier 100,000 whose three starts had not yet run; the three starts then failed with "no such file" (`find_one` in the harness). That is an operator error, not a tool result. The build row and the three start rows were moved unchanged to `results/superseded_cleanup_error/`, and the build (a new build 1, with new timings) and its three starts were run again. No other unit was affected.
 
 **D14. CerebroNexus attribute route of Task 2 run afterwards (2026-10-23).** The first Task 2 run recorded no attribute route for CerebroNexus (`route not found`) because only the legend of the Projection tab was tried, where a click hides or shows a group but selects nothing. The Group filters (Projection tab, Settings) were not tried. In CerebroNexus 6.0.0 a cell removed by a group filter is inactive and not selectable, so a filter plus a lasso around the whole plot selects by attribute; the filter, not the outline, decides which cells are selected. The route was run on 2026-10-23 (`scripts/task2/t2_cerebronexus.py <set> 3 attribute`): Projection tab, projection UMAP (S1) or umap (S2), Group filters, None, then only the target value on, Settings closed, a rectangular lasso inset 2 px from the canvas edge, then the table export of the region route (page length 1,000, Download, CSV). Three runs per set. S1 (`louvain == "B cells"`): 342 of 342 cells selected and exported, Jaccard 1.0 in all three runs. S2 (most frequent `CTaa`): the Group filters of the I2 CRB offer only `seurat_clusters` (17 levels) because the CRB was exported with `groups = "seurat_clusters"`; `CTaa` is not a grouping variable, so the route is recorded as `route not found` (evidence `logs/task2/cerebronexus_S2_attribute_*_groupfilters.png`). The CRB was not rebuilt with extra groups, because that would change the import route graded in Task 1. The region rows are unchanged. The previous `task2_cerebronexus.csv` and `task2_summary.csv` are in `results/superseded_task2_attribute/`.
+
+**D15. Folders reorganised (2026-10-23); path map.** After the measured runs the folders were regrouped. Nothing was re-run and no result file changed (the aggregation scripts were re-run once and wrote byte-identical tables, except `results/SUMMARY.md`, whose header now points to the new folders). The text above and D1-D14 keep the old paths; read them with this map.
+
+| Old path | New path |
+|---|---|
+| `results/task1_raw/`, `results/task1_<tool>.csv\|json` | `results/task1/` |
+| `results/task2_raw/`, `results/task2_<tool>.csv` | `results/task2/` |
+| `results/task3_builds.csv`, `results/task3_starts.csv` | `results/task3/` |
+| `results/superseded_v1`, `_v2_cellxgene_upgrade_check`, `_cleanup_error`, `_task2_attribute` | `results/superseded/v1`, `v2_cellxgene_upgrade_check`, `cleanup_error`, `task2_attribute` |
+| `logs/` (relative paths in the result tables, `screenshot` and `log` columns, notes) | `results/evidence/`; the path prefix `logs/` or `logs\\` in `results/task*/` and the summaries was replaced by `results/evidence/` with one script, nothing else in those files changed |
+| `logs/superseded_v1/` | `results/superseded/v1/logs/` |
+| `logs/task2_cn_probe.log` | `results/evidence/task2/cn_attribute_probe.log` |
+| `figures/`, `captures/` | `results/figures/`, `results/figures/captures/` |
+| `data/` (downloads), `inputs/` (derived) | `data/raw/`, `data/inputs/` |
+| `artifacts/` (what each tool builds) | `data/builds/` |
+| `scripts/harness.py`, `serve_vitessce.py`, `run_r.sh`, `task1/`, `task2/`, `tools/` | `scripts/run/` (same names) |
+| `scripts/task3.py`, `stop_task3.py` | `scripts/run/task3/run.py`, `stop.py` |
+| `scripts/task1/aggregate.py`, `task2/aggregate.py`, `summarize_task3.py`, `make_summary.py`, `capture_figures.py` | `scripts/report/aggregate_task1.py`, `aggregate_task2.py`, `summarize_task3.py`, `make_summary.py`, `capture_figures.py` |
+| `scripts/setup_r*.R`, `r_versions.R`, `record_env.py`, `make_i2*`, `rewrite_h5ad.py`, `prep_task3.py` | `scripts/setup/` |
+| other `results/*` (summaries, `environment.json`, `inputs.csv`, manifest, hashes) | unchanged |
+
+The exploration helpers `probe_page.py`, `probe_page2.py` and `killport.sh`, which nothing referenced, were deleted (they stay in history). `TASK2_RERUN.md`, the finished work order behind D14, was deleted.

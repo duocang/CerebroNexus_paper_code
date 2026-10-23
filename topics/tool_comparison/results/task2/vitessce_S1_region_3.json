@@ -1,0 +1,147 @@
+{
+ "tool": "Vitessce",
+ "set": "S1",
+ "set_definition": "louvain == 'B cells'",
+ "route": "region (lasso)",
+ "export_route": "Cell Sets > My Selections > Export hierarchy (to CSV file)",
+ "route_steps": [
+  "scatterplot shows UMAP",
+  "calibrate data->pixel on a screenshot of the plot canvas (fit quality recorded)",
+  "toolbar 'Select lasso'",
+  "lasso drag along the (margin-expanded) convex hull of the target cells",
+  "Cell Sets: three-dot menu of 'My Selections' > 'Export hierarchy (to CSV file)' (browser download)"
+ ],
+ "repeat": 3,
+ "status": "ok",
+ "calibration": {
+  "ax": 58.2967,
+  "bx": 540.422,
+  "ay": -58.3352,
+  "by": 594.1921,
+  "quality": 0.6115,
+  "y_flipped": false,
+  "dot_radius": 1.0,
+  "quality_dilated": 0.9947
+ },
+ "margin_px": 4.0,
+ "polygon_px": [
+  [
+   495,
+   131
+  ],
+  [
+   495,
+   130
+  ],
+  [
+   509,
+   88
+  ],
+  [
+   509,
+   87
+  ],
+  [
+   541,
+   60
+  ],
+  [
+   542,
+   59
+  ],
+  [
+   566,
+   52
+  ],
+  [
+   568,
+   52
+  ],
+  [
+   602,
+   54
+  ],
+  [
+   603,
+   54
+  ],
+  [
+   605,
+   55
+  ],
+  [
+   635,
+   78
+  ],
+  [
+   635,
+   79
+  ],
+  [
+   640,
+   89
+  ],
+  [
+   640,
+   91
+  ],
+  [
+   650,
+   145
+  ],
+  [
+   649,
+   146
+  ],
+  [
+   641,
+   180
+  ],
+  [
+   630,
+   212
+  ],
+  [
+   505,
+   518
+  ],
+  [
+   504,
+   520
+  ],
+  [
+   503,
+   521
+  ],
+  [
+   502,
+   521
+  ],
+  [
+   500,
+   521
+  ],
+  [
+   499,
+   520
+  ],
+  [
+   498,
+   518
+  ],
+  [
+   498,
+   517
+  ]
+ ],
+ "n_exported": 349,
+ "n_truth": 342,
+ "n_intersection": 341,
+ "jaccard": 0.9742857142857143,
+ "precision": 0.9770773638968482,
+ "recall": 0.9970760233918129,
+ "export_file": "results\\evidence\\task2\\vitessce_S1_region_3.csv",
+ "export_sets": [
+  "Selection 1"
+ ]
+}

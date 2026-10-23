@@ -1,5 +1,0 @@
-# Usage: isee_artifact.R <dataset> <route> <kind> <workaround> <outdir>  -> <outdir>/sce.rds (for the UI check)
-a <- commandArgs(TRUE)
-source("scripts/tools/common.R"); source("scripts/task1/rside.R")
-sce <- r_object(a[1], a[3], a[2]); if (a[4] == "1") sce <- plain_reduced_dims(sce)
-dir.create(a[5], recursive = TRUE, showWarnings = FALSE); saveRDS(sce, file.path(a[5], "sce.rds"), compress = FALSE)
