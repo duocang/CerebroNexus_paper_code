@@ -12,7 +12,7 @@ for sname, label in (("S1", "louvain == 'B cells'"), ("S2", None)):
 CN_NOTE = ("legend click only toggles the visibility of a group; no selection by attribute value exists in the Projection tab, so no cohort and no table of selected cells "
            "is produced (evidence: logs/task2/cerebronexus_attribute_legend_click.png)")
 sets = {r["set"]: r["set_definition"] for r in raw if r.get("set_definition")}
-# The legend-only 'route not found' row is added only for a set without CerebroNexus attribute rows (rows through the Group filters replace it, Deviations D14)
+# The legend-only 'route not found' row is added only for a set without CerebroNexus attribute rows (rows through the Group filters replace it, see TASK2_RERUN.md)
 for s in ("S1", "S2"):
     if not any(r["tool"] == "CerebroNexus" and r["set"] == s and (r.get("route") or "").startswith("attribute") for r in raw):
         extra.append(dict(tool="CerebroNexus", set=s, set_definition=sets.get(s), route="attribute (legend / group filter)", status="route_not_found", repeat="n/a",

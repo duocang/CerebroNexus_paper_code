@@ -1,0 +1,11 @@
+There were 12 warnings (use warnings() to see them)
+Loading required package: shiny
+Warning: package 'shiny' was built under R version 4.5.3
+
+Listening on http://127.0.0.1:8814
+Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.
+ℹ The deprecated feature was likely used in the iSEE package.
+  Please report the issue at <https://github.com/iSEE/iSEE/issues>.
+Warning in .coerce_type(v, f, max_levels = max_levels, df = df) :
+  covariate has too many unique values, coercing to numeric
