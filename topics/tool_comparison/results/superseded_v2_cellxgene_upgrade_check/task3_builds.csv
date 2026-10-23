@@ -1,5 +1,0 @@
-tier,config,build_idx,status,reason,wall_s,read_input_s,tool_step_s,peak_rss_bytes,exit_code,artifact_bytes,artifact_files,log,started_at,idle_cpu_pct_before,free_disk_gb_before
-10000,cellxgene,1,n/a,reads the input file directly,,,,,,168376200,1,,2026-10-22T18:45:18+02:00,17.9,982.6
-10000,cellxgene,2,n/a,reads the input file directly,,,,,,168376200,1,,2026-10-22T18:51:53+02:00,7.7,979.7
-10000,cellxgene,3,n/a,reads the input file directly,,,,,,168376200,1,,2026-10-22T18:58:02+02:00,11.8,979.7
-100000,cellxgene,1,n/a,reads the input file directly,,,,,,1615750760,1,,2026-10-22T19:09:05+02:00,9.2,979.7

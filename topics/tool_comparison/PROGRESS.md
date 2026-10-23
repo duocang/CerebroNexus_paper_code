@@ -60,3 +60,8 @@ Observations to keep in mind: Vitessce's server is a static file server, so its 
 - The first Task 2 run said CerebroNexus has no attribute route; that was wrong, only the legend had been tried. The Group filters (Projection > Settings) make filtered cells unselectable, so filter plus lasso selects by attribute (Deviation D14).
 - Run with `scripts/task2/t2_cerebronexus.py <set> 3 attribute`: S1 selects exactly the 342 B cells, Jaccard 1.0 (three runs). S2: the Group filters of the I2 CRB list only `seurat_clusters`, so the route is `route not found` for `CTaa`; the CRB was not rebuilt.
 - `results/task2_cerebronexus.csv`, `results/task2_summary.csv` and `results/SUMMARY.md` regenerated; the previous summaries are in `results/superseded_task2_attribute/`. The region rows did not change.
+
+## 2026-10-23: tidy
+
+- Removed the superseded runs from the tree (`logs/superseded_v1/`, `results/superseded_*`; 245 tracked files), the finished `TASK2_RERUN.md`, three unreferenced helpers (`probe_page.py`, `probe_page2.py`, `killport.sh`) and the empty `.gitkeep` files; they stay in history at `ad107fa` (Deviation D15). Cut the stale Windows work-order part out of `FIGURES.md`. No result, measured log or result-writing script changed; `results/PROTOCOL_body.sha256` still matches.
+- Kept as they are: `scripts/` layout (the frozen records cite these paths), `logs/screens/` (evidence required by PROTOCOL 7.5 and 9).

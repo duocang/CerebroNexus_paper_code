@@ -10,4 +10,3 @@ Nothing in this folder is a figure panel. The images here are 1× frames saved b
 | `task2/` | Task 2 selection and export logs and frames | yes, `results/task2_*` |
 | `task3/<tier>/` | Task 3 build and serve logs per run | yes, `results/task3_*` |
 | `screens/` | Task 3 accepted first-plot frame per start (`<tier>_<config>_b<build>_s<start>.png`) | evidence for `t_first_plot_s` |
-| `superseded_v1/` | runs replaced after Deviations D11-D13 | no |

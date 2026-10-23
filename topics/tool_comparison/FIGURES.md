@@ -1,6 +1,6 @@
-# Figures for the tool comparison: what to capture and how
+# Figures for the tool comparison: panels and captures
 
-This is the work order for the figure captures. It is separate from the measured study in `PROTOCOL.md`: nothing here is timed, nothing here changes `results/`, and none of the measured runs is repeated.
+The two screenshot panels of the figure and how they are captured. This is separate from the measured study in `PROTOCOL.md`: nothing here is timed, nothing here changes `results/`, and none of the measured runs is repeated.
 
 ## Why the existing screenshots are not used
 
@@ -17,11 +17,11 @@ Most of the comparison is drawn from the result tables in R, with no screenshot 
 
 | Panel | Source | Screenshot? | Where it runs |
 |---|---|---|---|
-| Capability matrix (Task 1) | `results/task1_summary.csv` | no, tile plot | R, any machine |
-| Selection accuracy (Task 2) | `results/task2_summary.csv` | no, dot plot of Jaccard per tool and route | R, any machine |
-| Scale (Task 3) | `results/task3_builds.csv`, `results/task3_starts.csv` | no, metric vs tier per tool | R, any machine |
-| **A. Same view in five tools** | I1 (pbmc3k) | **yes, 5 captures** | Windows host |
-| **B. Spatial view** | I3 (Visium H&E) | **yes, 2 captures** | Windows host |
+| Capability matrix (Task 1) | `results/task1_summary.csv` | no, tile plot | R |
+| Selection accuracy (Task 2) | `results/task2_summary.csv` | no, dot plot of Jaccard per tool and route | R |
+| Scale (Task 3) | `results/task3_builds.csv`, `results/task3_starts.csv` | no, metric vs tier per tool | R |
+| **A. Same view in five tools** | I1 (pbmc3k) | **yes, 5 captures** | `capture_figures.py` |
+| **B. Spatial view** | I3 (Visium H&E) | **yes, 2 captures** | `capture_figures.py` |
 
 Not captured: I2 (TCR) and I4 (duplicated names), whose differences are a yes/no in the capability matrix; the CerebroNexus TCR view is already in the interface figures. No E18 tier is captured. `cerebronexus_h5` draws the same plot as `cerebronexus_default` and is not captured separately; the caption says so.
 
@@ -37,7 +37,7 @@ Dataset I1, `data/pbmc3k.h5ad` (ShinyCell and iSEE read `inputs/I1_rewritten.h5a
 | A4 | cellxgene 1.3.0 | embedding `umap`; colour by the `louvain` category; dismiss the annotation dialog (Cancel) | `canvas.graph-canvas` |
 | A5 | Vitessce | the harness build (`vitessce_build.py`) already uses `X_umap` and `louvain` cell sets | `canvas#deckgl-overlay-A` |
 
-The selectors are the ones the harness used; the controls that switch embedding and colouring have not been scripted yet and must be found on the Windows host. Whatever had to be set beyond the tool's default (the iSEE `initial=`, any dropdown choice) is written into the capture record and goes into the caption.
+The selectors are the ones the harness used; the controls that switch embedding and colouring are set in `capture_figures.py`. Whatever had to be set beyond the tool's default (the iSEE `initial=`, any dropdown choice) is written into the capture record and goes into the caption.
 
 ### B. Spatial view (2 captures)
 
@@ -50,64 +50,19 @@ Dataset I3, `data/visium_hne_adata.h5ad`. Only the two tools that show spatial c
 
 Colour by the same column in both. If I3's cluster column has another name, use that name in both tools and record it.
 
-## How to run on the Windows host
+## How the captures are made
 
-### 1. Move the ignored folders after pulling
+`scripts/capture_figures.py` (run with `env/py`; `--list` prints the ids, `A3 A4` runs only those) builds each artifact once into `artifacts/fig_<id>/`, starts one server, captures the plot element and kills the process tree before the next id. It imports `harness.py` and changes nothing in `results/` or `logs/`; nothing is timed.
 
-The study ran in `comparison/`; the tracked files now live in `topics/tool_comparison/`. `git pull` moves the tracked files but leaves the ignored folders behind, and without `comparison/.gitignore` they show up as untracked. From the repository root in PowerShell:
+- Playwright with installed Chrome (`channel="chrome"`), headless, CSS viewport 1024 x 720, `device_scale_factor=3`, light colour scheme, reduced motion, locale `en-US`.
+- Element screenshot of the plot only; overlaid toolbars, tooltips and the cursor are hidden by an injected stylesheet and the selectors are recorded.
+- A frame is saved only when the page is idle (network idle, Shiny not busy) and two consecutive element screenshots are pixel-identical; it gives up after 120 s and records the failure.
+- Before saving, the embedding and the colouring column are read back from the page and must match; otherwise the id fails.
+- cellxgene is started with `cellxgene_env()` (upgrade check blocked, D12) and `--disable-annotations`.
 
-```powershell
-git pull
-Move-Item comparison\data, comparison\env, comparison\inputs, comparison\artifacts topics\tool_comparison\
-Remove-Item comparison   # must now be empty; stop and look if it is not
-```
+Output: `captures/<id>.png` (3x element screenshot, unchanged), `captures/<id>.json` (record: settings changed from the tool default, selector and box, hidden selectors, visible text sizes, values read back, Chrome version, SHA-256) and `captures/index.csv`.
 
-The R library and the Python interpreter work after the move. The `cellxgene.exe` launcher in `env\py\Scripts` keeps the old absolute path; regenerate it and check:
-
-```powershell
-cd topics\tool_comparison
-uv pip install --python env\py\Scripts\python.exe --reinstall-package cellxgene cellxgene==1.3.0
-env\py\Scripts\cellxgene.exe --help
-```
-
-`git status` must then show no untracked files under `topics/tool_comparison/`.
-
-### 2. Write the capture script
-
-`scripts/capture_figures.py`, run with `env\py\Scripts\python.exe`. It imports `harness.py` for `build_spec`, `serve_spec`, `R`, `P`, `PORTS`, `kill_tree`, `port_free` and the environment helpers (`r_env`, `cellxgene_env`), and does not change `harness.py`.
-
-```
-python scripts/capture_figures.py            # all seven captures
-python scripts/capture_figures.py A3 A4      # only these
-python scripts/capture_figures.py --list     # print ids and exit
-```
-
-Limits, so it captures only what is listed and only the part that is needed:
-
-- **Only the seven ids above.** No tier loop, no repeats, no timing columns. Each id builds its artifact once into `artifacts/fig_<id>/` (I1 and I3 builds take seconds), reusing it if it already exists, starts one server, captures, and kills the process tree before the next id. One tool runs at a time; nothing else heavy runs alongside.
-- **Same browser for all.** Playwright with installed Chrome (`channel="chrome"`), headless, CSS viewport 1024 × 720, `device_scale_factor=3`, `color_scheme="light"`, `reduced_motion="reduce"`, locale `en-US`. This is the setting of the interface figures. If a plot element is cut off at 1024 × 720, enlarge the height only, and record it.
-- **Only the plot element.** Capture with `locator(<element>).screenshot()`, never the full page. Before capturing, hide the parts that would sit inside the element's box and are not data: toolbars and buttons drawn over the canvas (cellxgene, Vitessce), tooltips, the mouse cursor (move the mouse to 0,0). Hide them with an injected stylesheet (`visibility: hidden`) and list the selectors in the record. Legends that are separate elements are not captured; colours are explained in the caption and the figure legend is drawn in R.
-- **A finished, idle page.** After the view is set: wait for the network to be idle, for Shiny to be idle where the tool is a Shiny app (`$('html').hasClass('shiny-busy')` false), then take element screenshots every 500 ms until two in a row are pixel-identical. Save that frame. Give up after 120 s and record the failure; do not save a partial frame as if it were finished.
-- **Check the view, not just the pixels.** Before saving, confirm from the page that the embedding is UMAP (or spatial) and the colouring column is the required one, by reading the selected value of the control or the visible label. Write what was read into the record; if it does not match, fail the id.
-- **cellxgene:** start with `cellxgene_env()` (upgrade check blocked, Deviations D12) and add `--disable-annotations` so the annotation dialog never opens; if it opens anyway, click Cancel and check it is gone.
-
-### 3. Output
-
-```
-captures/<id>.png    3x element screenshot, unchanged
-captures/<id>.json   capture record
-captures/index.csv   one row per id: id, tool, version, dataset, view, colour_by, status, png_sha256
-```
-
-Each `<id>.json` holds: id, tool and version, dataset and input file with its SHA-256, the settings that were changed from the tool's default and how, the element selector and its bounding box in CSS px, viewport and device scale factor, the hidden selectors, every visible DOM text box inside the element with its font size in CSS px, the values read back for embedding and colouring, the time of capture, the Chrome version, and the PNG size and SHA-256.
-
-`captures/` is committed (seven PNGs of a few MB in total). `artifacts/` stays ignored.
-
-### 4. Check by eye, then commit
-
-Open the seven PNGs. Each shows only the plot, the whole cloud, coloured by the right column, no dialog, no menu, no cursor. Commit `scripts/capture_figures.py` and `captures/`, and push.
-
-## Assembly (any machine, R)
+## Assembly (R)
 
 The figure is assembled in R from `captures/`, following `topics/interface_figures/README.md`: 170 mm wide, panels labelled a, b, … in vector text with the tool name in vector text above each panel, PNGs placed without resampling, and checked with the same rules (`check_figures.R`). Interface text inside a panel is not meant to be read; for DOM text the 6 pt rule applies as in the interface figures. Axis text that iSEE and ShinyCell draw into their plot image is part of the picture, is not checked, and the caption says the panels are shown for the view, not for their labels.
 
