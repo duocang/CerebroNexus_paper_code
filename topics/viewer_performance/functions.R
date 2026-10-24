@@ -70,7 +70,7 @@ plot_viewer_trend <- function(index_tsv, out_png, tier = "l1") {
   lab <- paste0(substr(idx$candidate_sha, 1L, 7L), "\n", substr(idx$utc, 1L, 8L))
   panels <- list(
     list("Data info, initial load (ms)", idx$cand_initial_visual_ms, idx$base_initial_visual_ms),
-    list("Pages, first visit (ms)", idx$cand_first_visual_ms, idx$base_first_visual_ms),
+    list("Pages, cold first visit (ms)", idx$cand_cold_visual_ms, idx$base_cold_visual_ms),
     list("Pages, repeat visit (ms)", idx$cand_repeat_visual_ms, idx$base_repeat_visual_ms),
     list("R process tree peak (MiB)", idx$cand_r_peak_mib, NULL),
     list("Chrome process tree peak (MiB)", idx$cand_chrome_peak_mib, NULL)

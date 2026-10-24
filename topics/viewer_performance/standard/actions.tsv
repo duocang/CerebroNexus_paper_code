@@ -2,3 +2,17 @@ action	page	what
 overview.colour_by	overview	Colour the projection by the next column in "Colour by"
 overview.zoom	overview	Zoom in once with the projection's zoom button
 geneExpression.gene	geneExpression	Show one gene: the alphabetically first gene the gene box offers that is not shown
+groups.group	groups	Switch "Group" to the next grouping variable
+markerGenes.table	markerGenes	Switch "Grouping variable" of the marker gene table to the next one
+mostExpressedGenes.group	mostExpressedGenes	Switch the grouping variable to the next one
+enrichedPathways.table	enrichedPathways	Switch "Grouping variable" of the pathway table to the next one
+trajectory.colour_by	trajectory	Colour the trajectory by the next column
+coordinated_views.colour_by	coordinated_views	Colour the linked views by the next categorical or continuous field (not an expression mode)
+overview.lasso	overview	Draw a lasso over the middle 40 % of the projection: selects cells and shows their plots and table
+immune_repertoire.tab	immune_repertoire	Open the next analysis tab
+spatial.section	spatial	Show the next FOV / section
+extra_material.content	extra_material	Show the next content (table or plot)
+hla_tcr_motifs.colour_by	hla_tcr_motifs	Colour the motif network by the next variable
+trekker.colour_by	trekker	Colour the Trekker view by the next mode
+loadData.switch	loadData	Switch to the second dataset in the dataset menu (the small example CRB)
+loadData.switch_back	loadData	Switch back to the session's own dataset (loads the large dataset again)

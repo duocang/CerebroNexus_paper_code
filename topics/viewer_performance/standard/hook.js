@@ -1,4 +1,4 @@
-// In-page hook, contract "blackbox-v3". It only watches the DOM, so it works on any CerebroNexus
+// In-page hook, contract "blackbox-v4". It only watches the DOM, so it works on any CerebroNexus
 // version. The KPI (visual_complete_ms) is not measured here: it comes from screenshots taken by
 // measure_session.R, because the DOM cannot tell when a plot has finished drawing. This hook
 // supplies the rest:
@@ -102,11 +102,14 @@
   // column, the alphabetically first gene that is not shown), and returned as `arg` so that a run
   // can tell when two revisions did different work.
   function selectizeOf(id) { var el = document.getElementById(id); return el && el.selectize ? el.selectize : null; }
-  function nextChoice(id) {
+  // The option after the current one (wrapping), skipping disabled options and those `skip` rejects.
+  function nextChoice(id, skip) {
     var s = selectizeOf(id), el = document.getElementById(id);
     if (!el) return null;
-    var values = s ? Object.keys(s.options).sort(function (a, b) { return (s.options[a].$order || 0) - (s.options[b].$order || 0); })
-                   : Array.prototype.map.call(el.options, function (o) { return o.value; });
+    var values = s ? Object.keys(s.options).filter(function (v) { var o = s.options[v]; return !o.disabled && !(skip && skip(o)); })
+                       .sort(function (a, b) { return (s.options[a].$order || 0) - (s.options[b].$order || 0); })
+                   : Array.prototype.filter.call(el.options, function (o) { return !o.disabled && !(skip && skip(o)); })
+                       .map(function (o) { return o.value; });
     var cur = s ? String(s.getValue()) : el.value;
     var i = values.indexOf(cur);
     return values.length > 1 ? values[(i + 1) % values.length] : null;
@@ -122,8 +125,88 @@
     for (var i = 0; i < c.length; i++) if (visible(c[i])) return c[i];
     return null;
   }
+  // An action that switches a select to its next option: page, select id, optional option filter.
+  function selectAction(page, id, skip) {
+    return {
+      page: page,
+      prep: function () { var v = nextChoice(id, skip); return v === null ? { available: false } : { ready: true, arg: v }; },
+      run: function (arg) { choose(id, arg); }
+    };
+  }
+  // Immune repertoire: the tab after the active one.
+  function nextTab() {
+    var tabs = Array.prototype.filter.call(document.querySelectorAll('#ir_tabs a[data-value]'), visible);
+    if (tabs.length < 2) return null;
+    var i = tabs.findIndex(function (a) { return a.parentElement.classList.contains('active') || a.classList.contains('active'); });
+    return tabs[(i + 1) % tabs.length];
+  }
+  // Overview: a lasso over the middle of the projection, drawn with the mouse events the cell view
+  // listens to (mousedown on the panel, mousemove and mouseup on the window).
+  function overviewCanvas() {
+    var pane = document.getElementById('shiny-tab-overview');
+    var cs = pane ? pane.querySelectorAll('.cv-pane .cv-canvas-wrap canvas, .cv-pane canvas') : [];
+    for (var i = 0; i < cs.length; i++) if (visible(cs[i]) && cs[i].width > 0) return cs[i];
+    return null;
+  }
+  function lasso(canvas) {
+    var r = canvas.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    var rx = r.width * 0.2, ry = r.height * 0.2;
+    function ev(type, x, y, target) {
+      (target || window).dispatchEvent(new MouseEvent(type, { bubbles: true, cancelable: true, view: window,
+        clientX: x, clientY: y, button: 0, buttons: type === 'mouseup' ? 0 : 1 }));
+    }
+    ev('mousedown', cx + rx, cy, canvas);
+    for (var k = 1; k <= 24; k++) {
+      var a = 2 * Math.PI * k / 24;
+      ev('mousemove', cx + rx * Math.cos(a), cy + ry * Math.sin(a));
+    }
+    ev('mouseup', cx + rx, cy);
+  }
+  // Dataset menu (only there when the server has more than one CRB): switch away to the second
+  // dataset, then back to the one the session started with.
+  var homeDataset = null;
   var geneQuery = 0, geneQueries = ['a', 'e', 'c'];
   cb.actions = {
+    'groups.group': selectAction('groups', 'groups_selected_group'),
+    'markerGenes.table': selectAction('markerGenes', 'marker_genes_selected_table'),
+    'mostExpressedGenes.group': selectAction('mostExpressedGenes', 'most_expressed_genes_selected_group'),
+    'enrichedPathways.table': selectAction('enrichedPathways', 'enriched_pathways_selected_table'),
+    'trajectory.colour_by': selectAction('trajectory', 'trajectory_point_color'),
+    'spatial.section': selectAction('spatial', 'spatial_projection_to_display'),
+    'extra_material.content': selectAction('extra_material', 'extra_material_selected_content'),
+    'hla_tcr_motifs.colour_by': selectAction('hla_tcr_motifs', 'hla_color_by'),
+    'trekker.colour_by': selectAction('trekker', 'trekker_mode'),
+    'coordinated_views.colour_by': selectAction('coordinated_views', 'cv-pick-color', function (o) { return o.optgroup === 'Expression'; }),
+    'immune_repertoire.tab': {
+      page: 'immune_repertoire',
+      prep: function () { var a = nextTab(); return a ? { ready: true, arg: a.getAttribute('data-value') } : { available: false }; },
+      run: function (arg) { document.querySelector('#ir_tabs a[data-value="' + arg + '"]').click(); }
+    },
+    'overview.lasso': {
+      page: 'overview',
+      prep: function () { return overviewCanvas() ? { ready: true, arg: 'middle 40%' } : { available: false }; },
+      run: function () { lasso(overviewCanvas()); }
+    },
+    'loadData.switch': {
+      page: 'loadData',
+      prep: function () {
+        var s = selectizeOf('crb_file_selector');
+        if (!s) return { available: false };
+        homeDataset = String(s.getValue());
+        var v = nextChoice('crb_file_selector');
+        return v === null ? { available: false } : { ready: true, arg: v };
+      },
+      run: function (arg) { choose('crb_file_selector', arg); }
+    },
+    'loadData.switch_back': {
+      page: 'loadData',
+      prep: function () {
+        var s = selectizeOf('crb_file_selector');
+        if (!s || homeDataset === null || String(s.getValue()) === homeDataset) return { available: false };
+        return { ready: true, arg: homeDataset };
+      },
+      run: function (arg) { choose('crb_file_selector', arg); }
+    },
     'overview.colour_by': {
       page: 'overview',
       prep: function () { var v = nextChoice('overview_projection_point_color'); return v === null ? { available: false } : { ready: true, arg: v }; },

@@ -8,9 +8,9 @@ policy <- lapply(policy, function(p) { p$min_pages <- 2L; p })
 fake_raw <- function(labels = c("base", "cand"), datasets = paste0("d", 1:8), rounds = 3L,
                      pages = c("overview", "groups", "about"), ready = 800, status = "ok") {
   g <- expand.grid(label = labels, dataset = datasets, round = seq_len(rounds), page = pages,
-                   visit = c("first", "repeat"), stringsAsFactors = FALSE)
+                   visit = c("cold", "repeat"), stringsAsFactors = FALSE)
   g$status <- status
-  g$visual_complete_ms <- ifelse(g$visit == "first", ready, 100)
+  g$visual_complete_ms <- ifelse(g$visit == "cold", ready, 100)
   g$visual_90_ms <- g$visual_complete_ms / 2
   g$settled_ms <- g$visual_complete_ms + 50
   g$loader_visible_ms <- 0
@@ -30,7 +30,7 @@ test_that("identical measurements pass", {
 
 test_that("a page that gets slower than the tolerance fails, a smaller change does not", {
   raw <- fake_raw()
-  slow <- raw$label == "cand" & raw$page == "overview" & raw$visit == "first"
+  slow <- raw$label == "cand" & raw$page == "overview" & raw$visit == "cold"
   raw$visual_complete_ms[slow] <- 800 + 600
   res <- judge(raw, policy$l1, "base", "cand")
   expect_identical(res$verdict, "FAIL")
@@ -39,20 +39,20 @@ test_that("a page that gets slower than the tolerance fails, a smaller change do
   expect_identical(failed$scope, "overview")
 
   raw <- fake_raw()
-  raw$visual_complete_ms[raw$label == "cand" & raw$page == "overview" & raw$visit == "first"] <- 800 + 90  # within 10% + 100 ms
+  raw$visual_complete_ms[raw$label == "cand" & raw$page == "overview" & raw$visit == "cold"] <- 800 + 90  # within 10% + 100 ms
   expect_identical(judge(raw, policy$l1, "base", "cand")$verdict, "PASS")
 })
 
 test_that("tolerance is wider at L0 than at L2", {
   raw <- fake_raw(rounds = 5L)
-  raw$visual_complete_ms[raw$label == "cand" & raw$page == "groups" & raw$visit == "first"] <- 800 + 500
+  raw$visual_complete_ms[raw$label == "cand" & raw$page == "groups" & raw$visit == "cold"] <- 800 + 500
   expect_identical(judge(raw, policy$l2, "base", "cand")$verdict, "FAIL")
   expect_identical(judge(raw[raw$round == 1, ], policy$l0, "base", "cand")$verdict, "PASS")
 })
 
 test_that("a page that finishes on the baseline but not on the candidate fails", {
   raw <- fake_raw()
-  raw$status[raw$label == "cand" & raw$dataset == "d3" & raw$page == "groups" & raw$visit == "first"] <- "stuck_busy"
+  raw$status[raw$label == "cand" & raw$dataset == "d3" & raw$page == "groups" & raw$visit == "cold"] <- "stuck_busy"
   res <- judge(raw, policy$l1, "base", "cand")
   expect_identical(res$verdict, "FAIL")
   expect_true("completion" %in% res$table$metric[res$table$verdict == "FAIL"])
@@ -70,11 +70,11 @@ test_that("a page the baseline cannot finish is skipped, not blamed on the candi
 
 test_that("a loading card on one page is only reported, on several pages it fails", {
   raw <- fake_raw()
-  raw$loader_visible_ms[raw$label == "cand" & raw$page == "about" & raw$visit == "first"] <- 400
+  raw$loader_visible_ms[raw$label == "cand" & raw$page == "about" & raw$visit == "cold"] <- 400
   one <- judge(raw, policy$l1, "base", "cand")
   expect_identical(one$verdict, "PASS")
   expect_true(any(one$table$verdict == "REPORT" & one$table$metric == "loader_visible_ms"))
-  raw$loader_visible_ms[raw$label == "cand" & raw$page == "groups" & raw$visit == "first"] <- 400
+  raw$loader_visible_ms[raw$label == "cand" & raw$page == "groups" & raw$visit == "cold"] <- 400
   res <- judge(raw, policy$l1, "base", "cand")
   expect_identical(res$verdict, "FAIL")
   expect_identical(unique(res$table$metric[res$table$verdict == "FAIL"]), "loader_visible_ms")
@@ -82,12 +82,12 @@ test_that("a loading card on one page is only reported, on several pages it fail
 
 test_that("crossing a page budget fails", {
   raw <- fake_raw(ready = 1950)
-  raw$visual_complete_ms[raw$label == "cand" & raw$visit == "first"] <- 2400  # +23%: inside the L0 latency tolerance, over the 2 s budget
+  raw$visual_complete_ms[raw$label == "cand" & raw$visit == "cold"] <- 2400  # +23%: inside the L0 latency tolerance, over the 2 s budget
   res <- judge(raw, policy$l0, "base", "cand")
   expect_true("budget" %in% res$table$metric[res$table$verdict == "FAIL"])
   expect_false("visual_complete_ms" %in% res$table$metric[res$table$verdict == "FAIL"])
   # right at the budget is noise, not a crossing
-  raw$visual_complete_ms[raw$label == "cand" & raw$visit == "first"] <- 2050
+  raw$visual_complete_ms[raw$label == "cand" & raw$visit == "cold"] <- 2050
   expect_identical(judge(raw, policy$l0, "base", "cand")$verdict, "PASS")
 })
 
@@ -112,11 +112,11 @@ test_that("every page is measured on exactly one dataset, on its large fixture w
   coverage <- read_coverage(file.path("..", "standard", "coverage.tsv"))
   demos <- c("example", "demo_full_tcr_bcr", "demo_spatial_visium", "demo_trekker", "demo_hla_tcr_dextramer")
   expect_false(anyDuplicated(coverage$page) > 0)
-  demo_plan <- build_plan(coverage, "demo", character(), demos)
+  demo_plan <- build_plan(coverage, character(), demos)
   expect_false(anyDuplicated(demo_plan$page) > 0)
   expect_true(all(!demo_plan$large))
   expect_identical(demo_plan$dataset[demo_plan$page == "spatial"], "demo_spatial_visium")
-  auto <- build_plan(coverage, "auto", c("mouse1m", "ren"), demos)
+  auto <- build_plan(coverage, c("mouse1m", "ren"), demos)
   expect_identical(auto$dataset[auto$page == "overview"], "mouse1m")                # the main large fixture
   expect_identical(auto$dataset[auto$page == "trajectory"], "mouse1m")
   expect_identical(auto$dataset[auto$page == "immune_repertoire"], "ren")           # only what the mouse brain lacks
@@ -125,25 +125,96 @@ test_that("every page is measured on exactly one dataset, on its large fixture w
   expect_true(all(auto$large[auto$dataset %in% c("mouse1m", "ren")]))
   expect_true(all(head(auto$large, sum(auto$large))))                               # large fixtures are scheduled first
   expect_false(anyDuplicated(auto$page) > 0)
-  none <- build_plan(coverage, "auto", "ren", demos)                                # mouse brain not built yet
+  none <- build_plan(coverage, "ren", demos)                                # mouse brain not built yet
   expect_identical(none$dataset[none$page == "overview"], "example")                # a page does not move to another large fixture
-  gone <- build_plan(coverage, "demo", character(), c("example"))
+  gone <- build_plan(coverage, character(), c("example"))
   expect_true("spatial" %in% attr(gone, "uncovered"))                               # a page with no dataset is reported
   expect_false("spatial" %in% gone$page)
 })
 
-test_that("fixtures are found through the environment or their default path", {
-  fx <- data.frame(name = c("a", "b"), env = c("PERF_TEST_A", "PERF_TEST_B"), default_path = c("x/a.crb", ""), what = "", stringsAsFactors = FALSE)
-  home <- tempfile(); dir.create(file.path(home, "x"), recursive = TRUE); file.create(file.path(home, "x", "a.crb"))
-  expect_identical(names(fixture_paths(fx, home)), "a")
-  other <- tempfile(fileext = ".crb"); file.create(other)
-  withr::with_envvar(c(PERF_TEST_B = other), expect_setequal(names(fixture_paths(fx, home)), c("a", "b")))
+test_that("budgets", {
+  expect_equal(page_budget_ms("trajectory", "cold"), 3000)
+  expect_equal(page_budget_ms("overview", "journey"), 2000)
+  expect_equal(page_budget_ms("overview", "repeat"), 500)
+  expect_equal(page_budget_ms("overview", "revisit_after_tour"), 500)
+  expect_true(is.na(page_budget_ms("loadData", "initial")))
+  expect_equal(budget_time_ms(c(800, 800, 800), c(2600, 300, NA)), c(2600, 800, 800))
 })
 
-test_that("budgets", {
-  expect_equal(page_budget_ms("trajectory", "first"), 3000)
-  expect_equal(page_budget_ms("overview", "first"), 2000)
-  expect_equal(page_budget_ms("overview", "repeat"), 500)
+## A CPU trace sampled every 150 ms: cumulative CPU seconds that grow at `rate` cores in each [from, to) ms.
+cpu_trace <- function(spans, until = 20000, step = 150) {
+  t <- seq(0, until, by = step)
+  rate <- vapply(t, function(x) sum(vapply(spans, function(s) if (x >= s[[1L]] && x < s[[2L]]) s[[3L]] else 0, 0)), 0)
+  list(t = t, cpu = cumsum(c(0, head(rate, -1L) * step / 1000)))
+}
+
+test_that("server busy time runs to the end of the work, across a short pause", {
+  # Overview on the mouse brain: R draws for 4 s, pauses 1.2 s while Chrome draws, then sends a large
+  # message for 6 s. The pause is part of the work; the quiet stretch after 11.2 s ends it.
+  x <- cpu_trace(list(c(1000, 5000, 1), c(6200, 11200, 1)))
+  b <- busy_ms(x$t, x$cpu, t_click = 1000, t_stop = 18000, thr = 0.05)
+  expect_gt(b, 9800); expect_lt(b, 10400)
+  # nothing to do on the server: quiet from the click
+  idle <- cpu_trace(list())
+  expect_equal(busy_ms(idle$t, idle$cpu, 1000, 8000, 0.05), 0)
+  # a single tick of a timer is not work
+  blip <- cpu_trace(list(c(1000, 2000, 1), c(4500, 4650, 0.07)))
+  expect_lt(busy_ms(blip$t, blip$cpu, 1000, 9000, 0.05), 1300)
+  # still busy when the harness stopped looking: unknown, not short
+  long <- cpu_trace(list(c(1000, 20000, 1)))
+  expect_true(is.na(busy_ms(long$t, long$cpu, 1000, 15000, 0.05)))
+})
+
+test_that("quiet needs every tree below its threshold", {
+  r <- cpu_trace(list(c(0, 2000, 1)))
+  chrome <- cpu_trace(list(c(0, 5000, 2), c(5000, 20000, 0.15)))   # idle Chrome still uses a little
+  q <- quiet_from(r$t, cbind(r$cpu, chrome$cpu), c(0.05, 0.25))
+  expect_gt(q, 4500); expect_lt(q, 5200)                            # Chrome was the last to finish
+  expect_true(is.na(quiet_from(r$t[r$t < 900], cbind(r$cpu, chrome$cpu)[r$t < 900, ], c(0.05, 0.25))))  # no full window yet
+})
+
+test_that("a page whose server keeps working past the budget is over it, though it looks done", {
+  raw <- fake_raw(ready = 800)
+  raw$server_busy_ms <- 900
+  raw$server_busy_ms[raw$label == "cand" & raw$page == "overview" & raw$visit == "cold"] <- 6000
+  res <- judge(raw, policy$l1, "base", "cand")
+  expect_identical(res$verdict, "FAIL")
+  f <- res$table[res$table$verdict == "FAIL", ]
+  expect_identical(f$metric, "budget")
+  expect_match(f$note, "server_busy_ms")
+  expect_true(any(res$table$metric == "over_budget" & res$table$scope == "overview"))
+  expect_equal(res$pages$cand_busy_ms[res$pages$page == "overview" & res$pages$visit == "cold"], 6000)
+  # the same server time on both revisions is reported, not a regression
+  raw$server_busy_ms[raw$label == "base" & raw$page == "overview" & raw$visit == "cold"] <- 6000
+  res <- judge(raw, policy$l1, "base", "cand")
+  expect_identical(res$verdict, "PASS")
+  expect_match(res$table$note[res$table$metric == "over_budget"][[1L]], "server_busy_ms")
+})
+
+test_that("the journey order is reported, and the summary shows busy, trail and the largest message", {
+  raw <- fake_raw(datasets = "mouse1m", rounds = 3L)
+  raw$server_busy_ms <- 900; raw$trail_ms <- 100; raw$ws_max_msg_bytes <- 29e6
+  j <- raw[raw$visit == "cold", ]; j$visit <- "journey"
+  j$seq <- match(j$page, c("overview", "groups", "about")) + 1L
+  raw$seq <- NA_integer_
+  raw <- rbind(raw, j)
+  res <- judge(raw, policy$l1, "base", "cand")
+  expect_identical(res$journey$order, "overview -> groups -> about")
+  path <- tempfile(fileext = ".md")
+  info <- list(run_id = "r", tier = "l1", candidate_ref = "a", candidate_sha = "a", baseline_ref = "b", baseline_sha = "b",
+               rounds = 3, datasets = "mouse1m", host = "h", os = "o", r_version = "4.6.1", chrome = "c")
+  write_summary(path, info, res)
+  text <- paste(readLines(path), collapse = "\n")
+  expect_match(text, "Journey order")
+  expect_match(text, "mouse1m: overview -> groups -> about", fixed = TRUE)
+  expect_match(text, "busy cand")
+  expect_match(text, "| 29.0 |", fixed = TRUE)
+  solo <- record_only(raw[raw$label == "cand", ], policy$l1, "cand")
+  out <- tempfile(fileext = ".md")
+  write_solo_summary(out, c(info, list(candidate_ref = "master")), solo)
+  stext <- paste(readLines(out), collapse = "\n")
+  expect_match(stext, "Journey order")
+  expect_match(stext, "| busy | trail | ws max MB |", fixed = TRUE)
 })
 
 test_that("a planned page that the baseline measured and the candidate did not is a failure", {
@@ -172,7 +243,7 @@ test_that("INDEX rows are appended in a fixed column order and newest SHA is fou
 
 test_that("summary names failures and the evidence problems", {
   raw <- fake_raw()
-  raw$visual_complete_ms[raw$label == "cand" & raw$page == "overview" & raw$visit == "first"] <- 2000
+  raw$visual_complete_ms[raw$label == "cand" & raw$page == "overview" & raw$visit == "cold"] <- 2000
   res <- judge(raw, policy$l1, "base", "cand", canary_ratio = 1.5)
   path <- tempfile(fileext = ".md")
   info <- list(run_id = "r", tier = "l1", candidate_ref = "pr", candidate_sha = "aaa", baseline_ref = "master", baseline_sha = "bbb",
@@ -217,7 +288,7 @@ test_that("actions join the plan on the dataset of their page", {
   coverage <- read_coverage(file.path("..", "standard", "coverage.tsv"))
   actions <- read_actions(file.path("..", "standard", "actions.tsv"))
   demos <- c("example", "demo_full_tcr_bcr", "demo_spatial_visium", "demo_trekker", "demo_hla_tcr_dextramer")
-  plan <- add_actions(build_plan(coverage, "auto", "mouse1m", demos), actions)
+  plan <- add_actions(build_plan(coverage, "mouse1m", demos), actions)
   expect_identical(plan$dataset[plan$page == "overview.colour_by"], "mouse1m")
   expect_identical(plan$dataset[plan$page == "geneExpression.gene"], "mouse1m")
   expect_false(anyDuplicated(plan$page) > 0)
@@ -229,7 +300,7 @@ test_that("actions join the plan on the dataset of their page", {
 
 fake_actions <- function(arg_cand = "Gad1", status_cand = "ok") {
   raw <- fake_raw()
-  a <- unique(raw[raw$page == "overview" & raw$visit == "first", ])
+  a <- unique(raw[raw$page == "overview" & raw$visit == "cold", ])
   a$page <- "geneExpression.gene"; a$visit <- "action"; a$arg <- "Gad1"; a$visual_complete_ms <- 400
   a$arg[a$label == "cand"] <- arg_cand; a$status[a$label == "cand"] <- status_cand
   raw$arg <- NA_character_
@@ -275,4 +346,26 @@ test_that("server steps are reported with their change and a note when results d
                rounds = 3, datasets = "example", host = "h", os = "o", r_version = "4.6.1", chrome = "c")
   write_summary(path, info, res)
   expect_match(paste(readLines(path), collapse = "\n"), "Server steps")
+})
+
+test_that("a solo run records one revision's times without a verdict", {
+  raw <- fake_raw(labels = "cand", datasets = "d1", rounds = 5L, ready = 2500)
+  res <- record_only(raw, policy$l2, "cand")
+  expect_identical(res$invalid, character())
+  expect_identical(verdict_exit_code("RECORDED"), 0L)
+  expect_identical(res$verdict, "RECORDED")
+  first <- res$pages[res$pages$visit == "cold", ]
+  expect_identical(nrow(first), 3L)
+  expect_equal(first$visual_ms, rep(2500, 3))
+  expect_equal(first$budget_ms, rep(2000, 3))
+  expect_equal(res$memory$r_peak_mib, 1500)
+  out <- tempfile(fileext = ".md")
+  write_solo_summary(out, list(run_id = "x", tier = "l2", candidate_ref = "master", candidate_sha = "abc", rounds = 5,
+                               datasets = "d1", host = "h", os = "o", r_version = "r", chrome = "c"), res)
+  expect_true(any(grepl("**over**", readLines(out), fixed = TRUE)))
+})
+
+test_that("a solo run with too few rounds is invalid", {
+  res <- record_only(fake_raw(labels = "cand", rounds = 2L), policy$l2, "cand")
+  expect_identical(res$verdict, "INVALID")
 })

@@ -69,12 +69,22 @@ if (length(genes) >= 12L) {
 viewer <- file.path(opt$src, "inst", "viewer")
 bundle_file <- file.path(viewer, "coordinated_views", "bundle.R")
 env <- new.env(parent = asNamespace("CerebroNexus"))
-if (file.exists(bundle_file)) {
-  ok <- tryCatch({
-    for (f in c(file.path(viewer, "utility_functions.R"), bundle_file)) if (file.exists(f)) sys.source(f, envir = env)
-    TRUE
-  }, error = function(e) { message("  bundle helpers did not load: ", conditionMessage(e)); FALSE })
+# The bundle code calls helpers from all over inst/viewer. Load every top-level definition there (functions
+# and constants), but nothing that touches a Shiny session, so no file layout has to be known.
+shiny_words <- c("input", "output", "session", "observe", "observeEvent", "reactive", "eventReactive", "renderUI")
+viewer_definitions <- function(dir) {
+  for (f in list.files(dir, "[.]R$", recursive = TRUE, full.names = TRUE)) {
+    exprs <- tryCatch(parse(f, keep.source = FALSE), error = function(e) expression())
+    for (e in exprs) {
+      if (!is.call(e) || !is.name(e[[1L]]) || !as.character(e[[1L]]) %in% c("<-", "=") || !is.name(e[[2L]])) next
+      is_function <- is.call(e[[3L]]) && identical(e[[3L]][[1L]], as.name("function"))
+      if (is_function || !any(shiny_words %in% all.names(e[[3L]]))) {
+        try(eval(e, env), silent = TRUE)
+      }
+    }
+  }
 }
+ok <- file.exists(bundle_file) && is.null(viewer_definitions(viewer))
 if (file.exists(bundle_file) && isTRUE(ok) && is.function(env$cv_build_bundle)) {
   bundle <- step("linked_bundle_build", function() env$cv_build_bundle(obj), hash = FALSE)
   if (!is.null(bundle)) {

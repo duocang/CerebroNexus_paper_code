@@ -1,4 +1,4 @@
-tier	rounds	fixtures	min_pages	latency_rel	latency_floor_ms	loader_floor_ms	loader_min_pages	mem_rel	mem_floor_mib	mem_gate	canary_max_ratio	calibrated_by
-l0	1	demo	14	0.30	300	250	2	0.25	128	0	1.50	-
-l1	3	auto	14	0.20	300	300	2	0.10	128	0	1.30	-
-l2	5	auto	14	0.15	300	250	2	0.10	128	1	1.20	-
+tier	rounds	min_pages	latency_rel	latency_floor_ms	loader_floor_ms	loader_min_pages	mem_rel	mem_floor_mib	mem_gate	canary_max_ratio	calibrated_by
+l0	1	14	0.30	300	250	2	0.25	128	0	1.50	-
+l1	3	14	0.20	300	300	2	0.10	128	0	1.30	-
+l2	5	14	0.15	300	250	2	0.10	128	1	1.20	-
