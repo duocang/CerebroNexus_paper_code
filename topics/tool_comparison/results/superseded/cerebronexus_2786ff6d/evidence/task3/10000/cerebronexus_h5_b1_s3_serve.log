@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------##
+## Launching CerebroNexus
+##---------------------------------------------------------------------------##
+Loading required package: shiny
+
+Listening on http://127.0.0.1:8812
+[2026-10-26 03:07:02.601274] CRB cache hit: cerebro_e18_10000.crb
+[2026-10-26 03:07:02.636258] Data loaded; expression backend will attach on first use.

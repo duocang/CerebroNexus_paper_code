@@ -14,7 +14,7 @@ Figures (R, ggplot2, Genome Biology rules; `functions.R` and `targets.R`): `figu
 ## Layout
 
 ```
-PROTOCOL.md     protocol of round 2 (frozen; Deviations D1-D5 at the end)
+PROTOCOL.md     protocol of round 2 (frozen; Deviations D1-D6 at the end)
 PROGRESS.md     run diary
 FIGURES.md      the two screenshot panels and how scripts/report/capture_figures.py makes them
 functions.R     plotting functions of the figures

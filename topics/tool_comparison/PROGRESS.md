@@ -67,3 +67,10 @@ Correction (same day): the whole-file hash above is that of the PROTOCOL.md as f
 ## 2026-10-26, merged to main
 
 - The round-1 archive was removed from the tree at the owner's request (Deviation D5); the new results and `figures/` are the ones kept. `FIGURES.md` moved to the folder top, `capture_figures.py` writes to `figures/captures/`, `README.md` rewritten for round 2.
+
+## 2026-10-26, CerebroNexus re-run with the H5 write optimisation (Deviation D6)
+
+- New pin `c9bc0a0d` (`tmp/应急-优化`: H5 sidecar written with rhdf5 slabs instead of `writeTENxMatrix`). The new 10,000-cell `.h5` equals the old one in every dataset, type, chunk, filter and value. Both CerebroNexus configurations re-run on all three tiers (3 builds x 3 starts, 54 starts, all `ok`); the other four tools, Task 1 and Task 2 were not repeated. The old rows (`2786ff6d`) are in `results/superseded/cerebronexus_2786ff6d/`.
+- A first launch of the re-run started two runners at once (my mistake; the process check I used to wait did not see the second one); the starts of that attempt failed or were `not_run`; stopped, moved to `results/superseded/cerebronexus_c9bc0a0d_aborted_two_runners/`, and the tier run again with one runner.
+- Median at 500,000 cells: H5 build 876 s -> 176 s (5.0x), 100,000 cells 73 s -> 35 s; embedded build 165 s -> 183 s (unchanged within noise); ready 3.2 s and 20.6 -> 21.3 s; first plot 1.95 -> 2.15 s (H5) and 2.54 -> 2.81 s (embedded), 0.2-0.5 s longer than in the earlier runs for reasons not looked for (the change does not touch the Viewer). Idle CPU before the new starts: median 5.1%, maximum 8.4%.
+- `figures/fig-tool-comparison-start.pdf|png` redrawn; `figures/fig-tool-comparison.pdf` could not be redrawn because the PDF is open in a viewer (file locked): it still shows the numbers before D6 until it is redrawn.

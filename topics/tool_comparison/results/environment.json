@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-10-26T01:57:00+01:00",
+  "recorded_at": "2026-10-26T13:36:46+01:00",
   "host": {
     "cpu": "12th Gen Intel(R) Core(TM) i9-12900K",
     "physical_cores": 16,
@@ -7,7 +7,7 @@
     "ram_gb": 127.7,
     "os": "Microsoft Windows 11 Pro 10.0.26300",
     "power_plan": "电源方案 GUID: 4e8b97b5-0b7d-455c-8253-cbf4409f3c98  (卓越性能)",
-    "disk_free_gb": 884.9,
+    "disk_free_gb": 858.1,
     "wsl": false
   },
   "r": {
@@ -84,10 +84,10 @@
   "tools": {
     "CerebroNexus": {
       "version": "6.0.0",
-      "branch": "tmp/应急 (Builder 6.0.0 merged into perf/viewer-page-open)",
-      "commit": "2786ff6d09a53f54e25bb1affbc6ed58aac70b43",
-      "source_tarball": "env/src/CerebroNexus-tmp-emergency-2786ff6d.tar.gz",
-      "tarball_sha256": "26094e6ea1c6169c7c866eeeb7ed37c288321c82b48e21c43933190e69ad1f80"
+      "branch": "tmp/应急-优化 (tmp/应急 plus the H5 sidecar write optimisation)",
+      "commit": "c9bc0a0d5eee005e8e581d549f464ec73031ece7",
+      "source_tarball": "env/src/CerebroNexus-tmp-emergency-opt-c9bc0a0d.tar.gz",
+      "tarball_sha256": "afae9e6a4628f5176af57c83d6fbd54af0d795ec655ec4bf77c3ccdfb3b3b66c"
     },
     "ShinyCell": {
       "version": "2.1.0",

@@ -14,7 +14,7 @@ repos <- BiocManager::repositories()
 db <- available.packages(repos = repos, type = "binary")
 tmp <- tempfile()
 dir.create(tmp)
-untar("env/src/CerebroNexus-tmp-emergency-2786ff6d.tar.gz", exdir = tmp)
+untar("env/src/CerebroNexus-tmp-emergency-opt-c9bc0a0d.tar.gz", exdir = tmp)
 untar("env/src/ShinyCell-5c61db78.tar.gz", exdir = tmp)
 hard <- function(path) {
   d <- read.dcf(path, fields = c("Depends", "Imports"))

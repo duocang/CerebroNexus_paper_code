@@ -15,7 +15,7 @@ from harness import HERE
 
 SEED = 20261026
 TIERS = [10000, 100000, 500000]
-CONFIGS = harness.TOOLS_ORDER                       # cerebronexus_default, cerebronexus_h5, shinycell, isee, cellxgene, vitessce
+CONFIGS = [c for c in harness.TOOLS_ORDER if c in os.environ.get("TASK3_CONFIGS", ",".join(harness.TOOLS_ORDER)).split(",")]   # all six; TASK3_CONFIGS=a,b limits a re-run (Deviation D6)
 ROUNDS, STARTS = 3, 3
 RES = os.path.join(HERE, "results", "task3")
 BUILDS_CSV = os.path.join(RES, "task3_builds.csv")

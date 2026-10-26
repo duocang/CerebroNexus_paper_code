@@ -3,53 +3,53 @@ tier,config,build_idx,status,reason,wall_s,read_input_s,tool_step_s,peak_rss_byt
 10000,shinycell,1,ok,,21.379,5.25,11.51,1586253824,0,95481646,7,results\evidence\task3\10000\shinycell_b1_build.log,2026-10-26T03:03:00+01:00,2.4,888.7
 10000,isee,1,ok,,8.128,4.58,0.24,1494867968,0,251084315,1,results\evidence\task3\10000\isee_b1_build.log,2026-10-26T03:04:04+01:00,2.9,888.7
 10000,cellxgene,1,n/a,reads the input file directly,,,,,,168376200,1,,2026-10-26T03:05:20+01:00,2.5,888.7
-10000,cerebronexus_h5,1,ok,,12.547,,,1859809280,0,250848705,2,results\evidence\task3\10000\cerebronexus_h5_b1_build.log,2026-10-26T03:06:10+01:00,2.2,888.7
-10000,cerebronexus_default,1,ok,,10.149,,,1756471296,0,44226806,1,results\evidence\task3\10000\cerebronexus_default_b1_build.log,2026-10-26T03:07:06+01:00,5.3,888.7
 10000,isee,2,ok,,8.39,4.73,0.25,1494237184,0,251084315,1,results\evidence\task3\10000\isee_b2_build.log,2026-10-26T03:08:01+01:00,5.5,888.7
 10000,shinycell,2,ok,,22.893,5.45,12.47,1589071872,0,95481646,7,results\evidence\task3\10000\shinycell_b2_build.log,2026-10-26T03:09:20+01:00,36.4,888.7
-10000,cerebronexus_h5,2,ok,,12.82,,,1850642432,0,250848705,2,results\evidence\task3\10000\cerebronexus_h5_b2_build.log,2026-10-26T03:10:25+01:00,9.2,888.7
 10000,vitessce,2,ok,,2.814,0.13,0.9,481423360,0,87169737,177,results\evidence\task3\10000\vitessce_b2_build.log,2026-10-26T03:11:22+01:00,9.4,888.7
-10000,cerebronexus_default,2,ok,,10.175,,,1765957632,0,44226806,1,results\evidence\task3\10000\cerebronexus_default_b2_build.log,2026-10-26T03:12:01+01:00,7.2,888.7
 10000,cellxgene,2,n/a,reads the input file directly,,,,,,168376200,1,,2026-10-26T03:12:56+01:00,3.8,888.7
-10000,cerebronexus_default,3,ok,,9.92,,,1756520448,0,44226806,1,results\evidence\task3\10000\cerebronexus_default_b3_build.log,2026-10-26T03:13:48+01:00,3.1,894.6
 10000,isee,3,ok,,8.148,4.57,0.24,1494315008,0,251084315,1,results\evidence\task3\10000\isee_b3_build.log,2026-10-26T03:14:44+01:00,2.2,894.6
 10000,cellxgene,3,n/a,reads the input file directly,,,,,,168376200,1,,2026-10-26T03:16:01+01:00,5.9,894.6
-10000,cerebronexus_h5,3,ok,,12.293,,,1860046848,0,250848705,2,results\evidence\task3\10000\cerebronexus_h5_b3_build.log,2026-10-26T03:16:51+01:00,2.2,894.6
 10000,vitessce,3,ok,,2.556,0.13,0.83,481632256,0,87169737,177,results\evidence\task3\10000\vitessce_b3_build.log,2026-10-26T03:17:46+01:00,3.6,894.6
 10000,shinycell,3,ok,,21.083,5.1,11.46,1567420416,0,95481646,7,results\evidence\task3\10000\shinycell_b3_build.log,2026-10-26T03:18:24+01:00,5.7,894.6
-100000,cerebronexus_h5,1,ok,,71.635,,,11049091072,0,2388004025,2,results\evidence\task3\100000\cerebronexus_h5_b1_build.log,2026-10-26T03:19:27+01:00,3.5,894.6
 100000,vitessce,1,ok,,8.529,0.9,5.85,3359952896,0,844536021,1079,results\evidence\task3\100000\vitessce_b1_build.log,2026-10-26T03:21:23+01:00,2.7,894.6
-100000,cerebronexus_default,1,ok,,28.074,,,11011481600,0,382982152,1,results\evidence\task3\100000\cerebronexus_default_b1_build.log,2026-10-26T03:22:08+01:00,3.2,894.6
 100000,cellxgene,1,n/a,reads the input file directly,,,,,,1615750760,1,,2026-10-26T03:23:30+01:00,4.1,894.6
 100000,shinycell,1,ok,,131.645,20.21,106.56,8049774592,0,885250287,7,results\evidence\task3\100000\shinycell_b1_build.log,2026-10-26T03:24:22+01:00,3.1,894.6
 100000,isee,1,ok,,25.696,19.99,2.23,8056676352,0,2431480103,1,results\evidence\task3\100000\isee_b1_build.log,2026-10-26T03:27:19+01:00,3.0,894.6
 100000,vitessce,2,ok,,8.749,0.9,6.1,3357478912,0,844536021,1079,results\evidence\task3\100000\vitessce_b2_build.log,2026-10-26T03:29:14+01:00,2.3,894.6
-100000,cerebronexus_default,2,ok,,28.224,,,11011248128,0,382982152,1,results\evidence\task3\100000\cerebronexus_default_b2_build.log,2026-10-26T03:30:00+01:00,4.7,894.6
 100000,cellxgene,2,n/a,reads the input file directly,,,,,,1615750760,1,,2026-10-26T03:31:22+01:00,3.0,894.6
-100000,cerebronexus_h5,2,ok,,76.623,,,11049156608,0,2388004025,2,results\evidence\task3\100000\cerebronexus_h5_b2_build.log,2026-10-26T03:32:15+01:00,2.1,894.6
 100000,isee,2,ok,,27.521,21.56,2.23,8056725504,0,2431480103,1,results\evidence\task3\100000\isee_b2_build.log,2026-10-26T03:34:18+01:00,10.3,894.6
 100000,shinycell,2,ok,,139.237,21.76,112.49,8048807936,0,885250287,7,results\evidence\task3\100000\shinycell_b2_build.log,2026-10-26T03:36:17+01:00,11.5,894.0
 100000,cellxgene,3,n/a,reads the input file directly,,,,,,1615750760,1,,2026-10-26T03:39:22+01:00,8.1,894.7
-100000,cerebronexus_h5,3,ok,,73.289,,,11049119744,0,2388004025,2,results\evidence\task3\100000\cerebronexus_h5_b3_build.log,2026-10-26T03:40:16+01:00,7.2,894.7
-100000,cerebronexus_default,3,ok,,29.561,,,11011604480,0,382982152,1,results\evidence\task3\100000\cerebronexus_default_b3_build.log,2026-10-26T03:42:15+01:00,8.3,894.7
 100000,shinycell,3,ok,,141.454,22.2,114.19,8048484352,0,885250287,7,results\evidence\task3\100000\shinycell_b3_build.log,2026-10-26T03:43:40+01:00,9.0,894.7
 100000,vitessce,3,ok,,8.989,0.99,6.16,3359354880,0,844536021,1079,results\evidence\task3\100000\vitessce_b3_build.log,2026-10-26T03:46:47+01:00,7.0,894.7
 100000,isee,3,ok,,26.113,20.45,2.12,8056926208,0,2431480103,1,results\evidence\task3\100000\isee_b3_build.log,2026-10-26T03:47:34+01:00,7.6,894.7
 500000,vitessce,1,ok,,31.018,5.42,23.35,16630165504,0,4313321106,2112,results\evidence\task3\500000\vitessce_b1_build.log,2026-10-26T03:49:31+01:00,7.2,894.7
-500000,cerebronexus_h5,1,ok,,876.086,,,53791674368,0,12270136883,11,results\evidence\task3\500000\cerebronexus_h5_b1_build.log,2026-10-26T03:50:49+01:00,7.5,894.7
-500000,cerebronexus_default,1,ok,,165.012,,,53737508864,0,1963414895,10,results\evidence\task3\500000\cerebronexus_default_b1_build.log,2026-10-26T04:06:12+01:00,3.3,894.7
 500000,cellxgene,1,n/a,reads the input file directly,,,,,,8297998840,1,,2026-10-26T04:10:36+01:00,3.3,894.6
 500000,shinycell,1,ok,,723.38,106.68,611.33,38352551936,0,4523650833,7,results\evidence\task3\500000\shinycell_b1_build.log,2026-10-26T04:11:41+01:00,2.8,894.6
 500000,isee,1,ok,,122.732,107.3,11.07,38337327104,0,12500545935,1,results\evidence\task3\500000\isee_b1_build.log,2026-10-26T04:24:42+01:00,6.1,894.6
-500000,cerebronexus_default,2,ok,,165.021,,,53737279488,0,1963414895,10,results\evidence\task3\500000\cerebronexus_default_b2_build.log,2026-10-26T04:29:46+01:00,2.2,894.6
 500000,vitessce,2,ok,,28.914,4.02,22.66,16638709760,0,4313321106,2112,results\evidence\task3\500000\vitessce_b2_build.log,2026-10-26T04:34:10+01:00,10.2,894.6
 500000,cellxgene,2,n/a,reads the input file directly,,,,,,8297998840,1,,2026-10-26T04:35:24+01:00,2.8,894.6
 500000,isee,2,ok,,122.485,107.2,10.95,38337142784,0,12500545935,1,results\evidence\task3\500000\isee_b2_build.log,2026-10-26T04:36:28+01:00,2.5,894.6
-500000,cerebronexus_h5,2,ok,,876.029,,,53792280576,0,12270136883,11,results\evidence\task3\500000\cerebronexus_h5_b2_build.log,2026-10-26T04:41:33+01:00,3.6,894.6
 500000,shinycell,2,ok,,724.36,107.81,610.94,38359187456,0,4523650833,7,results\evidence\task3\500000\shinycell_b2_build.log,2026-10-26T04:56:55+01:00,2.7,894.6
-500000,cerebronexus_default,3,ok,,165.292,,,53736919040,0,1963414895,10,results\evidence\task3\500000\cerebronexus_default_b3_build.log,2026-10-26T05:09:57+01:00,4.3,894.6
 500000,vitessce,3,ok,,29.054,4.04,22.84,16634806272,0,4313321106,2112,results\evidence\task3\500000\vitessce_b3_build.log,2026-10-26T05:14:22+01:00,2.6,894.6
-500000,cerebronexus_h5,3,ok,,876.747,,,53792010240,0,12270136883,11,results\evidence\task3\500000\cerebronexus_h5_b3_build.log,2026-10-26T05:15:35+01:00,3.0,894.6
 500000,shinycell,3,ok,,723.493,106.82,611.07,38358999040,0,4523650833,7,results\evidence\task3\500000\shinycell_b3_build.log,2026-10-26T05:30:58+01:00,2.4,894.6
 500000,isee,3,ok,,122.453,107.24,10.87,38337327104,0,12500545935,1,results\evidence\task3\500000\isee_b3_build.log,2026-10-26T05:44:00+01:00,3.6,894.6
 500000,cellxgene,3,n/a,reads the input file directly,,,,,,8297998840,1,,2026-10-26T05:49:05+01:00,2.6,894.6
+10000,cerebronexus_h5,1,ok,,12.022,,,2019418112,0,250848705,2,results\evidence\task3\10000\cerebronexus_h5_b1_build.log,2026-10-26T12:56:06+01:00,5.1,858.3
+10000,cerebronexus_default,1,ok,,10.649,,,1759514624,0,44226806,1,results\evidence\task3\10000\cerebronexus_default_b1_build.log,2026-10-26T12:57:04+01:00,4.6,858.3
+10000,cerebronexus_h5,2,ok,,11.784,,,1815990272,0,250848705,2,results\evidence\task3\10000\cerebronexus_h5_b2_build.log,2026-10-26T12:58:02+01:00,5.8,858.3
+10000,cerebronexus_default,2,ok,,10.508,,,1758605312,0,44226806,1,results\evidence\task3\10000\cerebronexus_default_b2_build.log,2026-10-26T12:59:00+01:00,4.1,858.3
+10000,cerebronexus_h5,3,ok,,11.835,,,1817141248,0,250848705,2,results\evidence\task3\10000\cerebronexus_h5_b3_build.log,2026-10-26T12:59:58+01:00,5.9,858.3
+10000,cerebronexus_default,3,ok,,10.542,,,1745784832,0,44226806,1,results\evidence\task3\10000\cerebronexus_default_b3_build.log,2026-10-26T13:00:55+01:00,5.3,858.3
+100000,cerebronexus_default,1,ok,,30.62,,,11010781184,0,382982152,1,results\evidence\task3\100000\cerebronexus_default_b1_build.log,2026-10-26T13:01:54+01:00,5.4,858.3
+100000,cerebronexus_h5,1,ok,,37.306,,,11048521728,0,2388004025,2,results\evidence\task3\100000\cerebronexus_h5_b1_build.log,2026-10-26T13:03:21+01:00,5.3,858.3
+100000,cerebronexus_default,2,ok,,30.536,,,11010867200,0,382982152,1,results\evidence\task3\100000\cerebronexus_default_b2_build.log,2026-10-26T13:04:45+01:00,5.4,858.3
+100000,cerebronexus_h5,2,ok,,34.828,,,11049787392,0,2388004025,2,results\evidence\task3\100000\cerebronexus_h5_b2_build.log,2026-10-26T13:06:13+01:00,4.8,858.3
+100000,cerebronexus_h5,3,ok,,35.171,,,11049570304,0,2388004025,2,results\evidence\task3\100000\cerebronexus_h5_b3_build.log,2026-10-26T13:07:35+01:00,4.4,858.3
+100000,cerebronexus_default,3,ok,,30.554,,,11010940928,0,382982152,1,results\evidence\task3\100000\cerebronexus_default_b3_build.log,2026-10-26T13:08:57+01:00,5.8,858.4
+500000,cerebronexus_h5,1,ok,,175.808,,,53792055296,0,12270136883,11,results\evidence\task3\500000\cerebronexus_h5_b1_build.log,2026-10-26T13:10:25+01:00,18.7,858.3
+500000,cerebronexus_default,1,ok,,183.144,,,53737340928,0,1963414895,10,results\evidence\task3\500000\cerebronexus_default_b1_build.log,2026-10-26T13:14:09+01:00,5.0,858.3
+500000,cerebronexus_default,2,ok,,182.724,,,53737422848,0,1963414895,10,results\evidence\task3\500000\cerebronexus_default_b2_build.log,2026-10-26T13:18:55+01:00,5.5,858.3
+500000,cerebronexus_h5,2,ok,,170.213,,,53792182272,0,12270136883,11,results\evidence\task3\500000\cerebronexus_h5_b2_build.log,2026-10-26T13:23:41+01:00,3.4,858.3
+500000,cerebronexus_default,3,ok,,181.571,,,53737414656,0,1963414895,10,results\evidence\task3\500000\cerebronexus_default_b3_build.log,2026-10-26T13:27:20+01:00,4.4,858.3
+500000,cerebronexus_h5,3,ok,,175.529,,,53792157696,0,12270136883,11,results\evidence\task3\500000\cerebronexus_h5_b3_build.log,2026-10-26T13:32:05+01:00,5.1,858.3

@@ -1,0 +1,15 @@
+tier,config,build_idx,status,reason,wall_s,read_input_s,tool_step_s,peak_rss_bytes,exit_code,artifact_bytes,artifact_files,log,started_at,idle_cpu_pct_before,free_disk_gb_before
+10000,cerebronexus_h5,1,error,000.crb [Error: Error processing e18_10000.h5ad: Refusing to replace an existing expression sidecar that is not owned by the published CRB: C:/Users/wangx/Projects/worktrees/paper-tool-comparison-r2/topics/tool_comparison/data/builds/t3/10000/cerebronexus_h5_b1/cerebro_e18_10000.h5 Execution halted ,13.875,,,1913110528,1,,,results\evidence\task3\10000\cerebronexus_h5_b1_build.log,2026-10-26T12:44:02+01:00,4.3,858.6
+10000,cerebronexus_h5,1,ok,,14.495,,,1914376192,0,250848705,2,results\evidence\task3\10000\cerebronexus_h5_b1_build.log,2026-10-26T12:44:02+01:00,4.3,858.6
+10000,cerebronexus_default,1,ok,,12.493,,,1759121408,0,44226806,1,results\evidence\task3\10000\cerebronexus_default_b1_build.log,2026-10-26T12:44:19+01:00,13.1,858.3
+10000,cerebronexus_default,1,ok,,12.487,,,1758412800,0,44226806,1,results\evidence\task3\10000\cerebronexus_default_b1_build.log,2026-10-26T12:44:19+01:00,10.9,858.3
+10000,cerebronexus_h5,2,ok,,12.546,,,1814933504,0,250848705,2,results\evidence\task3\10000\cerebronexus_h5_b2_build.log,2026-10-26T12:45:05+01:00,5.3,858.3
+10000,cerebronexus_default,2,ok,,11.17,,,1758863360,0,44226806,1,results\evidence\task3\10000\cerebronexus_default_b2_build.log,2026-10-26T12:46:06+01:00,5.5,858.3
+10000,cerebronexus_h5,3,ok,,12.378,,,1813929984,0,250848705,2,results\evidence\task3\10000\cerebronexus_h5_b3_build.log,2026-10-26T12:46:29+01:00,6.3,858.3
+10000,cerebronexus_default,3,ok,,11.116,,,1765105664,0,44226806,1,results\evidence\task3\10000\cerebronexus_default_b3_build.log,2026-10-26T12:47:28+01:00,5.5,858.3
+100000,cerebronexus_default,1,ok,,32.369,,,11011334144,0,382982152,1,results\evidence\task3\100000\cerebronexus_default_b1_build.log,2026-10-26T12:47:51+01:00,4.4,858.3
+100000,cerebronexus_h5,1,ok,,37.305,,,11049037824,0,2388004025,2,results\evidence\task3\100000\cerebronexus_h5_b1_build.log,2026-10-26T12:48:36+01:00,4.7,858.3
+100000,cerebronexus_default,2,ok,,32.185,,,11010637824,0,382982152,1,results\evidence\task3\100000\cerebronexus_default_b2_build.log,2026-10-26T12:50:01+01:00,7.1,858.1
+100000,cerebronexus_h5,2,ok,,37.229,,,11048943616,0,2388004025,2,results\evidence\task3\100000\cerebronexus_h5_b2_build.log,2026-10-26T12:50:45+01:00,18.4,858.1
+100000,cerebronexus_h5,3,ok,,37.124,,,11049234432,0,2388004025,2,results\evidence\task3\100000\cerebronexus_h5_b3_build.log,2026-10-26T12:52:10+01:00,4.4,858.1
+100000,cerebronexus_default,3,ok,,32.356,,,11010953216,0,382982152,1,results\evidence\task3\100000\cerebronexus_default_b3_build.log,2026-10-26T12:53:34+01:00,6.4,858.1

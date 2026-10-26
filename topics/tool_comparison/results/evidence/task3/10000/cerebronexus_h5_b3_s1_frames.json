@@ -1,1 +1,1 @@
-[["exc", "Locator.click: Timeout 400ms exceeded.\nCall log:\n  - waiting for get_by_text(\"Projection\", exact=True).first\n"], [1.576, 0.1543, 1290, 677, 0.134], [2.042, 0.1541, 1290, 677, 0.124]]
+[["exc", "Locator.click: Timeout 400ms exceeded.\nCall log:\n  - waiting for get_by_text(\"Projection\", exact=True).first\n"], [1.776, 0.1541, 1290, 677, 0.221], [2.287, 0.1541, 1290, 677, 0.165]]
