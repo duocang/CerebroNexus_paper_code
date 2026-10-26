@@ -1,0 +1,332 @@
+[
+ {
+  "tool": "cerebronexus_default",
+  "dataset": "I1",
+  "build_status": "ok",
+  "build_wall_s": 14.62348559999964,
+  "build_peak_rss_bytes": 1435570176,
+  "build_exit_code": 0,
+  "build_read_input": 3.24,
+  "build_seurat_object": 2.09,
+  "build_tool_step": 0.31,
+  "artifact_bytes": 21214278,
+  "start_status": "ok",
+  "start_t_ready_s": 3.801079199999549,
+  "start_plot_status": "ok",
+  "start_t_first_plot_s": 1.7493816000001061,
+  "start_frames": 3,
+  "start_ink_fraction": 0.056630416596954995,
+  "start_frame_series": [
+   [
+    "exc",
+    "Locator.click: Timeout 400ms exceeded.\nCall log:\n  - waiting for get_by_text(\"Projection\", exact=True).first\n"
+   ],
+   [
+    1.749,
+    0.0566,
+    1290,
+    695,
+    0.112
+   ],
+   [
+    2.404,
+    0.0566,
+    1290,
+    695,
+    0.11
+   ]
+  ],
+  "start_screenshot_s": 0.11025590000008378,
+  "start_elem_w": 1290,
+  "start_elem_h": 695,
+  "start_t_total_s": 5.550460799999655,
+  "start_peak_rss_bytes": 759300096,
+  "start_browser_peak_rss_bytes": 811548672
+ },
+ {
+  "tool": "cerebronexus_h5",
+  "dataset": "I1",
+  "build_status": "ok",
+  "build_wall_s": 15.715958300000239,
+  "build_peak_rss_bytes": 1468137472,
+  "build_exit_code": 0,
+  "build_read_input": 3.02,
+  "build_seurat_object": 2.06,
+  "build_tool_step": 1.98,
+  "artifact_bytes": 58467304,
+  "start_status": "ok",
+  "start_t_ready_s": 3.287503000000015,
+  "start_plot_status": "ok",
+  "start_t_first_plot_s": 2.208009800000127,
+  "start_frames": 3,
+  "start_ink_fraction": 0.056630416596954995,
+  "start_frame_series": [
+   [
+    "exc",
+    "Locator.click: Timeout 400ms exceeded.\nCall log:\n  - waiting for get_by_text(\"Projection\", exact=True).first\n"
+   ],
+   [
+    2.208,
+    0.0601,
+    1290,
+    695,
+    0.16
+   ],
+   [
+    2.67,
+    0.0566,
+    1290,
+    695,
+    0.113
+   ]
+  ],
+  "start_screenshot_s": 0.11301830000002155,
+  "start_elem_w": 1290,
+  "start_elem_h": 695,
+  "start_t_total_s": 5.495512800000142,
+  "start_peak_rss_bytes": 487428096,
+  "start_browser_peak_rss_bytes": 825384960
+ },
+ {
+  "tool": "shinycell",
+  "dataset": "I1",
+  "build_status": "ok",
+  "build_wall_s": 9.890461899999991,
+  "build_peak_rss_bytes": 1079181312,
+  "build_exit_code": 0,
+  "build_read_input": 3.11,
+  "build_tool_step": 1.09,
+  "artifact_bytes": 17373149,
+  "start_status": "ok",
+  "start_t_ready_s": 2.3295130999999856,
+  "start_plot_status": "ok",
+  "start_t_first_plot_s": 4.022054799999751,
+  "start_frames": 7,
+  "start_ink_fraction": 0.04656692144345524,
+  "start_frame_series": [
+   [
+    1.973,
+    0.0,
+    753,
+    601,
+    0.112
+   ],
+   [
+    2.378,
+    0.0,
+    753,
+    601,
+    0.081
+   ],
+   [
+    2.769,
+    0.0,
+    753,
+    601,
+    0.091
+   ],
+   [
+    3.226,
+    0.0,
+    753,
+    601,
+    0.118
+   ],
+   [
+    3.601,
+    0.0,
+    753,
+    601,
+    0.079
+   ],
+   [
+    4.022,
+    0.0466,
+    753,
+    601,
+    0.091
+   ],
+   [
+    4.427,
+    0.0466,
+    753,
+    601,
+    0.1
+   ]
+  ],
+  "start_screenshot_s": 0.1001298000001043,
+  "start_elem_w": 753,
+  "start_elem_h": 601,
+  "start_t_total_s": 6.351567899999736,
+  "start_peak_rss_bytes": 500166656,
+  "start_browser_peak_rss_bytes": 703217664
+ },
+ {
+  "tool": "isee",
+  "dataset": "I1",
+  "build_status": "ok",
+  "build_wall_s": 6.832858099999612,
+  "build_peak_rss_bytes": 907251712,
+  "build_exit_code": 0,
+  "build_read_input": 2.91,
+  "build_tool_step": 0.05,
+  "artifact_bytes": 42362171,
+  "start_status": "ok",
+  "start_t_ready_s": 6.473076300000685,
+  "start_plot_status": "ok",
+  "start_t_first_plot_s": 6.59284740000021,
+  "start_frames": 10,
+  "start_ink_fraction": 0.07251778656126483,
+  "start_frame_series": [
+   [
+    3.267,
+    0.0,
+    506,
+    500,
+    0.129
+   ],
+   [
+    3.659,
+    0.0,
+    506,
+    500,
+    0.107
+   ],
+   [
+    4.044,
+    0.0,
+    506,
+    500,
+    0.09
+   ],
+   [
+    4.45,
+    0.0,
+    506,
+    500,
+    0.092
+   ],
+   [
+    4.838,
+    0.0,
+    506,
+    500,
+    0.101
+   ],
+   [
+    5.212,
+    0.0,
+    506,
+    500,
+    0.091
+   ],
+   [
+    5.62,
+    0.0,
+    506,
+    500,
+    0.083
+   ],
+   [
+    6.042,
+    0.0,
+    506,
+    500,
+    0.119
+   ],
+   [
+    6.593,
+    0.0725,
+    506,
+    500,
+    0.125
+   ],
+   [
+    7.01,
+    0.0725,
+    506,
+    500,
+    0.094
+   ]
+  ],
+  "start_screenshot_s": 0.09418629999981931,
+  "start_elem_w": 506,
+  "start_elem_h": 500,
+  "start_t_total_s": 13.065923700000894,
+  "start_peak_rss_bytes": 1246097408,
+  "start_browser_peak_rss_bytes": 807669760
+ },
+ {
+  "tool": "cellxgene",
+  "dataset": "I1",
+  "build_status": "n/a",
+  "artifact_bytes": 24653425,
+  "start_status": "ok",
+  "start_t_ready_s": 8.005823299999975,
+  "start_plot_status": "ok",
+  "start_t_first_plot_s": 0.8148652999998376,
+  "start_frames": 2,
+  "start_ink_fraction": 0.05006221198156682,
+  "start_frame_series": [
+   [
+    0.815,
+    0.05,
+    868,
+    1000,
+    0.174
+   ],
+   [
+    1.275,
+    0.0501,
+    868,
+    1000,
+    0.1
+   ]
+  ],
+  "start_screenshot_s": 0.10011089999989053,
+  "start_elem_w": 868,
+  "start_elem_h": 1000,
+  "start_t_total_s": 8.820688599999812,
+  "start_peak_rss_bytes": 294174720,
+  "start_browser_peak_rss_bytes": 684802048
+ },
+ {
+  "tool": "vitessce",
+  "dataset": "I1",
+  "build_status": "ok",
+  "build_wall_s": 3.9414172000006147,
+  "build_peak_rss_bytes": 176271360,
+  "build_exit_code": 0,
+  "build_read_input": 0.2,
+  "build_tool_step": 0.59,
+  "artifact_bytes": 17599272,
+  "start_status": "ok",
+  "start_t_ready_s": 0.5876351999995677,
+  "start_plot_status": "ok",
+  "start_t_first_plot_s": 1.2659510000003138,
+  "start_frames": 2,
+  "start_ink_fraction": 0.013613534232090933,
+  "start_frame_series": [
+   [
+    1.266,
+    0.0136,
+    776,
+    936,
+    0.449
+   ],
+   [
+    1.698,
+    0.0136,
+    776,
+    936,
+    0.086
+   ]
+  ],
+  "start_screenshot_s": 0.08551460000035149,
+  "start_elem_w": 776,
+  "start_elem_h": 936,
+  "start_t_total_s": 1.8535861999998815,
+  "start_peak_rss_bytes": 28041216,
+  "start_browser_peak_rss_bytes": 782925824
+ }
+]

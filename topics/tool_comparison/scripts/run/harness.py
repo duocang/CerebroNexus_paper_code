@@ -12,7 +12,7 @@ import requests
 from PIL import Image
 
 HERE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-RSCRIPT = r"C:\Program Files\R\R-4.5.0\bin\Rscript.exe"
+RSCRIPT = "C:/R/R-4.6.1/bin/Rscript.exe"
 PY = sys.executable
 CONFIG = json.load(open(os.path.join(HERE, "scripts", "run", "harness_config.json"))) if os.path.exists(os.path.join(HERE, "scripts", "run", "harness_config.json")) else {}
 
@@ -186,7 +186,7 @@ def ink_fraction(png):
 
 
 class BrowserRun:
-    """Browser, context and page are created BEFORE the server is spawned, so their start-up is not timed."""
+    """Browser, context and page are created AFTER the server answered its first HTTP 200 (round 2): browser start-up is in neither t_ready nor t_first_plot, and Chrome does not compete with the server for the CPU while it starts."""
 
     def __init__(self):
         from playwright.sync_api import sync_playwright
@@ -258,7 +258,7 @@ def run_start(serve_spec, port, tool_cfg, log_path, shot_path):
     if not port_free(port):
         return dict(status="error", error=f"port {port} not free")
     res = dict(status="ok")
-    br = BrowserRun()
+    br = None
     try:
         t0 = time.perf_counter()
         with open(log_path, "w", encoding="utf-8", errors="replace") as lf:
@@ -282,6 +282,7 @@ def run_start(serve_spec, port, tool_cfg, log_path, shot_path):
                         res.update(status="timeout", error="no HTTP 200 within ready timeout")
                 else:
                     res["t_ready_s"] = ready
+                    br = BrowserRun()
                     pl = first_plot(br, url, tool_cfg, t0, shot_path)
                     res.update(pl)
                     if pl["plot_status"] == "ok":
@@ -297,7 +298,8 @@ def run_start(serve_spec, port, tool_cfg, log_path, shot_path):
                 break
             time.sleep(0.2)
     finally:
-        br.close()
+        if br is not None:
+            br.close()
     return res
 
 
@@ -339,10 +341,8 @@ def find_one(d, suffix):
 
 
 def serve_spec(tool, art, inp, port):
-    if tool == "cerebronexus_default":
-        return R("cerebronexus_serve.R", find_one(art, ".crb"), port, "embedded")
-    if tool == "cerebronexus_h5":
-        return R("cerebronexus_serve.R", find_one(art, ".crb"), port, "h5", find_one(art, ".h5"))
+    if tool in ("cerebronexus_default", "cerebronexus_h5"):
+        return R("cerebronexus_serve.R", find_one(art, ".crb"), port)
     if tool == "shinycell":
         return R("serve_shiny_dir.R", art, port)
     if tool == "isee":

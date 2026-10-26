@@ -1,0 +1,39 @@
+[03:52:15] Calculating most expressed genes and mean expression for each group...
+[03:52:15] Processing group: cluster
+[03:52:41] Most expressed genes and mean expression calculation completed.
+[03:52:42] Initializing Cerebro object...
+[03:52:59] Writing expression matrix to TENx HDF5 file: C:/Users/wangx/Projects/worktrees/paper-tool-comparison-r2/topics/tool_comparison/data/builds/t3/500000/cerebronexus_h5_b1\.crb-stage-34d01c271110/cerebro_e18_500000.h5
+[04:05:23] Extracting all meta data columns...
+[04:05:23] Extracting dimensional reductions...
+[04:05:23] Will export the following dimensional reductions: UMAP
+[04:05:23] Extracting tables of most expressed genes...
+[04:05:23] Extracting tables of mean expression...
+[04:05:23] No trajectories to extract...
+[04:05:23] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: e18_500000
+organism: Human
+date of analysis: 
+date of export: 2026-10-26
+number of cells: NULL
+number of genes: NULL
+grouping variables (1): cluster
+cell cycle variables (0): 
+projections (1): UMAP
+trees (0): 
+most expressed genes: cluster
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+[04:05:23] Saving Cerebro object to: C:\Users\wangx\Projects\worktrees\paper-tool-comparison-r2\topics\tool_comparison\data\builds\t3\500000\cerebronexus_h5_b1/cerebro_e18_500000.crb
+[04:05:26] Done!
+Successfully exported: cerebro_e18_500000.crb 
+RESULT: [1] "C:\\Users\\wangx\\Projects\\worktrees\\paper-tool-comparison-r2\\topics\\tool_comparison\\data\\builds\\t3\\500000\\cerebronexus_h5_b1/cerebro_e18_500000.crb" 
+FILES: cerebro_e18_500000.crb, cerebro_e18_500000.h5, cerebro_e18_500000.viewer/common/cell_order.qs2, cerebro_e18_500000.viewer/groups/001.qs2, cerebro_e18_500000.viewer/groups/002.qs2, cerebro_e18_500000.viewer/manifest.json, cerebro_e18_500000.viewer/metadata/001.codes.bin, cerebro_e18_500000.viewer/metadata/001.dictionary.json, cerebro_e18_500000.viewer/metadata/002.bin, cerebro_e18_500000.viewer/metadata/003.bin, cerebro_e18_500000.viewer/projections/001.bin 

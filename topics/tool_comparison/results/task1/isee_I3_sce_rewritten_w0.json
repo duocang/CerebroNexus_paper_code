@@ -1,0 +1,20 @@
+{
+  "tool": "iSEE",
+  "dataset": "I3",
+  "route": "sce",
+  "input": "rewritten",
+  "workaround": false,
+  "status": "ok",
+  "error_message": null,
+  "failed_stage": null,
+  "warnings": [],
+  "required_args": "iSEE(se)",
+  "n_cells": 2688,
+  "n_genes": 18078,
+  "unique_cell_names": true,
+  "embeddings": ["X_pca", "X_umap", "spatial"],
+  "categorical_annotations": ["leiden", "cluster"],
+  "ctaa_column_in_metadata": false,
+  "reduced_dim_classes": ["LinearEmbeddingMatrix", "matrix", "matrix"],
+  "app_built": true
+}

@@ -1,0 +1,24 @@
+{
+ "tool": "cellxgene",
+ "set": "S1",
+ "set_definition": "louvain == 'B cells'",
+ "route": "attribute (category value)",
+ "export_route": "annotation CSV written by the server (no browser download in 1.3.0)",
+ "route_steps": [
+  "name the user generated data directory (dialog)",
+  "in category 'louvain' untick all values, tick the target value (selects the cells)",
+  "Create new category 'sel'",
+  "'+' add label 'S' and 'Add label & assign N cells'",
+  "read the cell IDs of label S from the annotation CSV"
+ ],
+ "repeat": 1,
+ "status": "ok",
+ "ui_selected_text": "umap: 342 out of 2638 cells",
+ "n_exported": 342,
+ "n_truth": 342,
+ "n_intersection": 342,
+ "jaccard": 1.0,
+ "precision": 1.0,
+ "recall": 1.0,
+ "export_file": "data\\builds\\t2\\cx_ugd\\t2-cell-labels-CHSKKUM4.csv"
+}

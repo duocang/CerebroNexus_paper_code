@@ -1,0 +1,21 @@
+{
+  "tool": "CerebroNexus",
+  "dataset": "I3",
+  "route": "seurat-spatial",
+  "input_kind": "rewritten",
+  "required_args": "hand-built Seurat FOV image from the spatial coordinates + PNG of the H&E image + spatial_images = list(slice1 = list(hires = list(path, bounds))); exportFromSeurat(file, experiment_name, organism, groups, nUMI, nGene)",
+  "status": "ok",
+  "error_message": null,
+  "warnings": [],
+  "n_cells": 2688,
+  "n_genes": 18078,
+  "embeddings": ["umap", "spatial"],
+  "categorical_annotations": "cluster",
+  "unique_cell_names": true,
+  "spatial_present": true,
+  "tissue_image_present": true,
+  "immune_repertoire_present": false,
+  "ctaa_column_in_metadata": false,
+  "artifact_bytes": 72395896,
+  "artifact_files": ["hires.png", "I3.crb"]
+}

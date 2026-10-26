@@ -1,0 +1,30 @@
+TIMING read_input=6.46
+TIMING seurat_object=2.62
+[00:21:30] Start collecting data...
+[00:21:33] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 5.5.0
+experiment name: input
+organism: mm
+date of analysis: 
+date of export: 2026-10-26
+number of cells: NULL
+number of genes: NULL
+grouping variables (1): cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+[00:21:33] Saving Cerebro object to: C:\Users\wangx\Projects\worktrees\paper-tool-comparison-r2\topics\tool_comparison\data\builds\pilot_cerebronexus_h5_e18_10000/cerebro_input.crb
+[00:21:33] Done!
+TIMING tool_step=3.47
+FILES: cerebro_input.crb, cerebro_input.h5 

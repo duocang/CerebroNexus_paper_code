@@ -1,0 +1,20 @@
+{
+  "tool": "iSEE",
+  "dataset": "I4",
+  "route": "sce",
+  "input": "orig",
+  "workaround": false,
+  "status": "ok",
+  "error_message": null,
+  "failed_stage": null,
+  "warnings": "Error reading element obs of type <dataframe>\nℹ duplicate row.names: AAACATACAACCAC-1, AAACATTGAGCTAC-1, AAACATTGATCAGC-1,\nAAACCGTGCTTCCG-1, AAACCGTGTATGCG-1, AAACGCACTGGTAC-1, AAACGCTGACCAGT-1,\nAAACGCTGGTTCTT-1, AAACGCTGTAGCCA-1, AAACGCTGTTTCTG-1",
+  "required_args": "iSEE(se)",
+  "n_cells": 2638,
+  "n_genes": 1838,
+  "unique_cell_names": false,
+  "embeddings": ["X_draw_graph_fr", "X_pca", "X_tsne", "X_umap"],
+  "categorical_annotations": [],
+  "ctaa_column_in_metadata": false,
+  "reduced_dim_classes": ["matrix", "LinearEmbeddingMatrix", "matrix", "matrix"],
+  "app_built": true
+}

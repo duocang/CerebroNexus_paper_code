@@ -1,0 +1,12 @@
+{
+  "tool": "ShinyCell",
+  "dataset": "I4",
+  "route": "sce",
+  "input": "orig",
+  "workaround": false,
+  "status": "error",
+  "error_message": "At least 2 metadata is required!",
+  "failed_stage": "makeShinyApp",
+  "warnings": "Error reading element obs of type <dataframe>\nℹ duplicate row.names: AAACATACAACCAC-1, AAACATTGAGCTAC-1, AAACATTGATCAGC-1,\nAAACCGTGCTTCCG-1, AAACCGTGTATGCG-1, AAACGCACTGGTAC-1, AAACGCTGACCAGT-1,\nAAACGCTGGTTCTT-1, AAACGCTGTAGCCA-1, AAACGCTGTTTCTG-1",
+  "required_args": "makeShinyApp(obj, scConf); createConfig(obj)"
+}

@@ -1,0 +1,10 @@
+{
+  "tool": "CerebroNexus",
+  "dataset": "I1",
+  "route": "sce-nogroups",
+  "input_kind": "rewritten",
+  "required_args": "none given for groups (omitted on purpose)",
+  "status": "error",
+  "error_message": "argument \"groups\" is missing, with no default",
+  "warnings": []
+}

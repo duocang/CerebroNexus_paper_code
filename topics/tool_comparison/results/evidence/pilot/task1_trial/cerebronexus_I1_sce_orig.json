@@ -1,0 +1,10 @@
+{
+  "tool": "CerebroNexus",
+  "dataset": "I1",
+  "route": "sce",
+  "input_kind": "orig",
+  "required_args": "exportFromSCE(object, file, experiment_name, organism, groups = 'louvain', nUMI = 'n_counts', nGene = 'n_genes')",
+  "status": "error",
+  "error_message": "File\n'C:\\Users\\wangx\\Projects\\CerebroNexus_paper_code\\topics\\tool_comparison\\data\\raw\\pbmc3k.h5ad'\nis not a valid H5AD file.\nℹ Either the file is not an H5AD file or it was created with anndata<0.8.0.",
+  "warnings": []
+}

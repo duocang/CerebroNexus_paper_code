@@ -1,0 +1,31 @@
+##---------------------------------------------------------------------------##
+## Launching CerebroNexus
+##---------------------------------------------------------------------------##
+Loading required package: shiny
+
+Listening on http://127.0.0.1:8811
+[2026-10-26 01:43:30.260467] CRB cache hit: cerebro_pbmc3k.crb
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: pbmc3k
+organism: Human
+date of analysis: 
+date of export: 2026-10-26
+number of cells: 2,638
+number of genes: 1,838
+grouping variables (1): louvain
+cell cycle variables (0): 
+projections (3): TSNE, UMAP, draw_graph_fr
+trees (0): 
+most expressed genes: louvain
+marker genes:
+  - scanpy: t-test_overestim_var (1): louvain
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+
+[2026-10-26 01:43:30.396657] Format of expression data: dgCMatrix

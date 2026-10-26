@@ -1,0 +1,19 @@
+{
+ "tool": "isee",
+ "dataset": "I1",
+ "route": "sce",
+ "input": "rewritten",
+ "workaround": true,
+ "ui_status": "plot drawn",
+ "ink_fraction": 0.07251778656126483,
+ "ui_embedding_choices": [
+  "X_draw_graph_fr",
+  "X_pca",
+  "X_tsne",
+  "X_umap"
+ ],
+ "ui_notifications": [],
+ "console_errors": [
+  "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+ ]
+}

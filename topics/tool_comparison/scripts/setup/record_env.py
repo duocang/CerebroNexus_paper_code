@@ -4,7 +4,7 @@ from importlib import metadata
 import psutil
 
 HERE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-R_DIR = r"C:\Program Files\R\R-4.5.0\bin\Rscript.exe"
+R_DIR = "C:/R/R-4.6.1/bin/Rscript.exe"
 
 def ps(cmd):
     return subprocess.run(["powershell", "-NoProfile", "-Command", "[Console]::OutputEncoding=[Text.Encoding]::UTF8; " + cmd], capture_output=True, text=True, encoding="utf-8", errors="replace").stdout.strip()
@@ -16,9 +16,22 @@ def sha256(path):
             h.update(b)
     return h.hexdigest()
 
+def gpu():
+    smi = subprocess.run(["nvidia-smi", "--query-gpu=name,driver_version,memory.total", "--format=csv,noheader"], capture_output=True, text=True).stdout.strip()
+    from playwright.sync_api import sync_playwright
+    with sync_playwright() as pw:
+        b = pw.chromium.launch(channel="chrome", headless=True); pg = b.new_page(); pg.set_content("<canvas id=c></canvas>")
+        r = pg.evaluate("""()=>{const c=document.getElementById('c');const gl=c.getContext('webgl2')||c.getContext('webgl');if(!gl)return null;const e=gl.getExtension('WEBGL_debug_renderer_info');return e?gl.getParameter(e.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)}""")
+        ver = b.version; b.close()
+    return {"nvidia_smi": smi, "headless_chrome_version": ver, "webgl_unmasked_renderer": r}
+
 chrome = ps(r"(Get-Item 'C:\Program Files\Google\Chrome\Application\chrome.exe').VersionInfo.ProductVersion")
 r_env = dict(os.environ, LANGUAGE="en", LANG="en_US.UTF-8", R_LIBS=os.path.join(HERE, "env", "rlib"), R_LIBS_USER=os.path.join(HERE, "env", "rlib"), R_LIBS_SITE="")
 rv = subprocess.run([R_DIR, "--vanilla", os.path.join(HERE, "scripts", "setup", "r_versions.R")], capture_output=True, text=True, env=r_env).stdout
+iso = subprocess.run([R_DIR, "--vanilla", os.path.join(HERE, "scripts", "setup", "r_isolation.R")], capture_output=True, text=True, env=r_env).stdout
+iso_line = [l for l in iso.splitlines() if l.startswith("ISO")]
+iso_p = iso_line[0].split() if iso_line else ["ISO", "?", "?", "BIOC", "?"]
+bioc = iso_p[4]
 rpk = {}
 for line in rv.splitlines():
     p = line.split()
@@ -39,13 +52,16 @@ env = {
     "r": {"version": ps("& '%s' --version 2>&1 | Select-Object -First 1" % R_DIR), "packages": rpk},
     "python": {"version": sys.version.split()[0], "executable": sys.executable, "packages": py_pk},
     "chrome": chrome,
+    "gpu": gpu(),
+    "r_isolation_check": {"loaded_namespaces": iso_p[1], "outside_env_rlib": iso_p[2], "note": "R 4.6.1 system library holds other packages and stays on the library path; every loaded non-base namespace must come from env/rlib"},
     "node": {"node": subprocess.run(["node", "--version"], capture_output=True, text=True).stdout.strip(),
              "packages": {n: json.load(open(os.path.join(HERE, "env", "js", "node_modules", n, "package.json")))["version"]
                           for n in ["vitessce", "react", "react-dom", "esbuild"]}},
     "tools": {
-        "CerebroNexus": {"version": rpk.get("CerebroNexus"), "commit": "27ac995e983a3ff1c79a2d051c9a4374dde37ec6"},
+        "CerebroNexus": {"version": rpk.get("CerebroNexus"), "branch": "tmp/应急 (Builder 6.0.0 merged into perf/viewer-page-open)", "commit": "2786ff6d09a53f54e25bb1affbc6ed58aac70b43",
+                         "source_tarball": "env/src/CerebroNexus-tmp-emergency-2786ff6d.tar.gz", "tarball_sha256": sha256(os.path.join(HERE, "env", "src", "CerebroNexus-tmp-emergency-2786ff6d.tar.gz"))},
         "ShinyCell": {"version": rpk.get("ShinyCell"), "commit": "5c61db78cdd624636e161406d5d42aeb2c0f1205"},
-        "iSEE": {"version": rpk.get("iSEE"), "source": "Bioconductor " + ("3.22")},
+        "iSEE": {"version": rpk.get("iSEE"), "source": "Bioconductor " + bioc},
         "cellxgene": {"version": py_pk["cellxgene"]},
         "Vitessce": {"python": py_pk["vitessce"], "js": "vitessce@3.9.9"},
     },

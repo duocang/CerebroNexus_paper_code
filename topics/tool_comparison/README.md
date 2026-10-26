@@ -1,5 +1,7 @@
 # Tool comparison
 
+**Round 2 (current):** CerebroNexus `perf/viewer-page-open` (5.5.0) against ShinyCell, iSEE, cellxgene and Vitessce on native Windows with R 4.6.1 and a GPU-backed Chrome; see [PROTOCOL.md](PROTOCOL.md) and [PROGRESS.md](PROGRESS.md). Round 1 (CerebroNexus 6.0.0, R 4.5.0) is kept unchanged in [archive/round1_cerebronexus-6.0.0/](archive/round1_cerebronexus-6.0.0/). The text below describes round 1 and the scripts, and is updated as round 2 proceeds; figures now go to `figures/` beside `results/`.
+
 Same-task comparison of five single-cell viewers: CerebroNexus 6.0.0 (default and H5 backend), ShinyCell, iSEE, cellxgene 1.3.0 and Vitessce 3.8.4 / 3.9.9, run on one native Windows 11 host (i9-12900K, 127.7 GB RAM, R 4.5.0, Python 3.11, Chrome 155).
 
 - Task 1: import and capability recognition on I1-I4 (pbmc3k, scRepertoire example with TCR, Visium H&E, pbmc3k with duplicated cell names).

@@ -1,0 +1,19 @@
+{
+  "tool": "CerebroNexus",
+  "dataset": "I2",
+  "route": "h5ad",
+  "required_args": "h5ad_file, result_dir, groups = 'seurat_clusters'",
+  "status": "ok",
+  "error_message": null,
+  "warnings": [],
+  "n_cells": 500,
+  "n_genes": 2000,
+  "embeddings": "UMAP",
+  "categorical_annotations": "seurat_clusters",
+  "unique_cell_names": true,
+  "spatial_present": false,
+  "tissue_image_present": false,
+  "immune_repertoire_present": false,
+  "ctaa_column_in_metadata": true,
+  "artifact_bytes": 534638
+}

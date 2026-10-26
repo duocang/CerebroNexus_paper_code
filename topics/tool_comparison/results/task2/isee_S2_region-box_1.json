@@ -1,0 +1,44 @@
+{
+ "tool": "iSEE",
+ "set": "S2",
+ "set_definition": "CTaa == 'CVVSDNTGGFKTIF_CASSVRRERANTGELFF'",
+ "route": "region (box brush)",
+ "export_route": "Export > Download panel output (table CSV)",
+ "route_steps": [
+  "Data parameters of 'Reduced dimension plot 1': embedding = UMAP",
+  "calibrate data->pixel on a screenshot of the plot (fit quality recorded)",
+  "brush (rectangle) over the margin-expanded bounding box of the target cells",
+  "Selection parameters of 'Column data table 1': column selection source = Reduced dimension plot 1",
+  "Export > Download panel output > tick 'Column data table 1' > Download (browser download)"
+ ],
+ "repeat": 1,
+ "status": "ok",
+ "calibration": {
+  "ax": 29.9099,
+  "bx": 240.466,
+  "ay": -24.1809,
+  "by": 236.7939,
+  "quality": 0.7478,
+  "y_flipped": false,
+  "dot_radius": 2.0,
+  "quality_dilated": 1.0
+ },
+ "margin_px": 4.0,
+ "bbox_px": [
+  259,
+  315,
+  346,
+  353
+ ],
+ "ui_selected_text": null,
+ "export_file": "results\\evidence\\task2\\isee_S2_region-box_1_iSEE_exports.zip",
+ "zip_members": [
+  "ColumnDataTable1.csv"
+ ],
+ "n_exported": 500,
+ "n_truth": 11,
+ "n_intersection": 11,
+ "jaccard": 0.022,
+ "precision": 0.022,
+ "recall": 1.0
+}

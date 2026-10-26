@@ -1,0 +1,49 @@
+{
+ "tool": "Vitessce",
+ "dataset": "I1",
+ "route": "optimize_adata -> write_zarr -> AnnDataWrapper (paths by hand)",
+ "workaround": false,
+ "n_cells": 2638,
+ "n_genes": 1838,
+ "unique_cell_names": true,
+ "obsm_keys_in_file": [
+  "X_pca",
+  "X_tsne",
+  "X_umap",
+  "X_draw_graph_fr"
+ ],
+ "status": "ok",
+ "paths_written_by_hand": [
+  "obsm/X_pca",
+  "obsm/X_tsne",
+  "obsm/X_umap",
+  "obsm/X_draw_graph_fr",
+  "obs/louvain",
+  "X"
+ ],
+ "embeddings_offered_in_config": [
+  "PCA",
+  "TSNE",
+  "UMAP",
+  "DRAW_GRAPH_FR"
+ ],
+ "categorical_annotations": [
+  "louvain"
+ ],
+ "obs_columns_in_file": [
+  "n_genes",
+  "percent_mito",
+  "n_counts",
+  "louvain"
+ ],
+ "spatial_in_file": false,
+ "images_in_file": false,
+ "screenshot": "results\\evidence\\task1\\vitessce_I1.png",
+ "page_text": "Scatterplot (PCA)\n2,638 cells\nCell Sets\nlouvain\n+\nGene List\nAAGAB\nAAR2\nAATF\nABCB1\nABCC10\nABCC3\nABHD12\nABHD13\nABHD17B\nABHD5\nABI3\nABRACL\nABT1\nAC004257.3\nAC005082.12\nAC010642.1\nAC074138.3\nAC092295.7\nAC093323.3\nAC113189.5\nAC147651.3\nACADM\nACADVL\nACAP1\nACAT2\nACBD3\nACD\nACOT11\n1,838 genes",
+ "console_errors": [
+  "error: Failed to load resource: the server responded with a status of 404 (File not found)",
+  "error: Failed to load resource: the server responded with a status of 404 (File not found)",
+  "error: Failed to load resource: the server responded with a status of 404 (File not found)",
+  "error: Failed to load resource: the server responded with a status of 404 (File not found)"
+ ]
+}

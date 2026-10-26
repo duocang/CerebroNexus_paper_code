@@ -1,0 +1,21 @@
+{
+  "tool": "CerebroNexus",
+  "dataset": "I4",
+  "route": "sce-dup",
+  "input_kind": "-",
+  "required_args": "exportFromSCE(object, file, experiment_name, organism, groups = 'louvain', nUMI, nGene)",
+  "status": "ok",
+  "error_message": null,
+  "warnings": [],
+  "n_cells": 2638,
+  "n_genes": 1838,
+  "embeddings": ["X_draw_graph_fr", "X_tsne", "X_umap"],
+  "categorical_annotations": "louvain",
+  "unique_cell_names": false,
+  "spatial_present": false,
+  "tissue_image_present": false,
+  "immune_repertoire_present": false,
+  "ctaa_column_in_metadata": false,
+  "artifact_bytes": 21271431,
+  "artifact_files": "I4.crb"
+}

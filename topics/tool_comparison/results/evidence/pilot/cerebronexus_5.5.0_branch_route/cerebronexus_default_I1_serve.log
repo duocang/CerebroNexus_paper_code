@@ -1,0 +1,31 @@
+##---------------------------------------------------------------------------##
+## Launching CerebroNexus
+##---------------------------------------------------------------------------##
+Loading required package: shiny
+
+Listening on http://127.0.0.1:8811
+[2026-10-26 00:18:50.711349] CRB cache hit: cerebro_input.crb
+class: Cerebro
+exporter package version: 5.5.0
+experiment name: input
+organism: hs
+date of analysis: 
+date of export: 2026-10-26
+number of cells: 2,638
+number of genes: 1,838
+grouping variables (1): louvain
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+
+[2026-10-26 00:18:50.75406] Format of expression data: matrix
+[2026-10-26 00:18:50.75406] Format of expression data: array

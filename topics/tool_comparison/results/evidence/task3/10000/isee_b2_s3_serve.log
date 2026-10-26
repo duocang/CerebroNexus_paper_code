@@ -1,0 +1,5 @@
+Loading required package: shiny
+
+Listening on http://127.0.0.1:8814
+Warning in .coerce_type(v, f, max_levels = max_levels, df = df) :
+  covariate has too many unique values, coercing to numeric

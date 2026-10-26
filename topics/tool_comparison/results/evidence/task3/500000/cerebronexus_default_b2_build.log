@@ -1,0 +1,39 @@
+[04:31:12] Calculating most expressed genes and mean expression for each group...
+[04:31:12] Processing group: cluster
+[04:31:38] Most expressed genes and mean expression calculation completed.
+[04:31:38] Initializing Cerebro object...
+[04:31:38] Adding expression data (embedded)...
+[04:31:38] Extracting all meta data columns...
+[04:31:38] Extracting dimensional reductions...
+[04:31:38] Will export the following dimensional reductions: UMAP
+[04:31:38] Extracting tables of most expressed genes...
+[04:31:38] Extracting tables of mean expression...
+[04:31:38] No trajectories to extract...
+[04:31:38] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: e18_500000
+organism: Human
+date of analysis: 
+date of export: 2026-10-26
+number of cells: 500,000
+number of genes: 27,998
+grouping variables (1): cluster
+cell cycle variables (0): 
+projections (1): UMAP
+trees (0): 
+most expressed genes: cluster
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+[04:31:38] Saving Cerebro object to: C:\Users\wangx\Projects\worktrees\paper-tool-comparison-r2\topics\tool_comparison\data\builds\t3\500000\cerebronexus_default_b2/cerebro_e18_500000.crb
+[04:32:32] Done!
+Successfully exported: cerebro_e18_500000.crb 
+RESULT: [1] "C:\\Users\\wangx\\Projects\\worktrees\\paper-tool-comparison-r2\\topics\\tool_comparison\\data\\builds\\t3\\500000\\cerebronexus_default_b2/cerebro_e18_500000.crb" 
+FILES: cerebro_e18_500000.crb, cerebro_e18_500000.viewer/common/cell_order.qs2, cerebro_e18_500000.viewer/groups/001.qs2, cerebro_e18_500000.viewer/groups/002.qs2, cerebro_e18_500000.viewer/manifest.json, cerebro_e18_500000.viewer/metadata/001.codes.bin, cerebro_e18_500000.viewer/metadata/001.dictionary.json, cerebro_e18_500000.viewer/metadata/002.bin, cerebro_e18_500000.viewer/metadata/003.bin, cerebro_e18_500000.viewer/projections/001.bin 

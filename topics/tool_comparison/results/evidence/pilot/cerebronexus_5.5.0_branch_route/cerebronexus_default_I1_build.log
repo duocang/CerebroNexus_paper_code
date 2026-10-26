@@ -1,0 +1,32 @@
+TIMING read_input=3.24
+Warning: Data is of class matrix. Coercing to dgCMatrix.
+TIMING seurat_object=2.09
+[00:18:41] Start collecting data...
+[00:18:41] Adding expression data (embedded)...
+[00:18:41] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 5.5.0
+experiment name: input
+organism: hs
+date of analysis: 
+date of export: 2026-10-26
+number of cells: 2,638
+number of genes: 1,838
+grouping variables (1): louvain
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+[00:18:41] Saving Cerebro object to: C:\Users\wangx\Projects\worktrees\paper-tool-comparison-r2\topics\tool_comparison\data\builds\pilot_cerebronexus_default_I1/cerebro_input.crb
+[00:18:42] Done!
+TIMING tool_step=0.31
+FILES: cerebro_input.crb 

@@ -1,0 +1,21 @@
+{
+  "tool": "CerebroNexus",
+  "dataset": "I3",
+  "route": "sce",
+  "input_kind": "rewritten",
+  "required_args": "exportFromSCE(object, file, experiment_name, organism, groups = 'cluster', nUMI = 'total_counts', nGene = 'n_genes_by_counts')",
+  "status": "ok",
+  "error_message": null,
+  "warnings": [],
+  "n_cells": 2688,
+  "n_genes": 18078,
+  "embeddings": ["X_umap", "spatial"],
+  "categorical_annotations": "cluster",
+  "unique_cell_names": true,
+  "spatial_present": false,
+  "tissue_image_present": false,
+  "immune_repertoire_present": false,
+  "ctaa_column_in_metadata": false,
+  "artifact_bytes": 30642723,
+  "artifact_files": "I3.crb"
+}

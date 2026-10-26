@@ -22,7 +22,7 @@ for rep in range(1, reps + 1):
                export_route="annotation CSV written by the server (no browser download in 1.3.0)", route_steps=steps, repeat=rep, status="ok")
     before = set(glob.glob(os.path.join(UGD, "*.csv")))
     srv = start_server(dict(cmd=[os.path.join(HERE, "env", "py", "Scripts", "cellxgene.exe"), "launch", os.path.join(HERE, h5), "--host", "127.0.0.1", "--port", str(PORT),
-                                 "--disable-gene-sets-save", "--user-generated-data-dir", UGD], env=harness.py_env()), PORT)
+                                 "--disable-gene-sets-save", "--user-generated-data-dir", UGD], env=harness.cellxgene_env()), PORT)
     br = harness.BrowserRun(); pg = br.page
     try:
         pg.goto(f"http://127.0.0.1:{PORT}/"); time.sleep(6)

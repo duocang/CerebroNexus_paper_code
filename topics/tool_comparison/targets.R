@@ -16,7 +16,7 @@ targets_tool_comparison <- list(
       tool_comparison_results[[1]],
       tool_comparison_results[[2]],
       tool_comparison_results[[3]],
-      "topics/tool_comparison/results/figures"
+      "topics/tool_comparison/figures"
     ),
     format = "file"
   )

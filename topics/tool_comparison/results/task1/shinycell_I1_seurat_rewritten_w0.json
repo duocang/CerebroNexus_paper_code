@@ -1,0 +1,12 @@
+{
+  "tool": "ShinyCell",
+  "dataset": "I1",
+  "route": "seurat",
+  "input": "rewritten",
+  "workaround": false,
+  "status": "error",
+  "error_message": "argument is of length zero",
+  "failed_stage": "makeShinyApp",
+  "warnings": "Data is of class matrix. Coercing to dgCMatrix.",
+  "required_args": "makeShinyApp(obj, scConf); createConfig(obj)"
+}

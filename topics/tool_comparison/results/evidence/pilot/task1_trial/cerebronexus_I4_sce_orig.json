@@ -1,0 +1,10 @@
+{
+  "tool": "CerebroNexus",
+  "dataset": "I4",
+  "route": "sce",
+  "input_kind": "orig",
+  "required_args": "exportFromSCE(object, file, experiment_name, organism, groups = 'louvain', nUMI = 'n_counts', nGene = 'n_genes')",
+  "status": "error",
+  "error_message": "Some group columns could not be found in meta data: louvain",
+  "warnings": "Error reading element obs of type <dataframe>\nℹ duplicate row.names: AAACATACAACCAC-1, AAACATTGAGCTAC-1, AAACATTGATCAGC-1,\nAAACCGTGCTTCCG-1, AAACCGTGTATGCG-1, AAACGCACTGGTAC-1, AAACGCTGACCAGT-1,\nAAACGCTGGTTCTT-1, AAACGCTGTAGCCA-1, AAACGCTGTTTCTG-1"
+}

@@ -1,0 +1,44 @@
+{
+ "tool": "iSEE",
+ "set": "S1",
+ "set_definition": "louvain == 'B cells'",
+ "route": "region (box brush)",
+ "export_route": "Export > Download panel output (table CSV)",
+ "route_steps": [
+  "Data parameters of 'Reduced dimension plot 1': embedding = X_umap",
+  "calibrate data->pixel on a screenshot of the plot (fit quality recorded)",
+  "brush (rectangle) over the margin-expanded bounding box of the target cells",
+  "Selection parameters of 'Column data table 1': column selection source = Reduced dimension plot 1",
+  "Export > Download panel output > tick 'Column data table 1' > Download (browser download)"
+ ],
+ "repeat": 1,
+ "status": "ok",
+ "calibration": {
+  "ax": 31.7309,
+  "bx": 350.1595,
+  "ay": -26.0782,
+  "by": 301.4624,
+  "quality": 0.8396,
+  "y_flipped": false,
+  "dot_radius": 2.0,
+  "quality_dilated": 1.0
+ },
+ "margin_px": 4.0,
+ "bbox_px": [
+  318,
+  40,
+  406,
+  254
+ ],
+ "ui_selected_text": null,
+ "export_file": "results\\evidence\\task2\\isee_S1_region-box_1_iSEE_exports.zip",
+ "zip_members": [
+  "ColumnDataTable1.csv"
+ ],
+ "n_exported": 2638,
+ "n_truth": 342,
+ "n_intersection": 342,
+ "jaccard": 0.12964366944655042,
+ "precision": 0.12964366944655042,
+ "recall": 1.0
+}

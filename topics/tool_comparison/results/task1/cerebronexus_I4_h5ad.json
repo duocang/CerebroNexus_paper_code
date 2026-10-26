@@ -1,0 +1,9 @@
+{
+  "tool": "CerebroNexus",
+  "dataset": "I4",
+  "route": "h5ad",
+  "required_args": "h5ad_file, result_dir, groups = 'louvain'",
+  "status": "error",
+  "error_message": "h5ad obs index (cell names) must be unique and non-empty.",
+  "warnings": []
+}

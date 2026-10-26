@@ -1,0 +1,100 @@
+[
+ {
+  "tool": "cerebronexus_default",
+  "dataset": "I1",
+  "build_status": "ok",
+  "build_wall_s": 31.74250740000025,
+  "build_peak_rss_bytes": 861364224,
+  "build_exit_code": 0,
+  "artifact_bytes": 21551032,
+  "start_status": "ok",
+  "start_t_ready_s": 13.045677799998884,
+  "start_plot_status": "ok",
+  "start_t_first_plot_s": 5.630745099999331,
+  "start_frames": 5,
+  "start_ink_fraction": 0.057465841280464,
+  "start_frame_series": [
+   [
+    "exc",
+    "Locator.click: Timeout 400ms exceeded.\nCall log:\n  - waiting for get_by_text(\"Projection\", exact=True).first\n"
+   ],
+   [
+    "exc",
+    "Locator.click: Timeout 400ms exceeded.\nCall log:\n  - waiting for get_by_text(\"Projection\", exact=True).first\n"
+   ],
+   [
+    "exc",
+    "Locator.click: Timeout 400ms exceeded.\nCall log:\n  - waiting for get_by_text(\"Projection\", exact=True).first\n    - locat"
+   ],
+   [
+    5.631,
+    0.0575,
+    1290,
+    695,
+    0.335
+   ],
+   [
+    7.094,
+    0.0575,
+    1290,
+    695,
+    0.349
+   ]
+  ],
+  "start_screenshot_s": 0.3488978000004863,
+  "start_elem_w": 1290,
+  "start_elem_h": 695,
+  "start_t_total_s": 18.676422899998215,
+  "start_peak_rss_bytes": 784281600,
+  "start_browser_peak_rss_bytes": 810131456
+ },
+ {
+  "tool": "cerebronexus_h5",
+  "dataset": "I1",
+  "build_status": "ok",
+  "build_wall_s": 35.148441499999535,
+  "build_peak_rss_bytes": 1105567744,
+  "build_exit_code": 0,
+  "artifact_bytes": 58749636,
+  "start_status": "ok",
+  "start_t_ready_s": 12.097861000000194,
+  "start_plot_status": "ok",
+  "start_t_first_plot_s": 6.785486000000674,
+  "start_frames": 5,
+  "start_ink_fraction": 0.057465841280464,
+  "start_frame_series": [
+   [
+    "exc",
+    "Locator.click: Timeout 400ms exceeded.\nCall log:\n  - waiting for get_by_text(\"Projection\", exact=True).first\n"
+   ],
+   [
+    "exc",
+    "Locator.click: Timeout 400ms exceeded.\nCall log:\n  - waiting for get_by_text(\"Projection\", exact=True).first\n"
+   ],
+   [
+    "exc",
+    "Locator.click: Timeout 400ms exceeded.\nCall log:\n  - waiting for get_by_text(\"Projection\", exact=True).first\n    - locat"
+   ],
+   [
+    6.785,
+    0.0575,
+    1290,
+    695,
+    0.344
+   ],
+   [
+    7.808,
+    0.0575,
+    1290,
+    695,
+    0.3
+   ]
+  ],
+  "start_screenshot_s": 0.2998351999995066,
+  "start_elem_w": 1290,
+  "start_elem_h": 695,
+  "start_t_total_s": 18.883347000000867,
+  "start_peak_rss_bytes": 486318080,
+  "start_browser_peak_rss_bytes": 813084672
+ }
+]

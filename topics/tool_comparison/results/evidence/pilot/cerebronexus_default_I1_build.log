@@ -1,0 +1,41 @@
+[01:43:00] Calculating most expressed genes and mean expression for each group...
+[01:43:00] Processing group: louvain
+[01:43:03] Most expressed genes and mean expression calculation completed.
+[01:43:03] Initializing Cerebro object...
+[01:43:04] Adding expression data (embedded)...
+[01:43:04] Extracting all meta data columns...
+[01:43:04] Extracting dimensional reductions...
+[01:43:04] Will export the following dimensional reductions: TSNE, UMAP, draw_graph_fr
+[01:43:04] Extracting tables of most expressed genes...
+[01:43:04] Extracting tables of mean expression...
+[01:43:04] Extracting marker genes table...
+[01:43:04] No trajectories to extract...
+[01:43:04] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: pbmc3k
+organism: Human
+date of analysis: 
+date of export: 2026-10-26
+number of cells: 2,638
+number of genes: 1,838
+grouping variables (1): louvain
+cell cycle variables (0): 
+projections (3): TSNE, UMAP, draw_graph_fr
+trees (0): 
+most expressed genes: louvain
+marker genes:
+  - scanpy: t-test_overestim_var (1): louvain
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+[01:43:04] Saving Cerebro object to: C:\Users\wangx\Projects\worktrees\paper-tool-comparison-r2\topics\tool_comparison\data\builds\pilot_cerebronexus_default_I1/cerebro_pbmc3k.crb
+[01:43:05] Done!
+Successfully exported: cerebro_pbmc3k.crb 
+RESULT: [1] "C:\\Users\\wangx\\Projects\\worktrees\\paper-tool-comparison-r2\\topics\\tool_comparison\\data\\builds\\pilot_cerebronexus_default_I1/cerebro_pbmc3k.crb" 
+FILES: cerebro_pbmc3k.crb 

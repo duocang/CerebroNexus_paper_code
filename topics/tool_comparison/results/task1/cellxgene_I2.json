@@ -1,0 +1,53 @@
+{
+ "tool": "cellxgene",
+ "dataset": "I2",
+ "route": "cellxgene launch <h5ad>",
+ "required_args": "<path to .h5ad>",
+ "status": "ok",
+ "n_cells": 500,
+ "n_genes": 2000,
+ "embeddings": [
+  "umap"
+ ],
+ "obs_columns": [
+  "name_0",
+  "orig.ident",
+  "nCount_RNA",
+  "nFeature_RNA",
+  "mito.genes",
+  "RNA_snn_res.0.8",
+  "seurat_clusters",
+  "CTgene",
+  "CTnt",
+  "CTaa",
+  "CTstrict",
+  "clonalProportion",
+  "clonalFrequency",
+  "cloneSize",
+  "sample"
+ ],
+ "categorical_annotations": [
+  "orig.ident",
+  "RNA_snn_res.0.8",
+  "seurat_clusters",
+  "CTgene",
+  "CTnt",
+  "CTaa",
+  "CTstrict",
+  "cloneSize",
+  "sample"
+ ],
+ "ctaa_column_in_metadata": true,
+ "obs_index_name": "name_0",
+ "unique_cell_names_in_file": true,
+ "screenshot": "results\\evidence\\task1\\cellxgene_I2.png",
+ "error_message": null,
+ "warnings": [
+  "[cellxgene] Warning: `__version__` is deprecated, use `importlib.metadata.version('anndata')` instead. ",
+  "[cellxgene] Warning: Anndata data matrix is sparse, but not a CSC (columnar) matrix.  Performance may be improved by using CSC. ",
+  "[cellxgene] Warning: The method obsm_keys is deprecated and will be removed in the future. Use obsm instead of obsm_keys. (e.g. `k in adata.obsm` or `adata.obsm",
+  "[cellxgene] Warning: The method obsm_keys is deprecated and will be removed in the future. Use obsm instead of obsm_keys. (e.g. `k in adata.obsm` or `adata.obsm",
+  "[cellxgene] Warning: `__version__` is deprecated, use `importlib.metadata.version('anndata')` instead. ",
+  "[cellxgene] Warning: The method uns_keys is deprecated and will be removed in the future. Use uns instead of uns_keys. (e.g. `k in adata.uns` or `sorted(adata.u"
+ ]
+}

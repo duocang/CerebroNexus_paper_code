@@ -1,0 +1,7 @@
+Loading required package: shiny
+
+Listening on http://127.0.0.1:8832
+Warning in .refineParameters(initial[[idx]], se) :
+  no valid y-axis 'rowData' fields for 'RowDataPlot'
+Warning in .refineParameters(extra[[idx]], se) :
+  no valid y-axis 'rowData' fields for 'RowDataPlot'

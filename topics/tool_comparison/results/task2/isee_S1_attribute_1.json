@@ -1,0 +1,25 @@
+{
+ "tool": "iSEE",
+ "set": "S1",
+ "set_definition": "louvain == 'B cells'",
+ "route": "attribute (table column filter)",
+ "export_route": "Export > Download panel output (table CSV)",
+ "route_steps": [
+  "'Column data table 1': column filter on 'louvain' = 'B cells'",
+  "Export > Download panel output > tick 'Column data table 1' > Download (browser download)"
+ ],
+ "repeat": 1,
+ "status": "ok",
+ "filter_column_index": 4,
+ "ui_rows_text": "Showing 1 to 10 of 342 entries (filtered from 2,638 total entries)",
+ "export_file": "results\\evidence\\task2\\isee_S1_attribute_1_iSEE_exports.zip",
+ "zip_members": [
+  "ColumnDataTable1.csv"
+ ],
+ "n_exported": 2638,
+ "n_truth": 342,
+ "n_intersection": 342,
+ "jaccard": 0.12964366944655042,
+ "precision": 0.12964366944655042,
+ "recall": 1.0
+}

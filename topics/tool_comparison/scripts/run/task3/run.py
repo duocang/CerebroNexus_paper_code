@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import harness
 from harness import HERE
 
-SEED = 20261022
+SEED = 20261026
 TIERS = [10000, 100000, 500000]
 CONFIGS = harness.TOOLS_ORDER                       # cerebronexus_default, cerebronexus_h5, shinycell, isee, cellxgene, vitessce
 ROUNDS, STARTS = 3, 3

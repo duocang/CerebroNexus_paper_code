@@ -1,0 +1,7 @@
+Upgrade check failed.
+
+[cellxgene] Starting the CLI...
+[cellxgene] Warning: `__version__` is deprecated, use `importlib.metadata.version('anndata')` instead. 
+[cellxgene] Loading data from I4.h5ad.
+[cellxgene] Warning: Observation names are not unique. To make them unique, call `.obs_names_make_unique`. 
+KeyError: 'Values in obs.index must be unique. Please prepare data to contain unique index values, or specify an alternative with --{ax_name}-name.'

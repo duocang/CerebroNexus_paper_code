@@ -1,0 +1,5 @@
+Loading required package: shiny
+
+Listening on http://127.0.0.1:8832
+Warning in .nextMethod(se = se) :
+  duplicated 'colnames(se)' detected, making them unique
