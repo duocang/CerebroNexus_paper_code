@@ -1,3 +1,0 @@
-TIMING read_input=5.71
-TIMING tool_step=36.52
-FILES: ['config.json', 'data.zarr']

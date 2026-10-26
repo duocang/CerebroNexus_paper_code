@@ -1,5 +1,0 @@
-There were 12 warnings (use warnings() to see them)
-There were 11 warnings (use warnings() to see them)
-TIMING read_input=6.60
-TIMING tool_step=11.55
-FILES: sc1conf.rds, sc1def.rds, sc1gene.rds, sc1gexpr.h5, sc1meta.rds, server.R, ui.R 

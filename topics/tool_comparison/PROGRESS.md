@@ -1,6 +1,6 @@
 # Round 2 diary
 
-Round 2 compares CerebroNexus `perf/viewer-page-open` with ShinyCell, iSEE, cellxgene and Vitessce. Protocol: [PROTOCOL.md](PROTOCOL.md) (not yet frozen). Round 1: [archive/round1_cerebronexus-6.0.0/](archive/round1_cerebronexus-6.0.0/).
+Round 2 compares CerebroNexus `perf/viewer-page-open` with ShinyCell, iSEE, cellxgene and Vitessce. Protocol: [PROTOCOL.md](PROTOCOL.md). Round 1: Git history up to commit `983df03` (Deviation D5).
 
 ## 2026-10-25
 
@@ -63,3 +63,7 @@ Correction (same day): the whole-file hash above is that of the PROTOCOL.md as f
 - Deviations D3 (script changes) and D4 (host load) added to `PROTOCOL.md`; the body hash is unchanged. Script manifest regenerated.
 - Quantitative figure `figures/fig-tool-comparison.pdf|png` drawn from the three summary tables (patchwork, Arial, 170 x 120 mm, 6-8 pt text, line widths at least 0.38 pt, fonts embedded) and checked with `topics/interface_figures/scripts/check_figures.R`: all figures pass. Not committed.
 - Idle CPU before the 162 Task 3 starts: median 3.7%, p90 7.8%, max 13.7% (round 1: 9.7%, 22.9%, 81.5%); a sample before Task 2 read about 25% (corrected in D4).
+
+## 2026-10-26, merged to main
+
+- The round-1 archive was removed from the tree at the owner's request (Deviation D5); the new results and `figures/` are the ones kept. `FIGURES.md` moved to the folder top, `capture_figures.py` writes to `figures/captures/`, `README.md` rewritten for round 2.

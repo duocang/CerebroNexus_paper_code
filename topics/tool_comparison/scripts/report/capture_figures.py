@@ -8,7 +8,7 @@ Run with the comparison Python environment (env/py), from anywhere:
 
 Nothing here is timed, nothing here touches harness.py or results/. One id at a time: build once into data/builds/fig_<id>/ (reused if
 present), start one server, capture the plot element only, kill the process tree, then the next id.
-Output: results/figures/captures/<id>.png (3x element screenshot, unchanged), <id>.json (record), index.csv.
+Output: figures/captures/<id>.png (3x element screenshot, unchanged), <id>.json (record), index.csv.
 """
 import argparse, csv, datetime, hashlib, json, os, subprocess, sys, time
 
@@ -19,7 +19,7 @@ import requests                                   # noqa: E402
 from playwright.sync_api import sync_playwright   # noqa: E402
 
 HERE = harness.HERE
-OUT = os.path.join(HERE, "results", "figures", "captures")
+OUT = os.path.join(HERE, "figures", "captures")
 ART = os.path.join(HERE, "data", "builds")
 VIEWPORT = {"width": 1024, "height": 720}
 DSF = 3
@@ -477,7 +477,7 @@ def capture_id(cid):
         png_path = os.path.join(OUT, f"{cid}.png")
         open(png_path, "wb").write(png)
         w, h = harness.ink_fraction(png)[1:]
-        rec.update(png=f"results/figures/captures/{cid}.png", png_width_px=w, png_height_px=h, png_bytes=len(png), png_sha256=hashlib.sha256(png).hexdigest(), status="ok")
+        rec.update(png=f"figures/captures/{cid}.png", png_width_px=w, png_height_px=h, png_bytes=len(png), png_sha256=hashlib.sha256(png).hexdigest(), status="ok")
     except Exception as e:                                    # a failed id is recorded, never saved as a partial frame
         rec["error"] = f"{type(e).__name__}: {e}"[:600]
         old = os.path.join(OUT, f"{cid}.png")

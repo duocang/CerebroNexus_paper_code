@@ -1,8 +1,0 @@
-id,tool,version,dataset,view,colour_by,status,png_sha256
-A1,cerebronexus_default,"CerebroNexus 6.0.0 (27ac995e), embedded backend","I1 pbmc3k, 2,638 cells","Projection, UMAP",louvain,ok,b571dbf85721d53d9be3e1b3dafd4d19fc628dd416782c6f786ff0731c1ebcc4
-A2,shinycell,ShinyCell 2.1.0 (5c61db78),"I1 pbmc3k, 2,638 cells","cell info vs gene expression tab, UMAP",louvain,ok,ae5266ecf7ef1ebc6ab91386234634c96820e43400dd962135686273ab38d86d
-A3,isee,iSEE 2.22.0,"I1 pbmc3k, 2,638 cells","Reduced dimension plot, X_umap",louvain,ok,215ffaa3a2f573aef2ece9ae93b1e21449f209c7ed9334063443f4cd4ad9b8f2
-A4,cellxgene,cellxgene 1.3.0,"I1 pbmc3k, 2,638 cells",umap embedding,louvain,ok,0b5752ea0bc6fa9ebad0872e96afdd20e056e86f22e0ef1c30e8bcbb62f0f7e5
-A5,vitessce,Vitessce 3.8.4 (Python) / vitessce@3.9.9 (JS),"I1 pbmc3k, 2,638 cells","Scatterplot, UMAP",louvain (cell sets),ok,9e8f2e0216770a45efc7d8959d4790b6c331269f3b1702bae92d0fc5493c0d22
-B1,cerebronexus_default,"CerebroNexus 6.0.0 (27ac995e), embedded backend","I3 Visium H&E mouse brain, 2,688 spots","Spatial, ImageDimPlot with the H&E image",cluster,ok,37383c245f3b55f93a3e32c95c18769a5b4c7bdff76f8f4f0892ea0f1717e9e6
-B2,vitessce,Vitessce 3.8.4 (Python) / vitessce@3.9.9 (JS),"I3 Visium H&E mouse brain, 2,688 spots","Spatial (spatialBeta) view, spots only",cluster,ok,88bbc1c8b514794bd152baa7cba6f4248b3631521257ad97dad8ea9b721f47fd
