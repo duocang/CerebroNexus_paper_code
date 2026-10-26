@@ -9,7 +9,7 @@ Same-task comparison of five single-cell viewers on one native Windows 11 host (
 
 Results: [results/SUMMARY.md](results/SUMMARY.md) and [results/summary_task3.md](results/summary_task3.md); one file or row per run, with per-tool tables, in `results/task1/`, `results/task2/` and `results/task3/`; logs and screenshots behind them in `results/evidence/`.
 
-Figures (R, ggplot2, Genome Biology rules; `functions.R` and `targets.R`): `figures/fig-tool-comparison.pdf` (a: capability matrix, b: Jaccard per route, c: build time, artifact size, start to first plot and server memory at 10k / 100k / 500k cells) and `figures/fig-tool-comparison-start.pdf` (service-ready and first-plot time, every single start). Checked with `topics/interface_figures/scripts/check_figures.R`. The screenshot panels of [FIGURES.md](FIGURES.md) are not redone yet.
+Figures (R, ggplot2, Genome Biology rules; `functions.R` and `targets.R`): `figures/fig-tool-comparison.pdf` (a: capability matrix, b: Jaccard per route, c: build time, artifact size, ready + first plot and server and browser memory at 10k / 100k / 500k cells) and `figures/fig-tool-comparison-start.pdf` (service-ready and first-plot time, every single start). Checked with `topics/interface_figures/scripts/check_figures.R`. The screenshot panels of [FIGURES.md](FIGURES.md) are not redone yet.
 
 ## Layout
 

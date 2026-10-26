@@ -14,10 +14,10 @@ TC_CONFIGS <- c(
 )
 TC_COLOURS <- c(
   "CerebroNexus (embedded)" = "#D55E00",
-  "CerebroNexus (HDF5)" = "#D55E00",
+  "CerebroNexus (HDF5)" = "#0072B2",
   "ShinyCell" = "#E69F00",
   "iSEE" = "#009E73",
-  "cellxgene" = "#0072B2",
+  "cellxgene" = "#666666",
   "Vitessce" = "#CC79A7"
 )
 TC_GRADES <- c(
@@ -213,10 +213,11 @@ tool_scale <- function(task3) {
     all(d$starts_ok == "9/9")
   )
   metrics <- c(
-    build_s = "Build time (s)",
-    artifact_gb = "Artifact size (GB)",
-    total_s = "Start to first plot (s)",
-    server_peak_rss_gb = "Server peak memory (GB)"
+    build_s = "Build\ntime (s)",
+    artifact_gb = "Artifact\nsize (GB)",
+    total_s = "Ready +\nfirst plot (s)",
+    server_peak_rss_gb = "Server peak\nmemory (GB)",
+    browser_peak_rss_gb = "Browser peak\nmemory (GB)"
   )
   rows <- lapply(names(metrics), function(m) {
     data.frame(
@@ -426,7 +427,7 @@ plot_start_figure <- function(starts_csv, out_dir) {
       labels = c("10k", "100k", "500k")
     ) +
     ggplot2::scale_y_log10(
-      "Start to first plot per start (s)",
+      "Ready + first plot per start (s)",
       labels = function(x) {
         format(x, scientific = FALSE, drop0trailing = TRUE, trim = TRUE)
       }
@@ -482,6 +483,87 @@ plot_start_figure <- function(starts_csv, out_dir) {
     ggplot2::ggsave(
       file.path(out_dir, "qa", "fig-tool-comparison-start.svg"),
       plot,
+      width = width,
+      height = height,
+      units = "mm",
+      device = svglite::svglite,
+      bg = "white"
+    )
+  }
+  paste0(name, c(".pdf", ".png"))
+}
+
+# Peak memory of the server process tree and of Chrome (psutil, 100 ms
+# samples), stacked: the data work of Vitessce happens in the browser, so the
+# server alone would make it look much smaller than it is.
+plot_memory_figure <- function(task3_csv, out_dir) {
+  d <- utils::read.csv(task3_csv, check.names = FALSE)
+  d$config <- factor(TC_CONFIGS[d$config], unname(TC_CONFIGS))
+  d$tier_label <- factor(
+    format(d$tier, big.mark = ",", trim = TRUE),
+    format(sort(unique(d$tier)), big.mark = ",", trim = TRUE)
+  )
+  long <- rbind(
+    data.frame(
+      d[c("config", "tier_label")],
+      part = "Server",
+      gb = as.numeric(d$server_peak_rss_gb_median)
+    ),
+    data.frame(
+      d[c("config", "tier_label")],
+      part = "Browser",
+      gb = as.numeric(d$browser_peak_rss_gb_median)
+    )
+  )
+  long$part <- factor(long$part, c("Browser", "Server"))
+  p <- ggplot2::ggplot(long, ggplot2::aes(gb, config, fill = part)) +
+    ggplot2::geom_col(width = 0.72, orientation = "y") +
+    ggplot2::facet_grid(tier_label ~ ., scales = "free_x") +
+    ggplot2::scale_fill_manual(
+      NULL,
+      values = c(Server = "#0072B2", Browser = "#E69F00"),
+      breaks = c("Server", "Browser")
+    ) +
+    ggplot2::scale_x_continuous(
+      "Peak memory (GB)",
+      expand = ggplot2::expansion(mult = c(0, 0.05))
+    ) +
+    ggplot2::scale_y_discrete(NULL, limits = rev) +
+    theme_tool_comparison() +
+    ggplot2::theme(
+      legend.position = "inside",
+      legend.position.inside = c(0.97, 0.99),
+      legend.justification = c(1, 1),
+      strip.text.y = ggplot2::element_text(angle = 270),
+      panel.spacing = ggplot2::unit(2, "mm")
+    )
+  width <- 170
+  height <- 95
+  dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+  name <- file.path(out_dir, "fig-tool-comparison-memory")
+  ggplot2::ggsave(
+    paste0(name, ".pdf"),
+    p,
+    width = width,
+    height = height,
+    units = "mm",
+    device = grDevices::cairo_pdf,
+    bg = "white"
+  )
+  ggplot2::ggsave(
+    paste0(name, ".png"),
+    p,
+    width = width,
+    height = height,
+    units = "mm",
+    dpi = 300,
+    bg = "white"
+  )
+  if (requireNamespace("svglite", quietly = TRUE)) {
+    dir.create(file.path(out_dir, "qa"), showWarnings = FALSE)
+    ggplot2::ggsave(
+      file.path(out_dir, "qa", "fig-tool-comparison-memory.svg"),
+      p,
       width = width,
       height = height,
       units = "mm",
