@@ -1,0 +1,23 @@
+Date: 2026-10-27T20:28:35Z
+Host: Apple M1 Pro, 10 CPUs, 32 GB, macOS 27.0.1 (arm64)
+R: R version 4.6.1 (2026-06-24) -- "Happy Hop"
+ShinyCell              2.1.0
+iSEE                   2.24.0
+anndataR               1.2.3
+SingleCellExperiment   1.34.0
+shiny                  1.14.0
+shinyhelper            0.3.2
+hdf5r                  1.3.16
+chromote               0.5.1
+CerebroNexus           6.0.0 (/Volumes/bv_cache/env/rlib/CerebroNexus)
+CerebroNexus commit: CerebroNexus under test: duocang/CerebroNexus branch builder/03_builder, commit 33150d9d7a957607ccf43a0296903e073be2408f 
+Python: Python 3.11.15
+anndata             0.12.19
+cellxgene           1.3.0
+numpy               2.0.1
+pandas              2.3.3
+scanpy              1.11.5
+vitessce            3.8.4
+zarr                2.18.7
+vitessce JS: 3.9.9, bundled with esbuild 0.24.0
+Chrome (chromote): /Applications/Google Chrome.app/Contents/MacOS/Google Chrome

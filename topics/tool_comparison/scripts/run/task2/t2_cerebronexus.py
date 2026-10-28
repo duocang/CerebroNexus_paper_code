@@ -12,17 +12,17 @@ from t2_common import *
 S = load_sets()
 sname = sys.argv[1]; reps = int(sys.argv[2]) if len(sys.argv) > 2 else 3
 route = sys.argv[3] if len(sys.argv) > 3 else "region"
-assert route in ("region", "attribute")
+assert route in ("region", "region-box", "attribute")
 st = S[sname]; PORT = 8841
 crb = {"S1": os.path.join(HERE, "data", "builds", "pilot_cerebronexus_default_I1", "cerebro_pbmc3k.crb"),
        "S2": os.path.join(HERE, "data", "builds", "t1", "cn_I2_seurat", "I2_seurat.crb")}[sname]
 proj = {"S1": "UMAP", "S2": "umap"}[sname]
 group, level = {"S1": ("louvain", "B cells"), "S2": ("CTaa", st["label"].split("'")[1])}[sname]
-tag = "" if route == "region" else "attribute_"          # region file names are unchanged from the first run
+tag = {"region": "", "region-box": "box_", "attribute": "attribute_"}[route]          # region file names are unchanged from the first run
 common = ["lasso", "scroll to 'Table of selected cells', set 'Show' = 1,000 entries", "Download > CSV (browser download)"]
-if route == "region":
+if route in ("region", "region-box"):
     steps = ["open Projection tab", f"set Projection = {proj}", "calibrate data->pixel on a screenshot of the plot (fit quality recorded)",
-             "lasso drag along the convex hull of the target cells", *common[1:]]
+             ("lasso drag along the convex hull of the target cells" if route == "region" else "toolbar: Box select, then drag the margin-expanded bounding box of the target cells"), *common[1:]]
 else:
     steps = ["open Projection tab", f"set Projection = {proj}", "Settings > Group filters", f"open the '{group}' filter, click None, tick '{level}' only, close Settings",
              "lasso drag around the whole plot area, inset 2 px from the canvas edge (the filter decides which cells can be selected)", *common[1:]]
@@ -31,7 +31,7 @@ logdir = os.path.join(HERE, "results", "evidence", "task2"); os.makedirs(logdir,
 try:
     for rep in range(1, reps + 1):
         row = dict(tool="CerebroNexus", set=sname, set_definition=st["label"],
-                   route=("region (lasso)" if route == "region" else "attribute (group filter + lasso)"),
+                   route={"region": "region (lasso)", "region-box": "region (box select)", "attribute": "attribute (group filter + lasso)"}[route],
                    export_route="Table of selected cells > Download > CSV", route_steps=steps, repeat=rep, status="ok")
         br = harness.BrowserRun(); pg = br.page
         try:
@@ -43,12 +43,12 @@ try:
                 time.sleep(0.5); b2 = el.bounding_box()
                 if b2 == box: break
                 box = b2
-            if route == "region":
+            if route in ("region", "region-box"):
                 png = el.screenshot(); w = box["width"]
                 f = calib.fit_both(png, st["umap"], exclude=[(w - 230, 0, w, 40)], dot_radius=3)
                 row["calibration"] = {k: (round(v, 4) if isinstance(v, float) else v) for k, v in f.items()}
                 tgt = np.isin(st["ids"], list(st["truth"]))
-                hull = calib.expanded_hull(calib.to_pixels(f, st["umap"][tgt])); row["margin_px"] = calib.MARGIN_PX
+                pix = calib.to_pixels(f, st["umap"][tgt]); hull = calib.expanded_hull(pix) if route == "region" else calib.expanded_bbox(pix); row["margin_px"] = calib.MARGIN_PX
                 box2 = el.bounding_box(); row["box_at_calibration"] = box; row["box_at_drag"] = box2
                 pts = [(box2["x"] + x, box2["y"] + y) for x, y in hull]
             else:
@@ -73,7 +73,13 @@ try:
                 x0, y0, x1, y1 = box2["x"] + 2, box2["y"] + 2, box2["x"] + box2["width"] - 2, box2["y"] + box2["height"] - 2
                 pts = [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
                 row["inset_px"] = 2
-            drag_polygon(pg, pts); time.sleep(3)
+            if route == "region-box":
+                el.hover(); time.sleep(0.5); pg.locator("button.cv-tbtn[data-act='box']").first.click(force=True); time.sleep(1)
+                (bx0, by0), (bx1, by1) = pts[0], pts[2]
+                pg.mouse.move(bx0, by0); pg.mouse.down(); pg.mouse.move(bx1, by1, steps=12); pg.mouse.up()
+            else:
+                drag_polygon(pg, pts)
+            time.sleep(3)
             pg.screenshot(path=os.path.join(logdir, f"cerebronexus_{sname}_{tag}{rep}_selection.png")); row["polygon_px"] = [[round(a), round(b)] for a, b in pts]
             row["ui_selected_text"] = pg.evaluate("() => { const t = document.body.innerText; const m = t.match(/Selected [0-9,]+ \/ [0-9,]+ cells/); return m ? m[0] : null }")
             sel = pg.locator("select[name$='_length']").last

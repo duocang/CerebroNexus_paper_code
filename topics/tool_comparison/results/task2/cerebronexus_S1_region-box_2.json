@@ -1,0 +1,66 @@
+{
+ "tool": "CerebroNexus",
+ "set": "S1",
+ "set_definition": "louvain == 'B cells'",
+ "route": "region (box select)",
+ "export_route": "Table of selected cells > Download > CSV",
+ "route_steps": [
+  "open Projection tab",
+  "set Projection = UMAP",
+  "calibrate data->pixel on a screenshot of the plot (fit quality recorded)",
+  "toolbar: Box select, then drag the margin-expanded bounding box of the target cells",
+  "scroll to 'Table of selected cells', set 'Show' = 1,000 entries",
+  "Download > CSV (browser download)"
+ ],
+ "repeat": 2,
+ "status": "ok",
+ "calibration": {
+  "ax": 90.7265,
+  "bx": 916.5476,
+  "ay": -39.6369,
+  "by": 446.4833,
+  "quality": 0.8477,
+  "y_flipped": false,
+  "dot_radius": 3,
+  "quality_dilated": 1.0
+ },
+ "margin_px": 4.0,
+ "box_at_calibration": {
+  "x": 265,
+  "y": 274.5,
+  "width": 1290,
+  "height": 694
+ },
+ "box_at_drag": {
+  "x": 265,
+  "y": 274.5,
+  "width": 1290,
+  "height": 694
+ },
+ "polygon_px": [
+  [
+   1096,
+   325
+  ],
+  [
+   1332,
+   325
+  ],
+  [
+   1332,
+   646
+  ],
+  [
+   1096,
+   646
+  ]
+ ],
+ "ui_selected_text": "Selected 620 / 2,638 cells",
+ "n_exported": 620,
+ "n_truth": 342,
+ "n_intersection": 342,
+ "jaccard": 0.5516129032258065,
+ "precision": 0.5516129032258065,
+ "recall": 1.0,
+ "export_file": "results\\evidence\\task2\\cerebronexus_S1_box_2.csv"
+}

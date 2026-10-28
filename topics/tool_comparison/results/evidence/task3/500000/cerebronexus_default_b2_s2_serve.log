@@ -4,7 +4,7 @@
 Loading required package: shiny
 
 Listening on http://127.0.0.1:8811
-[2026-10-26 13:23:03.017431] CRB cache hit: cerebro_e18_500000.crb
+[2026-10-26 23:47:26.94236] CRB cache hit: cerebro_e18_500000.crb
 class: Cerebro
 exporter package version: 6.0.0
 experiment name: e18_500000
@@ -27,4 +27,4 @@ HLA typing: none
 Spatial data:
 
 
-[2026-10-26 13:23:03.090225] Format of expression data: dgCMatrix
+[2026-10-26 23:47:27.07244] Format of expression data: dgCMatrix

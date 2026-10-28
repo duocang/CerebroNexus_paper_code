@@ -1,2 +1,4 @@
 PROTOCOL.md text eol=lf
 results/PROTOCOL.sha256 text eol=lf
+PROTOCOL_task4.md text eol=lf
+results/task4/PROTOCOL.sha256 text eol=lf

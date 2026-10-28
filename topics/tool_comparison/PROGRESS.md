@@ -74,3 +74,19 @@ Correction (same day): the whole-file hash above is that of the PROTOCOL.md as f
 - A first launch of the re-run started two runners at once (my mistake; the process check I used to wait did not see the second one); the starts of that attempt failed or were `not_run`; stopped, moved to `results/superseded/cerebronexus_c9bc0a0d_aborted_two_runners/`, and the tier run again with one runner.
 - Median at 500,000 cells: H5 build 876 s -> 176 s (5.0x), 100,000 cells 73 s -> 35 s; embedded build 165 s -> 183 s (unchanged within noise); ready 3.2 s and 20.6 -> 21.3 s; first plot 1.95 -> 2.15 s (H5) and 2.54 -> 2.81 s (embedded), 0.2-0.5 s longer than in the earlier runs for reasons not looked for (the change does not touch the Viewer). Idle CPU before the new starts: median 5.1%, maximum 8.4%.
 - `figures/fig-tool-comparison-start.pdf|png` redrawn; `figures/fig-tool-comparison.pdf` could not be redrawn because the PDF is open in a viewer (file locked): it still shows the numbers before D6 until it is redrawn.
+
+## 2026-10-27, CerebroNexus re-run with the compiled H5 and export optimisations (Deviation D7)
+
+- New pin `f86667ae9` of `tmp/应急` (the optimisation branch `tmp/应急-优化` was merged into it). Package with C++ code built with the Rtools45 compiler under R 4.6.1. New 10,000-cell `.h5` equal in every value to the previous one (data float32, no filter). Both CerebroNexus configurations run again on all three tiers (54 starts, all `ok`); earlier rows in `results/superseded/cerebronexus_c9bc0a0d/`.
+- 500,000 cells, median: H5 build 176 s -> 43 s (41-78), artifact 11.4 -> 7.6 GB; embedded build 183 -> 252 s, server peak 15.8 -> 19.3 GB. Ready and first plot of all starts were longer than before while the host was busier (idle CPU median 10.8%, max 71.3%; WSL `vmmemWSL` about 1.5 cores): see D7.
+
+## 2026-10-27, box select for CerebroNexus, figure key, merge to main (Deviation D8)
+
+- Task 2: CerebroNexus box-select route added (S1 0.552, S2 0.423, three runs each, same every time). The iSEE box-brush rows are the whole table (no selection formed), kept as recorded (D8).
+- Figures: panel a has a key for the grades (auto, manual, absent, rejected, silent); panel b shows the CerebroNexus box point; `Ready + first plot` and separate server and browser memory in panel c; `fig-tool-comparison-memory` stacks server and browser.
+- A CerebroNexus H5 + Blosc configuration was started and stopped (the Blosc rewrite after the build, done with rhdf5 from R, took about a minute at 10,000 cells and would have taken hours at 500,000); its 10,000-cell rows are in `results/superseded/cerebronexus_h5_blosc_abandoned/` and in no table.
+- Merged into `main` and the worktree removed.
+
+## 2026-10-27, iSEE box brush re-run (Deviation D9)
+
+- Only the iSEE box-brush route of Task 2 was run again: the drag now forms a selection (S1 0.545, 628 cells; S2 0.379, 29 cells in two runs and one run without a selection). The earlier rows (whole table) are in `results/superseded/isee_box_brush_no_selection/`.

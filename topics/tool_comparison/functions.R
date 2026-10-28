@@ -95,12 +95,49 @@ plot_capabilities <- function(cap) {
   cap$tool <- factor(cap$tool, rev(TC_TOOLS))
   cap$capability <- factor(cap$capability, unique(cap$capability))
   cap$grade <- factor(cap$grade, names(TC_GRADES))
+  # Key under the matrix: what each grade means (drawn below the panel).
+  key <- data.frame(
+    grade = factor(
+      c("auto", "manual", "absent", "rejected", "silent"),
+      names(TC_GRADES)
+    ),
+    label = c(
+      "auto: default call",
+      "manual: extra step or code",
+      "absent: not offered",
+      "rejected: duplicates refused",
+      "silent: duplicates kept, no warning"
+    ),
+    x = c(0.75, 0.75, 0.75, 4.95, 4.95),
+    y = c(-0.2, -0.75, -1.3, -0.2, -0.75)
+  )
   ggplot2::ggplot(cap, ggplot2::aes(capability, tool, fill = grade)) +
     ggplot2::geom_tile(colour = "white", linewidth = 2 * TC_LINE) +
     ggplot2::geom_text(
       ggplot2::aes(label = grade),
       size = 6 / ggplot2::.pt,
       family = "Arial"
+    ) +
+    ggplot2::geom_tile(
+      data = key,
+      ggplot2::aes(x = x, y = y, fill = grade),
+      width = 0.4,
+      height = 0.3,
+      inherit.aes = FALSE
+    ) +
+    ggplot2::geom_text(
+      data = key,
+      ggplot2::aes(x = x + 0.45, y = y, label = label),
+      hjust = 0,
+      size = TC_TEXT_PT / ggplot2::.pt,
+      family = "Arial",
+      inherit.aes = FALSE
+    ) +
+    ggplot2::coord_cartesian(
+      xlim = c(0.5, 8.5),
+      ylim = c(0.5, 5.5),
+      expand = FALSE,
+      clip = "off"
     ) +
     ggplot2::scale_fill_manual(
       values = TC_GRADES,
@@ -112,6 +149,7 @@ plot_capabilities <- function(cap) {
     ggplot2::labs(x = NULL, y = NULL) +
     theme_tool_comparison() +
     ggplot2::theme(
+      plot.margin = ggplot2::margin(1, 1, 16, 1, "mm"),
       axis.line = ggplot2::element_blank(),
       axis.ticks = ggplot2::element_blank(),
       axis.text.x.top = ggplot2::element_text(
@@ -131,7 +169,7 @@ tool_selection <- function(task2) {
     grepl("^attribute", d$route),
     "Attribute",
     ifelse(
-      grepl("box brush", d$route),
+      grepl("box (brush|select)", d$route),
       "Box brush",
       ifelse(grepl("lasso", d$route), "Lasso", NA)
     )
@@ -214,10 +252,10 @@ tool_scale <- function(task3) {
   )
   metrics <- c(
     build_s = "Build\ntime (s)",
-    artifact_gb = "Artifact\nsize (GB)",
+    artifact_gb = "Artifact\nsize (GiB)",
     total_s = "Ready +\nfirst plot (s)",
-    server_peak_rss_gb = "Server peak\nmemory (GB)",
-    browser_peak_rss_gb = "Browser peak\nmemory (GB)"
+    server_peak_rss_gb = "Server peak\nmemory (GiB)",
+    browser_peak_rss_gb = "Browser peak\nmemory (GiB)"
   )
   rows <- lapply(names(metrics), function(m) {
     data.frame(
@@ -298,7 +336,7 @@ plot_tool_comparison <- function(task1, task2, task3, out_dir) {
     patchwork::wrap_plots(a, b, widths = c(1.15, 1)),
     c,
     ncol = 1,
-    heights = c(1, 1)
+    heights = c(0.8, 1)
   ) +
     patchwork::plot_annotation(tag_levels = "a")
   plot <- plot &
@@ -310,7 +348,7 @@ plot_tool_comparison <- function(task1, task2, task3, out_dir) {
       )
     )
   width <- 170
-  height <- 120
+  height <- 123
   dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
   name <- file.path(out_dir, "fig-tool-comparison")
   ggplot2::ggsave(
@@ -525,7 +563,7 @@ plot_memory_figure <- function(task3_csv, out_dir) {
       breaks = c("Server", "Browser")
     ) +
     ggplot2::scale_x_continuous(
-      "Peak memory (GB)",
+      "Peak memory (GiB)",
       expand = ggplot2::expansion(mult = c(0, 0.05))
     ) +
     ggplot2::scale_y_discrete(NULL, limits = rev) +
@@ -564,6 +602,223 @@ plot_memory_figure <- function(task3_csv, out_dir) {
     ggplot2::ggsave(
       file.path(out_dir, "qa", "fig-tool-comparison-memory.svg"),
       p,
+      width = width,
+      height = height,
+      units = "mm",
+      device = svglite::svglite,
+      bg = "white"
+    )
+  }
+  paste0(name, c(".pdf", ".png"))
+}
+
+# Task 4 (Supplementary Figure S13): build time and start-to-main-view time
+# per tool (a; 3 runs as circles, median as a bar) and what each tool offers
+# for a shared deployment (b), from results/task4/task4_*.csv.
+TC_TASK4_TOOLS <- c(
+  cerebronexus = "CerebroNexus",
+  "cerebronexus (login)" = "CerebroNexus with login",
+  shinycell = "ShinyCell",
+  isee = "iSEE",
+  cellxgene = "cellxgene",
+  vitessce = "Vitessce"
+)
+
+plot_task4_times <- function(build, deploy) {
+  stopifnot(
+    all(build$exit_status == 0),
+    all(build$cells == 2638),
+    all(deploy$http == 200),
+    all(deploy$view_drawn)
+  )
+  deploy$tool[deploy$login] <- "cerebronexus (login)"
+  times <- rbind(
+    data.frame(
+      tool = build$tool,
+      run = build$run,
+      metric = "Build (s)",
+      seconds = build$seconds
+    ),
+    data.frame(
+      tool = deploy$tool,
+      run = deploy$run,
+      metric = "Start to main view (s)",
+      seconds = deploy$seconds_to_view
+    )
+  )
+  stopifnot(all(table(times$tool, times$metric) == 3))
+  times$tool <- factor(TC_TASK4_TOOLS[times$tool], rev(unname(TC_TASK4_TOOLS)))
+  med <- stats::aggregate(seconds ~ tool + metric, times, stats::median)
+  colours <- TC_COLOURS[c(
+    "CerebroNexus (embedded)",
+    "CerebroNexus (embedded)",
+    "ShinyCell",
+    "iSEE",
+    "cellxgene",
+    "Vitessce"
+  )]
+  names(colours) <- unname(TC_TASK4_TOOLS)
+  ggplot2::ggplot(times, ggplot2::aes(seconds, tool, colour = tool)) +
+    ggplot2::geom_errorbar(
+      data = med,
+      ggplot2::aes(xmin = seconds, xmax = seconds),
+      width = 0.6,
+      linewidth = 2 * TC_LINE
+    ) +
+    ggplot2::geom_point(shape = 1, size = 1.4, stroke = 2 * TC_LINE) +
+    ggplot2::facet_wrap(~metric, nrow = 1, scales = "free_x") +
+    ggplot2::scale_x_continuous(
+      NULL,
+      limits = c(0, NA),
+      expand = ggplot2::expansion(mult = c(0, 0.05))
+    ) +
+    ggplot2::scale_y_discrete(NULL) +
+    ggplot2::scale_colour_manual(values = colours, guide = "none") +
+    theme_tool_comparison() +
+    ggplot2::theme(
+      panel.spacing = ggplot2::unit(4, "mm"),
+      panel.grid.major.x = ggplot2::element_line(
+        colour = "grey90",
+        linewidth = TC_LINE
+      )
+    )
+}
+
+# One tile per tool and deployment property: login documented (only
+# CerebroNexus documents one for a shared artifact), data files served without
+# login, view state restored after a restart, previous version kept after a
+# killed update.
+task4_capabilities <- function(deploy, state, update) {
+  good <- "#009E73"
+  manual <- "#E69F00"
+  none <- "#D9D9D9"
+  bad <- "#D55E00"
+  neutral <- "#56B4E9"
+  cell <- function(tool, capability, label, fill) {
+    data.frame(tool, capability, label, fill)
+  }
+  login <- "Login\ndocumented"
+  served <- "Data files served\nwithout login"
+  restored <- "View state restored\nafter restart"
+  kept <- "Killed update keeps\nprevious version"
+  tools <- setdiff(names(TC_TASK4_TOOLS), "cerebronexus (login)")
+  rows <- lapply(tools, function(t) {
+    reachable <- unique(deploy$data_reachable[deploy$tool == t])
+    stopifnot(length(reachable) == 1)
+    s <- state[state$tool == t, ]
+    u <- update[update$tool == t, ]
+    stopifnot(u$killed_while_running)
+    rbind(
+      if (t == "cerebronexus") {
+        cell(t, login, "yes", good)
+      } else {
+        cell(t, login, "no", none)
+      },
+      if (reachable) {
+        cell(t, served, "yes (by design)", neutral)
+      } else {
+        cell(t, served, "no (404)", good)
+      },
+      switch(
+        s$grade,
+        done = if (isTRUE(s$restored_after_restart)) {
+          cell(t, restored, "yes", good)
+        } else {
+          stop(t)
+        },
+        manual = if (isTRUE(s$restored_after_restart)) {
+          cell(t, restored, "manual (restart\nwith saved file)", manual)
+        } else {
+          cell(t, restored, "manual (not run)", manual)
+        },
+        absent = cell(t, restored, "absent", none)
+      ),
+      if (u$after_kill == "v1") {
+        cell(
+          t,
+          kept,
+          if (t == "cerebronexus") {
+            "yes (staged release)"
+          } else {
+            "yes (killed before\nwriting)"
+          },
+          good
+        )
+      } else {
+        cell(t, kept, u$after_kill, bad)
+      }
+    )
+  })
+  cap <- do.call(rbind, rows)
+  cap$tool <- factor(TC_TASK4_TOOLS[cap$tool], rev(unname(TC_TASK4_TOOLS[tools])))
+  cap$capability <- factor(cap$capability, unique(cap$capability))
+  cap
+}
+
+plot_task4_capabilities <- function(cap) {
+  ggplot2::ggplot(cap, ggplot2::aes(capability, tool, fill = fill)) +
+    ggplot2::geom_tile(colour = "white", linewidth = 2 * TC_LINE) +
+    ggplot2::geom_text(
+      ggplot2::aes(label = label),
+      size = TC_TEXT_PT / ggplot2::.pt,
+      family = "Arial",
+      lineheight = 0.9
+    ) +
+    ggplot2::scale_fill_identity() +
+    ggplot2::scale_x_discrete(NULL, position = "top", expand = c(0, 0)) +
+    ggplot2::scale_y_discrete(NULL, expand = c(0, 0)) +
+    theme_tool_comparison() +
+    ggplot2::theme(
+      axis.line = ggplot2::element_blank(),
+      axis.ticks = ggplot2::element_blank()
+    )
+}
+
+# Draw the figure to <out_dir>/fig-tool-comparison-task4.{pdf,png} (PNG at
+# 600 dpi, plus an SVG twin in qa/ for check_figures.R) and return the files.
+plot_task4_figure <- function(build_csv, deploy_csv, state_csv, update_csv, out_dir) {
+  read <- function(f) utils::read.csv(f, check.names = FALSE)
+  deploy <- read(deploy_csv)
+  a <- plot_task4_times(read(build_csv), deploy)
+  b <- plot_task4_capabilities(
+    task4_capabilities(deploy, read(state_csv), read(update_csv))
+  )
+  plot <- patchwork::wrap_plots(a, b, ncol = 1, heights = c(1, 1.15)) +
+    patchwork::plot_annotation(tag_levels = "a") &
+    ggplot2::theme(
+      plot.tag = ggplot2::element_text(
+        size = 8,
+        face = "bold",
+        family = "Arial"
+      )
+    )
+  width <- 170
+  height <- 105
+  dir.create(file.path(out_dir, "qa"), recursive = TRUE, showWarnings = FALSE)
+  name <- file.path(out_dir, "fig-tool-comparison-task4")
+  ggplot2::ggsave(
+    paste0(name, ".pdf"),
+    plot,
+    width = width,
+    height = height,
+    units = "mm",
+    device = grDevices::cairo_pdf,
+    bg = "white"
+  )
+  ggplot2::ggsave(
+    paste0(name, ".png"),
+    plot,
+    width = width,
+    height = height,
+    units = "mm",
+    dpi = 600,
+    device = ragg::agg_png,
+    bg = "white"
+  )
+  if (requireNamespace("svglite", quietly = TRUE)) {
+    ggplot2::ggsave(
+      file.path(out_dir, "qa", "fig-tool-comparison-task4.svg"),
+      plot,
       width = width,
       height = height,
       units = "mm",

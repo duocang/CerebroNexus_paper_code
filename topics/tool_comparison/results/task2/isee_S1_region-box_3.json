@@ -30,15 +30,15 @@
   406,
   254
  ],
- "ui_selected_text": null,
+ "ui_selected_text": "628 of 2638 columns in active selection (23.8%)",
  "export_file": "results\\evidence\\task2\\isee_S1_region-box_3_iSEE_exports.zip",
  "zip_members": [
   "ColumnDataTable1.csv"
  ],
- "n_exported": 2638,
+ "n_exported": 628,
  "n_truth": 342,
  "n_intersection": 342,
- "jaccard": 0.12964366944655042,
- "precision": 0.12964366944655042,
+ "jaccard": 0.5445859872611465,
+ "precision": 0.5445859872611465,
  "recall": 1.0
 }

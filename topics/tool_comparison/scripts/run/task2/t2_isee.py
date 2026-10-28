@@ -40,7 +40,12 @@ try:
                 else:
                     bb = calib.expanded_bbox(pix); (x0, y0), (x1, _), (_, y1) = bb[0], bb[1], bb[2]
                     row["bbox_px"] = [round(x0), round(y0), round(x1), round(y1)]
-                    pg.mouse.move(box2["x"] + x0, box2["y"] + y0); pg.mouse.down(); pg.mouse.move(box2["x"] + x1, box2["y"] + y1, steps=10); pg.mouse.up(); time.sleep(3)
+                    # A Playwright mouse drag alone does not commit a brush in iSEE (no brush input, Deviation D8); a first real drag creates the brush element, and the same mousedown / mousemove / mouseup sequence sent as DOM events on the plot image then commits it.
+                    pg.mouse.move(box2["x"] + x0, box2["y"] + y0); pg.mouse.down(); pg.mouse.move(box2["x"] + x1, box2["y"] + y1, steps=10); pg.mouse.up(); time.sleep(1)
+                    pg.evaluate("""([x0, y0, x1, y1]) => { const img = document.querySelector('#ReducedDimensionPlot1 img');
+                        const fire = (t, x, y, target) => (target || img).dispatchEvent(new MouseEvent(t, {bubbles: true, cancelable: true, clientX: x, clientY: y, button: 0, buttons: t === 'mouseup' ? 0 : 1, view: window}));
+                        fire('mousedown', x0, y0); for (let i = 1; i <= 15; i++) fire('mousemove', x0 + (x1 - x0) * i / 15, y0 + (y1 - y0) * i / 15, document); fire('mouseup', x1, y1, document); }""",
+                        [box2["x"] + x0, box2["y"] + y0, box2["x"] + x1, box2["y"] + y1]); time.sleep(4)
                 row["ui_selected_text"] = (re.findall(r"[0-9,]+ of [0-9,]+ columns in active selection.*", pg.evaluate("() => document.body.innerText")) or [None])[0]
                 pg.screenshot(path=os.path.join(HERE, "results", "evidence", "task2", f"isee_{sname}_{route}_{rep}_selection.png"))
                 pg.evaluate("() => document.getElementById('ColumnDataTable1_ColumnSelectionSource').selectize.setValue('ReducedDimensionPlot1')"); time.sleep(3)

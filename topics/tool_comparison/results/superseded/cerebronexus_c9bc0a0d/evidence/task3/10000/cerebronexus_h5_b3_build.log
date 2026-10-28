@@ -1,0 +1,39 @@
+[13:00:09] Calculating most expressed genes and mean expression for each group...
+[13:00:10] Processing group: cluster
+[13:00:11] Most expressed genes and mean expression calculation completed.
+[13:00:11] Initializing Cerebro object...
+[13:00:11] Writing expression matrix to TENx HDF5 file: C:/Users/wangx/Projects/worktrees/paper-tool-comparison-r2/topics/tool_comparison/data/builds/t3/10000/cerebronexus_h5_b3\.crb-stage-92d068fc7da8/cerebro_e18_10000.h5
+[13:00:12] Extracting all meta data columns...
+[13:00:12] Extracting dimensional reductions...
+[13:00:12] Will export the following dimensional reductions: UMAP
+[13:00:12] Extracting tables of most expressed genes...
+[13:00:12] Extracting tables of mean expression...
+[13:00:12] No trajectories to extract...
+[13:00:12] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: e18_10000
+organism: Human
+date of analysis: 
+date of export: 2026-10-26
+number of cells: NULL
+number of genes: NULL
+grouping variables (1): cluster
+cell cycle variables (0): 
+projections (1): UMAP
+trees (0): 
+most expressed genes: cluster
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+[13:00:12] Saving Cerebro object to: C:\Users\wangx\Projects\worktrees\paper-tool-comparison-r2\topics\tool_comparison\data\builds\t3\10000\cerebronexus_h5_b3/cerebro_e18_10000.crb
+[13:00:12] Done!
+Successfully exported: cerebro_e18_10000.crb 
+RESULT: [1] "C:\\Users\\wangx\\Projects\\worktrees\\paper-tool-comparison-r2\\topics\\tool_comparison\\data\\builds\\t3\\10000\\cerebronexus_h5_b3/cerebro_e18_10000.crb" 
+FILES: cerebro_e18_10000.crb, cerebro_e18_10000.h5 

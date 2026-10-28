@@ -58,8 +58,8 @@ env = {
              "packages": {n: json.load(open(os.path.join(HERE, "env", "js", "node_modules", n, "package.json")))["version"]
                           for n in ["vitessce", "react", "react-dom", "esbuild"]}},
     "tools": {
-        "CerebroNexus": {"version": rpk.get("CerebroNexus"), "branch": "tmp/应急-优化 (tmp/应急 plus the H5 sidecar write optimisation)", "commit": "c9bc0a0d5eee005e8e581d549f464ec73031ece7",
-                         "source_tarball": "env/src/CerebroNexus-tmp-emergency-opt-c9bc0a0d.tar.gz", "tarball_sha256": sha256(os.path.join(HERE, "env", "src", "CerebroNexus-tmp-emergency-opt-c9bc0a0d.tar.gz"))},
+        "CerebroNexus": {"version": rpk.get("CerebroNexus"), "branch": "tmp/应急 (with the H5 sidecar and export optimisations, compiled code)", "commit": "f86667ae9",
+                         "source_tarball": "env/src/CerebroNexus-tmp-emergency-f86667ae.tar.gz", "tarball_sha256": sha256(os.path.join(HERE, "env", "src", "CerebroNexus-tmp-emergency-f86667ae.tar.gz"))},
         "ShinyCell": {"version": rpk.get("ShinyCell"), "commit": "5c61db78cdd624636e161406d5d42aeb2c0f1205"},
         "iSEE": {"version": rpk.get("iSEE"), "source": "Bioconductor " + bioc},
         "cellxgene": {"version": py_pk["cellxgene"]},

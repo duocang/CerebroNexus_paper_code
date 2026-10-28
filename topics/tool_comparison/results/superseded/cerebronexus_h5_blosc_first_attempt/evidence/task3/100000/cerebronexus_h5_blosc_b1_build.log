@@ -1,0 +1,41 @@
+[00:36:15] Calculating most expressed genes and mean expression for each group...
+[00:36:15] Processing group: cluster
+[00:36:16] Most expressed genes and mean expression calculation completed.
+[00:36:16] Initializing Cerebro object...
+[00:36:16] Moving expression matrix written from the h5ad to: C:/Users/wangx/Projects/worktrees/paper-tool-comparison-r2/topics/tool_comparison/data/builds/t3/100000/cerebronexus_h5_blosc_b1\.crb-stage-5da070ee1c35/cerebro_e18_100000.h5
+[00:36:16] Extracting all meta data columns...
+[00:36:16] Extracting dimensional reductions...
+[00:36:16] Will export the following dimensional reductions: UMAP
+[00:36:16] Extracting tables of most expressed genes...
+[00:36:16] Extracting tables of mean expression...
+[00:36:16] No trajectories to extract...
+[00:36:16] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: e18_100000
+organism: Human
+date of analysis: 
+date of export: 2026-10-27
+number of cells: NULL
+number of genes: NULL
+grouping variables (1): cluster
+cell cycle variables (0): 
+projections (1): UMAP
+trees (0): 
+most expressed genes: cluster
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+[00:36:16] Saving Cerebro object to: C:\Users\wangx\Projects\worktrees\paper-tool-comparison-r2\topics\tool_comparison\data\builds\t3\100000\cerebronexus_h5_blosc_b1/cerebro_e18_100000.crb
+[00:36:17] Done!
+Successfully exported: cerebro_e18_100000.crb 
+RESULT: [1] "C:\\Users\\wangx\\Projects\\worktrees\\paper-tool-comparison-r2\\topics\\tool_comparison\\data\\builds\\t3\\100000\\cerebronexus_h5_blosc_b1/cerebro_e18_100000.crb" 
+FILES: cerebro_e18_100000.crb, cerebro_e18_100000.h5 
+Error in tick() : could not find function "tick"
+Execution halted

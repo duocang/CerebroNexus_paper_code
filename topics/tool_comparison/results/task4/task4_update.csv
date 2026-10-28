@@ -1,0 +1,6 @@
+"tool","v1_cells","update_exit","after_update","update_deploy_drawn","kill_after_s","killed_while_running","after_kill","recovery","after_recovery","killed_deploy_http","killed_deploy_drawn"
+"cerebronexus",2638,0,"v2",TRUE,6.21,TRUE,"v1","state=ready -> ready","v1",200,TRUE
+"shinycell",2638,0,"v2",TRUE,2.91,TRUE,"v1","","v1",200,TRUE
+"isee",2638,0,"v2",TRUE,4.08,TRUE,"v1","","v1",200,TRUE
+"cellxgene",2638,0,"v2",TRUE,0.05,TRUE,"unreadable","","unreadable",NA,FALSE
+"vitessce",2638,0,"v2",TRUE,0.76,TRUE,"v1","","v1",200,TRUE

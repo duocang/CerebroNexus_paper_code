@@ -1,0 +1,19 @@
+"tool","run","login","http","view_drawn","seconds_to_view","data_file_requests","data_reachable"
+"cerebronexus",1,FALSE,200,TRUE,5.54,"private-data/01-pbmc3k-pbmc3k.crb -> 404",FALSE
+"cerebronexus",2,FALSE,200,TRUE,4.05,"private-data/01-pbmc3k-pbmc3k.crb -> 404",FALSE
+"cerebronexus",3,FALSE,200,TRUE,4.09,"private-data/01-pbmc3k-pbmc3k.crb -> 404",FALSE
+"shinycell",1,FALSE,200,TRUE,3.19,"sc1gexpr.h5 -> 404; sc1meta.rds -> 404",FALSE
+"shinycell",2,FALSE,200,TRUE,2.94,"sc1gexpr.h5 -> 404; sc1meta.rds -> 404",FALSE
+"shinycell",3,FALSE,200,TRUE,2.97,"sc1gexpr.h5 -> 404; sc1meta.rds -> 404",FALSE
+"isee",1,FALSE,200,TRUE,7.89,"sce.rds -> 404",FALSE
+"isee",2,FALSE,200,TRUE,7.81,"sce.rds -> 404",FALSE
+"isee",3,FALSE,200,TRUE,7.87,"sce.rds -> 404",FALSE
+"cellxgene",1,FALSE,200,TRUE,4.47,"data.h5ad -> 404; api/v0.2/schema -> 200; api/v0.2/annotations/obs -> 200",TRUE
+"cellxgene",2,FALSE,200,TRUE,3.73,"data.h5ad -> 404; api/v0.2/schema -> 200; api/v0.2/annotations/obs -> 200",TRUE
+"cellxgene",3,FALSE,200,TRUE,3.75,"data.h5ad -> 404; api/v0.2/schema -> 200; api/v0.2/annotations/obs -> 200",TRUE
+"vitessce",1,FALSE,200,TRUE,0.94,"data.zarr/.zgroup -> 200; data.zarr/obs/.zattrs -> 200; config.json -> 404",TRUE
+"vitessce",2,FALSE,200,TRUE,0.93,"data.zarr/.zgroup -> 200; data.zarr/obs/.zattrs -> 200; config.json -> 404",TRUE
+"vitessce",3,FALSE,200,TRUE,0.93,"data.zarr/.zgroup -> 200; data.zarr/obs/.zattrs -> 200; config.json -> 404",TRUE
+"cerebronexus",1,TRUE,200,TRUE,5.61,"private-data/01-pbmc3k-pbmc3k.crb -> 404",FALSE
+"cerebronexus",2,TRUE,200,TRUE,5.55,"private-data/01-pbmc3k-pbmc3k.crb -> 404",FALSE
+"cerebronexus",3,TRUE,200,TRUE,5.6,"private-data/01-pbmc3k-pbmc3k.crb -> 404",FALSE

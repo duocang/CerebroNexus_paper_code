@@ -19,5 +19,26 @@ targets_tool_comparison <- list(
       "topics/tool_comparison/figures"
     ),
     format = "file"
+  ),
+  # Task 4 (Supplementary Figure S13), measured on a Mac with
+  # scripts/run/task4/; see the Task 4 section of the README.
+  tar_target(
+    tool_comparison_task4_results,
+    file.path(
+      "topics/tool_comparison/results/task4",
+      c("task4_build.csv", "task4_deploy.csv", "task4_state.csv", "task4_update.csv")
+    ),
+    format = "file"
+  ),
+  tar_target(
+    tool_comparison_task4_figure,
+    plot_task4_figure(
+      tool_comparison_task4_results[[1]],
+      tool_comparison_task4_results[[2]],
+      tool_comparison_task4_results[[3]],
+      tool_comparison_task4_results[[4]],
+      "topics/tool_comparison/figures"
+    ),
+    format = "file"
   )
 )

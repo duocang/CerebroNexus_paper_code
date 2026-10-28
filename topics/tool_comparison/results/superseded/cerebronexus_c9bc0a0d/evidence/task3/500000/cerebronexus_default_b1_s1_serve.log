@@ -1,0 +1,30 @@
+##---------------------------------------------------------------------------##
+## Launching CerebroNexus
+##---------------------------------------------------------------------------##
+Loading required package: shiny
+
+Listening on http://127.0.0.1:8811
+[2026-10-26 13:17:43.846942] CRB cache hit: cerebro_e18_500000.crb
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: e18_500000
+organism: Human
+date of analysis: 
+date of export: 2026-10-26
+number of cells: 500,000
+number of genes: 27,998
+grouping variables (1): cluster
+cell cycle variables (0): 
+projections (1): UMAP
+trees (0): 
+most expressed genes: cluster
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+
+[2026-10-26 13:17:43.929818] Format of expression data: dgCMatrix
