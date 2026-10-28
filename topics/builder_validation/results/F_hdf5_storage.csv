@@ -1,0 +1,8 @@
+"build","file","bytes","filters","expr_max_abs_diff_vs_source"
+"Builder, B_BACKEND=h5: visium","01-visium-anterior1-visium.h5",185007769,"shuffle+deflate",NA
+"Builder, B_BACKEND=h5: xenium","01-xenium-brain-xenium.h5",31681919,"shuffle+deflate",NA
+"Builder, B_BACKEND=h5: pbmc_seurat","01-pbmc-seurat-pbmc-seurat.h5",219023,"shuffle+deflate",NA
+"Builder, B_BACKEND=h5: pbmc_sce","01-pbmc-sce-pbmc-sce.h5",219023,"shuffle+deflate",NA
+"Builder, B_BACKEND=h5: pbmc_sce_own_qc","01-pbmc-sce-own-qc-pbmc-sce-own-qc.h5",219023,"shuffle+deflate",NA
+"Builder, B_BACKEND=h5: pbmc3k_h5ad","01-pbmc3k-h5ad-pbmc3k-h5ad.h5",58361835,"shuffle+deflate",NA
+"exportFromSeurat(h5_compression_level = 6): visium","visium_level6.h5",113257172,"shuffle+deflate",0

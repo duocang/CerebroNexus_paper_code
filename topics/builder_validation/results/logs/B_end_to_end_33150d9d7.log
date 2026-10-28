@@ -1,0 +1,359 @@
+
+==== visium ====
+[22:05:17] Start collecting data...
+[22:05:17] Adding expression data (embedded)...
+[22:05:17] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: Visium anterior1
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[22:05:18] Saving Cerebro object to: /Volumes/bv_cache/data/B/visium/.cbr-d432d86dce4957b5/stages/s-1414c56c096ef/01-visium-anterior1-visium.crb
+[22:05:18] Done!
+List of 45
+ $ id                     : chr "visium"
+ $ input                  : chr "visium_anterior1.rds"
+ $ input_sha256           : chr "45f7264248ca724958ff9cc65a5a8715fcf87cc71870d1c6508ef65fcd18b5ad"
+ $ route_error            : chr ""
+ $ route_warnings         : chr ""
+ $ seconds_profile        : num 2.99
+ $ seconds_to_plan        : num 4.94
+ $ seconds_to_build       : num 10.6
+ $ seconds_to_publish     : num 13.5
+ $ published              : logi TRUE
+ $ crb                    : chr "01-visium-anterior1-visium.crb"
+ $ crb_bytes              : num 6e+07
+ $ layer                  : chr "data"
+ $ http_status            : int 200
+ $ viewer_loaded          : logi TRUE
+ $ spatial_page           : logi TRUE
+ $ image_listed           : logi TRUE
+ $ viewer_error           : chr ""
+ $ viewer_seconds         : num 8.44
+ $ painted_points         : int 1025
+ $ truth_matrix           : chr "Spatial/data"
+ $ n_cells                : int 2696
+ $ n_genes                : int 31053
+ $ cells_identical_order  : logi TRUE
+ $ genes_identical_order  : logi TRUE
+ $ expr_max_abs_diff      : num 0
+ $ expr_values_compared   : num 83718888
+ $ projections            : chr "umap"
+ $ projections_compared   : chr "umap"
+ $ projection_max_abs_diff: num 0
+ $ groups                 : chr "seurat_clusters;Spatial_snn_res.0.5;cluster"
+ $ groups_compared        : chr "seurat_clusters;Spatial_snn_res.0.5;cluster"
+ $ group_label_mismatches : int 0
+ $ meta_rows_aligned      : logi TRUE
+ $ spatial_sections       : chr "anterior1"
+ $ coords_compared        : int 2696
+ $ coord_max_abs_diff     : num 0
+ $ coord_ids_match        : logi TRUE
+ $ image_published        : logi TRUE
+ $ image_file             : chr "u332999b13348704a136276b9105153c9.png"
+ $ image_dims             : chr "599x600x3"
+ $ image_dims_equal       : logi TRUE
+ $ image_max_abs_diff_8bit: num 0
+ $ image_bytes_identical  : logi TRUE
+ $ seconds_total          : num 25.1
+
+==== pbmc_seurat ====
+[22:05:38] Start collecting data...
+[22:05:38] Adding expression data (embedded)...
+[22:05:38] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: PBMC Seurat
+organism: hg
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 80
+number of genes: 230
+grouping variables (4): seurat_clusters, sample, RNA_snn_res.0.8, RNA_snn_res.0.5
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+  - cerebro_seurat (1): seurat_clusters
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+[22:05:38] Saving Cerebro object to: /Volumes/bv_cache/data/B/pbmc_seurat/.cbr-a57c211a3065a621/stages/s-1414c23edf5d2/01-pbmc-seurat-pbmc-seurat.crb
+[22:05:38] Done!
+List of 42
+ $ id                     : chr "pbmc_seurat"
+ $ input                  : chr "pbmc_seurat.rds"
+ $ input_sha256           : chr "2d2eb1930210acbdf9905221a03fd7ae7582c886431dbfe4fb4b23a4d69caeaa"
+ $ route_error            : chr ""
+ $ route_warnings         : chr ""
+ $ seconds_profile        : num 0.425
+ $ seconds_to_plan        : num 1.36
+ $ seconds_to_build       : num 2.51
+ $ seconds_to_publish     : num 5.12
+ $ published              : logi TRUE
+ $ crb                    : chr "01-pbmc-seurat-pbmc-seurat.crb"
+ $ crb_bytes              : num 37016
+ $ layer                  : chr "data"
+ $ http_status            : int 200
+ $ viewer_loaded          : logi TRUE
+ $ spatial_page           : logi FALSE
+ $ image_listed           : logi NA
+ $ viewer_error           : chr ""
+ $ viewer_seconds         : num 5.11
+ $ painted_points         : int 80
+ $ truth_matrix           : chr "RNA/data"
+ $ n_cells                : int 80
+ $ n_genes                : int 230
+ $ cells_identical_order  : logi TRUE
+ $ genes_identical_order  : logi TRUE
+ $ expr_max_abs_diff      : num 0
+ $ expr_values_compared   : num 18400
+ $ projections            : chr "umap"
+ $ projections_compared   : chr "umap"
+ $ projection_max_abs_diff: num 0
+ $ groups                 : chr "seurat_clusters;sample;RNA_snn_res.0.8;RNA_snn_res.0.5"
+ $ groups_compared        : chr "seurat_clusters;sample;RNA_snn_res.0.8;RNA_snn_res.0.5"
+ $ group_label_mismatches : int 0
+ $ meta_rows_aligned      : logi TRUE
+ $ spatial_sections       : chr ""
+ $ coords_compared        : int 0
+ $ coord_max_abs_diff     : num NA
+ $ coord_ids_match        : logi NA
+ $ image_published        : logi NA
+ $ image_dims_equal       : logi NA
+ $ image_max_abs_diff_8bit: num NA
+ $ seconds_total          : num 10.3
+
+==== pbmc3k_h5ad ====
+[22:05:50] Start collecting data...
+[22:05:50] Adding expression data (embedded)...
+[22:05:50] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: pbmc3k h5ad
+organism: hg
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 2,638
+number of genes: 1,838
+grouping variables (1): louvain
+cell cycle variables (0): 
+projections (3): TSNE, UMAP, draw_graph_fr
+trees (0): 
+most expressed genes: 
+marker genes:
+  - scanpy: t-test_overestim_var (1): louvain
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+[22:05:50] Saving Cerebro object to: /Volumes/bv_cache/data/B/pbmc3k_h5ad/.cbr-dc08f22c0187f1ce/stages/s-1414c12c9e82c/01-pbmc3k-h5ad-pbmc3k-h5ad.crb
+[22:05:50] Done!
+List of 42
+ $ id                     : chr "pbmc3k_h5ad"
+ $ input                  : chr "pbmc3k.h5ad"
+ $ input_sha256           : chr "0db367b991dd95809732b218539ede489bea99113807f62ebd7ccc970025fe38"
+ $ route_error            : chr ""
+ $ route_warnings         : chr ""
+ $ seconds_profile        : num 2.79
+ $ seconds_to_plan        : num 3.06
+ $ seconds_to_build       : num 4.31
+ $ seconds_to_publish     : num 6.53
+ $ published              : logi TRUE
+ $ crb                    : chr "01-pbmc3k-h5ad-pbmc3k-h5ad.crb"
+ $ crb_bytes              : num 21345471
+ $ layer                  : chr "data"
+ $ http_status            : int 200
+ $ viewer_loaded          : logi TRUE
+ $ spatial_page           : logi FALSE
+ $ image_listed           : logi NA
+ $ viewer_error           : chr ""
+ $ viewer_seconds         : num 5.54
+ $ painted_points         : int 1003
+ $ truth_matrix           : chr "X"
+ $ n_cells                : int 2638
+ $ n_genes                : int 1838
+ $ cells_identical_order  : logi TRUE
+ $ genes_identical_order  : logi TRUE
+ $ expr_max_abs_diff      : num 0
+ $ expr_values_compared   : num 4848644
+ $ projections            : chr "TSNE;UMAP;draw_graph_fr"
+ $ projections_compared   : chr "TSNE;UMAP;draw_graph_fr"
+ $ projection_max_abs_diff: num 0
+ $ groups                 : chr "louvain"
+ $ groups_compared        : chr "louvain"
+ $ group_label_mismatches : int 0
+ $ meta_rows_aligned      : logi TRUE
+ $ spatial_sections       : chr ""
+ $ coords_compared        : int 0
+ $ coord_max_abs_diff     : num NA
+ $ coord_ids_match        : logi NA
+ $ image_published        : logi NA
+ $ image_dims_equal       : logi NA
+ $ image_max_abs_diff_8bit: num NA
+ $ seconds_total          : num 12.4
+                        visium                                                            
+id                      "visium"                                                          
+input                   "visium_anterior1.rds"                                            
+input_sha256            "45f7264248ca724958ff9cc65a5a8715fcf87cc71870d1c6508ef65fcd18b5ad"
+route_error             ""                                                                
+route_warnings          ""                                                                
+seconds_profile         "2.990"                                                           
+seconds_to_plan         "4.936"                                                           
+seconds_to_build        "10.583"                                                          
+seconds_to_publish      "13.542"                                                          
+published               "TRUE"                                                            
+crb                     "01-visium-anterior1-visium.crb"                                  
+crb_bytes               "59982931"                                                        
+layer                   "data"                                                            
+http_status             "200"                                                             
+viewer_loaded           "TRUE"                                                            
+spatial_page            "TRUE"                                                            
+image_listed            "TRUE"                                                            
+viewer_error            ""                                                                
+viewer_seconds          "8.441"                                                           
+painted_points          "1025"                                                            
+truth_matrix            "Spatial/data"                                                    
+n_cells                 "2696"                                                            
+n_genes                 "31053"                                                           
+cells_identical_order   "TRUE"                                                            
+genes_identical_order   "TRUE"                                                            
+expr_max_abs_diff       "0"                                                               
+expr_values_compared    "83718888"                                                        
+projections             "umap"                                                            
+projections_compared    "umap"                                                            
+projection_max_abs_diff "0"                                                               
+groups                  "seurat_clusters;Spatial_snn_res.0.5;cluster"                     
+groups_compared         "seurat_clusters;Spatial_snn_res.0.5;cluster"                     
+group_label_mismatches  "0"                                                               
+meta_rows_aligned       "TRUE"                                                            
+spatial_sections        "anterior1"                                                       
+coords_compared         "2696"                                                            
+coord_max_abs_diff      " 0"                                                              
+coord_ids_match         "TRUE"                                                            
+image_published         "TRUE"                                                            
+image_file              "u332999b13348704a136276b9105153c9.png"                           
+image_dims              "599x600x3"                                                       
+image_dims_equal        "TRUE"                                                            
+image_max_abs_diff_8bit " 0"                                                              
+image_bytes_identical   "TRUE"                                                            
+seconds_total           "25.103"                                                          
+                        pbmc_seurat                                                       
+id                      "pbmc_seurat"                                                     
+input                   "pbmc_seurat.rds"                                                 
+input_sha256            "2d2eb1930210acbdf9905221a03fd7ae7582c886431dbfe4fb4b23a4d69caeaa"
+route_error             ""                                                                
+route_warnings          ""                                                                
+seconds_profile         "0.425"                                                           
+seconds_to_plan         "1.362"                                                           
+seconds_to_build        " 2.510"                                                          
+seconds_to_publish      " 5.117"                                                          
+published               "TRUE"                                                            
+crb                     "01-pbmc-seurat-pbmc-seurat.crb"                                  
+crb_bytes               "   37016"                                                        
+layer                   "data"                                                            
+http_status             "200"                                                             
+viewer_loaded           "TRUE"                                                            
+spatial_page            "FALSE"                                                           
+image_listed            NA                                                                
+viewer_error            ""                                                                
+viewer_seconds          "5.106"                                                           
+painted_points          "  80"                                                            
+truth_matrix            "RNA/data"                                                        
+n_cells                 "  80"                                                            
+n_genes                 "  230"                                                           
+cells_identical_order   "TRUE"                                                            
+genes_identical_order   "TRUE"                                                            
+expr_max_abs_diff       "0"                                                               
+expr_values_compared    "   18400"                                                        
+projections             "umap"                                                            
+projections_compared    "umap"                                                            
+projection_max_abs_diff "0"                                                               
+groups                  "seurat_clusters;sample;RNA_snn_res.0.8;RNA_snn_res.0.5"          
+groups_compared         "seurat_clusters;sample;RNA_snn_res.0.8;RNA_snn_res.0.5"          
+group_label_mismatches  "0"                                                               
+meta_rows_aligned       "TRUE"                                                            
+spatial_sections        ""                                                                
+coords_compared         "   0"                                                            
+coord_max_abs_diff      NA                                                                
+coord_ids_match         NA                                                                
+image_published         NA                                                                
+image_file              NA                                                                
+image_dims              NA                                                                
+image_dims_equal        NA                                                                
+image_max_abs_diff_8bit NA                                                                
+image_bytes_identical   NA                                                                
+seconds_total           "10.260"                                                          
+                        pbmc3k_h5ad                                                       
+id                      "pbmc3k_h5ad"                                                     
+input                   "pbmc3k.h5ad"                                                     
+input_sha256            "0db367b991dd95809732b218539ede489bea99113807f62ebd7ccc970025fe38"
+route_error             ""                                                                
+route_warnings          ""                                                                
+seconds_profile         "2.792"                                                           
+seconds_to_plan         "3.063"                                                           
+seconds_to_build        " 4.311"                                                          
+seconds_to_publish      " 6.530"                                                          
+published               "TRUE"                                                            
+crb                     "01-pbmc3k-h5ad-pbmc3k-h5ad.crb"                                  
+crb_bytes               "21345471"                                                        
+layer                   "data"                                                            
+http_status             "200"                                                             
+viewer_loaded           "TRUE"                                                            
+spatial_page            "FALSE"                                                           
+image_listed            NA                                                                
+viewer_error            ""                                                                
+viewer_seconds          "5.544"                                                           
+painted_points          "1003"                                                            
+truth_matrix            "X"                                                               
+n_cells                 "2638"                                                            
+n_genes                 " 1838"                                                           
+cells_identical_order   "TRUE"                                                            
+genes_identical_order   "TRUE"                                                            
+expr_max_abs_diff       "0"                                                               
+expr_values_compared    " 4848644"                                                        
+projections             "TSNE;UMAP;draw_graph_fr"                                         
+projections_compared    "TSNE;UMAP;draw_graph_fr"                                         
+projection_max_abs_diff "0"                                                               
+groups                  "louvain"                                                         
+groups_compared         "louvain"                                                         
+group_label_mismatches  "0"                                                               
+meta_rows_aligned       "TRUE"                                                            
+spatial_sections        ""                                                                
+coords_compared         "   0"                                                            
+coord_max_abs_diff      NA                                                                
+coord_ids_match         NA                                                                
+image_published         NA                                                                
+image_file              NA                                                                
+image_dims              NA                                                                
+image_dims_equal        NA                                                                
+image_max_abs_diff_8bit NA                                                                
+image_bytes_identical   NA                                                                
+seconds_total           "12.388"                                                          

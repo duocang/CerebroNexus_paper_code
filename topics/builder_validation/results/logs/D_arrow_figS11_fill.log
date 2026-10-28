@@ -1,0 +1,221 @@
+
+==== arrow identity ====
+[11:50:40] Start collecting data...
+[11:50:40] Adding expression data (embedded)...
+[11:50:40] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: arrow_identity
+organism: mm
+date of analysis: 
+date of export: 2026-10-28
+number of cells: 75
+number of genes: 30
+grouping variables (1): region
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:arrow_fov
+
+[11:50:40] Saving Cerebro object to: /Volumes/bv_cache/data/D_figS11_fill/arrow_identity/.cbr-8fd93bc4c7db014c/stages/s-ee736e251b83/01-arrow-identity-arrow-identity.crb
+[11:50:41] Done!
+[[1]]
+              case   page transform cells cell_fit_mean_dist_capture_px
+95% arrow_identity linked        []    75                           5.4
+    capture_px_per_image_px corner_squares_in_view max_residual_image_px
+95%                   0.901                      0                    NA
+    corner_residuals_image_px outline_pixels_found
+95%               NA;NA;NA;NA                 1486
+    outline_residual_p95_image_px outline_residual_max_image_px
+95%                         31.75                         43.41
+    predicted_viewer_residual_image_px
+95%                                  0
+
+[[2]]
+              case    page transform cells cell_fit_mean_dist_capture_px
+95% arrow_identity spatial        []    75                           6.5
+    capture_px_per_image_px corner_squares_in_view max_residual_image_px
+95%                    1.81                      0                    NA
+    corner_residuals_image_px outline_pixels_found
+95%               NA;NA;NA;NA                 6573
+    outline_residual_p95_image_px outline_residual_max_image_px
+95%                         43.54                         44.36
+    predicted_viewer_residual_image_px
+95%                                  0
+
+
+==== arrow rotate_90 ====
+[11:51:05] Start collecting data...
+[11:51:05] Adding expression data (embedded)...
+[11:51:05] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: arrow_rotate_90
+organism: mm
+date of analysis: 
+date of export: 2026-10-28
+number of cells: 75
+number of genes: 30
+grouping variables (1): region
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:arrow_fov
+
+[11:51:05] Saving Cerebro object to: /Volumes/bv_cache/data/D_figS11_fill/arrow_rotate_90/.cbr-054b1f6285164193/stages/s-ee734073d3e0/01-arrow-rotate-90-arrow-rotate-90.crb
+[11:51:05] Done!
+[[1]]
+               case   page       transform cells cell_fit_mean_dist_capture_px
+95% arrow_rotate_90 linked {"rotation":90}    75                          0.81
+    capture_px_per_image_px corner_squares_in_view max_residual_image_px
+95%                   1.053                      0                    NA
+    corner_residuals_image_px outline_pixels_found
+95%               NA;NA;NA;NA                 3010
+    outline_residual_p95_image_px outline_residual_max_image_px
+95%                          32.2                         33.15
+    predicted_viewer_residual_image_px
+95%                              667.1
+
+[[2]]
+               case    page       transform cells cell_fit_mean_dist_capture_px
+95% arrow_rotate_90 spatial {"rotation":90}    75                          1.65
+    capture_px_per_image_px corner_squares_in_view max_residual_image_px
+95%                   0.954                      0                    NA
+    corner_residuals_image_px outline_pixels_found
+95%               NA;NA;NA;NA                 1959
+    outline_residual_p95_image_px outline_residual_max_image_px
+95%                         37.57                         39.58
+    predicted_viewer_residual_image_px
+95%                              667.1
+
+
+==== arrow flip_x ====
+[11:51:25] Start collecting data...
+[11:51:25] Adding expression data (embedded)...
+[11:51:25] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: arrow_flip_x
+organism: mm
+date of analysis: 
+date of export: 2026-10-28
+number of cells: 75
+number of genes: 30
+grouping variables (1): region
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:arrow_fov
+
+[11:51:25] Saving Cerebro object to: /Volumes/bv_cache/data/D_figS11_fill/arrow_flip_x/.cbr-6da7b14a68fb39e0/stages/s-ee731f477f85/01-arrow-flip-x-arrow-flip-x.crb
+[11:51:25] Done!
+[[1]]
+            case   page       transform cells cell_fit_mean_dist_capture_px
+95% arrow_flip_x linked {"flip_x":true}    75                          0.99
+    capture_px_per_image_px corner_squares_in_view max_residual_image_px
+95%                   0.858                      0                    NA
+    corner_residuals_image_px outline_pixels_found
+95%               NA;NA;NA;NA                 1486
+    outline_residual_p95_image_px outline_residual_max_image_px
+95%                         33.36                         33.36
+    predicted_viewer_residual_image_px
+95%                                  0
+
+[[2]]
+            case    page       transform cells cell_fit_mean_dist_capture_px
+95% arrow_flip_x spatial {"flip_x":true}    75                          6.29
+    capture_px_per_image_px corner_squares_in_view max_residual_image_px
+95%                   1.835                      0                    NA
+    corner_residuals_image_px outline_pixels_found
+95%               NA;NA;NA;NA                 6573
+    outline_residual_p95_image_px outline_residual_max_image_px
+95%                         32.36                         35.71
+    predicted_viewer_residual_image_px
+95%                                  0
+
+
+==== arrow scale_0.6 ====
+[11:51:45] Start collecting data...
+[11:51:45] Adding expression data (embedded)...
+[11:51:45] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: arrow_scale_0.6
+organism: mm
+date of analysis: 
+date of export: 2026-10-28
+number of cells: 75
+number of genes: 30
+grouping variables (1): region
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:arrow_fov
+
+[11:51:45] Saving Cerebro object to: /Volumes/bv_cache/data/D_figS11_fill/arrow_scale_0.6/.cbr-fd621b9d41a3f07f/stages/s-ee732d69793e/01-arrow-scale-0-6-arrow-scale-0-6.crb
+[11:51:45] Done!
+[[1]]
+               case   page     transform cells cell_fit_mean_dist_capture_px
+95% arrow_scale_0.6 linked {"scale":0.6}    75                          2.48
+    capture_px_per_image_px corner_squares_in_view max_residual_image_px
+95%                    0.91                      0                    NA
+    corner_residuals_image_px outline_pixels_found
+95%               NA;NA;NA;NA                 1486
+    outline_residual_p95_image_px outline_residual_max_image_px
+95%                          6.96                          8.68
+    predicted_viewer_residual_image_px
+95%                                  0
+
+[[2]]
+               case    page     transform cells cell_fit_mean_dist_capture_px
+95% arrow_scale_0.6 spatial {"scale":0.6}    75                          9.12
+    capture_px_per_image_px corner_squares_in_view max_residual_image_px
+95%                   1.955                      0                    NA
+    corner_residuals_image_px outline_pixels_found
+95%               NA;NA;NA;NA                 6573
+    outline_residual_p95_image_px outline_residual_max_image_px
+95%                         26.12                         36.43
+    predicted_viewer_residual_image_px
+95%                                  0
+
+             case    page max_residual_image_px
+1  arrow_identity  linked                    NA
+2  arrow_identity spatial                    NA
+3 arrow_rotate_90  linked                    NA
+4 arrow_rotate_90 spatial                    NA
+5    arrow_flip_x  linked                    NA
+6    arrow_flip_x spatial                    NA
+7 arrow_scale_0.6  linked                    NA
+8 arrow_scale_0.6 spatial                    NA

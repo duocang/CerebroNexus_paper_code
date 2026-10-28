@@ -1,0 +1,576 @@
+
+==== A01_truncated_rds ====
+List of 7
+ $ case      : chr "A01_truncated_rds"
+ $ input     : chr "truncated.rds"
+ $ stopped_at: chr "profile"
+ $ outcome   : chr "explicit error"
+ $ message   : chr "Could not read with RDS: error reading from connection"
+ $ warnings  : chr ""
+ $ seconds   : num 0.634
+
+==== A02_not_rds_bytes ====
+List of 7
+ $ case      : chr "A02_not_rds_bytes"
+ $ input     : chr "png_named.rds"
+ $ stopped_at: chr "profile"
+ $ outcome   : chr "explicit error"
+ $ message   : chr "Could not read with RDS: unknown input format"
+ $ warnings  : chr ""
+ $ seconds   : num 0.046
+
+==== A03_spatial_removed ====
+[15:23:44] Start collecting data...
+[15:23:44] Adding expression data (embedded)...
+[15:23:44] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: A03_spatial_removed
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+[15:23:44] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/A/runs/A03_spatial_removed/.cbr-25cf34550d7416dd/stages/s-109b9617110a1/01-a03-spatial-removed-a03-spatial-removed.crb
+[15:23:44] Done!
+List of 19
+ $ case             : chr "A03_spatial_removed"
+ $ input            : chr "no_spatial.rds"
+ $ stopped_at       : chr "none (published)"
+ $ outcome          : chr "silent output"
+ $ message          : chr ""
+ $ warnings         : chr ""
+ $ seconds          : num 10.1
+ $ group_candidates : chr "Spatial_snn_res.0.5;seurat_clusters;cluster"
+ $ group_struck     : chr ""
+ $ crb_written      : logi TRUE
+ $ cells_equal      : logi TRUE
+ $ genes_equal      : logi TRUE
+ $ expr_max_abs_diff: num 0
+ $ expr_na_source   : int 0
+ $ expr_na_crb      : int 0
+ $ group_mismatches : int 0
+ $ groups_in_crb    : chr "seurat_clusters;Spatial_snn_res.0.5;cluster"
+ $ meta_cols_in_crb : chr "cell_barcode;seurat_clusters;Spatial_snn_res.0.5;cluster;nUMI;nGene;orig.ident;slice;region"
+ $ spatial_sections : chr ""
+
+==== A04a_image_file_missing ====
+List of 7
+ $ case      : chr "A04a_image_file_missing"
+ $ input     : chr "visium_anterior1.rds"
+ $ stopped_at: chr "plan"
+ $ outcome   : chr "explicit error"
+ $ message   : chr "BuildPlan was not frozen: Dataset <U+201C>A04a_image_file_missing<U+201D>, section <U+201C>anterior1<U+201D>, i"| __truncated__
+ $ warnings  : chr ""
+ $ seconds   : num 3.7
+
+==== A04b_image_replaced_after_review ====
+[15:23:59] Start collecting data...
+[15:23:59] Adding expression data (embedded)...
+[15:23:59] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: A04b_image_replaced_after_review
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[15:23:59] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/A/runs/A04b_image_replaced_after_review/.cbr-4053802286dd2cca/stages/s-109b95a21caa0/01-a04b-image-repl-8d08dc5f-a04b-image--8d08dc5f.crb
+[15:24:00] Done!
+List of 7
+ $ case      : chr "A04b_image_replaced_after_review"
+ $ input     : chr "visium_anterior1.rds"
+ $ stopped_at: chr "build"
+ $ outcome   : chr "explicit error"
+ $ message   : chr "Build failed: A04b_image_replaced_after_review: A Builder Spatial image failed its integrity check."
+ $ warnings  : chr ""
+ $ seconds   : num 7.02
+
+==== A04c_image_not_an_image ====
+List of 7
+ $ case      : chr "A04c_image_not_an_image"
+ $ input     : chr "visium_anterior1.rds"
+ $ stopped_at: chr "plan"
+ $ outcome   : chr "explicit error"
+ $ message   : chr "image: Could not read this image. Check that it is a valid PNG or JPEG file."
+ $ warnings  : chr ""
+ $ seconds   : num 0.98
+
+==== A05a_assay_absent ====
+List of 7
+ $ case      : chr "A05a_assay_absent"
+ $ input     : chr "visium_anterior1.rds"
+ $ stopped_at: chr "plan"
+ $ outcome   : chr "explicit error"
+ $ message   : chr "BuildPlan was not frozen: invalid_artifact_identity"
+ $ warnings  : chr ""
+ $ seconds   : num 2.48
+
+==== A05b_layer_absent ====
+List of 7
+ $ case      : chr "A05b_layer_absent"
+ $ input     : chr "no_data_layer.rds"
+ $ stopped_at: chr "plan"
+ $ outcome   : chr "explicit error"
+ $ message   : chr "BuildPlan was not frozen: Layer `data` is no longer available in assay `Spatial`. Select an available layer and"| __truncated__
+ $ warnings  : chr ""
+ $ seconds   : num 1.46
+
+==== A06_duplicated_barcodes ====
+List of 7
+ $ case      : chr "A06_duplicated_barcodes"
+ $ input     : chr "duplicated_barcodes_sce.rds"
+ $ stopped_at: chr "profile"
+ $ outcome   : chr "explicit error"
+ $ message   : chr "Could not convert the SingleCellExperiment: duplicate 'row.names' are not allowed"
+ $ warnings  : chr "non-unique value when setting 'row.names': 'AAACAAGTATCTCCCA-1'"
+ $ seconds   : num 0.812
+
+==== A07a_coords_subset ====
+[15:24:52] Start collecting data...
+[15:24:52] Adding expression data (embedded)...
+[15:24:52] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: A07a_coords_subset
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[15:24:52] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/A/runs/A07a_coords_subset/.cbr-8dc09c88dae35699/stages/s-109b93dd0dbb4/01-a07a-coords-subset-a07a-coords-subset.crb
+[15:24:53] Done!
+List of 24
+ $ case                          : chr "A07a_coords_subset"
+ $ input                         : chr "coords_subset.rds"
+ $ stopped_at                    : chr "none (published)"
+ $ outcome                       : chr "silent output"
+ $ message                       : chr ""
+ $ warnings                      : chr ""
+ $ seconds                       : num 11.3
+ $ group_candidates              : chr "Spatial_snn_res.0.5;seurat_clusters;cluster"
+ $ group_struck                  : chr ""
+ $ crb_written                   : logi TRUE
+ $ cells_equal                   : logi TRUE
+ $ genes_equal                   : logi TRUE
+ $ expr_max_abs_diff             : num 0
+ $ expr_na_source                : int 0
+ $ expr_na_crb                   : int 0
+ $ group_mismatches              : int 0
+ $ groups_in_crb                 : chr "seurat_clusters;Spatial_snn_res.0.5;cluster"
+ $ meta_cols_in_crb              : chr "cell_barcode;seurat_clusters;Spatial_snn_res.0.5;cluster;nUMI;nGene;orig.ident;slice;region"
+ $ spatial_sections              : chr "anterior1"
+ $ coords_in_crb                 : int 1348
+ $ coords_in_source              : int 1348
+ $ coords_barcodes_matched       : int 1348
+ $ coords_max_abs_diff_by_barcode: num 0
+ $ coords_barcodes_not_cells     : int 0
+
+==== A07b_coords_barcodes_unmatched ====
+List of 7
+ $ case      : chr "A07b_coords_barcodes_unmatched"
+ $ input     : chr "coords_unmatched.rds"
+ $ stopped_at: chr "plan"
+ $ outcome   : chr "explicit error"
+ $ message   : chr "BuildPlan was not frozen: Dataset A07b_coords_barcodes_unmatched has a blocking capability: spatial."
+ $ warnings  : chr ""
+ $ seconds   : num 2.57
+
+==== A07c_coords_row_order_shuffled ====
+[15:25:37] Start collecting data...
+[15:25:37] Adding expression data (embedded)...
+[15:25:37] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: A07c_coords_row_order_shuffled
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[15:25:37] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/A/runs/A07c_coords_row_order_shuffled/.cbr-15ad53006538f767/stages/s-109b9235d6643/01-a07c-coords-row-1636d8e5-a07c-coords-1636d8e5.crb
+[15:25:38] Done!
+List of 24
+ $ case                          : chr "A07c_coords_row_order_shuffled"
+ $ input                         : chr "coords_shuffled.rds"
+ $ stopped_at                    : chr "none (published)"
+ $ outcome                       : chr "silent output"
+ $ message                       : chr ""
+ $ warnings                      : chr ""
+ $ seconds                       : num 8.9
+ $ group_candidates              : chr "Spatial_snn_res.0.5;seurat_clusters;cluster"
+ $ group_struck                  : chr ""
+ $ crb_written                   : logi TRUE
+ $ cells_equal                   : logi TRUE
+ $ genes_equal                   : logi TRUE
+ $ expr_max_abs_diff             : num 0
+ $ expr_na_source                : int 0
+ $ expr_na_crb                   : int 0
+ $ group_mismatches              : int 0
+ $ groups_in_crb                 : chr "seurat_clusters;Spatial_snn_res.0.5;cluster"
+ $ meta_cols_in_crb              : chr "cell_barcode;seurat_clusters;Spatial_snn_res.0.5;cluster;nUMI;nGene;orig.ident;slice;region"
+ $ spatial_sections              : chr "anterior1"
+ $ coords_in_crb                 : int 2696
+ $ coords_in_source              : int 2696
+ $ coords_barcodes_matched       : int 2696
+ $ coords_max_abs_diff_by_barcode: num 0
+ $ coords_barcodes_not_cells     : int 0
+
+==== A08_empty_group_column ====
+[15:26:02] Start collecting data...
+[15:26:02] Adding expression data (embedded)...
+[15:26:03] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: A08_empty_group_column
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[15:26:03] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/A/runs/A08_empty_group_column/.cbr-5a3d02a251dd13b7/stages/s-109b94c5aadee/01-a08-empty-group-column-a08-empty-g-2ce0cefc.crb
+[15:26:03] Done!
+List of 24
+ $ case                          : chr "A08_empty_group_column"
+ $ input                         : chr "empty_group.rds"
+ $ stopped_at                    : chr "none (published)"
+ $ outcome                       : chr "silent output"
+ $ message                       : chr ""
+ $ warnings                      : chr ""
+ $ seconds                       : num 9.15
+ $ group_candidates              : chr "Spatial_snn_res.0.5;seurat_clusters;cluster"
+ $ group_struck                  : chr ""
+ $ crb_written                   : logi TRUE
+ $ cells_equal                   : logi TRUE
+ $ genes_equal                   : logi TRUE
+ $ expr_max_abs_diff             : num 0
+ $ expr_na_source                : int 0
+ $ expr_na_crb                   : int 0
+ $ group_mismatches              : int 0
+ $ groups_in_crb                 : chr "seurat_clusters;Spatial_snn_res.0.5;cluster"
+ $ meta_cols_in_crb              : chr "cell_barcode;seurat_clusters;Spatial_snn_res.0.5;cluster;nUMI;nGene;orig.ident;slice;region;empty_group"
+ $ spatial_sections              : chr "anterior1"
+ $ coords_in_crb                 : int 2696
+ $ coords_in_source              : int 2696
+ $ coords_barcodes_matched       : int 2696
+ $ coords_max_abs_diff_by_barcode: num 0
+ $ coords_barcodes_not_cells     : int 0
+
+==== A09_all_na_column ====
+[15:26:29] Start collecting data...
+[15:26:29] Adding expression data (embedded)...
+[15:26:29] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: A09_all_na_column
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[15:26:29] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/A/runs/A09_all_na_column/.cbr-3bb519cad7976a96/stages/s-109b96a5b7063/01-a09-all-na-column-a09-all-na-column.crb
+[15:26:30] Done!
+List of 24
+ $ case                          : chr "A09_all_na_column"
+ $ input                         : chr "all_na.rds"
+ $ stopped_at                    : chr "none (published)"
+ $ outcome                       : chr "silent output"
+ $ message                       : chr ""
+ $ warnings                      : chr ""
+ $ seconds                       : num 9.52
+ $ group_candidates              : chr "Spatial_snn_res.0.5;seurat_clusters;cluster"
+ $ group_struck                  : chr ""
+ $ crb_written                   : logi TRUE
+ $ cells_equal                   : logi TRUE
+ $ genes_equal                   : logi TRUE
+ $ expr_max_abs_diff             : num 0
+ $ expr_na_source                : int 0
+ $ expr_na_crb                   : int 0
+ $ group_mismatches              : int 0
+ $ groups_in_crb                 : chr "seurat_clusters;Spatial_snn_res.0.5;cluster"
+ $ meta_cols_in_crb              : chr "cell_barcode;seurat_clusters;Spatial_snn_res.0.5;cluster;nUMI;nGene;orig.ident;slice;region;all_na"
+ $ spatial_sections              : chr "anterior1"
+ $ coords_in_crb                 : int 2696
+ $ coords_in_source              : int 2696
+ $ coords_barcodes_matched       : int 2696
+ $ coords_max_abs_diff_by_barcode: num 0
+ $ coords_barcodes_not_cells     : int 0
+
+==== A10a_zero_cells ====
+List of 7
+ $ case      : chr "A10a_zero_cells"
+ $ input     : chr "zero_cells_sce.rds"
+ $ stopped_at: chr "profile"
+ $ outcome   : chr "explicit error"
+ $ message   : chr "Could not convert the SingleCellExperiment: No cell overlap between existing object and new layer data"
+ $ warnings  : chr ""
+ $ seconds   : num 0.038
+
+==== A10b_zero_genes ====
+List of 7
+ $ case      : chr "A10b_zero_genes"
+ $ input     : chr "zero_genes_sce.rds"
+ $ stopped_at: chr "profile"
+ $ outcome   : chr "explicit error"
+ $ message   : chr "Could not convert the SingleCellExperiment: No feature overlap between existing object and new layer data"
+ $ warnings  : chr ""
+ $ seconds   : num 0.02
+
+==== A11_na_expression_values ====
+[15:26:54] Start collecting data...
+[15:26:54] Adding expression data (embedded)...
+[15:26:55] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: A11_na_expression_values
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[15:26:55] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/A/runs/A11_na_expression_values/.cbr-ed9ae8654b212629/stages/s-109b9556d5274/01-a11-na-expression-values-a11-na-expr-5c16e875.crb
+[15:26:55] Done!
+List of 24
+ $ case                          : chr "A11_na_expression_values"
+ $ input                         : chr "na_expression.rds"
+ $ stopped_at                    : chr "none (published)"
+ $ outcome                       : chr "silent output"
+ $ message                       : chr ""
+ $ warnings                      : chr ""
+ $ seconds                       : num 9.31
+ $ group_candidates              : chr "Spatial_snn_res.0.5;seurat_clusters;cluster"
+ $ group_struck                  : chr ""
+ $ crb_written                   : logi TRUE
+ $ cells_equal                   : logi TRUE
+ $ genes_equal                   : logi TRUE
+ $ expr_max_abs_diff             : num 0
+ $ expr_na_source                : int 100
+ $ expr_na_crb                   : int 100
+ $ group_mismatches              : int 0
+ $ groups_in_crb                 : chr "seurat_clusters;Spatial_snn_res.0.5;cluster"
+ $ meta_cols_in_crb              : chr "cell_barcode;seurat_clusters;Spatial_snn_res.0.5;cluster;nUMI;nGene;orig.ident;slice;region"
+ $ spatial_sections              : chr "anterior1"
+ $ coords_in_crb                 : int 2696
+ $ coords_in_source              : int 2696
+ $ coords_barcodes_matched       : int 2696
+ $ coords_max_abs_diff_by_barcode: num 0
+ $ coords_barcodes_not_cells     : int 0
+
+==== A12_duplicate_nUMI_column ====
+[15:27:20] Start collecting data...
+[15:27:20] Adding expression data (embedded)...
+[15:27:20] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: A12_duplicate_nUMI_column
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[15:27:20] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/A/runs/A12_duplicate_nUMI_column/.cbr-d360f05c8e48460b/stages/s-109b9257d5959/01-a12-duplicate-n-f6c5c40a-a12-duplica-f6c5c40a.crb
+[15:27:21] Done!
+List of 7
+ $ case      : chr "A12_duplicate_nUMI_column"
+ $ input     : chr "dup_numi.rds"
+ $ stopped_at: chr "build"
+ $ outcome   : chr "explicit error"
+ $ message   : chr "Build failed: A12_duplicate_nUMI_column: The staged CRB metadata differs from BuildPlan."
+ $ warnings  : chr ""
+ $ seconds   : num 5.54
+
+==== A13a_h5ad_truncated ====
+List of 7
+ $ case      : chr "A13a_h5ad_truncated"
+ $ input     : chr "truncated.h5ad"
+ $ stopped_at: chr "profile"
+ $ outcome   : chr "explicit error"
+ $ message   : chr "Could not read with h5ad: `/Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder"| __truncated__
+ $ warnings  : chr ""
+ $ seconds   : num 0.071
+
+==== A13b_h5ad_header_only ====
+List of 7
+ $ case      : chr "A13b_h5ad_header_only"
+ $ input     : chr "header_only.h5ad"
+ $ stopped_at: chr "profile"
+ $ outcome   : chr "explicit error"
+ $ message   : chr "Could not read with h5ad: `/Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder"| __truncated__
+ $ warnings  : chr ""
+ $ seconds   : num 0.003
+                                                             case
+A01_truncated_rds                               A01_truncated_rds
+A02_not_rds_bytes                               A02_not_rds_bytes
+A03_spatial_removed                           A03_spatial_removed
+A04a_image_file_missing                   A04a_image_file_missing
+A04b_image_replaced_after_review A04b_image_replaced_after_review
+A04c_image_not_an_image                   A04c_image_not_an_image
+A05a_assay_absent                               A05a_assay_absent
+A05b_layer_absent                               A05b_layer_absent
+A06_duplicated_barcodes                   A06_duplicated_barcodes
+A07a_coords_subset                             A07a_coords_subset
+A07b_coords_barcodes_unmatched     A07b_coords_barcodes_unmatched
+A07c_coords_row_order_shuffled     A07c_coords_row_order_shuffled
+A08_empty_group_column                     A08_empty_group_column
+A09_all_na_column                               A09_all_na_column
+A10a_zero_cells                                   A10a_zero_cells
+A10b_zero_genes                                   A10b_zero_genes
+A11_na_expression_values                 A11_na_expression_values
+A12_duplicate_nUMI_column               A12_duplicate_nUMI_column
+A13a_h5ad_truncated                           A13a_h5ad_truncated
+A13b_h5ad_header_only                       A13b_h5ad_header_only
+                                       stopped_at        outcome
+A01_truncated_rds                         profile explicit error
+A02_not_rds_bytes                         profile explicit error
+A03_spatial_removed              none (published)  silent output
+A04a_image_file_missing                      plan explicit error
+A04b_image_replaced_after_review            build explicit error
+A04c_image_not_an_image                      plan explicit error
+A05a_assay_absent                            plan explicit error
+A05b_layer_absent                            plan explicit error
+A06_duplicated_barcodes                   profile explicit error
+A07a_coords_subset               none (published)  silent output
+A07b_coords_barcodes_unmatched               plan explicit error
+A07c_coords_row_order_shuffled   none (published)  silent output
+A08_empty_group_column           none (published)  silent output
+A09_all_na_column                none (published)  silent output
+A10a_zero_cells                           profile explicit error
+A10b_zero_genes                           profile explicit error
+A11_na_expression_values         none (published)  silent output
+A12_duplicate_nUMI_column                   build explicit error
+A13a_h5ad_truncated                       profile explicit error
+A13b_h5ad_header_only                     profile explicit error
+                                                                                                                                                                                                                                                                     message
+A01_truncated_rds                                                                                                                                                                                                     Could not read with RDS: error reading from connection
+A02_not_rds_bytes                                                                                                                                                                                                              Could not read with RDS: unknown input format
+A03_spatial_removed                                                                                                                                                                                                                                                         
+A04a_image_file_missing                                  BuildPlan was not frozen: Dataset <U+201C>A04a_image_file_missing<U+201D>, section <U+201C>anterior1<U+201D>, image <U+201C>he_deleted.png<U+201D> has no valid external source file. Re-upload it before building.
+A04b_image_replaced_after_review                                                                                                                                         Build failed: A04b_image_replaced_after_review: A Builder Spatial image failed its integrity check.
+A04c_image_not_an_image                                                                                                                                                                         image: Could not read this image. Check that it is a valid PNG or JPEG file.
+A05a_assay_absent                                                                                                                                                                                                        BuildPlan was not frozen: invalid_artifact_identity
+A05b_layer_absent                                                                                                                  BuildPlan was not frozen: Layer `data` is no longer available in assay `Spatial`. Select an available layer and check this dataset again.
+A06_duplicated_barcodes                                                                                                                                                                    Could not convert the SingleCellExperiment: duplicate 'row.names' are not allowed
+A07a_coords_subset                                                                                                                                                                                                                                                          
+A07b_coords_barcodes_unmatched                                                                                                                                          BuildPlan was not frozen: Dataset A07b_coords_barcodes_unmatched has a blocking capability: spatial.
+A07c_coords_row_order_shuffled                                                                                                                                                                                                                                              
+A08_empty_group_column                                                                                                                                                                                                                                                      
+A09_all_na_column                                                                                                                                                                                                                                                           
+A10a_zero_cells                                                                                                                                                       Could not convert the SingleCellExperiment: No cell overlap between existing object and new layer data
+A10b_zero_genes                                                                                                                                                    Could not convert the SingleCellExperiment: No feature overlap between existing object and new layer data
+A11_na_expression_values                                                                                                                                                                                                                                                    
+A12_duplicate_nUMI_column                                                                                                                                                           Build failed: A12_duplicate_nUMI_column: The staged CRB metadata differs from BuildPlan.
+A13a_h5ad_truncated                Could not read with h5ad: `/Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/A/inputs/truncated.h5ad` is not a readable HDF5/h5ad file: HDF5. File accessibility. Unable to open file.
+A13b_h5ad_header_only            Could not read with h5ad: `/Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/A/inputs/header_only.h5ad` is not a readable HDF5/h5ad file: HDF5. File accessibility. Unable to open file.

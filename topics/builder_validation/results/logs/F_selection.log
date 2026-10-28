@@ -1,0 +1,201 @@
+Loading required namespace: SeuratObject
+
+==== base ====
+[19:00:06] Start collecting data...
+[19:00:07] Adding expression data (embedded)...
+[19:00:07] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: complete viewer base
+organism: hg
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 180
+number of genes: 164
+grouping variables (9): cell_type, patient_id, section_id, fov_id, sample_id, condition, cluster, region, Phase
+cell cycle variables (1): Phase
+projections (2): umap, tsne
+trees (0): 
+most expressed genes: cell_type
+marker genes:
+  - wilcox (1): cell_type
+enriched pathways:
+  - enrichr (1): cell_type
+trajectories:
+  - monocle2 (1): lineage
+extra material:
+  - tables (1): cohort_summary, 
+  - plots (1): overview
+Immune repertoire:xenium_a_1, xenium_a_2, xenium_b_1, xenium_b_2, xenium_b_3, xenium_c_1
+HLA typing: 6 sample(s), 6 allele(s) [synthetic]
+Spatial data:section_a_1_fov_1, section_a_2_fov_1, section_b_1_fov_1, section_b_2_fov_1, section_b_3_fov_1, section_c_1_fov_1
+
+[19:00:07] Saving Cerebro object to: /Volumes/bv_cache/data/F/selection/base/.cbr-7b0ac46150d926cd/stages/s-132455bb2e7ba/01-complete-viewer-base-cv.crb
+[19:00:07] Done!
+
+==== reordered ====
+[19:00:20] Start collecting data...
+[19:00:20] Adding expression data (embedded)...
+[19:00:20] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: complete viewer reordered
+organism: hg
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 180
+number of genes: 164
+grouping variables (9): cell_type, patient_id, section_id, fov_id, sample_id, condition, cluster, region, Phase
+cell cycle variables (1): Phase
+projections (2): umap, tsne
+trees (0): 
+most expressed genes: cell_type
+marker genes:
+  - wilcox (1): cell_type
+enriched pathways:
+  - enrichr (1): cell_type
+trajectories:
+  - monocle2 (1): lineage
+extra material:
+  - tables (1): cohort_summary, 
+  - plots (1): overview
+Immune repertoire:xenium_a_1, xenium_a_2, xenium_b_1, xenium_b_2, xenium_b_3, xenium_c_1
+HLA typing: 6 sample(s), 6 allele(s) [synthetic]
+Spatial data:section_a_1_fov_1, section_a_2_fov_1, section_b_1_fov_1, section_b_2_fov_1, section_b_3_fov_1, section_c_1_fov_1
+
+[19:00:20] Saving Cerebro object to: /Volumes/bv_cache/data/F/selection/reordered/.cbr-43fe3613471c8523/stages/s-132453db8ba40/01-complete-viewer-08aa82b2-cv.crb
+[19:00:20] Done!
+
+==== case_ids ====
+[19:00:30] Start collecting data...
+[19:00:30] Adding expression data (embedded)...
+[19:00:30] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: complete viewer case_ids
+organism: hg
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 180
+number of genes: 164
+grouping variables (9): cell_type, patient_id, section_id, fov_id, sample_id, condition, cluster, region, Phase
+cell cycle variables (1): Phase
+projections (2): umap, tsne
+trees (0): 
+most expressed genes: cell_type
+marker genes:
+  - wilcox (1): cell_type
+enriched pathways:
+  - enrichr (1): cell_type
+trajectories:
+  - monocle2 (1): lineage
+extra material:
+  - tables (1): cohort_summary, 
+  - plots (1): overview
+Immune repertoire:xenium_a_1, xenium_a_2, xenium_b_1, xenium_b_2, xenium_b_3, xenium_c_1
+HLA typing: 6 sample(s), 6 allele(s) [synthetic]
+Spatial data:section_a_1_fov_1, section_a_2_fov_1, section_b_1_fov_1, section_b_2_fov_1, section_b_3_fov_1, section_c_1_fov_1
+
+[19:00:30] Saving Cerebro object to: /Volumes/bv_cache/data/F/selection/case_ids/.cbr-8403134ea62e1de8/stages/s-132456c7b0b43/01-complete-viewer-case-ids-cv.crb
+[19:00:30] Done!
+
+==== immune_part ====
+[19:00:40] Start collecting data...
+[19:00:40] Adding expression data (embedded)...
+[19:00:40] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: complete viewer immune_part
+organism: hg
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 180
+number of genes: 164
+grouping variables (9): cell_type, patient_id, section_id, fov_id, sample_id, condition, cluster, region, Phase
+cell cycle variables (1): Phase
+projections (2): umap, tsne
+trees (0): 
+most expressed genes: cell_type
+marker genes:
+  - wilcox (1): cell_type
+enriched pathways:
+  - enrichr (1): cell_type
+trajectories:
+  - monocle2 (1): lineage
+extra material:
+  - tables (1): cohort_summary, 
+  - plots (1): overview
+Immune repertoire:xenium_a_1, xenium_a_2, xenium_b_1, xenium_b_2, xenium_b_3, xenium_c_1
+HLA typing: 6 sample(s), 6 allele(s) [synthetic]
+Spatial data:section_a_1_fov_1, section_a_2_fov_1, section_b_1_fov_1, section_b_2_fov_1, section_b_3_fov_1, section_c_1_fov_1
+
+[19:00:40] Saving Cerebro object to: /Volumes/bv_cache/data/F/selection/immune_part/.cbr-96997eca47628869/stages/s-1324566ecce79/01-complete-viewer-b12e4b73-cv.crb
+[19:00:40] Done!
+
+==== immune_extra ====
+        variant                  set restored restored_equal_set open_error
+1          base             complete      180               TRUE           
+2          base              partial       60               TRUE           
+3          base                 zero        0               TRUE           
+4          base          one_section       30               TRUE           
+5          base    partial_reordered       60               TRUE           
+6          base partial_plus_unknown        0              FALSE           
+7     reordered             complete      180               TRUE           
+8     reordered              partial       60               TRUE           
+9     reordered                 zero        0               TRUE           
+10    reordered          one_section       30               TRUE           
+11    reordered    partial_reordered       60               TRUE           
+12    reordered partial_plus_unknown        0              FALSE           
+13     case_ids             complete      180               TRUE           
+14     case_ids              partial       60               TRUE           
+15     case_ids                 zero        0               TRUE           
+16     case_ids          one_section       30               TRUE           
+17     case_ids    partial_reordered       60               TRUE           
+18     case_ids partial_plus_unknown        0              FALSE           
+19     case_ids   upper_case_id_only        1               TRUE           
+20     case_ids   lower_case_id_only        1               TRUE           
+21  immune_part             complete      180               TRUE           
+22  immune_part              partial       60               TRUE           
+23  immune_part                 zero        0               TRUE           
+24  immune_part          one_section       30               TRUE           
+25  immune_part    partial_reordered       60               TRUE           
+26  immune_part partial_plus_unknown        0              FALSE           
+27 immune_extra                build       NA                 NA       <NA>
+                                       result
+1                                        pass
+2                                        pass
+3                                        pass
+4                                        pass
+5                                        pass
+6  partial (rejected, unknown IDs not listed)
+7                                        pass
+8                                        pass
+9                                        pass
+10                                       pass
+11                                       pass
+12 partial (rejected, unknown IDs not listed)
+13                                       pass
+14                                       pass
+15                                       pass
+16                                       pass
+17                                       pass
+18 partial (rejected, unknown IDs not listed)
+19                                       pass
+20                                       pass
+21                                       pass
+22                                       pass
+23                                       pass
+24                                       pass
+25                                       pass
+26 partial (rejected, unknown IDs not listed)
+27    partial (held at Review, IDs not named)
+             
+              TRUE
+  base          45
+  case_ids      63
+  immune_part   45
+  reordered     45

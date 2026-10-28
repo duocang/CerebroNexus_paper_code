@@ -1,0 +1,105 @@
+[19:09:57] Start collecting data...
+[19:10:01] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: Visium level 6
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: NULL
+number of genes: NULL
+grouping variables (1): cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[19:10:01] Saving Cerebro object to: /Volumes/bv_cache/data/F/hdf5/level6/visium_level6.crb
+[19:10:01] Done!
+                                                             build
+visium                               Builder, B_BACKEND=h5: visium
+xenium                               Builder, B_BACKEND=h5: xenium
+pbmc_seurat                     Builder, B_BACKEND=h5: pbmc_seurat
+pbmc_sce                           Builder, B_BACKEND=h5: pbmc_sce
+pbmc_sce_own_qc             Builder, B_BACKEND=h5: pbmc_sce_own_qc
+pbmc3k_h5ad                     Builder, B_BACKEND=h5: pbmc3k_h5ad
+level6          exportFromSeurat(h5_compression_level = 6): visium
+                                                 file     bytes         filters
+visium                  01-visium-anterior1-visium.h5 185007769 shuffle+deflate
+xenium                      01-xenium-brain-xenium.h5  31681919 shuffle+deflate
+pbmc_seurat             01-pbmc-seurat-pbmc-seurat.h5    219023 shuffle+deflate
+pbmc_sce                      01-pbmc-sce-pbmc-sce.h5    219023 shuffle+deflate
+pbmc_sce_own_qc 01-pbmc-sce-own-qc-pbmc-sce-own-qc.h5    219023 shuffle+deflate
+pbmc3k_h5ad             01-pbmc3k-h5ad-pbmc3k-h5ad.h5  58361835 shuffle+deflate
+level6                               visium_level6.h5 113257172 shuffle+deflate
+                expr_max_abs_diff_vs_source
+visium                                   NA
+xenium                                   NA
+pbmc_seurat                              NA
+pbmc_sce                                 NA
+pbmc_sce_own_qc                          NA
+pbmc3k_h5ad                              NA
+level6                                    0
+[pass] h5 control
+[pass] h5 delete
+[pass] h5 rename
+[pass] h5 truncate
+[pass] h5 replace_other_dataset
+[fail (wrong data shown without error)] h5 replace_same_ids_changed_values
+[pass] h5 replace_level6_same_content
+[1] "cv.crb"             "cv.immune.qs2"      "cv_part.crb"       
+[4] "cv_part.immune.qs2"
+[1] "private-data/cv.crb"        "private-data/cv.immune.qs2"
+[3] "viewer/core/crb_contract.R" "viewer/crb_cache.R"        
+[pass] immune_qs2 control
+[pass] immune_qs2 delete
+[pass] immune_qs2 rename
+[pass] immune_qs2 truncate
+[pass] immune_qs2 replace_other_valid
+      sidecar                            case
+1          h5                         control
+2          h5                          delete
+3          h5                          rename
+4          h5                        truncate
+5          h5           replace_other_dataset
+6          h5 replace_same_ids_changed_values
+7          h5     replace_level6_same_content
+8  immune_qs2                         control
+9  immune_qs2                          delete
+10 immune_qs2                          rename
+11 immune_qs2                        truncate
+12 immune_qs2             replace_other_valid
+                                                                                                                             read_error
+1                                                                                                                                      
+2  The h5 expression sidecar is missing: /Volumes/bv_cache/data/F/hdf5/h5/delete/cerebro_app/private-data/01-visium-anterior1-visium.h5
+3  The h5 expression sidecar is missing: /Volumes/bv_cache/data/F/hdf5/h5/rename/cerebro_app/private-data/01-visium-anterior1-visium.h5
+4                                                                                        HDF5. File accessibility. Unable to open file.
+5                                                                  The H5 cell names do not match CRB '01-visium-anterior1-visium.crb'.
+6                                                                                                                                      
+7                                                                                                                                      
+8                                                                                                                                      
+9       The immune repertoire sidecar is missing: /Volumes/bv_cache/data/F/hdf5/immune_qs2/delete/immune_app/private-data/cv.immune.qs2
+10      The immune repertoire sidecar is missing: /Volumes/bv_cache/data/F/hdf5/immune_qs2/rename/immune_app/private-data/cv.immune.qs2
+11                                                                               The immune repertoire sidecar checksum does not match.
+12                                                                               The immune repertoire sidecar checksum does not match.
+   viewer_loaded                                result
+1           TRUE                                  pass
+2          FALSE                                  pass
+3          FALSE                                  pass
+4          FALSE                                  pass
+5          FALSE                                  pass
+6           TRUE fail (wrong data shown without error)
+7           TRUE                                  pass
+8           TRUE                                  pass
+9          FALSE                                  pass
+10         FALSE                                  pass
+11         FALSE                                  pass
+12         FALSE                                  pass

@@ -1,0 +1,129 @@
+[19:47:38] Start collecting data...
+[19:47:38] Adding expression data (embedded)...
+[19:47:38] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: Visium anterior1
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[19:47:38] Saving Cerebro object to: /Volumes/bv_cache/data/E/visium_login/.cbr-1b25d8592118ae1b/stages/s-1e2d11a56377/01-visium-anterior1-visium.crb
+[19:47:39] Done!
+[19:47:49] Start collecting data...
+[19:47:49] Adding expression data (embedded)...
+[19:47:49] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: PBMC
+organism: hg
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 80
+number of genes: 230
+grouping variables (4): seurat_clusters, sample, RNA_snn_res.0.8, RNA_snn_res.0.5
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+  - cerebro_seurat (1): seurat_clusters
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+[19:47:49] Saving Cerebro object to: /Volumes/bv_cache/data/E/pbmc_login/.cbr-c6ae7c85ced06cb7/stages/s-1e2d2156e087/01-pbmc-pbmc.crb
+[19:47:49] Done!
+[19:47:57] Start collecting data...
+[19:47:57] Adding expression data (embedded)...
+[19:47:57] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: Visium anterior1
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[19:47:57] Saving Cerebro object to: /Volumes/bv_cache/data/E/visium_public/.cbr-a8527225a07adc5d/stages/s-1e2d1cb38206/01-visium-anterior1-visium.crb
+[19:47:58] Done!
+visium /Volumes/bv_cache/data/E/visium_login/release/cerebro_app 16.9 s
+pbmc /Volumes/bv_cache/data/E/pbmc_login/release/cerebro_app 7.1 s
+visium /Volumes/bv_cache/data/E/visium_public/release/cerebro_app 10.2 s
+[pass] E01 unauthenticated GET / shows only the login form: HTTP 200, 23591 bytes, login form TRUE, Viewer UI FALSE, data terms found 0 of 401
+[pass] E02 private files by direct URL and path traversal (unauthenticated): 61 requests over 5 private files: status 400 x25, 404 x36; responses equal to a private file: 0
+[pass] E03 nothing of the dataset reaches the browser before login: 10 frames received (1570 bytes); data terms found 0 of 401; dataobj guesses with the pre-login session token: 500/500
+[pass] E04 wrong password: result error after 0.8 s; data terms in 6 frames: 0
+[pass] E05 empty password: result error after 0.8 s; data terms in 6 frames: 0
+[pass] E06 empty username: result error after 0.2 s; data terms in 6 frames: 0
+[pass] E07 SQL-like username: result error after 0.2 s; data terms in 6 frames: 0
+[pass] E07b valid password of another account: result error after 0.8 s; data terms in 6 frames: 0
+[info (none)] E08 lockout or rate limit after repeated failures: 25 wrong passwords rejected (error 25) in 20.4 s (0.82 s each), then the right password: app; no lockout, no delay
+[pass] E09 positive control: right password opens the Viewer and data reaches the browser: login app, gene Ttr shown TRUE, data terms found 1 of 401, provider token in URL: TRUE
+[info] E10 session data URLs fetched by another client (no cookies) while the session is open: 2 data URLs (cerebro-gene-choices-, cerebro-image-); status from curl: 200 x2
+[fail] E11 replay of the login token from another client while the session is open: curl GET /?token=<token>: Viewer UI FALSE; new browser with the token URL: login form, gene shown FALSE, data terms in its frames 1
+[pass] E12 logout ends the session and stops data outputs: login form back TRUE; data URLs after logout: 404 x2; token replay shows Viewer FALSE; data terms in frames after logout 0 (also after an injected gene input: 0)
+[pass] E01 unauthenticated GET / shows only the login form: HTTP 200, 23591 bytes, login form TRUE, Viewer UI FALSE, data terms found 0 of 51
+[pass] E02 private files by direct URL and path traversal (unauthenticated): 61 requests over 5 private files: status 400 x25, 404 x36; responses equal to a private file: 0
+[pass] E03 nothing of the dataset reaches the browser before login: 10 frames received (1570 bytes); data terms found 0 of 51; dataobj guesses with the pre-login session token: 500
+[pass] E04 wrong password: result error after 0.8 s; data terms in 6 frames: 0
+[pass] E05 empty password: result error after 0.8 s; data terms in 6 frames: 0
+[pass] E06 empty username: result error after 0.2 s; data terms in 6 frames: 0
+[pass] E07 SQL-like username: result error after 0.2 s; data terms in 6 frames: 0
+[pass] E07b valid password of another account: result error after 0.8 s; data terms in 6 frames: 0
+[info (none)] E08 lockout or rate limit after repeated failures: 25 wrong passwords rejected (error 25) in 20.4 s (0.81 s each), then the right password: app; no lockout, no delay
+[pass] E09 positive control: right password opens the Viewer and data reaches the browser: login app, gene CD3E shown TRUE, data terms found 1 of 51, provider token in URL: TRUE
+[info] E10 session data URLs fetched by another client (no cookies) while the session is open: 1 data URLs (cerebro-gene-choices-); status from curl: 200 x1
+[fail] E11 replay of the login token from another client while the session is open: curl GET /?token=<token>: Viewer UI FALSE; new browser with the token URL: login form, gene shown FALSE, data terms in its frames 1
+[pass] E12 logout ends the session and stops data outputs: login form back TRUE; data URLs after logout: 404 x1; token replay shows Viewer FALSE; data terms in frames after logout 0 (also after an injected gene input: 0)
+[1] TRUE
+[pass] E13 inactivity timeout ends the session: login app, gene shown TRUE; login form back after 62 s idle: TRUE; data URLs then: 404 x1
+[pass] E14 two concurrent sessions keep their own state: logins app/app; gene views ready A TRUE, B TRUE; A shows Ttr TRUE (Mbp FALSE), B shows Mbp TRUE (Ttr FALSE); Linked views selection A 25 cells, B 0; requests of B with A's session token: 0
+[pass] E15 an account or token of another App (PBMC) on the Visium App: carol (PBMC only): error; alice with her PBMC password: error; PBMC token on Visium shows Viewer: FALSE
+[pass] E16 credentials database at rest: tables credentials,logs,pwd_mngt; credentials table stored as blob/vctrs_list_of/vctrs_vctr/list; usernames/passwords found in raw bytes: none; with a wrong key: error; decrypted with the App key: users alice,bob, is_hashed_password TRUE,TRUE, stored password equals plaintext FALSE
+[fail] E17 the database key is not in the App files: key stored in viewer-auth.env (mode 600) in the App root, next to private-data/auth/credentials.sqlite (mode 600); files containing the key: E/visium_login/release/cerebro_app/viewer-auth.env
+[pass] E18 no plaintext password in App, release or Builder work files: files with a plaintext password: none
+[pass] E19 logs do not print credentials: 23 log files (build, every App run); files with a secret: none
+[pass] E20 viewer-auth.env readable by others (0644): HTTP NA, login NA; error: Error : viewer-auth.env has insecure permissions: 0644. Required permissions: 0600. Set ownership for the actual Shiny/R runtime UID/GID and run chmod 600 on this file. For a read-only filesystem, correct the source file's permissions before deployment.
+[pass] E21 wrong database key in viewer-auth.env: HTTP NA, login NA; error: Error : Authentication database or passphrase is invalid.
+[pass] E22 viewer-auth.env removed, no key in the environment: HTTP NA, login NA; error: Error : viewer-auth.env was not found in the App directory. Restore the file matching credentials.sqlite or provide CEREBRO_AUTH_PASSPHRASE to the application process.
+[pass] E23 viewer-auth.env replaced by a symbolic link: HTTP NA, login NA; error: Error : viewer-auth.env is a symbolic link; authentication requires a regular file, not a symlink.
+[pass] E24 viewer-auth.env removed, key given in the process environment: HTTP 200, login app; error: none
+[pass] E24b credentials database removed: HTTP NA, login NA; error: Error : Authentication credentials database is not accessible. Check private-data/auth/credentials.sqlite and parent directory access for the actual Shiny/R runtime UID/GID. Recommended permissions: database 0600, auth directory 0700. For a read-only filesystem, correct source ownership and permissi...
+[pass] E25 App without login: GET / Viewer UI TRUE; Viewer opens without login and shows a gene TRUE; 39 private-file requests, responses equal to a private file 0, HTTP 200 0; viewer-auth.env and credentials absent: TRUE
+
+       fail        info info (none)        pass 
+          3           2           2          33 

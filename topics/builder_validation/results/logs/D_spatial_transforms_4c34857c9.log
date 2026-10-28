@@ -1,0 +1,889 @@
+
+==== synthetic identity ====
+[16:37:30] Start collecting data...
+[16:37:30] Adding expression data (embedded)...
+[16:37:31] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: identity
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[16:37:31] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D_4c34857c9/identity/.cbr-da6ff15d67fe63fe/stages/s-463c438538d4/01-identity-identity.crb
+[16:37:31] Done!
+[[1]]
+                case   page landmarks_found max_residual_image_px
+1 synthetic_identity linked               5                  0.23
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.15             5  0.1;0.2;0;0.2;0.1
+  capture_px_per_image_px transform        image_bounds
+1                   0.853        [] 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                      stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":0,"flip_x":false,"flip_y":false}
+
+[[2]]
+                case    page landmarks_found max_residual_image_px
+1 synthetic_identity spatial               5                  0.21
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.12             5  0.1;0.2;0;0.1;0.2
+  capture_px_per_image_px transform        image_bounds
+1                   1.451        [] 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                      stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":0,"flip_x":false,"flip_y":false}
+
+
+==== synthetic translate ====
+[16:37:55] Start collecting data...
+[16:37:55] Adding expression data (embedded)...
+[16:37:55] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: translate
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[16:37:55] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D_4c34857c9/translate/.cbr-c8472c4bfa85cf4a/stages/s-463c30e1cbb4/01-translate-translate.crb
+[16:37:55] Done!
+[[1]]
+                 case   page landmarks_found max_residual_image_px
+1 synthetic_translate linked               5                  0.23
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.15             5  0.1;0.2;0;0.2;0.1
+  capture_px_per_image_px           transform        image_bounds
+1                   0.853 {"dx":120,"dy":-80} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                          stored_alignment
+1 {"dx":120,"dy":-80,"scale":1,"rotation":0,"flip_x":false,"flip_y":false}
+
+[[2]]
+                 case    page landmarks_found max_residual_image_px
+1 synthetic_translate spatial               5                  0.21
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.12             5  0.1;0.2;0;0.1;0.2
+  capture_px_per_image_px           transform        image_bounds
+1                   1.451 {"dx":120,"dy":-80} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                          stored_alignment
+1 {"dx":120,"dy":-80,"scale":1,"rotation":0,"flip_x":false,"flip_y":false}
+
+
+==== synthetic scale_1.5 ====
+[16:38:16] Start collecting data...
+[16:38:16] Adding expression data (embedded)...
+[16:38:16] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: scale_1.5
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[16:38:16] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D_4c34857c9/scale_1.5/.cbr-feb896ff7507a091/stages/s-463ca9d73ed/01-scale-1-5-scale-1-5.crb
+[16:38:16] Done!
+[[1]]
+                 case   page landmarks_found max_residual_image_px
+1 synthetic_scale_1.5 linked               5                  0.23
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.15             5  0.1;0.2;0;0.2;0.1
+  capture_px_per_image_px     transform        image_bounds
+1                   0.853 {"scale":1.5} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                        stored_alignment
+1 {"dx":0,"dy":0,"scale":1.5,"rotation":0,"flip_x":false,"flip_y":false}
+
+[[2]]
+                 case    page landmarks_found max_residual_image_px
+1 synthetic_scale_1.5 spatial               5                  0.21
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.12             5  0.1;0.2;0;0.1;0.2
+  capture_px_per_image_px     transform        image_bounds
+1                   1.451 {"scale":1.5} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                        stored_alignment
+1 {"dx":0,"dy":0,"scale":1.5,"rotation":0,"flip_x":false,"flip_y":false}
+
+
+==== synthetic scale_0.6 ====
+[16:38:36] Start collecting data...
+[16:38:36] Adding expression data (embedded)...
+[16:38:36] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: scale_0.6
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[16:38:36] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D_4c34857c9/scale_0.6/.cbr-6a6e2e3c9a3bfedc/stages/s-463c5c5084a5/01-scale-0-6-scale-0-6.crb
+[16:38:36] Done!
+[[1]]
+                 case   page landmarks_found max_residual_image_px
+1 synthetic_scale_0.6 linked               5                  0.23
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.15             5  0.1;0.2;0;0.2;0.1
+  capture_px_per_image_px     transform        image_bounds
+1                   0.853 {"scale":0.6} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                        stored_alignment
+1 {"dx":0,"dy":0,"scale":0.6,"rotation":0,"flip_x":false,"flip_y":false}
+
+[[2]]
+                 case    page landmarks_found max_residual_image_px
+1 synthetic_scale_0.6 spatial               5                  0.21
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.12             5  0.1;0.2;0;0.1;0.2
+  capture_px_per_image_px     transform        image_bounds
+1                   1.451 {"scale":0.6} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                        stored_alignment
+1 {"dx":0,"dy":0,"scale":0.6,"rotation":0,"flip_x":false,"flip_y":false}
+
+
+==== synthetic flip_x ====
+[16:38:57] Start collecting data...
+[16:38:57] Adding expression data (embedded)...
+[16:38:57] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: flip_x
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[16:38:57] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D_4c34857c9/flip_x/.cbr-eae344f616cc536a/stages/s-463c1e2ae0f0/01-flip-x-flip-x.crb
+[16:38:57] Done!
+[[1]]
+              case   page landmarks_found max_residual_image_px
+1 synthetic_flip_x linked               5                  0.23
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.15             5  0.1;0.2;0;0.2;0.1
+  capture_px_per_image_px       transform        image_bounds
+1                   0.853 {"flip_x":true} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                     stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":0,"flip_x":true,"flip_y":false}
+
+[[2]]
+              case    page landmarks_found max_residual_image_px
+1 synthetic_flip_x spatial               5                  0.21
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.12             5  0.1;0.2;0;0.1;0.2
+  capture_px_per_image_px       transform        image_bounds
+1                   1.451 {"flip_x":true} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                     stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":0,"flip_x":true,"flip_y":false}
+
+
+==== synthetic flip_y ====
+[16:39:16] Start collecting data...
+[16:39:16] Adding expression data (embedded)...
+[16:39:16] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: flip_y
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[16:39:16] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D_4c34857c9/flip_y/.cbr-9694fcb855f0dfb4/stages/s-463c22906ee1/01-flip-y-flip-y.crb
+[16:39:16] Done!
+[[1]]
+              case   page landmarks_found max_residual_image_px
+1 synthetic_flip_y linked               5                  0.23
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.15             5  0.1;0.2;0;0.2;0.1
+  capture_px_per_image_px       transform        image_bounds
+1                   0.853 {"flip_y":true} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                     stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":0,"flip_x":false,"flip_y":true}
+
+[[2]]
+              case    page landmarks_found max_residual_image_px
+1 synthetic_flip_y spatial               5                  0.21
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.12             5  0.1;0.2;0;0.1;0.2
+  capture_px_per_image_px       transform        image_bounds
+1                   1.451 {"flip_y":true} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                     stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":0,"flip_x":false,"flip_y":true}
+
+
+==== synthetic rotate_90 ====
+[16:39:35] Start collecting data...
+[16:39:35] Adding expression data (embedded)...
+[16:39:35] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: rotate_90
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[16:39:35] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D_4c34857c9/rotate_90/.cbr-5bff48bdb7e47426/stages/s-463c7b39da92/01-rotate-90-rotate-90.crb
+[16:39:35] Done!
+[[1]]
+                 case   page landmarks_found max_residual_image_px
+1 synthetic_rotate_90 linked               5                  0.28
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.13             5    0.3;0;0;0.2;0.1
+  capture_px_per_image_px       transform        image_bounds
+1                   1.042 {"rotation":90} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                             3613.9
+                                                       stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":90,"flip_x":false,"flip_y":false}
+
+[[2]]
+                 case    page landmarks_found max_residual_image_px
+1 synthetic_rotate_90 spatial               5                  0.29
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.16             5  0.2;0.2;0;0.3;0.1
+  capture_px_per_image_px       transform        image_bounds
+1                   0.969 {"rotation":90} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                             3613.9
+                                                       stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":90,"flip_x":false,"flip_y":false}
+
+
+==== synthetic rotate_180 ====
+[16:39:56] Start collecting data...
+[16:39:56] Adding expression data (embedded)...
+[16:39:56] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: rotate_180
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[16:39:56] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D_4c34857c9/rotate_180/.cbr-1d9b56cabc0e0aa7/stages/s-463ca3a4ed6/01-rotate-180-rotate-180.crb
+[16:39:56] Done!
+[[1]]
+                  case   page landmarks_found max_residual_image_px
+1 synthetic_rotate_180 linked               5                  0.23
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.15             5  0.1;0.2;0;0.2;0.1
+  capture_px_per_image_px        transform        image_bounds
+1                   0.853 {"rotation":180} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                             5110.8
+                                                        stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":180,"flip_x":false,"flip_y":false}
+
+[[2]]
+                  case    page landmarks_found max_residual_image_px
+1 synthetic_rotate_180 spatial               5                  0.21
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.12             5  0.1;0.2;0;0.1;0.2
+  capture_px_per_image_px        transform        image_bounds
+1                   1.451 {"rotation":180} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                             5110.8
+                                                        stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":180,"flip_x":false,"flip_y":false}
+
+
+==== synthetic rotate_270 ====
+[16:40:16] Start collecting data...
+[16:40:16] Adding expression data (embedded)...
+[16:40:16] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: rotate_270
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[16:40:16] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D_4c34857c9/rotate_270/.cbr-eec69dcac0a05a7a/stages/s-463c5e21bfaf/01-rotate-270-rotate-270.crb
+[16:40:16] Done!
+[[1]]
+                  case   page landmarks_found max_residual_image_px
+1 synthetic_rotate_270 linked               5                  0.28
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.13             5    0.3;0;0;0.2;0.1
+  capture_px_per_image_px        transform        image_bounds
+1                   1.042 {"rotation":270} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                             3613.9
+                                                        stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":270,"flip_x":false,"flip_y":false}
+
+[[2]]
+                  case    page landmarks_found max_residual_image_px
+1 synthetic_rotate_270 spatial               5                  0.27
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.16             5  0.2;0.2;0;0.3;0.1
+  capture_px_per_image_px        transform        image_bounds
+1                   0.969 {"rotation":270} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                             3613.9
+                                                        stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":270,"flip_x":false,"flip_y":false}
+
+
+==== synthetic rotate_30 ====
+[16:40:35] Start collecting data...
+[16:40:35] Adding expression data (embedded)...
+[16:40:35] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: rotate_30
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[16:40:35] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D_4c34857c9/rotate_30/.cbr-6a239aacc5bc64de/stages/s-463c7cfd18b4/01-rotate-30-rotate-30.crb
+[16:40:35] Done!
+[[1]]
+                 case   page landmarks_found max_residual_image_px
+1 synthetic_rotate_30 linked               5                  0.37
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.18             5  0.3;0.4;0;0.1;0.1
+  capture_px_per_image_px       transform        image_bounds
+1                   0.711 {"rotation":30} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                             1322.8
+                                                       stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":30,"flip_x":false,"flip_y":false}
+
+[[2]]
+                 case    page landmarks_found max_residual_image_px
+1 synthetic_rotate_30 spatial               5                  0.24
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.14             5  0.1;0.2;0;0.2;0.2
+  capture_px_per_image_px       transform        image_bounds
+1                   0.898 {"rotation":30} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                             1322.8
+                                                       stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":30,"flip_x":false,"flip_y":false}
+
+
+==== synthetic rotate_90_flip_x ====
+[16:40:54] Start collecting data...
+[16:40:54] Adding expression data (embedded)...
+[16:40:54] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: rotate_90_flip_x
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[16:40:54] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D_4c34857c9/rotate_90_flip_x/.cbr-a6f4bfdfe51c3043/stages/s-463c3e4577a8/01-rotate-90-flip-x-rotate-90-flip-x.crb
+[16:40:54] Done!
+[[1]]
+                        case   page landmarks_found max_residual_image_px
+1 synthetic_rotate_90_flip_x linked               5                  0.28
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.13             5    0.3;0;0;0.2;0.1
+  capture_px_per_image_px                     transform        image_bounds
+1                   1.042 {"rotation":90,"flip_x":true} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                             3895.9
+                                                      stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":90,"flip_x":true,"flip_y":false}
+
+[[2]]
+                        case    page landmarks_found max_residual_image_px
+1 synthetic_rotate_90_flip_x spatial               5                  0.29
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.16             5  0.2;0.2;0;0.3;0.1
+  capture_px_per_image_px                     transform        image_bounds
+1                   0.969 {"rotation":90,"flip_x":true} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                             3895.9
+                                                      stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":90,"flip_x":true,"flip_y":false}
+
+
+==== synthetic combined ====
+[16:41:13] Start collecting data...
+[16:41:13] Adding expression data (embedded)...
+[16:41:13] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: combined
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[16:41:13] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D_4c34857c9/combined/.cbr-b764d354f6f25496/stages/s-463c8b28435/01-combined-combined.crb
+[16:41:13] Done!
+[[1]]
+                case   page landmarks_found max_residual_image_px
+1 synthetic_combined linked               5                  0.42
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.23             5    0.3;0.3;0;0.4;0
+  capture_px_per_image_px
+1                   0.725
+                                                   transform
+1 {"dx":60,"dy":40,"scale":1.25,"rotation":45,"flip_y":true}
+         image_bounds predicted_viewer_residual_image_px
+1 1000;1600;2000;2400                               2164
+                                                           stored_alignment
+1 {"dx":60,"dy":40,"scale":1.25,"rotation":45,"flip_x":false,"flip_y":true}
+
+[[2]]
+                case    page landmarks_found max_residual_image_px
+1 synthetic_combined spatial               5                  0.28
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.14             5    0.3;0.2;0;0.2;0
+  capture_px_per_image_px
+1                   0.822
+                                                   transform
+1 {"dx":60,"dy":40,"scale":1.25,"rotation":45,"flip_y":true}
+         image_bounds predicted_viewer_residual_image_px
+1 1000;1600;2000;2400                               2164
+                                                           stored_alignment
+1 {"dx":60,"dy":40,"scale":1.25,"rotation":45,"flip_x":false,"flip_y":true}
+
+
+==== synthetic origin_rotate_90 ====
+[16:41:33] Start collecting data...
+[16:41:33] Adding expression data (embedded)...
+[16:41:33] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: origin_rotate_90
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[16:41:33] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D_4c34857c9/origin_rotate_90/.cbr-e191660ab1b6095e/stages/s-463c7a09359/01-origin-rotate-90-origin-rotate-90.crb
+[16:41:33] Done!
+[[1]]
+                        case   page landmarks_found max_residual_image_px
+1 synthetic_origin_rotate_90 linked               5                  0.28
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.13             5    0.3;0;0;0.2;0.1
+  capture_px_per_image_px                     transform      image_bounds
+1                   1.042 {"rotation":90,"origin":true} -300;300;-200;200
+  predicted_viewer_residual_image_px
+1                                  0
+                                                       stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":90,"flip_x":false,"flip_y":false}
+
+[[2]]
+                        case    page landmarks_found max_residual_image_px
+1 synthetic_origin_rotate_90 spatial               5                  0.27
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.16             5  0.2;0.2;0;0.3;0.1
+  capture_px_per_image_px                     transform      image_bounds
+1                   0.969 {"rotation":90,"origin":true} -300;300;-200;200
+  predicted_viewer_residual_image_px
+1                                  0
+                                                       stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":90,"flip_x":false,"flip_y":false}
+
+
+==== synthetic origin_rotate_30 ====
+[16:41:53] Start collecting data...
+[16:41:53] Adding expression data (embedded)...
+[16:41:53] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: origin_rotate_30
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[16:41:53] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D_4c34857c9/origin_rotate_30/.cbr-d91e3fdbae0a477b/stages/s-463c65ae9f7c/01-origin-rotate-30-origin-rotate-30.crb
+[16:41:53] Done!
+[[1]]
+                        case   page landmarks_found max_residual_image_px
+1 synthetic_origin_rotate_30 linked               5                  0.37
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.18             5  0.3;0.4;0;0.1;0.1
+  capture_px_per_image_px                     transform      image_bounds
+1                   0.711 {"rotation":30,"origin":true} -300;300;-200;200
+  predicted_viewer_residual_image_px
+1                                  0
+                                                       stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":30,"flip_x":false,"flip_y":false}
+
+[[2]]
+                        case    page landmarks_found max_residual_image_px
+1 synthetic_origin_rotate_30 spatial               5                  0.24
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.14             5  0.1;0.2;0;0.2;0.2
+  capture_px_per_image_px                     transform      image_bounds
+1                   0.898 {"rotation":30,"origin":true} -300;300;-200;200
+  predicted_viewer_residual_image_px
+1                                  0
+                                                       stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":30,"flip_x":false,"flip_y":false}
+
+
+==== synthetic origin_rotate_90_flip_x ====
+[16:42:11] Start collecting data...
+[16:42:11] Adding expression data (embedded)...
+[16:42:11] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: origin_rotate_90_flip_x
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[16:42:11] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D_4c34857c9/origin_rotate_90_flip_x/.cbr-5faa5f7930d40f21/stages/s-463c7214133b/01-origin-rotate-90-flip-x-origin-rota-ce69222d.crb
+[16:42:11] Done!
+[[1]]
+                               case   page landmarks_found
+1 synthetic_origin_rotate_90_flip_x linked               5
+  max_residual_image_px mean_residual_image_px discs_in_view residuals_image_px
+1                  0.28                   0.13             5    0.3;0;0;0.2;0.1
+  capture_px_per_image_px                                   transform
+1                   1.042 {"rotation":90,"flip_x":true,"origin":true}
+       image_bounds predicted_viewer_residual_image_px
+1 -300;300;-200;200                              384.7
+                                                      stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":90,"flip_x":true,"flip_y":false}
+
+[[2]]
+                               case    page landmarks_found
+1 synthetic_origin_rotate_90_flip_x spatial               5
+  max_residual_image_px mean_residual_image_px discs_in_view residuals_image_px
+1                  0.27                   0.16             5  0.2;0.2;0;0.3;0.1
+  capture_px_per_image_px                                   transform
+1                   0.969 {"rotation":90,"flip_x":true,"origin":true}
+       image_bounds predicted_viewer_residual_image_px
+1 -300;300;-200;200                              384.7
+                                                      stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":90,"flip_x":true,"flip_y":false}
+
+
+==== synthetic origin_combined ====
+[16:42:30] Start collecting data...
+[16:42:30] Adding expression data (embedded)...
+[16:42:30] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: origin_combined
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[16:42:30] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D_4c34857c9/origin_combined/.cbr-3036472298156f6d/stages/s-463c1039c78e/01-origin-combined-origin-combined.crb
+[16:42:30] Done!
+[[1]]
+                       case   page landmarks_found max_residual_image_px
+1 synthetic_origin_combined linked               5                  0.42
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.23             5    0.3;0.3;0;0.4;0
+  capture_px_per_image_px
+1                   0.725
+                                                                 transform
+1 {"dx":60,"dy":40,"scale":1.25,"rotation":45,"flip_y":true,"origin":true}
+       image_bounds predicted_viewer_residual_image_px
+1 -300;300;-200;200                                340
+                                                           stored_alignment
+1 {"dx":60,"dy":40,"scale":1.25,"rotation":45,"flip_x":false,"flip_y":true}
+
+[[2]]
+                       case    page landmarks_found max_residual_image_px
+1 synthetic_origin_combined spatial               5                  0.28
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.14             5    0.3;0.2;0;0.2;0
+  capture_px_per_image_px
+1                   0.822
+                                                                 transform
+1 {"dx":60,"dy":40,"scale":1.25,"rotation":45,"flip_y":true,"origin":true}
+       image_bounds predicted_viewer_residual_image_px
+1 -300;300;-200;200                                340
+                                                           stored_alignment
+1 {"dx":60,"dy":40,"scale":1.25,"rotation":45,"flip_x":false,"flip_y":true}
+
+                                case    page max_residual_image_px
+1                 synthetic_identity  linked                  0.23
+2                 synthetic_identity spatial                  0.21
+3                synthetic_translate  linked                  0.23
+4                synthetic_translate spatial                  0.21
+5                synthetic_scale_1.5  linked                  0.23
+6                synthetic_scale_1.5 spatial                  0.21
+7                synthetic_scale_0.6  linked                  0.23
+8                synthetic_scale_0.6 spatial                  0.21
+9                   synthetic_flip_x  linked                  0.23
+10                  synthetic_flip_x spatial                  0.21
+11                  synthetic_flip_y  linked                  0.23
+12                  synthetic_flip_y spatial                  0.21
+13               synthetic_rotate_90  linked                  0.28
+14               synthetic_rotate_90 spatial                  0.29
+15              synthetic_rotate_180  linked                  0.23
+16              synthetic_rotate_180 spatial                  0.21
+17              synthetic_rotate_270  linked                  0.28
+18              synthetic_rotate_270 spatial                  0.27
+19               synthetic_rotate_30  linked                  0.37
+20               synthetic_rotate_30 spatial                  0.24
+21        synthetic_rotate_90_flip_x  linked                  0.28
+22        synthetic_rotate_90_flip_x spatial                  0.29
+23                synthetic_combined  linked                  0.42
+24                synthetic_combined spatial                  0.28
+25        synthetic_origin_rotate_90  linked                  0.28
+26        synthetic_origin_rotate_90 spatial                  0.27
+27        synthetic_origin_rotate_30  linked                  0.37
+28        synthetic_origin_rotate_30 spatial                  0.24
+29 synthetic_origin_rotate_90_flip_x  linked                  0.28
+30 synthetic_origin_rotate_90_flip_x spatial                  0.27
+31         synthetic_origin_combined  linked                  0.42
+32         synthetic_origin_combined spatial                  0.28

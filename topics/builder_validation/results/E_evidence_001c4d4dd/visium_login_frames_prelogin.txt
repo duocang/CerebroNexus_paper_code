@@ -1,0 +1,10 @@
+{"config":{"workerId":"","sessionId":"413f8651b4d15b3355d35cd3739755f8","user":null}}
+{"updateQueryString":{"queryString":"/","mode":"replace"}}
+{"busy":"busy"}
+{"custom":{"update_auth_title":{"inputId":"auth-shinymanager-auth-head","title":["Sign in"]}}}
+{"recalculating":{"name":"auth-update_shinymanager_language","status":"recalculating"}}
+{"recalculating":{"name":"auth-update_shinymanager_language","status":"recalculated"}}
+{"busy":"idle"}
+{"errors":{},"values":{"auth-update_shinymanager_language":{"html":"<div style=\"display: none;\">\n  <div class=\"form-group shiny-input-container\">\n    <label class=\"control-label shiny-label-null\" for=\"shinymanager_language\" id=\"shinymanager_language-label\"><\/label>\n    <div>\n      <select id=\"shinymanager_language\" class=\"shiny-input-select\"><option value=\"en\" selected>en<\/option><\/select>\n      <script type=\"application/json\" data-for=\"shinymanager_language\" data-nonempty=\"\">{\"plugins\":[\"selectize-plugin-a11y\"]}<\/script>\n    <\/div>\n  <\/div>\n<\/div>","deps":[{"name":"selectize","version":"0.15.2","src":{"href":"selectize-0.15.2"},"meta":null,"script":["js/selectize.min.js","accessibility/js/selectize-plugin-a11y.min.js"],"stylesheet":"css/selectize.bootstrap3.css","head":null,"attachment":null,"all_files":true}]}},"inputMessages":[{"id":"auth-user_id","message":{"label":{"html":"Username","deps":[]}}},{"id":"auth-user_pwd","message":{"label":{"html":"Password","deps":[]}}},{"id":"auth-go_auth","message":{"label":{"html":"Sign in","deps":[]}}}]}
+{"busy":"busy"}
+{"busy":"idle"}

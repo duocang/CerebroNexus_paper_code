@@ -1,0 +1,659 @@
+
+==== arrow identity ====
+[16:02:28] Start collecting data...
+[16:02:29] Adding expression data (embedded)...
+[16:02:29] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: arrow_identity
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 159
+number of genes: 30
+grouping variables (2): seurat_clusters, cell_type_final
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:arrow_fov
+
+[16:02:29] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D/arrow_identity/.cbr-395551e677343d4f/stages/s-174387111ad8b/01-arrow-identity-arrow-identity.crb
+[16:02:29] Done!
+[[1]]
+              case   page transform cells cell_fit_mean_dist_capture_px
+95% arrow_identity linked        []   159                             0
+    capture_px_per_image_px corner_squares_in_view max_residual_image_px
+95%                   0.642                      4                  3.13
+    corner_residuals_image_px outline_pixels_found
+95%           2.3;3.1;0.7;2.5                  506
+    outline_residual_p95_image_px outline_residual_max_image_px
+95%                          2.72                          3.14
+    predicted_viewer_residual_image_px
+95%                                  0
+
+[[2]]
+              case    page transform cells cell_fit_mean_dist_capture_px
+95% arrow_identity spatial        []   159                             0
+    capture_px_per_image_px corner_squares_in_view max_residual_image_px
+95%                   1.161                      4                  1.03
+    corner_residuals_image_px outline_pixels_found
+95%               1;0.9;1;0.8                 1724
+    outline_residual_p95_image_px outline_residual_max_image_px
+95%                          1.11                          1.57
+    predicted_viewer_residual_image_px
+95%                                  0
+
+
+==== arrow translate ====
+[16:02:53] Start collecting data...
+[16:02:53] Adding expression data (embedded)...
+[16:02:53] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: arrow_translate
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 159
+number of genes: 30
+grouping variables (2): seurat_clusters, cell_type_final
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:arrow_fov
+
+[16:02:53] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D/arrow_translate/.cbr-eb61fb827677e00d/stages/s-174386766c31d/01-arrow-translate-arrow-translate.crb
+[16:02:53] Done!
+[[1]]
+               case   page           transform cells
+95% arrow_translate linked {"dx":120,"dy":-80}   159
+    cell_fit_mean_dist_capture_px capture_px_per_image_px
+95%                             0                   0.639
+    corner_squares_in_view max_residual_image_px corner_residuals_image_px
+95%                      4                  2.35           0.8;2.1;1.6;2.4
+    outline_pixels_found outline_residual_p95_image_px
+95%                  506                          2.42
+    outline_residual_max_image_px predicted_viewer_residual_image_px
+95%                          2.89                                  0
+
+[[2]]
+               case    page           transform cells
+95% arrow_translate spatial {"dx":120,"dy":-80}   159
+    cell_fit_mean_dist_capture_px capture_px_per_image_px
+95%                             0                    1.16
+    corner_squares_in_view max_residual_image_px corner_residuals_image_px
+95%                      4                  1.31             1;0.1;1.3;0.8
+    outline_pixels_found outline_residual_p95_image_px
+95%                 1724                          0.98
+    outline_residual_max_image_px predicted_viewer_residual_image_px
+95%                          1.33                                  0
+
+
+==== arrow scale_1.5 ====
+[16:03:14] Start collecting data...
+[16:03:14] Adding expression data (embedded)...
+[16:03:14] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: arrow_scale_1.5
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 159
+number of genes: 30
+grouping variables (2): seurat_clusters, cell_type_final
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:arrow_fov
+
+[16:03:14] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D/arrow_scale_1.5/.cbr-3ef258f5011b7300/stages/s-17438490533db/01-arrow-scale-1-5-arrow-scale-1-5.crb
+[16:03:14] Done!
+[[1]]
+               case   page     transform cells cell_fit_mean_dist_capture_px
+95% arrow_scale_1.5 linked {"scale":1.5}   159                             0
+    capture_px_per_image_px corner_squares_in_view max_residual_image_px
+95%                   0.639                      4                  2.36
+    corner_residuals_image_px outline_pixels_found
+95%           1.6;1.4;2.4;2.1                  506
+    outline_residual_p95_image_px outline_residual_max_image_px
+95%                          2.21                          2.68
+    predicted_viewer_residual_image_px
+95%                                  0
+
+[[2]]
+               case    page     transform cells cell_fit_mean_dist_capture_px
+95% arrow_scale_1.5 spatial {"scale":1.5}   159                             0
+    capture_px_per_image_px corner_squares_in_view max_residual_image_px
+95%                   1.159                      4                  1.18
+    corner_residuals_image_px outline_pixels_found
+95%           0.7;1.1;0.9;1.2                 1724
+    outline_residual_p95_image_px outline_residual_max_image_px
+95%                          1.18                          1.65
+    predicted_viewer_residual_image_px
+95%                                  0
+
+
+==== arrow scale_0.6 ====
+[16:03:33] Start collecting data...
+[16:03:33] Adding expression data (embedded)...
+[16:03:33] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: arrow_scale_0.6
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 159
+number of genes: 30
+grouping variables (2): seurat_clusters, cell_type_final
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:arrow_fov
+
+[16:03:33] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D/arrow_scale_0.6/.cbr-9b149c958afcf415/stages/s-1743877269732/01-arrow-scale-0-6-arrow-scale-0-6.crb
+[16:03:33] Done!
+[[1]]
+               case   page     transform cells cell_fit_mean_dist_capture_px
+95% arrow_scale_0.6 linked {"scale":0.6}   159                             0
+    capture_px_per_image_px corner_squares_in_view max_residual_image_px
+95%                   0.638                      4                  2.07
+    corner_residuals_image_px outline_pixels_found
+95%           1.3;2.1;0.7;1.5                  506
+    outline_residual_p95_image_px outline_residual_max_image_px
+95%                          1.82                           2.3
+    predicted_viewer_residual_image_px
+95%                                  0
+
+[[2]]
+               case    page     transform cells cell_fit_mean_dist_capture_px
+95% arrow_scale_0.6 spatial {"scale":0.6}   159                             0
+    capture_px_per_image_px corner_squares_in_view max_residual_image_px
+95%                   1.161                      4                  0.71
+    corner_residuals_image_px outline_pixels_found
+95%           0.6;0.7;0.1;0.3                 1724
+    outline_residual_p95_image_px outline_residual_max_image_px
+95%                          1.04                          1.57
+    predicted_viewer_residual_image_px
+95%                                  0
+
+
+==== arrow flip_x ====
+[16:03:52] Start collecting data...
+[16:03:52] Adding expression data (embedded)...
+[16:03:52] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: arrow_flip_x
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 159
+number of genes: 30
+grouping variables (2): seurat_clusters, cell_type_final
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:arrow_fov
+
+[16:03:52] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D/arrow_flip_x/.cbr-dc9844ef64111abf/stages/s-17438257d790b/01-arrow-flip-x-arrow-flip-x.crb
+[16:03:52] Done!
+[[1]]
+            case   page       transform cells cell_fit_mean_dist_capture_px
+95% arrow_flip_x linked {"flip_x":true}   159                             0
+    capture_px_per_image_px corner_squares_in_view max_residual_image_px
+95%                   0.643                      4                  3.61
+    corner_residuals_image_px outline_pixels_found
+95%           3.1;3.6;1.5;2.7                  506
+    outline_residual_p95_image_px outline_residual_max_image_px
+95%                          2.71                          3.13
+    predicted_viewer_residual_image_px
+95%                                  0
+
+[[2]]
+            case    page       transform cells cell_fit_mean_dist_capture_px
+95% arrow_flip_x spatial {"flip_x":true}   159                             0
+    capture_px_per_image_px corner_squares_in_view max_residual_image_px
+95%                   1.162                      4                  0.81
+    corner_residuals_image_px outline_pixels_found
+95%           0.3;0.8;0.3;0.8                 1724
+    outline_residual_p95_image_px outline_residual_max_image_px
+95%                          1.04                          1.42
+    predicted_viewer_residual_image_px
+95%                                  0
+
+
+==== arrow flip_y ====
+[16:04:10] Start collecting data...
+[16:04:10] Adding expression data (embedded)...
+[16:04:10] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: arrow_flip_y
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 159
+number of genes: 30
+grouping variables (2): seurat_clusters, cell_type_final
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:arrow_fov
+
+[16:04:10] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D/arrow_flip_y/.cbr-e16da0eaa6d77f8e/stages/s-1743822447281/01-arrow-flip-y-arrow-flip-y.crb
+[16:04:10] Done!
+[[1]]
+            case   page       transform cells cell_fit_mean_dist_capture_px
+95% arrow_flip_y linked {"flip_y":true}   159                             0
+    capture_px_per_image_px corner_squares_in_view max_residual_image_px
+95%                   0.642                      4                  3.32
+    corner_residuals_image_px outline_pixels_found
+95%           0.6;2.4;2.1;3.3                  506
+    outline_residual_p95_image_px outline_residual_max_image_px
+95%                          2.72                          3.14
+    predicted_viewer_residual_image_px
+95%                                  0
+
+[[2]]
+            case    page       transform cells cell_fit_mean_dist_capture_px
+95% arrow_flip_y spatial {"flip_y":true}   159                             0
+    capture_px_per_image_px corner_squares_in_view max_residual_image_px
+95%                   1.161                      4                  1.06
+    corner_residuals_image_px outline_pixels_found
+95%           0.9;0.8;1.1;0.9                 1724
+    outline_residual_p95_image_px outline_residual_max_image_px
+95%                          1.11                          1.57
+    predicted_viewer_residual_image_px
+95%                                  0
+
+
+==== arrow rotate_90 ====
+[16:04:29] Start collecting data...
+[16:04:29] Adding expression data (embedded)...
+[16:04:29] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: arrow_rotate_90
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 159
+number of genes: 30
+grouping variables (2): seurat_clusters, cell_type_final
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:arrow_fov
+
+[16:04:29] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D/arrow_rotate_90/.cbr-44acae6e78a80bba/stages/s-17438463f3103/01-arrow-rotate-90-arrow-rotate-90.crb
+[16:04:29] Done!
+[[1]]
+             case   page       transform cells cell_fit_mean_dist_capture_px
+1 arrow_rotate_90 linked {"rotation":90}   159                             0
+  capture_px_per_image_px corner_squares_in_view max_residual_image_px
+1                   0.782                      0                    NA
+  corner_residuals_image_px outline_pixels_found outline_residual_p95_image_px
+1               NA;NA;NA;NA                    0                            NA
+  outline_residual_max_image_px predicted_viewer_residual_image_px
+1                            NA                              667.1
+
+[[2]]
+               case    page       transform cells cell_fit_mean_dist_capture_px
+95% arrow_rotate_90 spatial {"rotation":90}   159                         10.12
+    capture_px_per_image_px corner_squares_in_view max_residual_image_px
+95%                   0.475                      1                946.54
+    corner_residuals_image_px outline_pixels_found
+95%            NA;NA;946.5;NA                 1091
+    outline_residual_p95_image_px outline_residual_max_image_px
+95%                       1101.96                       1121.37
+    predicted_viewer_residual_image_px
+95%                              667.1
+
+
+==== arrow rotate_180 ====
+[16:04:48] Start collecting data...
+[16:04:48] Adding expression data (embedded)...
+[16:04:48] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: arrow_rotate_180
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 159
+number of genes: 30
+grouping variables (2): seurat_clusters, cell_type_final
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:arrow_fov
+
+[16:04:48] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D/arrow_rotate_180/.cbr-edc02e8d865795c7/stages/s-174384da9ea59/01-arrow-rotate-180-arrow-rotate-180.crb
+[16:04:48] Done!
+[[1]]
+              case   page        transform cells cell_fit_mean_dist_capture_px
+1 arrow_rotate_180 linked {"rotation":180}   159                             0
+  capture_px_per_image_px corner_squares_in_view max_residual_image_px
+1                   0.643                      1                926.45
+  corner_residuals_image_px outline_pixels_found outline_residual_p95_image_px
+1            NA;NA;926.4;NA                    0                            NA
+  outline_residual_max_image_px predicted_viewer_residual_image_px
+1                            NA                              943.4
+
+[[2]]
+              case    page        transform cells cell_fit_mean_dist_capture_px
+1 arrow_rotate_180 spatial {"rotation":180}   159                             0
+  capture_px_per_image_px corner_squares_in_view max_residual_image_px
+1                   1.165                      1                934.18
+  corner_residuals_image_px outline_pixels_found outline_residual_p95_image_px
+1            NA;NA;934.2;NA                    0                            NA
+  outline_residual_max_image_px predicted_viewer_residual_image_px
+1                            NA                              943.4
+
+
+==== arrow rotate_270 ====
+[16:05:07] Start collecting data...
+[16:05:07] Adding expression data (embedded)...
+[16:05:07] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: arrow_rotate_270
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 159
+number of genes: 30
+grouping variables (2): seurat_clusters, cell_type_final
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:arrow_fov
+
+[16:05:07] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D/arrow_rotate_270/.cbr-28262a25fbe3f54a/stages/s-174385657c3b8/01-arrow-rotate-270-arrow-rotate-270.crb
+[16:05:07] Done!
+[[1]]
+                case   page        transform cells
+95% arrow_rotate_270 linked {"rotation":270}   159
+    cell_fit_mean_dist_capture_px capture_px_per_image_px
+95%                             0                   0.781
+    corner_squares_in_view max_residual_image_px corner_residuals_image_px
+95%                      1                666.57            666.6;NA;NA;NA
+    outline_pixels_found outline_residual_p95_image_px
+95%                  223                        218.91
+    outline_residual_max_image_px predicted_viewer_residual_image_px
+95%                        226.56                              667.1
+
+[[2]]
+                case    page        transform cells
+95% arrow_rotate_270 spatial {"rotation":270}   159
+    cell_fit_mean_dist_capture_px capture_px_per_image_px
+95%                             0                   0.727
+    corner_squares_in_view max_residual_image_px corner_residuals_image_px
+95%                      2                668.25         667.8;NA;668.3;NA
+    outline_pixels_found outline_residual_p95_image_px
+95%                  232                        227.61
+    outline_residual_max_image_px predicted_viewer_residual_image_px
+95%                        236.17                              667.1
+
+
+==== arrow rotate_28 ====
+[16:05:26] Start collecting data...
+[16:05:26] Adding expression data (embedded)...
+[16:05:26] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: arrow_rotate_28
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 159
+number of genes: 30
+grouping variables (2): seurat_clusters, cell_type_final
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:arrow_fov
+
+[16:05:26] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D/arrow_rotate_28/.cbr-1ff9df30c820e7aa/stages/s-174386107b7be/01-arrow-rotate-28-arrow-rotate-28.crb
+[16:05:26] Done!
+[[1]]
+               case   page       transform cells cell_fit_mean_dist_capture_px
+95% arrow_rotate_28 linked {"rotation":28}   159                             0
+    capture_px_per_image_px corner_squares_in_view max_residual_image_px
+95%                   0.546                      3                227.22
+    corner_residuals_image_px outline_pixels_found
+95%      NA;225.5;226.5;227.2                  721
+    outline_residual_p95_image_px outline_residual_max_image_px
+95%                        215.46                        225.92
+    predicted_viewer_residual_image_px
+95%                              228.2
+
+[[2]]
+               case    page       transform cells cell_fit_mean_dist_capture_px
+95% arrow_rotate_28 spatial {"rotation":28}   159                             0
+    capture_px_per_image_px corner_squares_in_view max_residual_image_px
+95%                   1.094                      2                227.44
+    corner_residuals_image_px outline_pixels_found
+95%         NA;NA;227.4;227.4                 2138
+    outline_residual_p95_image_px outline_residual_max_image_px
+95%                        216.68                        227.89
+    predicted_viewer_residual_image_px
+95%                              228.2
+
+
+==== arrow fixture_as_is_identity ====
+[16:05:46] Start collecting data...
+[16:05:46] Adding expression data (embedded)...
+[16:05:46] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: arrow_fixture_as_is_identity
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 159
+number of genes: 30
+grouping variables (2): seurat_clusters, cell_type_final
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:arrow_fov
+
+[16:05:46] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D/arrow_fixture_as_is_identity/.cbr-fb895f2c44f13e13/stages/s-174387d9745e3/01-arrow-fixture-a-31e17f59-arrow-fixtu-31e17f59.crb
+[16:05:46] Done!
+[[1]]
+                            case   page      transform cells
+95% arrow_fixture_as_is_identity linked {"as_is":true}   159
+    cell_fit_mean_dist_capture_px capture_px_per_image_px
+95%                             0                   0.642
+    corner_squares_in_view max_residual_image_px corner_residuals_image_px
+95%                      4                 450.7   447.9;447.7;450.6;450.7
+    outline_pixels_found outline_residual_p95_image_px
+95%                  506                          2.72
+    outline_residual_max_image_px predicted_viewer_residual_image_px
+95%                          3.14                                  0
+
+[[2]]
+                            case    page      transform cells
+95% arrow_fixture_as_is_identity spatial {"as_is":true}   159
+    cell_fit_mean_dist_capture_px capture_px_per_image_px
+95%                             0                   1.161
+    corner_squares_in_view max_residual_image_px corner_residuals_image_px
+95%                      4                450.47       450.5;450.4;450;450
+    outline_pixels_found outline_residual_p95_image_px
+95%                 1724                          1.11
+    outline_residual_max_image_px predicted_viewer_residual_image_px
+95%                          1.57                                  0
+
+
+==== arrow example_preset_rotation_28 ====
+[16:06:05] Start collecting data...
+[16:06:05] Adding expression data (embedded)...
+[16:06:05] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: arrow_example_preset_rotation_28
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 159
+number of genes: 30
+grouping variables (2): seurat_clusters, cell_type_final
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:arrow_fov
+
+[16:06:05] Saving Cerebro object to: /Users/nuioi/projects/2026_07_01_cerebreNexus/CerebroNexus_paper_code/topics/builder_validation/data/D/arrow_example_preset_rotation_28/.cbr-8b8aa4d6e80c9740/stages/s-174383b9b14b7/01-arrow-example-p-ace3261d-arrow-examp-ace3261d.crb
+[16:06:05] Done!
+[[1]]
+                                case   page
+95% arrow_example_preset_rotation_28 linked
+                                     transform cells
+95% {"as_is":true,"preset":true,"rotation":28}   159
+    cell_fit_mean_dist_capture_px capture_px_per_image_px
+95%                             0                    0.64
+    corner_squares_in_view max_residual_image_px corner_residuals_image_px
+95%                      2                440.67         NA;NA;440.7;135.9
+    outline_pixels_found outline_residual_p95_image_px
+95%                  902                        258.93
+    outline_residual_max_image_px predicted_viewer_residual_image_px
+95%                        273.01                              228.2
+
+[[2]]
+                                case    page
+95% arrow_example_preset_rotation_28 spatial
+                                     transform cells
+95% {"as_is":true,"preset":true,"rotation":28}   159
+    cell_fit_mean_dist_capture_px capture_px_per_image_px
+95%                          1.31                   1.176
+    corner_squares_in_view max_residual_image_px corner_residuals_image_px
+95%                      2                437.52         NA;NA;437.5;138.4
+    outline_pixels_found outline_residual_p95_image_px
+95%                 2404                        165.19
+    outline_residual_max_image_px predicted_viewer_residual_image_px
+95%                        206.01                              228.2
+
+                               case    page max_residual_image_px
+1                    arrow_identity  linked                  3.13
+2                    arrow_identity spatial                  1.03
+3                   arrow_translate  linked                  2.35
+4                   arrow_translate spatial                  1.31
+5                   arrow_scale_1.5  linked                  2.36
+6                   arrow_scale_1.5 spatial                  1.18
+7                   arrow_scale_0.6  linked                  2.07
+8                   arrow_scale_0.6 spatial                  0.71
+9                      arrow_flip_x  linked                  3.61
+10                     arrow_flip_x spatial                  0.81
+11                     arrow_flip_y  linked                  3.32
+12                     arrow_flip_y spatial                  1.06
+13                  arrow_rotate_90  linked                    NA
+14                  arrow_rotate_90 spatial                946.54
+15                 arrow_rotate_180  linked                926.45
+16                 arrow_rotate_180 spatial                934.18
+17                 arrow_rotate_270  linked                666.57
+18                 arrow_rotate_270 spatial                668.25
+19                  arrow_rotate_28  linked                227.22
+20                  arrow_rotate_28 spatial                227.44
+21     arrow_fixture_as_is_identity  linked                450.70
+22     arrow_fixture_as_is_identity spatial                450.47
+23 arrow_example_preset_rotation_28  linked                440.67
+24 arrow_example_preset_rotation_28 spatial                437.52

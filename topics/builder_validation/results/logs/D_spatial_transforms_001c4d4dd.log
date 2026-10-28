@@ -1,0 +1,889 @@
+
+==== synthetic identity ====
+[18:44:59] Start collecting data...
+[18:44:59] Adding expression data (embedded)...
+[18:44:59] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: identity
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[18:44:59] Saving Cerebro object to: /Volumes/bv_cache/data/D_001c4d4dd/identity/.cbr-ea357d7fa6fc6310/stages/s-fc281a77085e/01-identity-identity.crb
+[18:44:59] Done!
+[[1]]
+                case   page landmarks_found max_residual_image_px
+1 synthetic_identity linked               5                  0.23
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.15             5  0.1;0.2;0;0.2;0.1
+  capture_px_per_image_px transform        image_bounds
+1                   0.853        [] 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                      stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":0,"flip_x":false,"flip_y":false}
+
+[[2]]
+                case    page landmarks_found max_residual_image_px
+1 synthetic_identity spatial               5                  0.21
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.12             5  0.1;0.2;0;0.1;0.2
+  capture_px_per_image_px transform        image_bounds
+1                   1.451        [] 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                      stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":0,"flip_x":false,"flip_y":false}
+
+
+==== synthetic translate ====
+[18:45:23] Start collecting data...
+[18:45:23] Adding expression data (embedded)...
+[18:45:23] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: translate
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[18:45:23] Saving Cerebro object to: /Volumes/bv_cache/data/D_001c4d4dd/translate/.cbr-3d789eb8127fc68f/stages/s-fc2877b8470d/01-translate-translate.crb
+[18:45:23] Done!
+[[1]]
+                 case   page landmarks_found max_residual_image_px
+1 synthetic_translate linked               5                  0.23
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.15             5  0.1;0.2;0;0.2;0.1
+  capture_px_per_image_px           transform        image_bounds
+1                   0.853 {"dx":120,"dy":-80} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                          stored_alignment
+1 {"dx":120,"dy":-80,"scale":1,"rotation":0,"flip_x":false,"flip_y":false}
+
+[[2]]
+                 case    page landmarks_found max_residual_image_px
+1 synthetic_translate spatial               5                  0.21
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.12             5  0.1;0.2;0;0.1;0.2
+  capture_px_per_image_px           transform        image_bounds
+1                   1.451 {"dx":120,"dy":-80} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                          stored_alignment
+1 {"dx":120,"dy":-80,"scale":1,"rotation":0,"flip_x":false,"flip_y":false}
+
+
+==== synthetic scale_1.5 ====
+[18:45:43] Start collecting data...
+[18:45:43] Adding expression data (embedded)...
+[18:45:43] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: scale_1.5
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[18:45:43] Saving Cerebro object to: /Volumes/bv_cache/data/D_001c4d4dd/scale_1.5/.cbr-c3fe152df43f2a00/stages/s-fc2816f80f30/01-scale-1-5-scale-1-5.crb
+[18:45:43] Done!
+[[1]]
+                 case   page landmarks_found max_residual_image_px
+1 synthetic_scale_1.5 linked               5                  0.23
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.15             5  0.1;0.2;0;0.2;0.1
+  capture_px_per_image_px     transform        image_bounds
+1                   0.853 {"scale":1.5} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                        stored_alignment
+1 {"dx":0,"dy":0,"scale":1.5,"rotation":0,"flip_x":false,"flip_y":false}
+
+[[2]]
+                 case    page landmarks_found max_residual_image_px
+1 synthetic_scale_1.5 spatial               5                  0.21
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.12             5  0.1;0.2;0;0.1;0.2
+  capture_px_per_image_px     transform        image_bounds
+1                   1.451 {"scale":1.5} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                        stored_alignment
+1 {"dx":0,"dy":0,"scale":1.5,"rotation":0,"flip_x":false,"flip_y":false}
+
+
+==== synthetic scale_0.6 ====
+[18:46:03] Start collecting data...
+[18:46:03] Adding expression data (embedded)...
+[18:46:03] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: scale_0.6
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[18:46:03] Saving Cerebro object to: /Volumes/bv_cache/data/D_001c4d4dd/scale_0.6/.cbr-1a1fc37ec23411ad/stages/s-fc285921c469/01-scale-0-6-scale-0-6.crb
+[18:46:03] Done!
+[[1]]
+                 case   page landmarks_found max_residual_image_px
+1 synthetic_scale_0.6 linked               5                  0.23
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.15             5  0.1;0.2;0;0.2;0.1
+  capture_px_per_image_px     transform        image_bounds
+1                   0.853 {"scale":0.6} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                        stored_alignment
+1 {"dx":0,"dy":0,"scale":0.6,"rotation":0,"flip_x":false,"flip_y":false}
+
+[[2]]
+                 case    page landmarks_found max_residual_image_px
+1 synthetic_scale_0.6 spatial               5                  0.21
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.12             5  0.1;0.2;0;0.1;0.2
+  capture_px_per_image_px     transform        image_bounds
+1                   1.451 {"scale":0.6} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                        stored_alignment
+1 {"dx":0,"dy":0,"scale":0.6,"rotation":0,"flip_x":false,"flip_y":false}
+
+
+==== synthetic flip_x ====
+[18:46:22] Start collecting data...
+[18:46:22] Adding expression data (embedded)...
+[18:46:22] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: flip_x
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[18:46:22] Saving Cerebro object to: /Volumes/bv_cache/data/D_001c4d4dd/flip_x/.cbr-cee8c79771f7408e/stages/s-fc2858f93df0/01-flip-x-flip-x.crb
+[18:46:22] Done!
+[[1]]
+              case   page landmarks_found max_residual_image_px
+1 synthetic_flip_x linked               5                  0.23
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.15             5  0.1;0.2;0;0.2;0.1
+  capture_px_per_image_px       transform        image_bounds
+1                   0.853 {"flip_x":true} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                     stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":0,"flip_x":true,"flip_y":false}
+
+[[2]]
+              case    page landmarks_found max_residual_image_px
+1 synthetic_flip_x spatial               5                  0.21
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.12             5  0.1;0.2;0;0.1;0.2
+  capture_px_per_image_px       transform        image_bounds
+1                   1.451 {"flip_x":true} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                     stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":0,"flip_x":true,"flip_y":false}
+
+
+==== synthetic flip_y ====
+[18:46:41] Start collecting data...
+[18:46:41] Adding expression data (embedded)...
+[18:46:41] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: flip_y
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[18:46:41] Saving Cerebro object to: /Volumes/bv_cache/data/D_001c4d4dd/flip_y/.cbr-63dd52546a934348/stages/s-fc28267461bd/01-flip-y-flip-y.crb
+[18:46:41] Done!
+[[1]]
+              case   page landmarks_found max_residual_image_px
+1 synthetic_flip_y linked               5                  0.23
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.15             5  0.1;0.2;0;0.2;0.1
+  capture_px_per_image_px       transform        image_bounds
+1                   0.853 {"flip_y":true} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                     stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":0,"flip_x":false,"flip_y":true}
+
+[[2]]
+              case    page landmarks_found max_residual_image_px
+1 synthetic_flip_y spatial               5                  0.21
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.12             5  0.1;0.2;0;0.1;0.2
+  capture_px_per_image_px       transform        image_bounds
+1                   1.451 {"flip_y":true} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                                  0
+                                                     stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":0,"flip_x":false,"flip_y":true}
+
+
+==== synthetic rotate_90 ====
+[18:47:01] Start collecting data...
+[18:47:01] Adding expression data (embedded)...
+[18:47:01] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: rotate_90
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[18:47:01] Saving Cerebro object to: /Volumes/bv_cache/data/D_001c4d4dd/rotate_90/.cbr-9b36c38a1e561f90/stages/s-fc287b494c34/01-rotate-90-rotate-90.crb
+[18:47:01] Done!
+[[1]]
+                 case   page landmarks_found max_residual_image_px
+1 synthetic_rotate_90 linked               5                  0.28
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.13             5    0.3;0;0;0.2;0.1
+  capture_px_per_image_px       transform        image_bounds
+1                   1.042 {"rotation":90} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                             3613.9
+                                                       stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":90,"flip_x":false,"flip_y":false}
+
+[[2]]
+                 case    page landmarks_found max_residual_image_px
+1 synthetic_rotate_90 spatial               5                  0.29
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.16             5  0.2;0.2;0;0.3;0.1
+  capture_px_per_image_px       transform        image_bounds
+1                   0.969 {"rotation":90} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                             3613.9
+                                                       stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":90,"flip_x":false,"flip_y":false}
+
+
+==== synthetic rotate_180 ====
+[18:47:21] Start collecting data...
+[18:47:21] Adding expression data (embedded)...
+[18:47:21] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: rotate_180
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[18:47:21] Saving Cerebro object to: /Volumes/bv_cache/data/D_001c4d4dd/rotate_180/.cbr-d77552196e09aab4/stages/s-fc28f8263e4/01-rotate-180-rotate-180.crb
+[18:47:21] Done!
+[[1]]
+                  case   page landmarks_found max_residual_image_px
+1 synthetic_rotate_180 linked               5                  0.23
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.15             5  0.1;0.2;0;0.2;0.1
+  capture_px_per_image_px        transform        image_bounds
+1                   0.853 {"rotation":180} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                             5110.8
+                                                        stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":180,"flip_x":false,"flip_y":false}
+
+[[2]]
+                  case    page landmarks_found max_residual_image_px
+1 synthetic_rotate_180 spatial               5                  0.21
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.12             5  0.1;0.2;0;0.1;0.2
+  capture_px_per_image_px        transform        image_bounds
+1                   1.451 {"rotation":180} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                             5110.8
+                                                        stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":180,"flip_x":false,"flip_y":false}
+
+
+==== synthetic rotate_270 ====
+[18:47:40] Start collecting data...
+[18:47:40] Adding expression data (embedded)...
+[18:47:40] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: rotate_270
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[18:47:40] Saving Cerebro object to: /Volumes/bv_cache/data/D_001c4d4dd/rotate_270/.cbr-afa01e5cfe661a5c/stages/s-fc287d9e3ffa/01-rotate-270-rotate-270.crb
+[18:47:40] Done!
+[[1]]
+                  case   page landmarks_found max_residual_image_px
+1 synthetic_rotate_270 linked               5                  0.28
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.13             5    0.3;0;0;0.2;0.1
+  capture_px_per_image_px        transform        image_bounds
+1                   1.042 {"rotation":270} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                             3613.9
+                                                        stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":270,"flip_x":false,"flip_y":false}
+
+[[2]]
+                  case    page landmarks_found max_residual_image_px
+1 synthetic_rotate_270 spatial               5                  0.27
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.16             5  0.2;0.2;0;0.3;0.1
+  capture_px_per_image_px        transform        image_bounds
+1                   0.969 {"rotation":270} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                             3613.9
+                                                        stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":270,"flip_x":false,"flip_y":false}
+
+
+==== synthetic rotate_30 ====
+[18:48:00] Start collecting data...
+[18:48:00] Adding expression data (embedded)...
+[18:48:00] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: rotate_30
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[18:48:00] Saving Cerebro object to: /Volumes/bv_cache/data/D_001c4d4dd/rotate_30/.cbr-f88dd4830c8f517c/stages/s-fc281130d23f/01-rotate-30-rotate-30.crb
+[18:48:00] Done!
+[[1]]
+                 case   page landmarks_found max_residual_image_px
+1 synthetic_rotate_30 linked               5                  0.37
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.18             5  0.3;0.4;0;0.1;0.1
+  capture_px_per_image_px       transform        image_bounds
+1                   0.711 {"rotation":30} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                             1322.8
+                                                       stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":30,"flip_x":false,"flip_y":false}
+
+[[2]]
+                 case    page landmarks_found max_residual_image_px
+1 synthetic_rotate_30 spatial               5                  0.24
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.14             5  0.1;0.2;0;0.2;0.2
+  capture_px_per_image_px       transform        image_bounds
+1                   0.898 {"rotation":30} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                             1322.8
+                                                       stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":30,"flip_x":false,"flip_y":false}
+
+
+==== synthetic rotate_90_flip_x ====
+[18:48:20] Start collecting data...
+[18:48:20] Adding expression data (embedded)...
+[18:48:20] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: rotate_90_flip_x
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[18:48:20] Saving Cerebro object to: /Volumes/bv_cache/data/D_001c4d4dd/rotate_90_flip_x/.cbr-a22042cef8edce0a/stages/s-fc289f32d9f/01-rotate-90-flip-x-rotate-90-flip-x.crb
+[18:48:20] Done!
+[[1]]
+                        case   page landmarks_found max_residual_image_px
+1 synthetic_rotate_90_flip_x linked               5                  0.28
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.13             5    0.3;0;0;0.2;0.1
+  capture_px_per_image_px                     transform        image_bounds
+1                   1.042 {"rotation":90,"flip_x":true} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                             3895.9
+                                                      stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":90,"flip_x":true,"flip_y":false}
+
+[[2]]
+                        case    page landmarks_found max_residual_image_px
+1 synthetic_rotate_90_flip_x spatial               5                  0.29
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.16             5  0.2;0.2;0;0.3;0.1
+  capture_px_per_image_px                     transform        image_bounds
+1                   0.969 {"rotation":90,"flip_x":true} 1000;1600;2000;2400
+  predicted_viewer_residual_image_px
+1                             3895.9
+                                                      stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":90,"flip_x":true,"flip_y":false}
+
+
+==== synthetic combined ====
+[18:48:40] Start collecting data...
+[18:48:40] Adding expression data (embedded)...
+[18:48:40] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: combined
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[18:48:40] Saving Cerebro object to: /Volumes/bv_cache/data/D_001c4d4dd/combined/.cbr-d514949ed1f952c5/stages/s-fc288045cb3/01-combined-combined.crb
+[18:48:40] Done!
+[[1]]
+                case   page landmarks_found max_residual_image_px
+1 synthetic_combined linked               5                  0.42
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.23             5    0.3;0.3;0;0.4;0
+  capture_px_per_image_px
+1                   0.725
+                                                   transform
+1 {"dx":60,"dy":40,"scale":1.25,"rotation":45,"flip_y":true}
+         image_bounds predicted_viewer_residual_image_px
+1 1000;1600;2000;2400                               2164
+                                                           stored_alignment
+1 {"dx":60,"dy":40,"scale":1.25,"rotation":45,"flip_x":false,"flip_y":true}
+
+[[2]]
+                case    page landmarks_found max_residual_image_px
+1 synthetic_combined spatial               5                  0.28
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.14             5    0.3;0.2;0;0.2;0
+  capture_px_per_image_px
+1                   0.822
+                                                   transform
+1 {"dx":60,"dy":40,"scale":1.25,"rotation":45,"flip_y":true}
+         image_bounds predicted_viewer_residual_image_px
+1 1000;1600;2000;2400                               2164
+                                                           stored_alignment
+1 {"dx":60,"dy":40,"scale":1.25,"rotation":45,"flip_x":false,"flip_y":true}
+
+
+==== synthetic origin_rotate_90 ====
+[18:48:59] Start collecting data...
+[18:48:59] Adding expression data (embedded)...
+[18:48:59] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: origin_rotate_90
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[18:48:59] Saving Cerebro object to: /Volumes/bv_cache/data/D_001c4d4dd/origin_rotate_90/.cbr-6224bcabcb560fc5/stages/s-fc2812bd968a/01-origin-rotate-90-origin-rotate-90.crb
+[18:48:59] Done!
+[[1]]
+                        case   page landmarks_found max_residual_image_px
+1 synthetic_origin_rotate_90 linked               5                  0.28
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.13             5    0.3;0;0;0.2;0.1
+  capture_px_per_image_px                     transform      image_bounds
+1                   1.042 {"rotation":90,"origin":true} -300;300;-200;200
+  predicted_viewer_residual_image_px
+1                                  0
+                                                       stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":90,"flip_x":false,"flip_y":false}
+
+[[2]]
+                        case    page landmarks_found max_residual_image_px
+1 synthetic_origin_rotate_90 spatial               5                  0.27
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.16             5  0.2;0.2;0;0.3;0.1
+  capture_px_per_image_px                     transform      image_bounds
+1                   0.969 {"rotation":90,"origin":true} -300;300;-200;200
+  predicted_viewer_residual_image_px
+1                                  0
+                                                       stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":90,"flip_x":false,"flip_y":false}
+
+
+==== synthetic origin_rotate_30 ====
+[18:49:19] Start collecting data...
+[18:49:19] Adding expression data (embedded)...
+[18:49:19] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: origin_rotate_30
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[18:49:19] Saving Cerebro object to: /Volumes/bv_cache/data/D_001c4d4dd/origin_rotate_30/.cbr-b1bd8ffa9fb37a60/stages/s-fc2839a6824b/01-origin-rotate-30-origin-rotate-30.crb
+[18:49:19] Done!
+[[1]]
+                        case   page landmarks_found max_residual_image_px
+1 synthetic_origin_rotate_30 linked               5                  0.37
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.18             5  0.3;0.4;0;0.1;0.1
+  capture_px_per_image_px                     transform      image_bounds
+1                   0.711 {"rotation":30,"origin":true} -300;300;-200;200
+  predicted_viewer_residual_image_px
+1                                  0
+                                                       stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":30,"flip_x":false,"flip_y":false}
+
+[[2]]
+                        case    page landmarks_found max_residual_image_px
+1 synthetic_origin_rotate_30 spatial               5                  0.24
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.14             5  0.1;0.2;0;0.2;0.2
+  capture_px_per_image_px                     transform      image_bounds
+1                   0.898 {"rotation":30,"origin":true} -300;300;-200;200
+  predicted_viewer_residual_image_px
+1                                  0
+                                                       stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":30,"flip_x":false,"flip_y":false}
+
+
+==== synthetic origin_rotate_90_flip_x ====
+[18:49:39] Start collecting data...
+[18:49:39] Adding expression data (embedded)...
+[18:49:39] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: origin_rotate_90_flip_x
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[18:49:39] Saving Cerebro object to: /Volumes/bv_cache/data/D_001c4d4dd/origin_rotate_90_flip_x/.cbr-27a96a37926b4f79/stages/s-fc2850a74541/01-origin-rotate-90-flip-x-origin-rota-ce69222d.crb
+[18:49:39] Done!
+[[1]]
+                               case   page landmarks_found
+1 synthetic_origin_rotate_90_flip_x linked               5
+  max_residual_image_px mean_residual_image_px discs_in_view residuals_image_px
+1                  0.28                   0.13             5    0.3;0;0;0.2;0.1
+  capture_px_per_image_px                                   transform
+1                   1.042 {"rotation":90,"flip_x":true,"origin":true}
+       image_bounds predicted_viewer_residual_image_px
+1 -300;300;-200;200                              384.7
+                                                      stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":90,"flip_x":true,"flip_y":false}
+
+[[2]]
+                               case    page landmarks_found
+1 synthetic_origin_rotate_90_flip_x spatial               5
+  max_residual_image_px mean_residual_image_px discs_in_view residuals_image_px
+1                  0.27                   0.16             5  0.2;0.2;0;0.3;0.1
+  capture_px_per_image_px                                   transform
+1                   0.969 {"rotation":90,"flip_x":true,"origin":true}
+       image_bounds predicted_viewer_residual_image_px
+1 -300;300;-200;200                              384.7
+                                                      stored_alignment
+1 {"dx":0,"dy":0,"scale":1,"rotation":90,"flip_x":true,"flip_y":false}
+
+
+==== synthetic origin_combined ====
+[18:49:59] Start collecting data...
+[18:49:59] Adding expression data (embedded)...
+[18:49:59] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 6.0.0
+experiment name: origin_combined
+organism: mm
+date of analysis: 
+date of export: 2026-10-27
+number of cells: 19
+number of genes: 10
+grouping variables (1): landmark
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:lm
+
+[18:49:59] Saving Cerebro object to: /Volumes/bv_cache/data/D_001c4d4dd/origin_combined/.cbr-2de5f63dbe4bfab6/stages/s-fc2858aa4ea9/01-origin-combined-origin-combined.crb
+[18:49:59] Done!
+[[1]]
+                       case   page landmarks_found max_residual_image_px
+1 synthetic_origin_combined linked               5                  0.42
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.23             5    0.3;0.3;0;0.4;0
+  capture_px_per_image_px
+1                   0.725
+                                                                 transform
+1 {"dx":60,"dy":40,"scale":1.25,"rotation":45,"flip_y":true,"origin":true}
+       image_bounds predicted_viewer_residual_image_px
+1 -300;300;-200;200                                340
+                                                           stored_alignment
+1 {"dx":60,"dy":40,"scale":1.25,"rotation":45,"flip_x":false,"flip_y":true}
+
+[[2]]
+                       case    page landmarks_found max_residual_image_px
+1 synthetic_origin_combined spatial               5                  0.28
+  mean_residual_image_px discs_in_view residuals_image_px
+1                   0.14             5    0.3;0.2;0;0.2;0
+  capture_px_per_image_px
+1                   0.822
+                                                                 transform
+1 {"dx":60,"dy":40,"scale":1.25,"rotation":45,"flip_y":true,"origin":true}
+       image_bounds predicted_viewer_residual_image_px
+1 -300;300;-200;200                                340
+                                                           stored_alignment
+1 {"dx":60,"dy":40,"scale":1.25,"rotation":45,"flip_x":false,"flip_y":true}
+
+                                case    page max_residual_image_px
+1                 synthetic_identity  linked                  0.23
+2                 synthetic_identity spatial                  0.21
+3                synthetic_translate  linked                  0.23
+4                synthetic_translate spatial                  0.21
+5                synthetic_scale_1.5  linked                  0.23
+6                synthetic_scale_1.5 spatial                  0.21
+7                synthetic_scale_0.6  linked                  0.23
+8                synthetic_scale_0.6 spatial                  0.21
+9                   synthetic_flip_x  linked                  0.23
+10                  synthetic_flip_x spatial                  0.21
+11                  synthetic_flip_y  linked                  0.23
+12                  synthetic_flip_y spatial                  0.21
+13               synthetic_rotate_90  linked                  0.28
+14               synthetic_rotate_90 spatial                  0.29
+15              synthetic_rotate_180  linked                  0.23
+16              synthetic_rotate_180 spatial                  0.21
+17              synthetic_rotate_270  linked                  0.28
+18              synthetic_rotate_270 spatial                  0.27
+19               synthetic_rotate_30  linked                  0.37
+20               synthetic_rotate_30 spatial                  0.24
+21        synthetic_rotate_90_flip_x  linked                  0.28
+22        synthetic_rotate_90_flip_x spatial                  0.29
+23                synthetic_combined  linked                  0.42
+24                synthetic_combined spatial                  0.28
+25        synthetic_origin_rotate_90  linked                  0.28
+26        synthetic_origin_rotate_90 spatial                  0.27
+27        synthetic_origin_rotate_30  linked                  0.37
+28        synthetic_origin_rotate_30 spatial                  0.24
+29 synthetic_origin_rotate_90_flip_x  linked                  0.28
+30 synthetic_origin_rotate_90_flip_x spatial                  0.27
+31         synthetic_origin_combined  linked                  0.42
+32         synthetic_origin_combined spatial                  0.28
