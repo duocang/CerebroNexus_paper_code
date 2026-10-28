@@ -38,18 +38,18 @@ test_that("failed publish preserves the prior current result", {
   skip_unless_bench_publish()
   root <- tempfile("bench-results-")
   stage <- tempfile("bench-stage-")
-  dir.create(file.path(root, "runs", "old-run"), recursive = TRUE)
+  dir.create(file.path(root, "old-run"), recursive = TRUE)
   dir.create(stage)
   on.exit(unlink(c(root, stage), recursive = TRUE), add = TRUE)
   writeLines("old-run", file.path(root, "CURRENT"))
-  writeLines("old evidence", file.path(root, "runs", "old-run", "summary.md"))
+  writeLines("old evidence", file.path(root, "old-run", "summary.md"))
   writeLines("new evidence", file.path(stage, "summary.md"))
 
   failed <- run_publisher(stage, root, "new-run", fail_at = "before-pointer")
   expect_false(identical(failed$status, 0L))
   expect_equal(readLines(file.path(root, "CURRENT")), "old-run")
   expect_equal(
-    readLines(file.path(root, "runs", "old-run", "summary.md")),
+    readLines(file.path(root, "old-run", "summary.md")),
     "old evidence"
   )
 
@@ -61,10 +61,10 @@ test_that("failed publish preserves the prior current result", {
   )
   expect_equal(readLines(file.path(root, "CURRENT")), "new-run")
   expect_equal(
-    readLines(file.path(root, "runs", "new-run", "summary.md")),
+    readLines(file.path(root, "new-run", "summary.md")),
     "new evidence"
   )
-  expect_true(dir.exists(file.path(root, "runs", "old-run")))
+  expect_true(dir.exists(file.path(root, "old-run")))
 })
 
 test_that("publisher rejects unsafe and conflicting run identities", {

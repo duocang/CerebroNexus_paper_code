@@ -261,7 +261,7 @@ test_that("finalization retries only re-verify an already archived run", {
     finish(),
     c("validate", "report", "evidence", "check", "publish")
   )
-  dir.create(file.path(root, "result", "runs", "run-1"), recursive = TRUE)
+  dir.create(file.path(root, "result", "run-1"), recursive = TRUE)
   expect_identical(finish(), "publish")
 })
 

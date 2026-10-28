@@ -158,7 +158,7 @@ if (identical(command, "inspect")) {
     "--untracked-files=no",
     "--",
     ".",
-    ":(exclude,glob)topics/expression_backends/results/**"
+    ":(exclude,glob)topics/expression_backends/data/**"
   )
   untracked_status <- git_value(
     "ls-files",
@@ -166,7 +166,7 @@ if (identical(command, "inspect")) {
     "--exclude-standard",
     "--",
     ".",
-    ":(exclude,glob)topics/expression_backends/results/**"
+    ":(exclude,glob)topics/expression_backends/data/**"
   )
   status <- paste0(tracked_status, untracked_status)
   scratch <- Sys.getenv("BENCH_SCRATCH")

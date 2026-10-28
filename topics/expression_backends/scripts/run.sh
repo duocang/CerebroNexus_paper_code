@@ -3,10 +3,11 @@
 set -euo pipefail
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd -P)"
-BENCH_ROOT="$REPO/benchmark/scripts"
+TOPIC="$REPO/topics/expression_backends"
+BENCH_ROOT="$TOPIC/scripts"
 # CerebroNexus under test: the commit in cerebronexus.lock, fetched from GitHub
 # into the cache, unless CEREBRONEXUS_SRC names a local checkout.
-CEREBRONEXUS_LOCK="$REPO/benchmark/cerebronexus.lock"
+CEREBRONEXUS_LOCK="$TOPIC/cerebronexus.lock"
 if [ -n "${CEREBRONEXUS_SRC:-}" ]; then
   export CEREBRONEXUS_SOURCE="${CEREBRONEXUS_SOURCE:-local}"
 else
@@ -167,7 +168,7 @@ finish_profile() {
   local stage=$1 result_root=$2 run_id=$3
   # Once archived, the run is immutable. Regenerated reports would no longer
   # match it, so a retry only lets the publisher re-verify and activate it.
-  if [ ! -d "$result_root/runs/$run_id" ]; then
+  if [ ! -d "$result_root/$run_id" ]; then
     mkdir -p "$stage/logs"
     Rscript "$BENCH_ROOT/benchmark_cli.R" validate "$stage" || return 1
     Rscript "$BENCH_ROOT/benchmark_cli.R" report "$stage" \
@@ -184,8 +185,8 @@ run_profile_engine() (
 set +e
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
-export BENCH_ROOT="$REPO/benchmark/scripts"
-RESULT_ROOT="${BENCH_RESULT_ROOT:-$REPO/benchmark/results}"
+export BENCH_ROOT="$TOPIC/scripts"
+RESULT_ROOT="${BENCH_RESULT_ROOT:-$TOPIC/data}"
 export BENCH_PROFILE="${BENCH_PROFILE:-quick}"
 export BENCH_THREADS="${BENCH_THREADS:-1}"
 
@@ -410,7 +411,7 @@ done
 echo "==> validating and publishing results"
 finish_profile "$STAGE" "$RESULT_ROOT" "$BENCH_RUN_ID" || exit 1
 
-echo "==> done: $RESULT_ROOT/runs/$BENCH_RUN_ID"
+echo "==> done: $RESULT_ROOT/$BENCH_RUN_ID"
 )
 
 read_pid() {
@@ -449,7 +450,7 @@ require_clean() {
   # Redrawn figures differ only in their PDF timestamps; they are outputs,
   # not benchmark code, so they do not block a run.
   dirty=$(git -C "$REPO" status --porcelain --untracked-files=all -- \
-    . ":(exclude,glob)topics/expression_backends/results/**" \
+    . ":(exclude,glob)topics/expression_backends/data/**" \
     ":(exclude,glob)topics/*/figures/**")
   [ -z "$dirty" ] || {
     printf '%s\n' "$dirty" >&2
@@ -474,7 +475,7 @@ run_profile() {
   local head_sha study_id memory_snapshot result_root
   require_clean
   head_sha=$(git -C "$REPO" rev-parse HEAD)
-  result_root="$REPO/benchmark/results/$result_name"
+  result_root="$TOPIC/data/$result_name"
   study_id="$(date -u +%Y%m%dT%H%M%SZ)-${head_sha:0:12}-$result_name"
   printf '==> running %s\n' "$result_name"
   if [ "$profile" = "scale" ]; then
@@ -525,7 +526,7 @@ resume_inside() {
     return 1
   }
 
-  export BENCH_ROOT="$REPO/benchmark/scripts"
+  export BENCH_ROOT="$TOPIC/scripts"
   export BENCH_SCRATCH="$scratch"
   export BENCH_LIB="$scratch/rlib"
   export R_LIBS_USER="$scratch/r-user-library"
@@ -543,11 +544,11 @@ resume_inside() {
       return 1
       ;;
   esac
-  local result_root="$REPO/benchmark/results/$result_name"
+  local result_root="$TOPIC/data/$result_name"
 
   finish_profile "$stage" "$result_root" "$BENCH_RUN_ID"
   printf '0\n' > "$EXIT_FILE"
-  printf 'benchmark result published: %s\n' "$result_root/runs/$BENCH_RUN_ID"
+  printf 'benchmark result published: %s\n' "$result_root/$BENCH_RUN_ID"
 }
 
 resume_run() {

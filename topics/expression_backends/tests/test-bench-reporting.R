@@ -89,11 +89,11 @@ test_that("current result resolution is safe and backward compatible", {
   on.exit(unlink(root, recursive = TRUE), add = TRUE)
   expect_equal(bench_current_result_dir(root), normalizePath(root))
 
-  dir.create(file.path(root, "runs", "run-1"), recursive = TRUE)
+  dir.create(file.path(root, "run-1"), recursive = TRUE)
   writeLines("run-1", file.path(root, "CURRENT"))
   expect_equal(
     bench_current_result_dir(root),
-    normalizePath(file.path(root, "runs", "run-1"))
+    normalizePath(file.path(root, "run-1"))
   )
 
   writeLines("../escape", file.path(root, "CURRENT"))
@@ -259,12 +259,12 @@ test_that("frozen run paths cannot escape their result roots", {
   source(bench_reporting, local = TRUE)
 
   root <- tempfile("bench-frozen-root-")
-  dir.create(file.path(root, "runs", "run-1"), recursive = TRUE)
+  dir.create(file.path(root, "run-1"), recursive = TRUE)
   on.exit(unlink(root, recursive = TRUE), add = TRUE)
 
   expect_equal(
     bench_result_run_dir(root, "run-1"),
-    normalizePath(file.path(root, "runs", "run-1"))
+    normalizePath(file.path(root, "run-1"))
   )
   expect_error(bench_result_run_dir(root, "../escape"), "unsafe run id")
   expect_error(bench_result_run_dir(root, "missing"), "does not exist")

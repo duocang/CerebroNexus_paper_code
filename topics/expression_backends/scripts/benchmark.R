@@ -1791,7 +1791,7 @@ bench_current_result_dir <- function(result_root) {
   if (!grepl("^[A-Za-z0-9][A-Za-z0-9._-]*$", run_id)) {
     stop("unsafe CURRENT benchmark run id", call. = FALSE)
   }
-  run_dir <- file.path(result_root, "runs", run_id)
+  run_dir <- file.path(result_root, run_id)
   if (!dir.exists(run_dir)) {
     stop("CURRENT benchmark run directory does not exist", call. = FALSE)
   }
@@ -1802,7 +1802,7 @@ bench_result_run_dir <- function(result_root, run_id) {
   if (!grepl("^[A-Za-z0-9][A-Za-z0-9._-]*$", run_id)) {
     stop("unsafe run id", call. = FALSE)
   }
-  run_dir <- file.path(result_root, "runs", run_id)
+  run_dir <- file.path(result_root, run_id)
   if (!dir.exists(run_dir)) {
     stop("benchmark run directory does not exist", call. = FALSE)
   }
@@ -2074,9 +2074,8 @@ bench_publish_result <- function(stage, result_root, run_id) {
     stop("staged result directory is empty", call. = FALSE)
   }
 
-  runs <- file.path(result_root, "runs")
-  dir.create(runs, recursive = TRUE, showWarnings = FALSE)
-  destination <- file.path(runs, run_id)
+  dir.create(result_root, recursive = TRUE, showWarnings = FALSE)
+  destination <- file.path(result_root, run_id)
 
   if (dir.exists(destination)) {
     if (!identical(source_fingerprint, tree_fingerprint(destination))) {
@@ -2085,7 +2084,7 @@ bench_publish_result <- function(stage, result_root, run_id) {
   } else {
     staged_destination <- tempfile(
       paste0(".stage-", run_id, "-"),
-      tmpdir = runs
+      tmpdir = result_root
     )
     dir.create(staged_destination)
     on.exit(

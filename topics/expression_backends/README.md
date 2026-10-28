@@ -51,7 +51,7 @@ Scale has no 1M tier: 1M sits next to the 1.31M and 1.49M endpoints on the log a
 
 ## Reruns and saved files
 
-Every run gets a timestamp-and-commit directory under `topics/expression_backends/results/<quick|scale>/runs/`. Existing runs are never overwritten by a later run. The CSV measurements, source checksums, environment, report and stage logs stay together. After a run passes validation and is archived, publication points that study's `CURRENT` at it; a failed run leaves `CURRENT` unchanged.
+Every run gets a timestamp-and-commit directory under `topics/expression_backends/data/<quick|scale>/`. Existing runs are never overwritten by a later run. The CSV measurements, source checksums, environment, report and stage logs stay together. After a run passes validation and is archived, publication points that study's `CURRENT` at it; a failed run leaves `CURRENT` unchanged.
 
 Verified source downloads stay in the external cache. Failed runs keep their scratch directory by default; `resume` retries validation, reporting and publication only; if the run was already archived before activation failed, it skips regeneration and only re-verifies and activates the archive. It does not resume measurements. Generated CRB/backend files are temporary and normally removed after measurement; start with `BENCH_KEEP=1 bash topics/expression_backends/run.sh` if you need to retain them too. Starting another run archives the previous launcher log under `runner/logs/` in the cache.
 
@@ -61,11 +61,11 @@ Runs do not draw figures. The article and paper figures are drawn from a run's `
 
 ## Read results
 
-Results are stored in `topics/expression_backends/results/` (not tracked), with separate `quick/` and `scale/` directories. Quick runs do not replace Scale results. To open the selected Scale report:
+Results are stored in `topics/expression_backends/data/`, with separate `quick/` and `scale/` directories. Quick runs do not replace Scale results; the figures use the run that `data/scale/CURRENT` names. To open the selected Scale report:
 
 ```bash
-RESULTS=topics/expression_backends/results/scale
-RUN="$RESULTS/runs/$(cat "$RESULTS/CURRENT")"
+RESULTS=topics/expression_backends/data/scale
+RUN="$RESULTS/$(cat "$RESULTS/CURRENT")"
 cat "$RUN/summary.md"
 ```
 

@@ -8,8 +8,8 @@ result
 # targets store
 _targets/
 
-# Raw benchmark runs: kept locally, archived as release assets
-topics/expression_backends/results/
+# Per-process logs of benchmark runs: kept locally, not tracked
+topics/expression_backends/data/*/*/logs/
 
 # local tool state
 .claude/

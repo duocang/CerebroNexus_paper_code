@@ -64,7 +64,7 @@ bash topics/expression_backends/run.sh scale    # full study
 bash topics/expression_backends/run.sh status   # progress and log
 ```
 
-Results go to `topics/expression_backends/results/` (not tracked); copy a published run to `topics/expression_backends/data/scale/` and point `CURRENT` at it to draw figures from it. Details: [topics/expression_backends/README.md](topics/expression_backends/README.md).
+A run is published to `topics/expression_backends/data/<quick|scale>/` and `CURRENT` is pointed at it; the figures are drawn from the run `data/scale/CURRENT` names. Details: [topics/expression_backends/README.md](topics/expression_backends/README.md).
 
 ## Viewer benchmarks
 
