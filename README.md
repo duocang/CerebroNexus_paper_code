@@ -17,7 +17,7 @@ Rscript install.R
 Rscript -e 'targets::tar_make()'
 ```
 
-Figures are written to `topics/<topic>/figures/`. GitHub Actions redraws them on every push and uploads them as the `figures` artifact.
+`tar_make()` redraws the figures of `expression_backends`, `viewer_performance` and `tool_comparison` from their committed result tables. The figures of `interface_figures` need a CerebroNexus checkout (`topics/interface_figures/run.sh`); the Builder topics have no figures in the pipeline. Figures are written to `topics/<topic>/figures/`. GitHub Actions redraws them on every push and uploads them as the `figures` artifact.
 
 ## Layout
 
@@ -31,8 +31,9 @@ topics/
   expression_backends/   H5 / BPCells / embedded storage benchmark and its figures
   viewer_performance/    Viewer page, startup, renderer and smoke benchmarks, Ren backend figure
   builder/               Builder builds from a SpatialData zip and a CITE-seq MuData file
+  builder_validation/    headless validation of the Builder on real data, experiments A-F (macOS; not in targets)
   interface_figures/     scripted Viewer/Builder captures and Figures 1-7, S1-S2 (run.sh; not in targets)
-  tool_comparison/       same-task comparison with ShinyCell, iSEE, cellxgene and Vitessce (Windows; not in targets)
+  tool_comparison/       same-task comparison with ShinyCell, iSEE, cellxgene and Vitessce (measured on Windows and one Mac; only its figures are in targets)
 ```
 
 A topic folder holds what it needs of:
@@ -48,11 +49,13 @@ figures/        the figures
 tests/          tests of the harness
 ```
 
-Run all tests from the repository root:
+Run all tests from the repository root, inside the Nix environment so that the package versions match the pinned ones:
 
 ```bash
-Rscript -e 'for (d in Sys.glob("topics/*/tests")) testthat::test_dir(d)'
+nix-shell --run "Rscript -e 'for (d in Sys.glob(\"topics/*/tests\")) testthat::test_dir(d)'"
 ```
+
+With your own R the `expression_backends` tests that write 10x HDF5 through BPCells (`test-bench-full-source.R`) may fail with a HighFive `Failed to create the dataset` error, depending on the installed BPCells version; the other tests do not depend on it.
 
 ## Run the benchmark
 
@@ -77,6 +80,10 @@ Page speed, startup, renderer and smoke checks of the CerebroNexus Viewer, plus 
 ```bash
 Rscript --vanilla topics/builder/build_crbs.R <library with CerebroNexus 6.0.0> <folder with the two inputs> <output folder>
 ```
+
+## Builder validation
+
+`topics/builder_validation/` tests the CerebroNexus Builder headlessly on real inputs in six experiments (malformed inputs, end to end with the exported Viewer App, publication faults, spatial image transforms, authorization and data leakage, cell selection and sidecars). It runs against a CerebroNexus checkout installed into `env/rlib`; the tables, logs and figures it produced are committed under `results/` and `figures/`. See [topics/builder_validation/README.md](topics/builder_validation/README.md) and `THREAT_MODEL.md`.
 
 ## Tool comparison
 
