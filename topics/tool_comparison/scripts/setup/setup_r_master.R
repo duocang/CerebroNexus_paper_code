@@ -1,0 +1,16 @@
+# CerebroNexus master (7b1cc488, 5.3.1) into data/builds/rlib_master, next to (not over) the 6.0.0 install in env/rlib.
+# Hard dependencies missing from both libraries are installed into rlib_master; the package is then installed with R CMD INSTALL.
+lib <- normalizePath("data/builds/rlib_master", winslash = "/", mustWork = TRUE)
+base <- normalizePath("env/rlib", winslash = "/", mustWork = TRUE)
+.libPaths(c(lib, base))
+options(repos = c(CRAN = "https://cloud.r-project.org"), Ncpus = 8L)
+tmp <- tempfile(); dir.create(tmp)
+untar("env/src/CerebroNexus-master-7b1cc488.tar.gz", exdir = tmp)
+d <- read.dcf(file.path(tmp, "DESCRIPTION"), fields = c("Depends", "Imports"))
+pk <- unlist(strsplit(gsub("[(][^)]*[)]", "", paste(d, collapse = ",")), "[,[:space:]]+"))
+pk <- setdiff(pk[nzchar(pk) & !is.na(pk)], c("NA", "R", rownames(installed.packages(priority = "base"))))
+need <- setdiff(pk, rownames(installed.packages(lib.loc = c(lib, base))))
+cat("missing hard deps:", need, "\n")
+if (length(need)) BiocManager::install(need, lib = lib, ask = FALSE, update = FALSE, type = "binary")
+install.packages(tmp, lib = lib, repos = NULL, type = "source", INSTALL_opts = "--no-multiarch")
+cat("installed:", as.character(packageVersion("CerebroNexus", lib.loc = lib)), "\n")

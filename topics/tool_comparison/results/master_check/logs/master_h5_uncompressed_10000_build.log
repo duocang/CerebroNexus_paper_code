@@ -1,0 +1,36 @@
+Warning messages:
+1: package 'Seurat' was built under R version 4.5.3 
+2: package 'SeuratObject' was built under R version 4.5.3 
+3: package 'sp' was built under R version 4.5.3 
+4: package 'Matrix' was built under R version 4.5.3 
+There were 11 warnings (use warnings() to see them)
+TIMING read_input=10.70
+TIMING seurat_object=2.66
+[13:49:31] Start collecting data...
+[13:49:36] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 5.3.1
+experiment name: e18
+organism: mm
+date of analysis: 
+date of export: 2026-10-23
+number of cells: NULL
+number of genes: NULL
+grouping variables (1): cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:
+
+[13:49:36] Saving Cerebro object to: C:\Users\wangx\Projects\CerebroNexus_paper_code\topics\tool_comparison\data\builds\master_h5_10000/cerebro_e18.crb
+[13:49:36] Done!
+TIMING tool_step=5.00
+FILES: cerebro_e18.crb, cerebro_e18.h5 
