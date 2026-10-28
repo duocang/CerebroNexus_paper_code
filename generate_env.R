@@ -40,7 +40,9 @@ rix(
     # figure pipeline
     "ggplot2",
     "patchwork",
+    "ragg",
     "scales",
+    "svglite",
     "systemfonts",
     "targets",
     # CerebroNexus Imports (keep in sync with its DESCRIPTION)

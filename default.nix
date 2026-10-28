@@ -3,7 +3,9 @@
 # >rix(date = latest_date,
 #  > r_pkgs = c("ggplot2",
 #  > "patchwork",
+#  > "ragg",
 #  > "scales",
+#  > "svglite",
 #  > "systemfonts",
 #  > "targets",
 #  > "base64enc",
@@ -104,6 +106,7 @@ let
       plotly
       qs2
       qvalue
+      ragg
       rhdf5
       rlang
       scRepertoire
@@ -115,6 +118,7 @@ let
       shinyjs
       stringdist
       stringr
+      svglite
       systemfonts
       targets
       testthat

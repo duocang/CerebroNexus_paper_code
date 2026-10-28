@@ -24,7 +24,7 @@ install <- function(pkgs, installer) {
   installer(todo)
 }
 
-figures <- c("ggplot2", "patchwork", "scales", "systemfonts", "targets")
+figures <- c("ggplot2", "patchwork", "ragg", "scales", "svglite", "systemfonts", "targets")
 install(figures, function(p) install.packages(p))
 
 if (what == "benchmark") {
