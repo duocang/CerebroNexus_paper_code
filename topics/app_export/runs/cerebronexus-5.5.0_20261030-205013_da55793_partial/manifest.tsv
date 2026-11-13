@@ -1,0 +1,10 @@
+key	value
+contract	app-export-v1
+version	5.5.0
+sha	da557938cbf20608d180bff3d73b69c22b8d8172
+ref	builder/01_viewer-export
+platform	x86_64-w64-mingw32
+host	NUIOI
+r	R version 4.6.1 (2026-06-24 ucrt)
+rounds	3
+started	2026-10-30 20:51:18

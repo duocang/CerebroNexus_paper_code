@@ -1,0 +1,3 @@
+scenario	rounds_ok	first_s	repeat_s	cpu_s	peak_mib	out_files	out_mib
+1m	3	4.8	3.91	10.21	496.4453	225	3081.54394245148
+cosmx	3	2.36	1.88	5.8	534.9961	241	773.43488407135

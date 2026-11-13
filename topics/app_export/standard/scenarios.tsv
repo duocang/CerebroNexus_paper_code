@@ -1,0 +1,10 @@
+# What createShinyApp() is timed on: a demo CRB that ships with the measured revision, or a large fixture.
+# source "demo" = inst/extdata/examples/<crb>.crb of the revision; "large" = the path below --large-examples;
+# "fixture" = the path below --fixtures (standard/fixtures.R makes them from the builder_performance cells100k fixture).
+scenario	source	crb
+example	demo	example
+spatial_visium	demo	demo_spatial_visium
+1m	large	1m/cerebro-v2/cerebro_mouse_brain_1m_compressed.crb
+cosmx	large	cosmx/cerebro-v2/cerebro_cosmx_nsclc_compressed.crb
+embedded_100k	fixture	embedded_100k/cerebro_embedded_100k.crb
+h5_100k	fixture	h5_100k/cerebro_h5_100k.crb
