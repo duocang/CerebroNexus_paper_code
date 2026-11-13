@@ -1,3 +1,4 @@
+# Retired topic: the commit it was measured on, kept as the record. It is not the pin (../cerebronexus.pin).
 # CerebroNexus commit the expression-backend benchmark installs and measures.
 # Bump commit when the benchmark should measure a newer CerebroNexus.
 repo=https://github.com/duocang/CerebroNexus.git

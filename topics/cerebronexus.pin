@@ -1,0 +1,12 @@
+# The one CerebroNexus revision every topic measures, installs or captures. Change it here, and only here, when the
+# final branch moves; the lock files of the topics that keep their own copy (expression_backends, interface_figures)
+# and the defaults of the run scripts are checked against it by tests/test-pin.R.
+# ref     the branch the commit was taken from (a name for people; the commit is what is used)
+# commit  the full hash: a run measures `git archive` of exactly this
+# version  the DESCRIPTION version at that commit
+# repo    where the commit can be fetched from. NOTE: a commit that is only in a local clone cannot be fetched by
+#         the topics that clone from this URL (expression_backends, interface_figures); push the branch first.
+ref=integration/8.3.0
+commit=e927cbf180fb1a50cf783245ab580e83a1334764
+version=8.3.0
+repo=https://github.com/duocang/CerebroNexus.git

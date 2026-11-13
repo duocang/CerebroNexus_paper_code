@@ -1,5 +1,13 @@
 # H5 / BPCells / embedded benchmark
 
+> **Retired (2026-11-13).** This benchmark compared BPCells with H5 and embedded storage. BPCells was removed from
+> CerebroNexus (NEWS 5.2.0), so the conclusion it supported has been acted on and the topic is **not rerun** on the
+> pinned revision (`../cerebronexus.pin`). Its results, figures and the lock below stay as the record of the
+> measurement made on CerebroNexus `17a6a35` (version 5.1.x); the harness cannot run on a later revision (it calls
+> `.writeBpcellsGeneMajor`, `setExpression(..., "external")` and an `h5` file layout the package no longer reads).
+> The H5 and embedded storage of the current package are measured by `../builder_performance` (`build_h5`,
+> `build_embedded`, `export_h5`) and `../app_export`.
+
 Compare expression-storage backends by build time, file size, memory, startup and gene-read speed. Use the commands below from the repository root on Linux or WSL, with a clean Git checkout. CerebroNexus is installed from the commit in `topics/expression_backends/cerebronexus.lock`, fetched from GitHub into the cache; set `CEREBRONEXUS_SRC=/path/to/CerebroNexus` to test a clean local checkout instead (the manifest records `cerebronexus_source` as `lock` or `local`). They use `nix-shell` with the root `default.nix` by default; with `BENCH_NIX=0` they use your own R instead (install its packages with `Rscript install.R benchmark`). The full run needs a machine with substantial memory and disk space; the runner checks capacity before downloading the data.
 
 ## Start and monitor
