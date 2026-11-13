@@ -6,8 +6,10 @@
 ##
 ## Usage (from any directory):
 ##   Rscript --vanilla build_crbs.R <r_library> <inputs_dir> <out_dir>
-## <r_library> holds CerebroNexus 6.0.0 installed from the
-## feat/multi-format-on-builder branch.
+## <r_library> holds the CerebroNexus revision of topics/cerebronexus.pin, installed with
+## install_pin.R (which stamps the commit on the installation). The script reads the pin and the installed
+## package, records both versions and fails only when the installed commit is not the pinned one.
+## Everything else (Builder runtime, HLA core) is taken from the installed package.
 
 args <- commandArgs(trailingOnly = TRUE)
 stopifnot(length(args) == 3L)
@@ -17,45 +19,75 @@ out_dir <- args[[3L]]
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 out_dir <- normalizePath(out_dir, mustWork = TRUE)
 
+## topics/cerebronexus.pin, found upwards from this script.
+script_dir <- local({
+  file <- sub("^--file=", "", grep("^--file=", commandArgs(FALSE), value = TRUE)[[1L]])
+  dirname(normalizePath(file, mustWork = TRUE))
+})
+pin <- local({
+  d <- script_dir
+  while (!file.exists(file.path(d, "cerebronexus.pin"))) {
+    if (identical(dirname(d), d)) stop("cerebronexus.pin not found above ", script_dir)
+    d <- dirname(d)
+  }
+  lines <- trimws(readLines(file.path(d, "cerebronexus.pin"), warn = FALSE))
+  lines <- lines[nzchar(lines) & !startsWith(lines, "#")]
+  kv <- regmatches(lines, regexpr("=", lines), invert = TRUE)
+  stats::setNames(vapply(kv, `[`, "", 2L), vapply(kv, `[`, "", 1L))
+})
+
 .libPaths(c(lib, .libPaths()))
 suppressPackageStartupMessages(library(CerebroNexus))
-cat("CerebroNexus", as.character(packageVersion("CerebroNexus")), "from",
-    find.package("CerebroNexus"), "\n")
-stopifnot(identical(as.character(packageVersion("CerebroNexus")), "6.0.0"))
+pkg_dir <- find.package("CerebroNexus")
+installed_version <- as.character(packageVersion("CerebroNexus"))
+## The commit of the installation: the stamp install_pin.R leaves, or, for a library from the viewer_performance
+## cache (<cache>/lib/<first 12 characters of the commit>), the library's folder name.
+installed_commit <- if (file.exists(file.path(pkg_dir, "PIN_COMMIT"))) {
+  trimws(readLines(file.path(pkg_dir, "PIN_COMMIT"), warn = FALSE)[[1L]])
+} else {
+  basename(lib)
+}
+cat("date:", format(Sys.time(), "%Y-%m-%dT%H:%M:%S%z"), "\n")
+cat("CerebroNexus", installed_version, "from", pkg_dir, "\n")
+cat("installed commit:", installed_commit, " version:", installed_version, "\n")
+cat("pinned commit:   ", pin[["commit"]], " version:", pin[["version"]], " ref:", pin[["ref"]], "\n")
+if (nchar(installed_commit) < 12L || !startsWith(pin[["commit"]], installed_commit)) {
+  stop("The installed CerebroNexus (", installed_commit, ") is not the pinned revision (", pin[["commit"]],
+       "); install it with install_pin.R", call. = FALSE)
+}
 
 `%||%` <- function(a, b) if (is.null(a)) b else a
 
-## Builder runtime, sourced from the installed package in the order app.R uses
-## (UI and server files left out).
+## Builder runtime: the files inst/builder/app.R sources, read from that installed app.R in its order (UI,
+## server and session files left out), so a file added, renamed or moved in the package is followed. The
+## HLA core is taken from the package namespace, the way app.R does when it is not run from a checkout.
 builder_dir <- system.file("builder", package = "CerebroNexus", mustWork = TRUE)
+builder_files <- local({
+  exprs <- parse(file.path(builder_dir, "app.R"), keep.source = FALSE)
+  files <- character()
+  for (e in exprs) {
+    if (is.call(e) && (identical(e[[1L]], as.name("source")) ||
+                       identical(e[[1L]], quote(base::source)))) {
+      f <- eval(e[[2L]], baseenv())
+      if (is.character(f) && length(f) == 1L) files <- c(files, f)
+    }
+  }
+  skip <- c("loading.R", "diagnostics.R", "async.R", "worker.R", "session.R", "spatial_alignment_server.R")
+  files <- files[!(startsWith(files, "ui") | startsWith(files, "server") | files %in% skip)]
+  setdiff(files, "prerequisite.R")
+})
 rt <- new.env(parent = globalenv())
 rt$`%||%` <- `%||%`
 old_wd <- setwd(builder_dir)
 base::source("prerequisite.R", local = rt, encoding = "UTF-8")
-runtime_files <- c(
-  file.path("core", "bundle_path_contract.R"),
-  "publish.R", "app_bundle.R", "report.R", "coordinator.R", "notify.R",
-  "io.R", "project.R",
-  file.path("..", "viewer", "core", "viewer_content_contract.R"),
-  file.path("..", "viewer", "core", "spatial_coordinate_contract.R"),
-  file.path("..", "viewer", "core", "spatial_coordinate_transform.R"),
-  "spatial.R",
-  file.path("..", "viewer", "hla_tcr_motifs", "core", "hla_typing.R"),
-  file.path("..", "viewer", "hla_tcr_motifs", "core", "hla_motif_core.R"),
-  file.path("..", "viewer", "hla_tcr_motifs", "core", "hla_association_core.R"),
-  "manifest.R", "content_tables.R", "content_immune.R", "content_spatial.R",
-  "content.R", "profile.R", "inspect.R", "recommend.R", "adapters.R",
-  "preview.R", "stats.R", "extras.R", "analysis.R", "marker_import.R",
-  "build.R", "state.R", "review.R", "workflow.R", "plan.R"
-)
-for (file in runtime_files) {
+invisible(list2env(utils::getFromNamespace(".viewerHLACore", "CerebroNexus")(), envir = rt))
+for (file in builder_files) {
   rt$builder_source_utf8(file, envir = rt)
 }
 setwd(old_wd)
+cat("Builder runtime files (", length(builder_files), "): ", paste(builder_files, collapse = " "), "\n", sep = "")
 
-sha256 <- function(path) {
-  unname(strsplit(system2("shasum", c("-a", "256", shQuote(path)), stdout = TRUE), " ")[[1L]][[1L]])
-}
+sha256 <- function(path) unname(tools::sha256sum(path))
 
 show_settings <- function(settings, when) {
   keys <- c("organism", "assay", "layer", "groups", "default_group", "reductions", "default_reduction")
@@ -181,7 +213,9 @@ for (job in jobs) {
   crb <- build_one(job$id, job$label, job$input, job$configure %||% list(),
                    isTRUE(job$make_app))
   d <- describe_crb(crb)
-  d <- c(list(input = basename(job$input), input_sha256 = sha256(job$input)), d)
+  d <- c(list(input = basename(job$input), input_sha256 = sha256(job$input)), d,
+         list(cerebronexus_commit = installed_commit, cerebronexus_version = installed_version,
+              pin_commit = pin[["commit"]], pin_version = pin[["version"]]))
   str(d)
   rows[[job$id]] <- as.data.frame(d)
 }

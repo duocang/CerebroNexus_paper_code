@@ -22,9 +22,10 @@
 ## image pixels. Four frame cells at the transformed image corners keep the
 ## whole picture in view and give the screen scale.
 ##
-## Arrow part (Builder example data). See the block "arrow fixture" below:
-## one CRB + Viewer App per alignment setting, measured on the corner squares
-## and the orange arrow outline of arrow_background.png.
+## Visium crop part (the Builder's Spatial alignment example). See the block "Visium crop"
+## below: one CRB + Viewer App per alignment setting, measured on five discs painted on a copy of
+## visium_breast_cancer_he.jpg. (The arrow fixture of the
+## runs up to 33150d9d7 is no longer shipped by the package.)
 ##
 ## Multi-section part. inst/builder/fixtures/complete_viewer (spatial sections
 ## section_a_1_fov_1, section_a_2_fov_1, section_b_1_fov_1): per section a landmark picture is
@@ -32,12 +33,13 @@
 ## three are published in one CRB, and each section is measured in Linked
 ## views after switching to it.
 ##
-## Usage: Rscript scripts/D_spatial_transforms.R [synthetic|arrow|multisection ...]
+## Usage: Rscript scripts/D_spatial_transforms.R [synthetic|crop|multisection ...]
 ## (D_OUT=<file.csv> writes to another results file, D_CAPTURES=<dir> and
-## D_DATA=<dir> put captures and builds elsewhere; D_TRANSFORMS / D_ARROW
-## restrict the synthetic / arrow settings; D_POINT_SIZE sets the Viewer point
+## D_DATA=<dir> put captures and builds elsewhere; D_TRANSFORMS / D_CROP
+## restrict the synthetic / crop settings; D_POINT_SIZE sets the Viewer point
 ## size, 5 by default.)
-## Writes results/D_spatial_transforms.csv, captures in results/D_captures/.
+## Defaults carry the suffix of the installed commit: results/D_spatial_transforms_<9 chars>.csv,
+## captures in results/D_captures_<9 chars>/.
 
 source(file.path(dirname(sub("^--file=", "", grep("^--file=", commandArgs(FALSE), value = TRUE))), "common.R"))
 source(file.path(bv_root, "scripts", "viewer.R"))
@@ -46,8 +48,8 @@ suppressPackageStartupMessages({
   library(EBImage)
 })
 
-root <- file.path(bv_data, Sys.getenv("D_DATA", "D"))
-captures <- file.path(bv_root, "results", Sys.getenv("D_CAPTURES", "D_captures"))
+root <- file.path(bv_data, Sys.getenv("D_DATA", paste0("D_", bv_suffix)))
+captures <- file.path(bv_root, "results", Sys.getenv("D_CAPTURES", paste0("D_captures_", bv_suffix)))
 dir.create(root, recursive = TRUE, showWarnings = FALSE)
 dir.create(captures, recursive = TRUE, showWarnings = FALSE)
 rt <- bv_load_runtime()
@@ -140,11 +142,21 @@ blob <- function(mask, fill = TRUE) {
   idx <- which(lab == k, arr.ind = TRUE)
   c(x = mean(idx[, 2]) - 0.5, y = mean(idx[, 1]) - 0.5, n = nrow(idx))
 }
-## centroid of all pixels of a colour (points of one group)
+## centroid of the largest connected group of pixels of a colour (the points of one group). Stray
+## pixels of that colour elsewhere in the capture (the pane title is drawn with colour fringes in
+## recent Chrome builds) must not pull the centroid, so the largest component is taken, not every pixel.
 all_px <- function(mask) {
   if (!any(mask)) return(c(x = NA, y = NA, n = 0))
-  idx <- which(mask, arr.ind = TRUE)
-  c(x = mean(idx[, 2]) - 0.5, y = mean(idx[, 1]) - 0.5, n = nrow(idx))
+  blob(mask, fill = FALSE)
+}
+
+## The pane's tool bar (zoom, selection, download buttons) and its mini map are drawn over the plot in
+## recent Viewers; their icons have colours of the default palette, so they are hidden before a capture.
+## Only controls are hidden; the plotted points and the image are untouched.
+hide_pane_controls <- function(d) {
+  d$run_js(paste0("document.querySelectorAll('.cv-panebar, .cv-mini, .cv-focus-btn, .cv-moran-badge')",
+                  ".forEach(function(e){e.style.visibility='hidden';});"))
+  Sys.sleep(0.5)
 }
 
 ## ---- Viewer session ----------------------------------------------------------------------
@@ -162,7 +174,13 @@ viewer_open <- function(app_dir, label) {
     if (!is.na(tryCatch(httr::status_code(httr::GET(url)), error = function(e) NA))) break
     Sys.sleep(0.5)
   }
-  d <- shinytest2::AppDriver$new(url, name = label, load_timeout = 120000, width = 1400, height = 1000)
+  ## Chrome sometimes misses its 10 s start-up window on a busy machine: retry the start, not the measurement.
+  d <- NULL
+  for (attempt in 1:3) {
+    d <- tryCatch(shinytest2::AppDriver$new(url, name = label, load_timeout = 120000, width = 1400, height = 1000),
+                  error = function(e) if (attempt == 3) stop(e) else NULL)
+    if (!is.null(d)) break
+  }
   d$wait_for_idle(timeout = 60000)
   list(d = d, proc = proc)
 }
@@ -198,6 +216,7 @@ capture_linked <- function(d, file, section = NULL) {
       paste0("t&&t.textContent.indexOf(", jsonlite::toJSON(section, auto_unbox = TRUE), ")===0"), "));})()"),
     timeout = 60000)
   Sys.sleep(4)
+  hide_pane_controls(d)
   d$get_screenshot(file, selector = ".cv-pane.cv-active-spatial")
   file
 }
@@ -207,6 +226,7 @@ capture_spatial <- function(d, file) {
   d$wait_for_js("(function(){var c=document.querySelector('#shiny-tab-spatial canvas.cv-layer-overlay');return !!(c&&c.width>0);})()",
                 timeout = 60000)
   Sys.sleep(4)
+  hide_pane_controls(d)
   d$get_screenshot(file, selector = "#shiny-tab-spatial .cv-pane")
   file
 }
@@ -295,7 +315,7 @@ screen_scale <- function(m, xy) {
 }
 
 rows <- list()
-out_csv <- file.path(bv_root, "results", Sys.getenv("D_OUT", "D_spatial_transforms.csv"))
+out_csv <- file.path(bv_root, "results", Sys.getenv("D_OUT", paste0("D_spatial_transforms_", bv_suffix, ".csv")))
 write_rows <- function() {
   if (!length(rows)) return(invisible())
   all_cols <- unique(unlist(lapply(rows, names)))
@@ -318,7 +338,11 @@ add_rows <- function(case, page, m, px_per_data, data_per_image_px, extra = list
 }
 
 parts <- commandArgs(trailingOnly = TRUE)
-if (!length(parts)) parts <- c("synthetic", "arrow", "multisection")
+if (!length(parts)) parts <- c("synthetic", "crop", "multisection")
+if ("arrow" %in% parts) {
+  stop("The arrow fixture is no longer shipped by the package; use \"crop\" (the Visium crop of the Builder example).",
+       call. = FALSE)
+}
 
 only_tr <- Sys.getenv("D_TRANSFORMS")
 if (nzchar(only_tr)) transforms <- transforms[strsplit(only_tr, ",")[[1]]]
@@ -365,234 +389,168 @@ if ("synthetic" %in% parts) {
   }
 }
 
-## ---- arrow fixture, one build and App per alignment setting -------------------------------
-## arrow_background.png is 800 x 500 px (light grid, blue arrow polygon with an
-## orange outline, vertices (80,190) (470,190) (470,90) (720,250) (470,410)
-## (470,310) (80,310); dashed spine at row 250; 50 x 50 px corner squares
-## red/green/blue/yellow centred at (25,25) (775,25) (25,475) (775,475); TOP,
-## RIGHT, BOTTOM labels). arrow_spatial.rds holds 159 cells whose coordinates
-## ARE pixel positions (x = column, y = row; 119 outline, 38 spine, anchors at
-## (0,0) and (800,500)), written by data-raw/build_builder_spatial_fixtures.R.
-## Data y points up in Builder and Viewer, image rows point down, so with
-## bounds 0..800 x 0..500 the picture is registered by construction only with
-## flip_y; the arrow is mirror-symmetric about row 250, so only the corner
-## squares and the TOP/BOTTOM labels tell the two apart.
+## ---- Visium crop (the Builder example), one build and App per alignment setting ------------
+## The Builder's "Spatial alignment" example ships a crop of a real 10x Visium
+## breast cancer section: inst/builder/fixtures/spatial_alignment/
+## visium_breast_cancer.rds (405 spots, 300 genes, FOV "visium_breast") and
+## visium_breast_cancer_he.jpg (560 x 440 px). The spot coordinates ARE pixel
+## positions of that image (x = column, y = row), so the picture is registered
+## by construction only with flip_y (data y points up in Builder and Viewer,
+## image rows point down), with bounds 0..560 x 440 and no rotation, offset
+## or scale. This replaces the synthetic arrow fixture (arrow_background.png,
+## arrow_spatial.rds), which the package no longer ships.
+##
+## The H&E has no landmarks that can be located exactly, so the measured
+## picture is a copy of the shipped H&E with five saturated discs painted on it
+## (lossless PNG, same 560 x 440 px), centred on the pixel positions of five
+## real spots: the extremes of x + y and x - y and the spot nearest the centre.
+## Those five spots form groups L1..L5 (all other spots "other"). As in the
+## synthetic part, the residual is the distance between a disc and the points
+## of its group in the same capture, in source-image pixels; nothing is fitted.
+## For the example case the Builder's own builder_example_configure_entry()
+## builds the alignment record from a catalog record whose image is the painted
+## copy (same pixel grid), so the preset (flip_y, bounds, opacities, point
+## appearance) is the one the package ships.
 ##
 ## Per setting T the cells are moved to where the Builder preview puts their
-## pixel under T (builder_q), the image gets alignment T, the CRB + Viewer App
-## is built and published, the App is started and both spatial canvases are
-## captured. The data->screen map is fitted to the captured cell points
-## (similarity with y flip, iterative closest point); the corner squares and
-## the orange outline found in the capture are compared with where they
-## should be (builder_q of their pixels). Two more rows: the fixture as is
-## with identity alignment, and the Builder example's own preset (rotation 28,
-## bounds fitted by builder_alignment_fit_bounds(), as builder_example_configure_entry()).
-arrow_vertices <- rbind(c(80, 190), c(470, 190), c(470, 90), c(720, 250),
-                        c(470, 410), c(470, 310), c(80, 310), c(80, 190))
-arrow_squares <- list(c("#dc2626", 25, 25), c("#16a34a", 775, 25),
-                      c("#2563eb", 25, 475), c("#eab308", 775, 475))
-arrow_settings <- list(
+## pixel under T (builder_q) and the image gets alignment T. Rows with `as_is`:
+## the spots as they ship (cells = pixels) with identity alignment (not
+## registered: the picture is upside down against the cells) and with the
+## Builder example's preset (registered).
+crop_settings <- list(
   identity = list(), translate = list(dx = 120, dy = -80),
   scale_1.5 = list(scale = 1.5), scale_0.6 = list(scale = 0.6),
   flip_x = list(flip_x = TRUE), flip_y = list(flip_y = TRUE),
   rotate_90 = list(rotation = 90), rotate_180 = list(rotation = 180),
   rotate_270 = list(rotation = 270), rotate_28 = list(rotation = 28),
   fixture_as_is_identity = list(as_is = TRUE),
-  example_preset_rotation_28 = list(as_is = TRUE, preset = TRUE, rotation = 28),
   ## the Builder example exactly as builder_example_configure_entry() sets it
-  ## up (image record and any cell coordinate transform), opacities set to 1
-  ## so colours can be measured
+  ## up (image record, point appearance), opacities set to 1 so colours can be
+  ## measured
   example_as_configured = list(as_is = TRUE, example = TRUE)
 )
-only_arrow <- Sys.getenv("D_ARROW")
-if (nzchar(only_arrow)) arrow_settings <- arrow_settings[strsplit(only_arrow, ",")[[1]]]
+only_crop <- Sys.getenv("D_CROP")
+if (nzchar(only_crop)) crop_settings <- crop_settings[strsplit(only_crop, ",")[[1]]]
 
-fit_screen <- function(cap, legend, data_xy) {
-  ## Pixels in a legend (cell) colour; screen = (tx + k x, ty - k y). Start
-  ## from the bounding boxes, then minimise the mean distance from each
-  ## predicted cell to the nearest cell-coloured pixel.
-  pal <- vapply(legend$col, rgb_to_hex, "")
-  mask <- Reduce(`|`, lapply(pal, function(h) colour_mask(cap, h, 0.08)))
-  idx <- which(mask, arr.ind = TRUE)
-  if (!nrow(idx)) return(NULL)
-  sx <- range(idx[, 2] - 0.5)
-  sy <- range(idx[, 1] - 0.5)
-  k <- mean(c(diff(sx) / diff(range(data_xy[, 1])), diff(sy) / diff(range(data_xy[, 2]))))
-  par <- c(sx[1] - k * min(data_xy[, 1]), sy[1] + k * max(data_xy[, 2]), k)
-  dm <- distmap(!mask)
-  cost <- function(p) {
-    x <- round(p[1] + p[3] * data_xy[, 1] + 0.5)
-    y <- round(p[2] - p[3] * data_xy[, 2] + 0.5)
-    ok <- x >= 1 & x <= nrow(dm) & y >= 1 & y <= ncol(dm)
-    mean(c(dm[cbind(y[ok], x[ok])], rep(50, sum(!ok))))
+## The shipped H&E with discs painted at pixel positions (u = column, v = row, continuous).
+paint_discs <- function(he_path, u, v, out, r = 12) {
+  a <- aperm(as.array(EBImage::readImage(he_path))[, , 1:3, drop = FALSE], c(2, 1, 3)) # rows = y, columns = x
+  Hc <- dim(a)[1]
+  Wc <- dim(a)[2]
+  yy <- matrix(rep(seq_len(Hc) - 0.5, Wc), Hc)
+  xx <- matrix(rep(seq_len(Wc) - 0.5, each = Hc), Hc)
+  for (k in seq_along(u)) {
+    m <- (xx - u[k])^2 + (yy - v[k])^2 <= r^2
+    rgb <- grDevices::col2rgb(disc_cols[k]) / 255
+    for (ch in 1:3) {
+      p <- a[, , ch]
+      p[m] <- rgb[ch]
+      a[, , ch] <- p
+    }
   }
-  ## distmap is indexed [row, col]; cap rows are y
-  dm <- dm
-  cost <- function(p) {
-    x <- round(p[1] + p[3] * data_xy[, 1] + 0.5)
-    y <- round(p[2] - p[3] * data_xy[, 2] + 0.5)
-    ok <- y >= 1 & y <= nrow(dm) & x >= 1 & x <= ncol(dm)
-    mean(c(dm[cbind(y[ok], x[ok])], rep(50, sum(!ok))))
-  }
-  opt <- stats::optim(par, cost, control = list(parscale = c(5, 5, par[3] / 50), maxit = 2000))
-  list(tx = opt$par[1], ty = opt$par[2], k = opt$par[3], blobs = nrow(data_xy),
-       point_fit_rms = opt$value)
-}
-seg_dist <- function(px, py, poly) {
-  d <- rep(Inf, length(px))
-  for (i in seq_len(nrow(poly) - 1L)) {
-    ax <- poly[i, 1]; ay <- poly[i, 2]; bx <- poly[i + 1, 1]; by <- poly[i + 1, 2]
-    t <- ((px - ax) * (bx - ax) + (py - ay) * (by - ay)) / ((bx - ax)^2 + (by - ay)^2)
-    t <- pmin(pmax(t, 0), 1)
-    d <- pmin(d, sqrt((px - ax - t * (bx - ax))^2 + (py - ay - t * (by - ay))^2))
-  }
-  d
+  png::writePNG(a, out)
+  out
 }
 
-if ("arrow" %in% parts) {
+if ("crop" %in% parts) {
   fx <- system.file("builder", "fixtures", "spatial_alignment", package = "CerebroNexus")
-  bg <- file.path(fx, "arrow_background.png")
-  fixture <- readRDS(file.path(fx, "arrow_spatial.rds"))
-  tc <- GetTissueCoordinates(fixture[["arrow_fov"]])
+  he <- file.path(fx, "visium_breast_cancer_he.jpg")
+  fixture <- readRDS(file.path(fx, "visium_breast_cancer.rds"))
+  section <- SeuratObject::Images(fixture)[1L]
+  tc <- GetTissueCoordinates(fixture[[section]])
   pix <- matrix(c(tc$x, tc$y), ncol = 2, dimnames = list(tc$cell, c("u", "v")))
-  ## D_ARROW_FILL=1 (display captures for Supplementary Figure S11b only): the
-  ## cells fill the arrow on a 30-px grid, labelled tail, shaft or head, and the
-  ## Viewer colours them by region; no cell lies outside the arrow. Grid cells
-  ## keep 14 px from the outline; one more cell just inside the tip makes the
-  ## Viewer's fitted view hold the whole arrow.
-  if (nzchar(Sys.getenv("D_ARROW_FILL"))) {
-    g <- expand.grid(u = seq(5, 795, by = 30), v = seq(10, 490, by = 30))
-    inside <- sp::point.in.polygon(g$u, g$v, arrow_vertices[, 1], arrow_vertices[, 2]) > 0
-    edge <- seg_dist(g$u, g$v, arrow_vertices)
-    cells_in <- g[inside & edge >= 14, ]
-    extent <- data.frame(u = 700, v = 250)
-    cells_in <- rbind(cells_in, extent)
-    region <- ifelse(cells_in$u >= 470, "head", ifelse(cells_in$u >= 275, "shaft", "tail"))
-    uv <- as.matrix(cells_in)
-    n <- nrow(uv)
-    ids <- sprintf("ArrowFill%03d", seq_len(n))
-    counts <- GetAssayData(fixture, assay = "Spatial", layer = "counts")[, sample(ncol(fixture), n, replace = TRUE)]
-    colnames(counts) <- ids
-    fill <- SeuratObject::CreateSeuratObject(counts, assay = "Spatial")
-    fill$region <- factor(region, c("tail", "shaft", "head"))
-    fill$seurat_clusters <- fill$region
-    fill$cell_type_final <- fill$region
-    fill$sample <- "arrow_sample"
-    emb <- uv; dimnames(emb) <- list(ids, c("umap_1", "umap_2"))
-    fill[["umap"]] <- SeuratObject::CreateDimReducObject(emb, key = "umap_", assay = "Spatial")
-    fill[["arrow_fov"]] <- CreateFOV(coords = data.frame(x = uv[, 1], y = uv[, 2], cell = ids),
-                                     type = "centroids", assay = "Spatial", key = "arrow_")
-    fixture <- fill
-    pix <- matrix(uv, ncol = 2, dimnames = list(ids, c("u", "v")))
-  }
-  B <- list(xmin = 0, xmax = 800, ymin = 0, ymax = 500)
-  for (id in names(arrow_settings)) {
-    cat("\n==== arrow ", id, " ====\n", sep = "")
-    tr <- arrow_settings[[id]]
-    dir <- file.path(root, paste0("arrow_", id))
+  dims <- dim(EBImage::readImage(he))
+  Wc <- dims[1L]
+  Hc <- dims[2L]
+  pick <- rownames(pix)[unique(c(which.min(pix[, 1] + pix[, 2]), which.max(pix[, 1] + pix[, 2]),
+                                 which.min(pix[, 1] - pix[, 2]), which.max(pix[, 1] - pix[, 2]),
+                                 which.min((pix[, 1] - mean(range(pix[, 1])))^2 + (pix[, 2] - mean(range(pix[, 2])))^2)))]
+  stopifnot(length(pick) == 5L)
+  fixture$landmark <- factor(ifelse(colnames(fixture) %in% pick, paste0("L", match(colnames(fixture), pick)), "other"),
+                             c(paste0("L", 1:5), "other"))
+  crop_dir <- file.path(root, "crop_fixture")
+  dir.create(crop_dir, recursive = TRUE, showWarnings = FALSE)
+  bg <- paint_discs(he, pix[pick, 1], pix[pick, 2], file.path(crop_dir, "visium_crop_painted.png"))
+  B <- list(xmin = 0, xmax = Wc, ymin = 0, ymax = Hc)
+  ## the same pixel grid, so the Builder's own example record can be built on the painted copy
+  catalog <- rt$builder_example_catalog()$spatial_alignment
+  painted <- catalog
+  painted$serialized_path <- file.path(crop_dir, basename(catalog$serialized_path))
+  painted$histology_images$visium_breast_cancer_he$path <- basename(bg)
+  crop_point_size <- as.numeric(Sys.getenv("D_POINT_SIZE", "12"))
+  for (id in names(crop_settings)) {
+    cat("\n==== visium crop ", id, " ====\n", sep = "")
+    tr <- crop_settings[[id]]
+    dir <- file.path(root, paste0("visium_crop_", id))
     unlink(dir, recursive = TRUE)
     dir.create(dir, recursive = TRUE)
     o <- fixture
-    o$sample <- "arrow"
     if (isTRUE(tr$as_is)) {
       data_xy <- pix
     } else {
-      data_xy <- builder_q(pix[, 1], pix[, 2], tr, B, 800, 500)
+      data_xy <- builder_q(pix[, 1], pix[, 2], tr, B, Wc, Hc)
       rownames(data_xy) <- rownames(pix)
       o@images <- list()
-      o[["arrow_fov"]] <- CreateFOV(coords = data.frame(x = data_xy[, 1], y = data_xy[, 2], cell = rownames(pix)),
-                                    type = "centroids", assay = "Spatial", key = "arrow_")
+      o[[section]] <- CreateFOV(coords = data.frame(x = data_xy[, 1], y = data_xy[, 2], cell = rownames(pix)),
+                                type = "centroids", assay = "Spatial", key = "vb_")
     }
-    colnames(data_xy) <- c("x", "y")
-    input <- file.path(dir, "arrow.rds")
+    input <- file.path(dir, "visium_crop.rds")
     saveRDS(o, input)
-    extra_configure <- list()
     if (isTRUE(tr$example)) {
-      catalog <- rt$builder_example_catalog()$spatial_alignment
       configured <- rt$builder_example_configure_entry(
-        list(id = "spatial_alignment", settings = list()), catalog, fixture)
-      rec <- configured$settings$images$arrow_fov[[1L]]
-      rec[c("image_opacity", "point_opacity", "point_size")] <- list(1, 1, point_size)
+        list(id = "spatial_alignment", settings = list()), painted, fixture)
+      images <- configured$settings$images
+      rec <- images[[section]][[1L]]
+      rec[c("image_opacity", "point_opacity", "point_size")] <- list(1, 1, crop_point_size)
+      images[[section]][[1L]] <- rec
+      extra_configure <- list(images = images)
+      if (!is.null(configured$settings$spatial_point_appearance)) {
+        extra_configure$spatial_point_appearance <- stats::setNames(
+          list(list(point_opacity = 1, point_size = crop_point_size)), section)
+      }
       extra_configure$spatial_coordinate_transforms <- configured$settings$spatial_coordinate_transforms
       expected_tr <- rec[c("dx", "dy", "scale", "rotation", "flip_x", "flip_y")]
       eb <- rec$base_bounds
-    } else if (isTRUE(tr$preset)) {
-      ins <- rt$builder_read_image(bg)
-      rec <- rt$builder_alignment_record(
-        source = list(name = basename(bg), type = ins$mime, size = ins$bytes),
-        base_bounds = rt$builder_alignment_fit_bounds(
-          list(xmin = min(data_xy[, 1]), xmax = max(data_xy[, 1]), ymin = min(data_xy[, 2]), ymax = max(data_xy[, 2])),
-          ins$source_dimensions),
-        parameters = utils::modifyList(rt$builder_alignment_defaults(),
-          list(rotation = 28, image_opacity = 1, point_opacity = 1, point_size = point_size)),
-        section = list(id = "arrow_fov", kind = "spatial"), source_path = ins$source_path)
-      rec$source_content_md5 <- ins$source_content_md5
-      expected_tr <- list(rotation = 28)
-      eb <- rec$base_bounds
+      preset <- bv_one_line(jsonlite::toJSON(expected_tr, auto_unbox = TRUE))
     } else {
-      rec <- image_record(bg, "arrow_fov", B, tr)
+      old_point_size <- point_size
+      point_size <- crop_point_size # image_record() reads the global
+      rec <- image_record(bg, section, B, tr)
+      point_size <- old_point_size
+      extra_configure <- list(images = stats::setNames(list(rec), section))
       expected_tr <- tr
       eb <- B
+      preset <- NA_character_
     }
-    ## where the Builder preview shows the image features in data space
-    sq_exp <- builder_q(vapply(arrow_squares, function(x) as.numeric(x[[2]]), 1),
-                        vapply(arrow_squares, function(x) as.numeric(x[[3]]), 1), expected_tr, eb, 800, 500)
-    poly_exp <- builder_q(arrow_vertices[, 1], arrow_vertices[, 2], expected_tr, eb, 800, 500)
-    sq_pred_viewer <- viewer_q(vapply(arrow_squares, function(x) as.numeric(x[[2]]), 1),
-                               vapply(arrow_squares, function(x) as.numeric(x[[3]]), 1), expected_tr, eb, 800, 500)
-    data_per_px <- (eb$xmax - eb$xmin) / 800 * (expected_tr$scale %||% 1)
-    ## as-is rows: truth is the fixture's own registration (cells = pixels)
-    if (isTRUE(tr$as_is)) {
-      sq_true <- cbind(vapply(arrow_squares, function(x) as.numeric(x[[2]]), 1),
-                       vapply(arrow_squares, function(x) as.numeric(x[[3]]), 1))
-      poly_true <- arrow_vertices
-    } else {
-      sq_true <- sq_exp
-      poly_true <- poly_exp
-    }
-    app <- publish_case(paste0("arrow_", id), input,
-                        c(list(images = list(arrow_fov = rec), organism = "mm"),
-                          if (nzchar(Sys.getenv("D_ARROW_FILL"))) list(groups = "region"),
-                          Filter(Negate(is.null), extra_configure)))
-    v <- viewer_open(app, paste0("arrow_", id))
+    ## where the Builder preview shows the five landmark pixels in data space; for the as-is rows the
+    ## points stay at the pixel positions, so the discs (drawn by the alignment) are what moves
+    lm_xy <- data_xy[pick, , drop = FALSE]
+    colnames(lm_xy) <- c("x", "y")
+    predicted <- sqrt(rowSums((viewer_q(pix[pick, 1], pix[pick, 2], expected_tr, eb, Wc, Hc) -
+                               builder_q(pix[pick, 1], pix[pick, 2], expected_tr, eb, Wc, Hc))^2))
+    app <- publish_case(paste0("visium_crop_", id), input,
+                        c(list(organism = "hg", groups = "landmark"), Filter(Negate(is.null), extra_configure)))
+    v <- viewer_open(app, paste0("visium_crop_", id))
     legend <- tryCatch({
       v$d$click(selector = "a[href='#shiny-tab-coordinated_views']")
       Sys.sleep(3)
       legend_colours(v$d)
     }, error = function(e) NULL)
     for (page in c("linked", "spatial")) {
-      file <- file.path(captures, paste0("arrow_", id, "_", page, ".png"))
+      file <- file.path(captures, paste0("visium_crop_", id, "_", page, ".png"))
       got <- bv_capture(if (page == "linked") capture_linked(v$d, file) else capture_spatial(v$d, file))
-      row <- list(case = paste0("arrow_", id), page = page,
-                  transform = bv_one_line(jsonlite::toJSON(tr, auto_unbox = TRUE)))
       if (!is.null(got$error) || is.null(legend)) {
-        row$error <- bv_one_line(got$error %||% "legend not found")
-      } else {
-        cap <- read_capture(file)
-        f <- fit_screen(cap, legend, data_xy)
-        to_s <- function(xy) cbind(f$tx + f$k * xy[, 1], f$ty - f$k * xy[, 2])
-        sq <- t(vapply(arrow_squares, function(x) blob(colour_mask(cap, x[[1]], 0.12)), numeric(3)))
-        sq_ok <- sq[, "n"] > 30
-        e <- to_s(sq_true)
-        r_sq <- sqrt((sq[, "x"] - e[, 1])^2 + (sq[, "y"] - e[, 2])^2) / f$k / data_per_px
-        r_sq[!sq_ok] <- NA
-        om <- colour_mask(cap, "#ea580c", 0.10)
-        idx <- which(om, arr.ind = TRUE)
-        ps <- to_s(poly_true)
-        r_out <- if (nrow(idx)) seg_dist(idx[, 2] - 0.5, idx[, 1] - 0.5, ps) / f$k / data_per_px else NA
-        pv <- sqrt(rowSums((sq_pred_viewer - sq_exp)^2)) / data_per_px
-        row <- c(row, list(
-          cells = f$blobs, cell_fit_mean_dist_capture_px = round(f$point_fit_rms, 2),
-          capture_px_per_image_px = round(f$k * data_per_px, 3),
-          corner_squares_in_view = sum(sq_ok),
-          max_residual_image_px = if (any(sq_ok)) round(max(r_sq, na.rm = TRUE), 2) else NA,
-          corner_residuals_image_px = paste(round(r_sq, 1), collapse = ";"),
-          outline_pixels_found = nrow(idx),
-          outline_residual_p95_image_px = if (nrow(idx)) round(stats::quantile(r_out, 0.95), 2) else NA,
-          outline_residual_max_image_px = if (nrow(idx)) round(max(r_out), 2) else NA,
-          predicted_viewer_residual_image_px = round(max(pv), 1)))
+        rows[[length(rows) + 1L]] <- data.frame(case = paste0("visium_crop_", id), page = page,
+          error = bv_one_line(got$error %||% "legend not found"), stringsAsFactors = FALSE)
+        next
       }
-      rows[[length(rows) + 1L]] <- as.data.frame(row, stringsAsFactors = FALSE)
+      ## flat dots in exactly the legend colour; the H&E under them has purple tissue that a looser match takes
+      m <- measure(file, legend, paste0("L", 1:5), point_tol = 0.03)
+      ## data units per source-image pixel: base-bound width over image width, times scale
+      add_rows(paste0("visium_crop_", id), page, m, screen_scale(m, lm_xy), (eb$xmax - eb$xmin) / Wc * (expected_tr$scale %||% 1),
+               list(transform = bv_one_line(jsonlite::toJSON(tr, auto_unbox = TRUE)),
+                    example_alignment = preset,
+                    predicted_viewer_residual_image_px = round(max(predicted), 1)))
     }
     viewer_close(v)
     write_rows()
@@ -676,6 +634,7 @@ run_multisection <- function() {
     Sys.sleep(5)
     file <- file.path(captures, paste0("multisection_", s, "_spatial.png"))
     unlink(file)
+    hide_pane_controls(v$d)
     v$d$get_screenshot(file, selector = "#shiny-tab-spatial .cv-pane")
     pk <- truth[[s]]
     m <- measure(file, legend, paste0("L", seq_along(pk$pick)))

@@ -96,15 +96,30 @@ dapi <- file.path(inputs, "xenium_dapi.png")
 ome <- file.path(xdir, "morphology_mip.ome.tif")
 if (!file.exists(dapi) && file.exists(ome)) {
   um_per_px <- jsonlite::fromJSON(file.path(xdir, "experiment.xenium"))$pixel_size %||% 0.2125
-  md <- RBioFormats::read.metadata(ome)
-  full <- RBioFormats::coreMetadata(md, series = 1)
-  level <- 1L
-  for (r in seq_along(md)) {
-    cm <- RBioFormats::coreMetadata(md, series = r)
-    if (max(cm$sizeX, cm$sizeY) >= 1400) level <- r
+  ## The smallest pyramid level with a long edge >= 1400 px. RBioFormats (Java) reads it when
+  ## installed; otherwise scripts/xenium_mip_level.py (python3 with tifffile and imagecodecs;
+  ## BV_PYTHON names the interpreter) gives the same level as raw uint16.
+  if (requireNamespace("RBioFormats", quietly = TRUE)) {
+    md <- RBioFormats::read.metadata(ome)
+    full <- RBioFormats::coreMetadata(md, series = 1)
+    full <- list(sizeX = full$sizeX, sizeY = full$sizeY)
+    level <- 1L
+    for (r in seq_along(md)) {
+      cm <- RBioFormats::coreMetadata(md, series = r)
+      if (max(cm$sizeX, cm$sizeY) >= 1400) level <- r
+    }
+    arr <- as.array(RBioFormats::read.image(ome, resolution = level, normalize = FALSE))
+    ch <- t(if (length(dim(arr)) == 3) arr[, , 1] else arr)
+  } else {
+    bin <- tempfile(fileext = ".bin")
+    meta <- jsonlite::fromJSON(system2(Sys.getenv("BV_PYTHON", "python3"),
+      c(shQuote(file.path(bv_root, "scripts", "xenium_mip_level.py")), shQuote(ome), shQuote(bin), "1400"),
+      stdout = TRUE))
+    ch <- matrix(readBin(bin, "integer", n = meta$width * meta$height, size = 2L, signed = FALSE),
+                 nrow = meta$height, ncol = meta$width, byrow = TRUE)
+    full <- list(sizeX = meta$full_width, sizeY = meta$full_height)
+    level <- meta$level
   }
-  arr <- as.array(RBioFormats::read.image(ome, resolution = level, normalize = FALSE))
-  ch <- t(if (length(dim(arr)) == 3) arr[, , 1] else arr)
   qs <- stats::quantile(ch, c(0.02, 0.99), na.rm = TRUE)
   ch <- pmin(pmax((ch - qs[[1]]) / (qs[[2]] - qs[[1]] + 1e-9), 0), 1)
   png::writePNG(ch, dapi)
@@ -131,4 +146,4 @@ info <- data.frame(
   row.names = NULL
 )
 print(info)
-utils::write.csv(info, file.path(bv_root, "results", "inputs.csv"), row.names = FALSE)
+utils::write.csv(info, file.path(bv_root, "results", paste0("inputs_", bv_suffix, ".csv")), row.names = FALSE)

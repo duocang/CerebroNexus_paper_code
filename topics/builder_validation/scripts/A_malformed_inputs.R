@@ -313,5 +313,5 @@ for (id in names(cases)) {
 all_cols <- unique(unlist(lapply(rows, names)))
 rows <- lapply(rows, function(r) { r[setdiff(all_cols, names(r))] <- NA; r[all_cols] })
 out <- do.call(rbind, rows)
-utils::write.csv(out, file.path(bv_root, "results", Sys.getenv("A_OUT", "A_malformed_inputs.csv")), row.names = FALSE)
+utils::write.csv(out, file.path(bv_root, "results", Sys.getenv("A_OUT", paste0("A_malformed_inputs_", bv_suffix, ".csv"))), row.names = FALSE)
 print(out[, c("case", "stopped_at", "outcome", "message")])

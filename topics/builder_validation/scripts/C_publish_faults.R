@@ -31,7 +31,7 @@
 source(file.path(dirname(sub("^--file=", "", grep("^--file=", commandArgs(FALSE), value = TRUE))), "common.R"))
 
 inputs <- file.path(bv_data, "inputs")
-root <- file.path(bv_data, Sys.getenv("C_DATA", "C"))
+root <- file.path(bv_data, Sys.getenv("C_DATA", paste0("C_", bv_suffix)))
 ## C_BACKEND=h5 builds v1 and v2 with the HDF5 expression backend.
 c_configure <- if (nzchar(Sys.getenv("C_BACKEND"))) list(expression_backend = Sys.getenv("C_BACKEND")) else list()
 dir.create(root, recursive = TRUE, showWarnings = FALSE)
@@ -338,5 +338,6 @@ for (id in names(expanded)) {
 all_cols <- unique(unlist(lapply(rows, names)))
 rows <- lapply(rows, function(r) { r[setdiff(all_cols, names(r))] <- NA; r[all_cols] })
 out <- do.call(rbind, rows)
-utils::write.csv(out, file.path(bv_root, "results", Sys.getenv("C_OUT", "C_publish_faults.csv")), row.names = FALSE)
+utils::write.csv(out, file.path(bv_root, "results", Sys.getenv("C_OUT",
+  paste0(if (identical(Sys.getenv("C_BACKEND"), "h5")) "F_publish_faults_h5_" else "C_publish_faults_", bv_suffix, ".csv"))), row.names = FALSE)
 print(out[, c("case", "recovery_action", "after_fault_release", "discover_state", "recover_result", "final_release", "final_crb_experiment")])

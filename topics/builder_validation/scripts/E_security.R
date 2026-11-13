@@ -7,7 +7,7 @@
 ## in a separate R process without CerebroNexus on its library path. Tests use
 ## plain HTTP (curl --path-as-is, so ".." is sent as typed) and headless Chrome
 ## through CDP, which records every websocket frame and request. Each test is
-## one row of results/E_security.csv; evidence files are in results/E_evidence/.
+## one row of results/E_security_<9 chars of the commit>.csv; evidence files are in results/E_evidence_<9 chars of the commit>/.
 ##
 ## Threat model and scope: THREAT_MODEL.md.
 ##
@@ -20,7 +20,8 @@ source(file.path(bv_root, "scripts", "apps.R"))
 source(file.path(bv_root, "scripts", "browser.R"))
 
 root <- file.path(bv_data, "E")
-evidence <- file.path(bv_root, "results", "E_evidence")
+evidence_name <- paste0("E_evidence_", bv_suffix)
+evidence <- file.path(bv_root, "results", evidence_name)
 dir.create(root, recursive = TRUE, showWarnings = FALSE)
 dir.create(evidence, recursive = TRUE, showWarnings = FALSE)
 logs <- file.path(root, "logs")
@@ -108,6 +109,10 @@ private_files <- function(app_dir) {
 probe_paths <- function(app, app_dir, html) {
   www_prefix <- regmatches(html, regexpr("cerebro_www[_0-9]*", html))
   www_prefix <- if (length(www_prefix)) www_prefix else "cerebro_www"
+  ## Fixed prefixes the Viewer serves besides cerebro_www*: `cerebro-first-view/` (the preview of
+  ## the first Projection frame, published only where Pack files are shared, not with a login) and
+  ## `cerebro-bundle/` (the kept page document, UI code). Both are probed like cerebro_www.
+  prefixes <- c(www_prefix, "cerebro-first-view", "cerebro-bundle")
   files <- private_files(app_dir)
   release_files <- c("build-report.json", ".cerebro-builder-release-v1")
   paths <- character()
@@ -118,14 +123,24 @@ probe_paths <- function(app, app_dir, html) {
       paste0("/cerebro_app/", f),
       paste0("//", f),
       paste0("/./", f),
-      paste0("/", www_prefix, "/../../", f),
-      paste0("/", www_prefix, "/%2e%2e/%2e%2e/", f),
-      paste0("/", www_prefix, "/..%2f..%2f", enc),
-      paste0("/", www_prefix, "/%252e%252e/%252e%252e/", f),
-      paste0("/", www_prefix, "/..\\..\\", gsub("/", "\\", f, fixed = TRUE)),
       paste0("/shinymanager/../../", f),
       paste0("/shared/../", f))
+    for (prefix in prefixes) {
+      paths <- c(paths,
+        paste0("/", prefix, "/../../", f),
+        paste0("/", prefix, "/%2e%2e/%2e%2e/", f),
+        paste0("/", prefix, "/..%2f..%2f", enc),
+        paste0("/", prefix, "/%252e%252e/%252e%252e/", f),
+        paste0("/", prefix, "/..\\..\\", gsub("/", "\\", f, fixed = TRUE)))
+    }
   }
+  ## The first-view files are named by the page address as hexadecimal UTF-8 ("/" + newline +
+  ## dataset, firstViewKey() in www/first-view.js); the directory, the description and the two
+  ## Pack files of the default address, then the bundle directory and the document index.
+  key <- paste(as.character(charToRaw("/\n")), collapse = "")
+  paths <- c(paths, paste0("/cerebro-first-view/", c("", paste0(key, ".json"), paste0(key, ".xy.bin"),
+                                                    paste0(key, ".codes.bin"))),
+             "/cerebro-bundle/", "/cerebro-bundle/index.html", "/cerebro-bundle/..")
   paths <- c(paths, paste0("/", release_files), paste0("/../", release_files),
              "/viewer/shiny_server.R", "/viewer/auth.R")
   sizes <- stats::setNames(file.size(file.path(app_dir, files)), files)
@@ -160,10 +175,10 @@ login_app_tests <- function(key, user, password, other_user, other_password, gen
                  grepl("shiny-tab-geneExpression", html), length(hits), length(data_terms)),
          pass_if(root_page$status == 200L && grepl("auth-user_pwd", html) &&
                  !grepl("shiny-tab-geneExpression", html) && !length(hits)),
-         paste0("E_evidence/", key, "_root.html"))
+         paste0(evidence_name, "/", key, "_root.html"))
   ## E02 direct URLs and path traversal to every private file
   probes <- probe_paths(app, a$app_dir, html)
-  pf <- paste0("E_evidence/", key, "_http_probes.csv")
+  pf <- paste0(evidence_name, "/", key, "_http_probes.csv")
   utils::write.csv(probes, file.path(bv_root, "results", pf), row.names = FALSE)
   leaked <- probes[probes$equals_private_file | probes$status == 200L, , drop = FALSE]
   record("E02 private files by direct URL and path traversal (unauthenticated)", key,
@@ -203,7 +218,7 @@ login_app_tests <- function(key, user, password, other_user, other_password, gen
                  length(pre), sum(nchar(pre)), length(hits), length(data_terms),
                  paste(guess_status, collapse = "/")),
          pass_if(!length(hits) && all(guess_status != 200L)),
-         paste0("E_evidence/", key, "_frames_prelogin.txt"))
+         paste0(evidence_name, "/", key, "_frames_prelogin.txt"))
 
   ## E04-E07 failed logins
   for (case in list(
@@ -272,7 +287,7 @@ login_app_tests <- function(key, user, password, other_user, other_password, gen
          sprintf("%d data URLs (%s); status from curl: %s", length(data_urls),
                  paste(unique(sub(".*/(dataobj/[a-z-]+|cerebro-[a-z-]+)-?.*", "\\1", data_urls)), collapse = ", "),
                  paste(names(table(live)), table(live), sep = " x", collapse = ", ")),
-         "info", paste0("E_evidence/", key, "_data_urls.txt"))
+         "info", paste0(evidence_name, "/", key, "_data_urls.txt"))
   ## E11 provider token replay
   replay_curl <- if (is.na(token)) NA else {
     r <- curl_get(sprintf("%s/?token=%%22%s%%22", app$url, token))
@@ -523,7 +538,7 @@ local({
   r <- curl_get(paste0(app$url, "/"))
   html <- bv_read_text(r$file)
   probes <- probe_paths(app, a$app_dir, html)
-  pf <- "E_evidence/visium_public_http_probes.csv"
+  pf <- paste0(evidence_name, "/visium_public_http_probes.csv")
   utils::write.csv(probes, file.path(bv_root, "results", pf), row.names = FALSE)
   p <- bv_browser("public"); on.exit(bv_close(p), add = TRUE)
   bv_goto(p, app$url)
@@ -539,5 +554,5 @@ local({
 })
 
 out <- do.call(rbind, rows)
-utils::write.csv(out, file.path(bv_root, "results", Sys.getenv("E_OUT", "E_security.csv")), row.names = FALSE)
+utils::write.csv(out, file.path(bv_root, "results", Sys.getenv("E_OUT", paste0("E_security_", bv_suffix, ".csv"))), row.names = FALSE)
 print(table(out$result))

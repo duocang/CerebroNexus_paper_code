@@ -1,3 +1,6 @@
+# NOTE (pinned-revision rerun): this script draws from the result files of the revisions up to 33150d9d7, which
+# stay in results/ as history; it was not changed for the run on the pin (README, "Rerun on the pinned revision").
+# Panel S11b uses the arrow display captures of 33150d9d7, which cannot be reproduced on the pin.
 # Supplementary Figures S11 (background-image alignment under spatial transforms) and
 # S12 (overview of every validation row, on the last revision it ran on), drawn from
 # results/ to the Genome Biology rules of the other figures: 170 mm wide, Arial

@@ -1,19 +1,21 @@
 # Builder builds from a SpatialData zip and a CITE-seq MuData file
 
-Run on 2026-10-21 (macOS arm64, R 4.5.0). This archive backs the manuscript sentence in "Capability profiling and frozen build plans" that Builder built CRBs from the Visium SpatialData sample store packed as a `.zip` (6,484 spots in two sections) and from a CITE-seq MuData file (411 cells, 29 antibody features). Both counts were reproduced and are read back from the written `.crb` files, not from the source objects.
+Run on 2026-11-13 (Ubuntu 24.04 under WSL2, R 4.6.1) with CerebroNexus 8.3.0, the revision pinned in `../cerebronexus.pin`. The results of the earlier run (2026-10-21, CerebroNexus 6.0.0, macOS arm64) are in Git history of this folder; the byte and SHA-256 values below replace them. This archive backs the manuscript sentence in "Capability profiling and frozen build plans" that Builder built CRBs from the Visium SpatialData sample store packed as a `.zip` (6,484 spots in two sections) and from a CITE-seq MuData file (411 cells, 29 antibody features). Both counts were reproduced and are read back from the written `.crb` files, not from the source objects.
 
 ## Files here
 
 | File | What it is |
 |---|---|
+| `install_pin.R` | Installs the revision of `../cerebronexus.pin` from `git archive` into a library and stamps its commit on the installation |
 | `build_crbs.R` | The build script: Builder import, inspect, freeze BuildPlan, execute BuildPlan, then read the CRB back |
 | `data/build.log` | Full console output of the recorded run, including `sessionInfo()` and the exit status |
 | `data/build-summary.csv` | Input and output checksums and the counts read from each CRB |
 
 ## Software
 
-- CerebroNexus 6.0.0 from branch `feat/multi-format-on-builder`, commit `27ac995e9` ("chore: bump version to 6.0.0"; full hash in `data/build.log`). At the time of the run the `v6.0.0` tag was not yet published, and the release was expected to also contain the H5 gzip-level-0 default and BPCells removal (mihem/CerebroNexus#209, #212). Neither change is exercised here: both builds use the embedded expression backend.
-- The package was installed with `R CMD INSTALL` into a separate library , so the run does not use the 5.1.3 installation in the user library. All other packages come from the user library; `arrow` 25.0.1 was installed for this run because Builder requires it to open SpatialData `.zip` sources.
+- CerebroNexus 8.3.0, branch `integration/8.3.0`, commit `e927cbf180fb1a50cf783245ab580e83a1334764` ("fix(cerebro_io): a sidecar the export verified is also kept for the next process"), the revision in `../cerebronexus.pin`. That commit exists only in a local clone, so `install_pin.R` installs it from `git archive` and writes the commit into the installation (`CerebroNexus/PIN_COMMIT`). The script reads the version from the installed package and from the pin, records both in the log and in `data/build-summary.csv`, and stops only when the installed commit is not the pinned one; it does not test for a version number.
+- Both builds use the embedded expression backend (the H5 and BPCells paths are not exercised).
+- The Builder runtime is read from the installed package: the list of files is taken from the `source()` calls of the installed `inst/builder/app.R` (UI, server and session files left out) and the HLA core from the package namespace, so the script does not depend on the file layout of any source tree. All other packages come from the user library of the run (`Seurat` 5.6.0, `SeuratObject` 5.4.0, `arrow` 26.0.0, `rhdf5` 2.56.1); `arrow` is needed to open SpatialData `.zip` sources.
 
 ## Inputs
 
@@ -39,23 +41,24 @@ Choices that differ from untouched defaults, each one a choice an author makes o
 - Visium: output "CRB files + Viewer App", because the Builder stores source tissue pictures next to the CRB and only allows that with a generated App. The CRB recorded here is the one in that release.
 - Both: expression backend `embedded`; no optional analyses.
 
-To rerun, from this folder (install CerebroNexus 6.0.0 into a library first, for example `R CMD INSTALL --library=<lib> <CerebroNexus checkout>`, and download the two inputs):
+To rerun, from this folder (the CerebroNexus checkout holding the pinned commit and the two downloaded inputs are needed):
 
 ```sh
-Rscript --vanilla build_crbs.R <library with CerebroNexus 6.0.0> <folder with the two inputs> <output folder>
+Rscript --vanilla install_pin.R <CerebroNexus checkout> <library>
+Rscript --vanilla build_crbs.R <library> <folder with the two inputs> <output folder>
 ```
 
 ## Results
 
 | Input | CRB | Bytes | SHA-256 | Cells/spots | Features | `prot:` features | Spatial sections | Projection |
 |---|---|---|---|---|---|---|---|---|
-| `visium_spatialdata_0.7.1.zip` | `visium_spatialdata.crb` | 95,765,691 | `7794eeec83188d76505ad65a8340b64f2a6650076f9be0d693d5115c946c4123` | 6,484 | 31,053 | 0 | 2 (ST8059048, ST8059050) | `spatial_xy` |
-| `minipbcite.h5mu` | `minipbcite.crb` | 5,529,732 | `79275e909544d2e50f8dacf63a8ecf943f899aa8dd347496139ab06bdc68a8a9` | 411 | 56 (27 RNA + 29 antibody) | 29 | 0 | `UMAP` |
+| `visium_spatialdata_0.7.1.zip` | `visium_spatialdata.crb` | 95,842,540 | `1968cda3cc4aa2e0dd5cc33a4958988da88bdf1e2f77300901e719850395b78d` | 6,484 | 31,053 | 0 | 2 (ST8059048, ST8059050) | `spatial_xy` |
+| `minipbcite.h5mu` | `minipbcite.crb` | 5,357,958 | `9f5fca7cb9ae24b5335b60cf486525d5d1d7181df432a254433719a6c544a621` | 411 | 56 (27 RNA + 29 antibody) | 29 | 0 | `UMAP` |
 
-An earlier trial build of each input on the same day produced byte-identical CRBs (same SHA-256). The CRBs are not kept in this repository; the Visium tissue pictures live beside its CRB in the release and are not part of the CRB hash.
+The same inputs built twice more in the same session produced byte-identical CRBs (same SHA-256); the CRB carries its export date (2026-11-13), so a build on another day may differ in bytes (not tested). The CRBs are not kept in this repository; the Visium tissue pictures live beside its CRB in the release and are not part of the CRB hash.
 
 ## Limits
 
 - The Builder's browser UI was not driven; the run calls the Builder's own import, plan and execute functions in one R process, without the isolated worker process and the publication step of the App.
-- The minipbcite read logs two warnings from Seurat ("Feature names cannot have underscores" and "No layers found matching search pattern provided"); both are kept in `data/build.log`. The antibody features keep their source names (for example `prot:CD3_TotalSeqB`).
+- The minipbcite read logs the same two warnings from Seurat as before ("Feature names cannot have underscores" and "No layers found matching search pattern provided"); both are kept in `data/build.log`. The antibody features keep their source names (for example `prot:CD3_TotalSeqB`).
 - The generated Viewer App for the Visium release was not opened.

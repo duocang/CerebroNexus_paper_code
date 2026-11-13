@@ -16,8 +16,8 @@
 ##     complete_viewer CRB, put into an App with createShinyApp(), and the same
 ##     faults are applied to it.
 ##
-## Usage: Rscript scripts/F_hdf5.R   (after B_BACKEND=h5 B_OUT=F_hdf5_end_to_end.csv)
-## Writes results/F_hdf5_storage.csv and results/F_hdf5_faults.csv.
+## Usage: Rscript scripts/F_hdf5.R   (after B_BACKEND=h5 Rscript scripts/B_end_to_end.R)
+## Writes results/F_hdf5_storage_<9 chars>.csv and results/F_hdf5_faults_<9 chars>.csv.
 
 source(file.path(dirname(sub("^--file=", "", grep("^--file=", commandArgs(FALSE), value = TRUE))), "common.R"))
 source(file.path(bv_root, "scripts", "viewer.R"))
@@ -79,7 +79,7 @@ storage$level6 <- data.frame(build = "exportFromSeurat(h5_compression_level = 6)
 storage <- do.call(rbind, storage)
 storage$expr_max_abs_diff_vs_source <- NA_real_
 storage$expr_max_abs_diff_vs_source[storage$build == storage$build[nrow(storage)]] <- level6_diff
-utils::write.csv(storage, file.path(bv_root, "results", "F_hdf5_storage.csv"), row.names = FALSE)
+utils::write.csv(storage, file.path(bv_root, "results", paste0("F_hdf5_storage_", bv_suffix, ".csv")), row.names = FALSE)
 print(storage)
 
 ## ---- 2./3. faults -----------------------------------------------------------
@@ -135,9 +135,9 @@ h5_cases <- list(
     unlink(s)
     HDF5Array::writeTENxMatrix(methods::as(Matrix::t(m), "CsparseMatrix"), s, group = "expression", level = 0L)
   }, FALSE),
-  ## same values, other bytes: accepted without a checksum, refused with one
+  ## same values, other bytes: refused by the recorded checksum (accepted only with F_H5_NO_CHECKSUM=1, the behaviour before 33150d9d7)
   replace_level6_same_content = list(function(s, a) file.copy(level6_h5, s, overwrite = TRUE),
-                                     !nzchar(Sys.getenv("F_H5_CHECKSUM")))
+                                     nzchar(Sys.getenv("F_H5_NO_CHECKSUM")))
 )
 for (case in if (nzchar(Sys.getenv("F_SKIP_H5"))) character() else names(h5_cases)) {
   fault_case("h5", visium_app, "\\.h5$", case, h5_cases[[case]][[1L]], "Ttr",
@@ -179,5 +179,5 @@ for (case in names(imm_cases)) {
 }
 
 out <- do.call(rbind, rows)
-utils::write.csv(out, file.path(bv_root, "results", "F_hdf5_faults.csv"), row.names = FALSE)
+utils::write.csv(out, file.path(bv_root, "results", paste0("F_hdf5_faults_", bv_suffix, ".csv")), row.names = FALSE)
 print(out[, c("sidecar", "case", "read_error", "viewer_loaded", "result")])

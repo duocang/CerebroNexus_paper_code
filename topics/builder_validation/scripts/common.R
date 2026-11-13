@@ -35,7 +35,62 @@ suppressPackageStartupMessages({
 })
 stopifnot(startsWith(find.package("CerebroNexus"), bv_lib))
 
+## The revision under test is the one in topics/cerebronexus.pin; nothing here
+## names a commit or a version. scripts/install_cerebronexus.sh records what it
+## installed in env/installed.txt. A run stops only when that is not the pin.
+source(file.path(bv_root, "..", "pin.R"), local = TRUE)
+bv_pin <- read_pin(file.path(bv_root, "..", "cerebronexus.pin"))
+bv_installed <- local({
+  path <- file.path(bv_root, "env", "installed.txt")
+  if (!file.exists(path)) {
+    stop("env/installed.txt is missing: run scripts/install_cerebronexus.sh (it installs the pinned commit)",
+         call. = FALSE)
+  }
+  lines <- trimws(readLines(path, warn = FALSE))
+  kv <- strsplit(lines[grepl("=", lines, fixed = TRUE)], "=", fixed = TRUE)
+  stats::setNames(
+    vapply(kv, function(x) paste(x[-1L], collapse = "="), ""),
+    vapply(kv, `[`, "", 1L)
+  )
+})
+bv_commit <- bv_installed[["commit"]]
+bv_version <- as.character(utils::packageVersion("CerebroNexus", lib.loc = bv_lib))
+## Suffix of every result file of a run on this revision: first 9 characters of the commit.
+bv_suffix <- substr(bv_commit, 1L, 9L)
+if (!identical(bv_commit, bv_pin$commit)) {
+  stop(sprintf("env/rlib holds CerebroNexus %s, the pin (topics/cerebronexus.pin) is %s: run scripts/install_cerebronexus.sh",
+               bv_commit, bv_pin$commit), call. = FALSE)
+}
+if (!identical(bv_version, bv_pin$version)) {
+  stop(sprintf("installed CerebroNexus version %s, the pin says %s", bv_version, bv_pin$version), call. = FALSE)
+}
+
 bv_builder_dir <- system.file("builder", package = "CerebroNexus", mustWork = TRUE)
+
+## Builder runtime for the headless route, loaded the way inst/builder/app.R
+## loads it: the `source()` calls at the top level of app.R name the files and
+## their order, so a file that moves or goes away is followed (or skipped) here
+## without an edit. Left out are the files of the browser interface and of the
+## Shiny session (ui/, server/, worker, session, loading, diagnostics, async,
+## spatial_alignment_server). The HLA core is taken from the package namespace,
+## as app.R does for an installed package. Files app.R names but the install
+## does not have are listed in `attr(rt, "skipped")`; a function a script then
+## calls and does not find fails there, by name.
+bv_runtime_skip <- "^(ui/|server/|worker\\.R$|session\\.R$|loading\\.R$|diagnostics\\.R$|async\\.R$|spatial_alignment_server\\.R$)"
+
+bv_runtime_files <- function(dir = bv_builder_dir) {
+  exprs <- parse(file.path(dir, "app.R"), keep.source = FALSE, encoding = "UTF-8")
+  files <- character()
+  for (e in exprs) {
+    if (!is.call(e) || !identical(e[[1L]], as.name("source"))) next
+    target <- tryCatch(eval(e[[2L]], baseenv()), error = function(err) NULL)
+    if (is.character(target) && length(target) == 1L) files <- c(files, target)
+  }
+  files <- gsub("\\\\", "/", files)
+  files <- files[!grepl(bv_runtime_skip, files)]
+  present <- file.exists(file.path(dir, files))
+  structure(files[present], skipped = files[!present])
+}
 
 bv_load_runtime <- function() {
   rt <- new.env(parent = globalenv())
@@ -43,27 +98,20 @@ bv_load_runtime <- function() {
   old <- setwd(bv_builder_dir)
   on.exit(setwd(old), add = TRUE)
   base::source("prerequisite.R", local = rt, encoding = "UTF-8")
-  files <- c(
-    file.path("core", "bundle_path_contract.R"),
-    "publish.R", "app_bundle.R", "report.R", "coordinator.R", "notify.R",
-    "io.R", "project.R",
-    file.path("..", "viewer", "core", "viewer_content_contract.R"),
-    file.path("..", "viewer", "core", "spatial_coordinate_contract.R"),
-    file.path("..", "viewer", "core", "spatial_coordinate_transform.R"),
-    "spatial.R"
-  )
-  for (file in files) rt$builder_source_utf8(file, envir = rt)
-  list2env(
-    utils::getFromNamespace(".viewerHLACore", "CerebroNexus")(),
-    envir = rt
-  )
-  files <- c(
-    "manifest.R", "content_tables.R", "content_immune.R", "content_spatial.R",
-    "content.R", "profile.R", "inspect.R", "recommend.R", "adapters.R",
-    "preview.R", "stats.R", "extras.R", "analysis.R", "marker_import.R",
-    "build.R", "state.R", "review.R", "workflow.R", "plan.R"
-  )
-  for (file in files) rt$builder_source_utf8(file, envir = rt)
+  files <- bv_runtime_files()
+  hla <- tryCatch(utils::getFromNamespace(".viewerHLACore", "CerebroNexus"), error = function(e) NULL)
+  hla_done <- FALSE
+  for (file in files) {
+    ## app.R takes the HLA core from the namespace right after the spatial files.
+    if (!hla_done && identical(file, "manifest.R")) {
+      if (is.function(hla)) list2env(hla(), envir = rt)
+      hla_done <- TRUE
+    }
+    rt$builder_source_utf8(file, envir = rt)
+  }
+  if (!hla_done && is.function(hla)) list2env(hla(), envir = rt)
+  attr(rt, "runtime_files") <- files
+  attr(rt, "skipped") <- attr(files, "skipped")
   rt
 }
 
@@ -71,9 +119,6 @@ bv_sha256 <- function(path) {
   out <- system2("shasum", c("-a", "256", shQuote(path)), stdout = TRUE)
   unname(strsplit(out, " ")[[1L]][[1L]])
 }
-
-## Commit installed in env/rlib (84ff72b3 for the first run, 4c34857c9 after the fixes).
-bv_commit <- Sys.getenv("BV_COMMIT", "84ff72b3368eb206354204d6e4871ac3600f1253")
 
 ## Run `expr`, keeping its value or error and every warning.
 bv_capture <- function(expr) {

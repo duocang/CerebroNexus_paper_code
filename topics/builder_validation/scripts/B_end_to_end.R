@@ -9,7 +9,7 @@
 ## coordinate, every group label, and the decoded image pixels.
 ##
 ## Usage: Rscript scripts/B_end_to_end.R [id ...]
-## Writes results/B_end_to_end.csv and results/logs/B_end_to_end.log (via tee).
+## Writes results/B_end_to_end_<9 chars of the commit>.csv (F_hdf5_end_to_end_<..>.csv with B_BACKEND=h5).
 
 source(file.path(dirname(sub("^--file=", "", grep("^--file=", commandArgs(FALSE), value = TRUE))), "common.R"))
 source(file.path(bv_root, "scripts", "viewer.R"))
@@ -303,5 +303,6 @@ for (id in names(cases)) {
 all_cols <- unique(unlist(lapply(rows, names)))
 rows <- lapply(rows, function(r) { r[setdiff(all_cols, names(r))] <- NA; r[all_cols] })
 out <- do.call(rbind, rows)
-utils::write.csv(out, file.path(bv_root, "results", Sys.getenv("B_OUT", "B_end_to_end.csv")), row.names = FALSE)
+utils::write.csv(out, file.path(bv_root, "results", Sys.getenv("B_OUT",
+  paste0(if (nzchar(b_backend)) "F_hdf5_end_to_end_" else "B_end_to_end_", bv_suffix, ".csv"))), row.names = FALSE)
 print(t(out))

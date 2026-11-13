@@ -1,0 +1,28 @@
+"variant","app_built","viewer_http","viewer_loaded","crb_cells","crb_cells_equal_source_set","crb_cell_order_equal_source","crb_repertoire_ids_not_cells","clone_space_receptor","source_repertoire_ids_not_cells","set","set_size","known","unknown","prepare_error","open_error","restored","restored_equal_set","indices_point_to_set","table_equal_set","unknown_ids_named_in_error","expected","result","observed"
+"base",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"complete",180,180,0,"","",180,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"base",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"partial",60,60,0,"","",60,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"base",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"zero",0,0,0,"","",0,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"base",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"one_section",30,30,0,"","",30,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"base",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"partial_reordered",60,60,0,"","",60,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"base",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"partial_plus_unknown",43,40,3,"The configuration selects cells that are not in this data set.","",0,FALSE,FALSE,TRUE,FALSE,"rejected or reduced, with the unknown IDs reported apart from the known ones","partial (rejected, unknown IDs not listed)",NA
+"reordered",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"complete",180,180,0,"","",180,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"reordered",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"partial",60,60,0,"","",60,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"reordered",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"zero",0,0,0,"","",0,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"reordered",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"one_section",30,30,0,"","",30,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"reordered",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"partial_reordered",60,60,0,"","",60,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"reordered",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"partial_plus_unknown",43,40,3,"The configuration selects cells that are not in this data set.","",0,FALSE,FALSE,TRUE,FALSE,"rejected or reduced, with the unknown IDs reported apart from the known ones","partial (rejected, unknown IDs not listed)",NA
+"case_ids",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"complete",180,180,0,"","",180,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"case_ids",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"partial",60,60,0,"","",60,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"case_ids",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"zero",0,0,0,"","",0,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"case_ids",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"one_section",30,30,0,"","",30,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"case_ids",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"partial_reordered",60,60,0,"","",60,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"case_ids",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"partial_plus_unknown",43,40,3,"The configuration selects cells that are not in this data set.","",0,FALSE,FALSE,TRUE,FALSE,"rejected or reduced, with the unknown IDs reported apart from the known ones","partial (rejected, unknown IDs not listed)",NA
+"case_ids",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"upper_case_id_only",1,1,0,"","",1,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"case_ids",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"lower_case_id_only",1,1,0,"","",1,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"immune_part",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"complete",180,180,0,"","",180,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"immune_part",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"partial",60,60,0,"","",60,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"immune_part",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"zero",0,0,0,"","",0,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"immune_part",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"one_section",30,30,0,"","",30,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"immune_part",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"partial_reordered",60,60,0,"","",60,TRUE,TRUE,TRUE,FALSE,"restored set, indices and table equal the predeclared set","pass",NA
+"immune_part",TRUE,200,TRUE,180,TRUE,TRUE,0,"TCR",0,"partial_plus_unknown",43,40,3,"The configuration selects cells that are not in this data set.","",0,FALSE,FALSE,TRUE,FALSE,"rejected or reduced, with the unknown IDs reported apart from the known ones","partial (rejected, unknown IDs not listed)",NA
+"immune_extra",NA,NA,NA,NA,NA,NA,NA,NA,NA,"build",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"repertoire IDs that are not cells reported (named) before or at build","partial (held at Review, IDs not named)","BuildPlan was not frozen: A dataset capability still needs attention."

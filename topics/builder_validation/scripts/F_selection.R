@@ -10,8 +10,8 @@
 ##      with the App's own cv_config_prepare() for a predeclared barcode set,
 ##      then opened with cv_config_decode() as the server does for "Open JSON"
 ##      (coordinated_views/server.R); the restored set, the selection indices
-##      sent to the browser and the server's "Table of selected cells"
-##      (cv_selected_metadata()) are compared with the predeclared set.
+##      sent to the browser and the CRB metadata rows of the restored cells (the table of selected
+##      cells itself is built in the browser now and was not driven) are compared with the predeclared set.
 ##  F2  for each set, the cells every Linked views space places are taken from
 ##      the same functions the bundle uses (cv_spatial_section_rows() per
 ##      section, cv_clone_per_cell() for the clone space, the CRB projections)
@@ -144,7 +144,10 @@ for (vid in names(variants)) {
       prepared$value$json, cells = cells, fingerprint = fingerprint)) else NULL
     restored <- if (!is.null(opened) && is.null(opened$error)) opened$value$selection$cells else NULL
     indices <- if (!is.null(restored)) match(restored, cells) - 1L else NULL
-    table_ids <- if (length(restored)) as.character(env$cv_selected_metadata(md, restored)$cell_barcode) else character()
+    ## The table of selected cells is built in the browser from columns it holds (selection-table.js);
+    ## the server no longer builds it. What is checked here is the part the server still decides: every
+    ## restored cell has a row in the CRB metadata, matched by barcode.
+    table_ids <- if (length(restored)) as.character(md$cell_barcode[match(restored, md$cell_barcode)]) else character()
     err <- prepared$error %||% opened$error %||% ""
     ok_known <- !length(unknown)
     row <- cbind(base_row, data.frame(
@@ -186,7 +189,7 @@ all_cols <- unique(unlist(lapply(sel_rows, names)))
 sel_rows <- lapply(sel_rows, function(r) { r[setdiff(all_cols, names(r))] <- NA; r[all_cols] })
 sel <- do.call(rbind, sel_rows)
 map <- do.call(rbind, map_rows)
-utils::write.csv(sel, file.path(bv_root, "results", "F_selection.csv"), row.names = FALSE)
-utils::write.csv(map, file.path(bv_root, "results", "F_mapping.csv"), row.names = FALSE)
+utils::write.csv(sel, file.path(bv_root, "results", paste0("F_selection_", bv_suffix, ".csv")), row.names = FALSE)
+utils::write.csv(map, file.path(bv_root, "results", paste0("F_mapping_", bv_suffix, ".csv")), row.names = FALSE)
 print(sel[, c("variant", "set", "restored", "restored_equal_set", "open_error", "result")])
 print(table(map$variant, map$mapped_sets_equal))

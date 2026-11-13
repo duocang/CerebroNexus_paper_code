@@ -1,0 +1,2842 @@
+
+==== C00_no_fault ====
+[13:11:56] Start collecting data...
+[13:11:56] Adding expression data (embedded)...
+[13:11:56] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:11:56] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C00_no_fault/.cbr-6b7ab56af9d032b2/stages/s-b85341c1629b/01-visium-v1-visium.crb
+[13:11:57] Done!
+[13:12:14] Start collecting data...
+[13:12:14] Adding expression data (embedded)...
+[13:12:14] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v2
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:12:14] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C00_no_fault/.cbr-6b7ab56af9d032b2/stages/s-b85314122d95/01-visium-v2-visium.crb
+[13:12:15] Done!
+List of 26
+ $ case                           : chr "C00_no_fault"
+ $ recovery_action                : chr "restore"
+ $ fault                          : chr "none"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr ""
+ $ publish_v2_succeeded           : logi TRUE
+ $ after_fault_release            : chr "v2"
+ $ discover_state                 : chr "ready"
+ $ discover_phase                 : logi NA
+ $ discover_backup_exists         : logi FALSE
+ $ discover_message               : chr ""
+ $ control_files_before_recovery  : int 0
+ $ control_listing_before_recovery: chr ""
+ $ recover_result                 : chr "not needed: recovered=FALSE state=ready"
+ $ final_release                  : chr "v2"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v2"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 38.5
+
+==== C01_verify_app_fails__restore ====
+[13:12:29] Start collecting data...
+[13:12:29] Adding expression data (embedded)...
+[13:12:29] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:12:29] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C01_verify_app_fails__restore/.cbr-1afc34feb4edf755/stages/s-b85363f6174/01-visium-v1-visium.crb
+[13:12:30] Done!
+[13:12:41] Start collecting data...
+[13:12:41] Adding expression data (embedded)...
+[13:12:41] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v2
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:12:41] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C01_verify_app_fails__restore/.cbr-1afc34feb4edf755/stages/s-b85353ac6bc7/01-visium-v2-visium.crb
+[13:12:42] Done!
+List of 26
+ $ case                           : chr "C01_verify_app_fails"
+ $ recovery_action                : chr "restore"
+ $ fault                          : chr "coordinator App verification, before the release lock"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "Parent App verification failed: injected: App verification failed"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "v1"
+ $ discover_state                 : chr "ready"
+ $ discover_phase                 : logi NA
+ $ discover_backup_exists         : logi FALSE
+ $ discover_message               : chr ""
+ $ control_files_before_recovery  : int 0
+ $ control_listing_before_recovery: chr ""
+ $ recover_result                 : chr "not needed: recovered=FALSE state=ready"
+ $ final_release                  : chr "v1"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 21
+
+==== C01_verify_app_fails__abort ====
+[13:12:50] Start collecting data...
+[13:12:50] Adding expression data (embedded)...
+[13:12:50] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:12:50] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C01_verify_app_fails__abort/.cbr-d662ef51b97e44f3/stages/s-b8533b6e09a7/01-visium-v1-visium.crb
+[13:12:51] Done!
+[13:13:02] Start collecting data...
+[13:13:02] Adding expression data (embedded)...
+[13:13:02] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v2
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:13:02] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C01_verify_app_fails__abort/.cbr-d662ef51b97e44f3/stages/s-b8536c27d798/01-visium-v2-visium.crb
+[13:13:03] Done!
+List of 26
+ $ case                           : chr "C01_verify_app_fails"
+ $ recovery_action                : chr "abort"
+ $ fault                          : chr "coordinator App verification, before the release lock"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "Parent App verification failed: injected: App verification failed"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "v1"
+ $ discover_state                 : chr "ready"
+ $ discover_phase                 : logi NA
+ $ discover_backup_exists         : logi FALSE
+ $ discover_message               : chr ""
+ $ control_files_before_recovery  : int 0
+ $ control_listing_before_recovery: chr ""
+ $ recover_result                 : chr "not needed: recovered=FALSE state=ready"
+ $ final_release                  : chr "v1"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 23.4
+
+==== C02_payload_check_fails_before_rename__restore ====
+[13:13:13] Start collecting data...
+[13:13:14] Adding expression data (embedded)...
+[13:13:14] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:13:14] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C02_payload_check_fails_before_rename__restore/.cbr-cfee2e7e23954965/stages/s-b8537f322b99/01-visium-v1-visium.crb
+[13:13:14] Done!
+[13:13:25] Start collecting data...
+[13:13:25] Adding expression data (embedded)...
+[13:13:25] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v2
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:13:25] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C02_payload_check_fails_before_rename__restore/.cbr-cfee2e7e23954965/stages/s-b853414fc12f/01-visium-v2-visium.crb
+[13:13:26] Done!
+List of 26
+ $ case                           : chr "C02_payload_check_fails_before_rename"
+ $ recovery_action                : chr "restore"
+ $ fault                          : chr "payload verification after the v1 backup was made, before v2 is installed"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "Publication verification failed; the prior release was restored."
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "v1"
+ $ discover_state                 : chr "ready"
+ $ discover_phase                 : logi NA
+ $ discover_backup_exists         : logi FALSE
+ $ discover_message               : chr ""
+ $ control_files_before_recovery  : int 0
+ $ control_listing_before_recovery: chr ""
+ $ recover_result                 : chr "not needed: recovered=FALSE state=ready"
+ $ final_release                  : chr "v1"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 25.2
+
+==== C02_payload_check_fails_before_rename__abort ====
+[13:13:39] Start collecting data...
+[13:13:39] Adding expression data (embedded)...
+[13:13:39] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:13:39] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C02_payload_check_fails_before_rename__abort/.cbr-e1e467efab4faa76/stages/s-b8537625ee67/01-visium-v1-visium.crb
+[13:13:40] Done!
+[13:13:50] Start collecting data...
+[13:13:51] Adding expression data (embedded)...
+[13:13:51] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v2
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:13:51] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C02_payload_check_fails_before_rename__abort/.cbr-e1e467efab4faa76/stages/s-b8536c02ccd6/01-visium-v2-visium.crb
+[13:13:51] Done!
+List of 26
+ $ case                           : chr "C02_payload_check_fails_before_rename"
+ $ recovery_action                : chr "abort"
+ $ fault                          : chr "payload verification after the v1 backup was made, before v2 is installed"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "Publication verification failed; the prior release was restored."
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "v1"
+ $ discover_state                 : chr "ready"
+ $ discover_phase                 : logi NA
+ $ discover_backup_exists         : logi FALSE
+ $ discover_message               : chr ""
+ $ control_files_before_recovery  : int 0
+ $ control_listing_before_recovery: chr ""
+ $ recover_result                 : chr "not needed: recovered=FALSE state=ready"
+ $ final_release                  : chr "v1"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 24.3
+
+==== C03_install_move_fails__restore ====
+[13:14:02] Start collecting data...
+[13:14:03] Adding expression data (embedded)...
+[13:14:03] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:14:03] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C03_install_move_fails__restore/.cbr-dcc3554df3408e5c/stages/s-b85358ffa6bd/01-visium-v1-visium.crb
+[13:14:04] Done!
+[13:14:14] Start collecting data...
+[13:14:14] Adding expression data (embedded)...
+[13:14:14] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v2
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:14:14] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C03_install_move_fails__restore/.cbr-dcc3554df3408e5c/stages/s-b85327d21bcf/01-visium-v2-visium.crb
+[13:14:14] Done!
+List of 26
+ $ case                           : chr "C03_install_move_fails"
+ $ recovery_action                : chr "restore"
+ $ fault                          : chr "promotion: moving the v2 stage onto the release path"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "Publication failed; the prior release was restored. Native file operation: action=\"install prepared release\";"| __truncated__
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "v1"
+ $ discover_state                 : chr "ready"
+ $ discover_phase                 : logi NA
+ $ discover_backup_exists         : logi FALSE
+ $ discover_message               : chr ""
+ $ control_files_before_recovery  : int 0
+ $ control_listing_before_recovery: chr ""
+ $ recover_result                 : chr "not needed: recovered=FALSE state=ready"
+ $ final_release                  : chr "v1"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 23.1
+
+==== C03_install_move_fails__abort ====
+[13:14:26] Start collecting data...
+[13:14:26] Adding expression data (embedded)...
+[13:14:26] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:14:26] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C03_install_move_fails__abort/.cbr-a07c13cb2d260521/stages/s-b853e240487/01-visium-v1-visium.crb
+[13:14:27] Done!
+[13:14:37] Start collecting data...
+[13:14:37] Adding expression data (embedded)...
+[13:14:37] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v2
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:14:37] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C03_install_move_fails__abort/.cbr-a07c13cb2d260521/stages/s-b85311a423dd/01-visium-v2-visium.crb
+[13:14:38] Done!
+List of 26
+ $ case                           : chr "C03_install_move_fails"
+ $ recovery_action                : chr "abort"
+ $ fault                          : chr "promotion: moving the v2 stage onto the release path"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "Publication failed; the prior release was restored. Native file operation: action=\"install prepared release\";"| __truncated__
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "v1"
+ $ discover_state                 : chr "ready"
+ $ discover_phase                 : logi NA
+ $ discover_backup_exists         : logi FALSE
+ $ discover_message               : chr ""
+ $ control_files_before_recovery  : int 0
+ $ control_listing_before_recovery: chr ""
+ $ recover_result                 : chr "not needed: recovered=FALSE state=ready"
+ $ final_release                  : chr "v1"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 23.4
+
+==== C04_error_after_backup_move__restore ====
+[13:14:49] Start collecting data...
+[13:14:49] Adding expression data (embedded)...
+[13:14:49] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:14:49] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C04_error_after_backup_move__restore/.cbr-45e1b443bd560d13/stages/s-b8532f263c70/01-visium-v1-visium.crb
+[13:14:50] Done!
+[13:15:00] Start collecting data...
+[13:15:00] Adding expression data (embedded)...
+[13:15:00] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v2
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:15:00] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C04_error_after_backup_move__restore/.cbr-45e1b443bd560d13/stages/s-b8537a4f70f/01-visium-v2-visium.crb
+[13:15:01] Done!
+List of 26
+ $ case                           : chr "C04_error_after_backup_move"
+ $ recovery_action                : chr "restore"
+ $ fault                          : chr "error thrown right after v1 was moved to the backup"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "injected failure at old_to_backup [cleanup: This release requires recovery and cannot be aborted.]"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "absent"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "old_moving"
+ $ discover_backup_exists         : logi TRUE
+ $ discover_message               : chr "An earlier release was interrupted during old_moving. The previous release backup was preserved: /home/wang/tmp"| __truncated__
+ $ control_files_before_recovery  : int 436
+ $ control_listing_before_recovery: chr ".cbr-45e1b443bd560d13/backup/.cerebro-builder-release-v1 | .cbr-45e1b443bd560d13/backup/build-report.json | .cb"| __truncated__
+ $ recover_result                 : chr "error: The release lock is not safely recoverable; manual inspection is required."
+ $ final_release                  : chr "absent"
+ $ final_crb_readable             : logi NA
+ $ final_crb_experiment           : logi NA
+ $ final_state                    : chr "recovery_required"
+ $ final_phase                    : chr "old_moving"
+ $ final_backup_exists            : logi TRUE
+ $ final_message                  : chr "An earlier release was interrupted during old_moving. The previous release backup was preserved: /home/wang/tmp"| __truncated__
+ $ control_files                  : int 436
+ $ control_backups                : int 4
+ $ control_stages                 : int 1
+ $ control_listing                : chr ".cbr-45e1b443bd560d13/backup/.cerebro-builder-release-v1 | .cbr-45e1b443bd560d13/backup/build-report.json | .cb"| __truncated__
+ $ seconds                        : num 21.6
+
+==== C04_error_after_backup_move__abort ====
+[13:15:10] Start collecting data...
+[13:15:11] Adding expression data (embedded)...
+[13:15:11] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:15:11] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C04_error_after_backup_move__abort/.cbr-9f3f07053e216940/stages/s-b853302ab572/01-visium-v1-visium.crb
+[13:15:11] Done!
+[13:15:22] Start collecting data...
+[13:15:22] Adding expression data (embedded)...
+[13:15:22] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v2
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:15:22] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C04_error_after_backup_move__abort/.cbr-9f3f07053e216940/stages/s-b85363d2f1e0/01-visium-v2-visium.crb
+[13:15:23] Done!
+List of 26
+ $ case                           : chr "C04_error_after_backup_move"
+ $ recovery_action                : chr "abort"
+ $ fault                          : chr "error thrown right after v1 was moved to the backup"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "injected failure at old_to_backup [cleanup: This release requires recovery and cannot be aborted.]"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "absent"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "old_moving"
+ $ discover_backup_exists         : logi TRUE
+ $ discover_message               : chr "An earlier release was interrupted during old_moving. The previous release backup was preserved: /home/wang/tmp"| __truncated__
+ $ control_files_before_recovery  : int 436
+ $ control_listing_before_recovery: chr ".cbr-9f3f07053e216940/backup/.cerebro-builder-release-v1 | .cbr-9f3f07053e216940/backup/build-report.json | .cb"| __truncated__
+ $ recover_result                 : chr "error: The release lock is not safely recoverable; manual inspection is required."
+ $ final_release                  : chr "absent"
+ $ final_crb_readable             : logi NA
+ $ final_crb_experiment           : logi NA
+ $ final_state                    : chr "recovery_required"
+ $ final_phase                    : chr "old_moving"
+ $ final_backup_exists            : logi TRUE
+ $ final_message                  : chr "An earlier release was interrupted during old_moving. The previous release backup was preserved: /home/wang/tmp"| __truncated__
+ $ control_files                  : int 436
+ $ control_backups                : int 4
+ $ control_stages                 : int 1
+ $ control_listing                : chr ".cbr-9f3f07053e216940/backup/.cerebro-builder-release-v1 | .cbr-9f3f07053e216940/backup/build-report.json | .cb"| __truncated__
+ $ seconds                        : num 21.3
+
+==== C05_error_after_old_moved_phase__restore ====
+[13:15:32] Start collecting data...
+[13:15:32] Adding expression data (embedded)...
+[13:15:32] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:15:32] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C05_error_after_old_moved_phase__restore/.cbr-025d6a3979238572/stages/s-b85360154c40/01-visium-v1-visium.crb
+[13:15:33] Done!
+[13:15:43] Start collecting data...
+[13:15:43] Adding expression data (embedded)...
+[13:15:43] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v2
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:15:43] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C05_error_after_old_moved_phase__restore/.cbr-025d6a3979238572/stages/s-b85360b74f8/01-visium-v2-visium.crb
+[13:15:43] Done!
+List of 26
+ $ case                           : chr "C05_error_after_old_moved_phase"
+ $ recovery_action                : chr "restore"
+ $ fault                          : chr "error thrown after the old_moved journal phase"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "injected failure at old_moved [cleanup: This release requires recovery and cannot be aborted.]"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "absent"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "old_moved"
+ $ discover_backup_exists         : logi TRUE
+ $ discover_message               : chr "An earlier release was interrupted during old_moved. The previous release backup was preserved: /home/wang/tmp_"| __truncated__
+ $ control_files_before_recovery  : int 436
+ $ control_listing_before_recovery: chr ".cbr-025d6a3979238572/backup/.cerebro-builder-release-v1 | .cbr-025d6a3979238572/backup/build-report.json | .cb"| __truncated__
+ $ recover_result                 : chr "error: The release lock is not safely recoverable; manual inspection is required."
+ $ final_release                  : chr "absent"
+ $ final_crb_readable             : logi NA
+ $ final_crb_experiment           : logi NA
+ $ final_state                    : chr "recovery_required"
+ $ final_phase                    : chr "old_moved"
+ $ final_backup_exists            : logi TRUE
+ $ final_message                  : chr "An earlier release was interrupted during old_moved. The previous release backup was preserved: /home/wang/tmp_"| __truncated__
+ $ control_files                  : int 436
+ $ control_backups                : int 4
+ $ control_stages                 : int 1
+ $ control_listing                : chr ".cbr-025d6a3979238572/backup/.cerebro-builder-release-v1 | .cbr-025d6a3979238572/backup/build-report.json | .cb"| __truncated__
+ $ seconds                        : num 20.9
+
+==== C05_error_after_old_moved_phase__abort ====
+[13:15:52] Start collecting data...
+[13:15:52] Adding expression data (embedded)...
+[13:15:53] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:15:53] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C05_error_after_old_moved_phase__abort/.cbr-9d1288e7c4ea2247/stages/s-b8538e40d73/01-visium-v1-visium.crb
+[13:15:53] Done!
+[13:16:03] Start collecting data...
+[13:16:04] Adding expression data (embedded)...
+[13:16:04] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v2
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:16:04] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C05_error_after_old_moved_phase__abort/.cbr-9d1288e7c4ea2247/stages/s-b8531802f3c6/01-visium-v2-visium.crb
+[13:16:04] Done!
+List of 26
+ $ case                           : chr "C05_error_after_old_moved_phase"
+ $ recovery_action                : chr "abort"
+ $ fault                          : chr "error thrown after the old_moved journal phase"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "injected failure at old_moved [cleanup: This release requires recovery and cannot be aborted.]"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "absent"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "old_moved"
+ $ discover_backup_exists         : logi TRUE
+ $ discover_message               : chr "An earlier release was interrupted during old_moved. The previous release backup was preserved: /home/wang/tmp_"| __truncated__
+ $ control_files_before_recovery  : int 436
+ $ control_listing_before_recovery: chr ".cbr-9d1288e7c4ea2247/backup/.cerebro-builder-release-v1 | .cbr-9d1288e7c4ea2247/backup/build-report.json | .cb"| __truncated__
+ $ recover_result                 : chr "error: The release lock is not safely recoverable; manual inspection is required."
+ $ final_release                  : chr "absent"
+ $ final_crb_readable             : logi NA
+ $ final_crb_experiment           : logi NA
+ $ final_state                    : chr "recovery_required"
+ $ final_phase                    : chr "old_moved"
+ $ final_backup_exists            : logi TRUE
+ $ final_message                  : chr "An earlier release was interrupted during old_moved. The previous release backup was preserved: /home/wang/tmp_"| __truncated__
+ $ control_files                  : int 436
+ $ control_backups                : int 4
+ $ control_stages                 : int 1
+ $ control_listing                : chr ".cbr-9d1288e7c4ea2247/backup/.cerebro-builder-release-v1 | .cbr-9d1288e7c4ea2247/backup/build-report.json | .cb"| __truncated__
+ $ seconds                        : num 21.1
+
+==== C06_post_install_check_fails__restore ====
+[13:16:13] Start collecting data...
+[13:16:14] Adding expression data (embedded)...
+[13:16:14] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:16:14] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C06_post_install_check_fails__restore/.cbr-7e418af351a7c83b/stages/s-b8533a50ef0a/01-visium-v1-visium.crb
+[13:16:14] Done!
+[13:16:24] Start collecting data...
+[13:16:25] Adding expression data (embedded)...
+[13:16:25] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v2
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:16:25] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C06_post_install_check_fails__restore/.cbr-7e418af351a7c83b/stages/s-b85323349563/01-visium-v2-visium.crb
+[13:16:25] Done!
+List of 26
+ $ case                           : chr "C06_post_install_check_fails"
+ $ recovery_action                : chr "restore"
+ $ fault                          : chr "payload verification after v2 was installed"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "Publication verification failed; the prior release was restored."
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "v1"
+ $ discover_state                 : chr "ready"
+ $ discover_phase                 : logi NA
+ $ discover_backup_exists         : logi FALSE
+ $ discover_message               : chr ""
+ $ control_files_before_recovery  : int 0
+ $ control_listing_before_recovery: chr ""
+ $ recover_result                 : chr "not needed: recovered=FALSE state=ready"
+ $ final_release                  : chr "v1"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 22.6
+
+==== C06_post_install_check_fails__abort ====
+[13:16:37] Start collecting data...
+[13:16:37] Adding expression data (embedded)...
+[13:16:37] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:16:37] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C06_post_install_check_fails__abort/.cbr-9610e301aabf4274/stages/s-b853ea7adb3/01-visium-v1-visium.crb
+[13:16:38] Done!
+[13:16:47] Start collecting data...
+[13:16:47] Adding expression data (embedded)...
+[13:16:47] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v2
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:16:47] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C06_post_install_check_fails__abort/.cbr-9610e301aabf4274/stages/s-b85329dea47a/01-visium-v2-visium.crb
+[13:16:48] Done!
+List of 26
+ $ case                           : chr "C06_post_install_check_fails"
+ $ recovery_action                : chr "abort"
+ $ fault                          : chr "payload verification after v2 was installed"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "Publication verification failed; the prior release was restored."
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "v1"
+ $ discover_state                 : chr "ready"
+ $ discover_phase                 : logi NA
+ $ discover_backup_exists         : logi FALSE
+ $ discover_message               : chr ""
+ $ control_files_before_recovery  : int 0
+ $ control_listing_before_recovery: chr ""
+ $ recover_result                 : chr "not needed: recovered=FALSE state=ready"
+ $ final_release                  : chr "v1"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 22.7
+
+==== C07_error_after_new_published__restore ====
+[13:16:59] Start collecting data...
+[13:16:59] Adding expression data (embedded)...
+[13:16:59] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:16:59] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C07_error_after_new_published__restore/.cbr-173823f454c424b6/stages/s-b8533bcc3b38/01-visium-v1-visium.crb
+[13:17:00] Done!
+[13:17:10] Start collecting data...
+[13:17:10] Adding expression data (embedded)...
+[13:17:10] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v2
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:17:10] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C07_error_after_new_published__restore/.cbr-173823f454c424b6/stages/s-b853ed76761/01-visium-v2-visium.crb
+[13:17:11] Done!
+List of 26
+ $ case                           : chr "C07_error_after_new_published"
+ $ recovery_action                : chr "restore"
+ $ fault                          : chr "error thrown after the new_published journal phase"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "injected failure at new_published [cleanup: This release requires recovery and cannot be aborted.]"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "v2"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "new_published"
+ $ discover_backup_exists         : logi TRUE
+ $ discover_message               : chr "An earlier release was interrupted during new_published. The previous release backup was preserved: /home/wang/"| __truncated__
+ $ control_files_before_recovery  : int 219
+ $ control_listing_before_recovery: chr ".cbr-173823f454c424b6/backup/.cerebro-builder-release-v1 | .cbr-173823f454c424b6/backup/build-report.json | .cb"| __truncated__
+ $ recover_result                 : chr "error: The release lock is not safely recoverable; manual inspection is required."
+ $ final_release                  : chr "v2"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v2"
+ $ final_state                    : chr "recovery_required"
+ $ final_phase                    : chr "new_published"
+ $ final_backup_exists            : logi TRUE
+ $ final_message                  : chr "An earlier release was interrupted during new_published. The previous release backup was preserved: /home/wang/"| __truncated__
+ $ control_files                  : int 219
+ $ control_backups                : int 3
+ $ control_stages                 : int 0
+ $ control_listing                : chr ".cbr-173823f454c424b6/backup/.cerebro-builder-release-v1 | .cbr-173823f454c424b6/backup/build-report.json | .cb"| __truncated__
+ $ seconds                        : num 24.1
+
+==== C07_error_after_new_published__abort ====
+[13:17:23] Start collecting data...
+[13:17:24] Adding expression data (embedded)...
+[13:17:24] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:17:24] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C07_error_after_new_published__abort/.cbr-45f50df33bb47c64/stages/s-b8537c2656b5/01-visium-v1-visium.crb
+[13:17:25] Done!
+[13:17:35] Start collecting data...
+[13:17:35] Adding expression data (embedded)...
+[13:17:35] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v2
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:17:35] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C07_error_after_new_published__abort/.cbr-45f50df33bb47c64/stages/s-b85320c770f/01-visium-v2-visium.crb
+[13:17:36] Done!
+List of 26
+ $ case                           : chr "C07_error_after_new_published"
+ $ recovery_action                : chr "abort"
+ $ fault                          : chr "error thrown after the new_published journal phase"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "injected failure at new_published [cleanup: This release requires recovery and cannot be aborted.]"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "v2"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "new_published"
+ $ discover_backup_exists         : logi TRUE
+ $ discover_message               : chr "An earlier release was interrupted during new_published. The previous release backup was preserved: /home/wang/"| __truncated__
+ $ control_files_before_recovery  : int 219
+ $ control_listing_before_recovery: chr ".cbr-45f50df33bb47c64/backup/.cerebro-builder-release-v1 | .cbr-45f50df33bb47c64/backup/build-report.json | .cb"| __truncated__
+ $ recover_result                 : chr "error: The release lock is not safely recoverable; manual inspection is required."
+ $ final_release                  : chr "v2"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v2"
+ $ final_state                    : chr "recovery_required"
+ $ final_phase                    : chr "new_published"
+ $ final_backup_exists            : logi TRUE
+ $ final_message                  : chr "An earlier release was interrupted during new_published. The previous release backup was preserved: /home/wang/"| __truncated__
+ $ control_files                  : int 219
+ $ control_backups                : int 3
+ $ control_stages                 : int 0
+ $ control_listing                : chr ".cbr-45f50df33bb47c64/backup/.cerebro-builder-release-v1 | .cbr-45f50df33bb47c64/backup/build-report.json | .cb"| __truncated__
+ $ seconds                        : num 24.2
+
+==== C08_restore_also_fails__restore ====
+[13:17:47] Start collecting data...
+[13:17:48] Adding expression data (embedded)...
+[13:17:48] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:17:48] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C08_restore_also_fails__restore/.cbr-2f94e997fa3c408c/stages/s-b85338ccaac7/01-visium-v1-visium.crb
+[13:17:48] Done!
+[13:17:58] Start collecting data...
+[13:17:58] Adding expression data (embedded)...
+[13:17:58] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v2
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:17:58] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C08_restore_also_fails__restore/.cbr-2f94e997fa3c408c/stages/s-b8531656bb71/01-visium-v2-visium.crb
+[13:17:59] Done!
+List of 26
+ $ case                           : chr "C08_restore_also_fails"
+ $ recovery_action                : chr "restore"
+ $ fault                          : chr "install move fails and the restore move fails too"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "Publication and restoration failed. Preserved backup: /home/wang/tmp_cerebro/20261113_1057_builder-validation/t"| __truncated__
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "absent"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "recovery_required"
+ $ discover_backup_exists         : logi TRUE
+ $ discover_message               : chr "An earlier release was interrupted during recovery_required. The previous release backup was preserved: /home/w"| __truncated__
+ $ control_files_before_recovery  : int 436
+ $ control_listing_before_recovery: chr ".cbr-2f94e997fa3c408c/backup/.cerebro-builder-release-v1 | .cbr-2f94e997fa3c408c/backup/build-report.json | .cb"| __truncated__
+ $ recover_result                 : chr "error: The release lock is not safely recoverable; manual inspection is required."
+ $ final_release                  : chr "absent"
+ $ final_crb_readable             : logi NA
+ $ final_crb_experiment           : logi NA
+ $ final_state                    : chr "recovery_required"
+ $ final_phase                    : chr "recovery_required"
+ $ final_backup_exists            : logi TRUE
+ $ final_message                  : chr "An earlier release was interrupted during recovery_required. The previous release backup was preserved: /home/w"| __truncated__
+ $ control_files                  : int 436
+ $ control_backups                : int 4
+ $ control_stages                 : int 1
+ $ control_listing                : chr ".cbr-2f94e997fa3c408c/backup/.cerebro-builder-release-v1 | .cbr-2f94e997fa3c408c/backup/build-report.json | .cb"| __truncated__
+ $ seconds                        : num 21.1
+
+==== C08_restore_also_fails__abort ====
+[13:18:08] Start collecting data...
+[13:18:08] Adding expression data (embedded)...
+[13:18:08] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:18:08] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C08_restore_also_fails__abort/.cbr-528f1765db83c991/stages/s-b853470263fb/01-visium-v1-visium.crb
+[13:18:09] Done!
+[13:18:19] Start collecting data...
+[13:18:19] Adding expression data (embedded)...
+[13:18:19] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v2
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:18:19] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/C08_restore_also_fails__abort/.cbr-528f1765db83c991/stages/s-b853489181c5/01-visium-v2-visium.crb
+[13:18:20] Done!
+List of 26
+ $ case                           : chr "C08_restore_also_fails"
+ $ recovery_action                : chr "abort"
+ $ fault                          : chr "install move fails and the restore move fails too"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "Publication and restoration failed. Preserved backup: /home/wang/tmp_cerebro/20261113_1057_builder-validation/t"| __truncated__
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "absent"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "recovery_required"
+ $ discover_backup_exists         : logi TRUE
+ $ discover_message               : chr "An earlier release was interrupted during recovery_required. The previous release backup was preserved: /home/w"| __truncated__
+ $ control_files_before_recovery  : int 436
+ $ control_listing_before_recovery: chr ".cbr-528f1765db83c991/backup/.cerebro-builder-release-v1 | .cbr-528f1765db83c991/backup/build-report.json | .cb"| __truncated__
+ $ recover_result                 : chr "error: The release lock is not safely recoverable; manual inspection is required."
+ $ final_release                  : chr "absent"
+ $ final_crb_readable             : logi NA
+ $ final_crb_experiment           : logi NA
+ $ final_state                    : chr "recovery_required"
+ $ final_phase                    : chr "recovery_required"
+ $ final_backup_exists            : logi TRUE
+ $ final_message                  : chr "An earlier release was interrupted during recovery_required. The previous release backup was preserved: /home/w"| __truncated__
+ $ control_files                  : int 436
+ $ control_backups                : int 4
+ $ control_stages                 : int 1
+ $ control_listing                : chr ".cbr-528f1765db83c991/backup/.cerebro-builder-release-v1 | .cbr-528f1765db83c991/backup/build-report.json | .cb"| __truncated__
+ $ seconds                        : num 20.5
+
+==== K1_kill_before_lock__restore ====
+[13:18:29] Start collecting data...
+[13:18:29] Adding expression data (embedded)...
+[13:18:29] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:18:29] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/K1_kill_before_lock__restore/.cbr-8a759fe00e7fad58/stages/s-b8533cc737bf/01-visium-v1-visium.crb
+[13:18:30] Done!
+List of 26
+ $ case                           : chr "K1_kill_before_lock"
+ $ recovery_action                : chr "restore"
+ $ fault                          : chr "SIGKILL after verification, before publication starts"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "child pid 50821 killed (SIGKILL) at progress:publish; exit status -9"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "v1"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "prepared"
+ $ discover_backup_exists         : logi FALSE
+ $ discover_message               : chr "An earlier release was interrupted during prepared. No previous-release backup is present."
+ $ control_files_before_recovery  : int 219
+ $ control_listing_before_recovery: chr ".cbr-8a759fe00e7fad58/journal.rds | .cbr-8a759fe00e7fad58/lock/owner.rds | .cbr-8a759fe00e7fad58/stages/s-c685386d8de9"
+ $ recover_result                 : chr "recovered=TRUE state="
+ $ final_release                  : chr "v1"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 29.1
+
+==== K1_kill_before_lock__abort ====
+[13:18:58] Start collecting data...
+[13:18:59] Adding expression data (embedded)...
+[13:18:59] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:18:59] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/K1_kill_before_lock__abort/.cbr-ea87a8f5b291e132/stages/s-b85334c567c4/01-visium-v1-visium.crb
+[13:18:59] Done!
+List of 26
+ $ case                           : chr "K1_kill_before_lock"
+ $ recovery_action                : chr "abort"
+ $ fault                          : chr "SIGKILL after verification, before publication starts"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "child pid 51071 killed (SIGKILL) at progress:publish; exit status -9"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "v1"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "prepared"
+ $ discover_backup_exists         : logi FALSE
+ $ discover_message               : chr "An earlier release was interrupted during prepared. No previous-release backup is present."
+ $ control_files_before_recovery  : int 219
+ $ control_listing_before_recovery: chr ".cbr-ea87a8f5b291e132/journal.rds | .cbr-ea87a8f5b291e132/lock/owner.rds | .cbr-ea87a8f5b291e132/stages/s-c77f4697be4b"
+ $ recover_result                 : chr "recovered=TRUE state="
+ $ final_release                  : chr "v1"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 30.1
+
+==== K2_kill_old_moving__restore ====
+[13:19:29] Start collecting data...
+[13:19:29] Adding expression data (embedded)...
+[13:19:29] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:19:29] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/K2_kill_old_moving__restore/.cbr-33be4ed53ae877af/stages/s-b85310db08e/01-visium-v1-visium.crb
+[13:19:29] Done!
+List of 26
+ $ case                           : chr "K2_kill_old_moving"
+ $ recovery_action                : chr "restore"
+ $ fault                          : chr "SIGKILL with journal at old_moving, before v1 is moved"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "child pid 51353 killed (SIGKILL) at old_moving; exit status -9"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "v1"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "old_moving"
+ $ discover_backup_exists         : logi FALSE
+ $ discover_message               : chr "An earlier release was interrupted during old_moving. No previous-release backup is present."
+ $ control_files_before_recovery  : int 219
+ $ control_listing_before_recovery: chr ".cbr-33be4ed53ae877af/journal.rds | .cbr-33be4ed53ae877af/lock/owner.rds | .cbr-33be4ed53ae877af/stages/s-c8993ffc0b2b"
+ $ recover_result                 : chr "recovered=TRUE state="
+ $ final_release                  : chr "v1"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 30.7
+
+==== K2_kill_old_moving__abort ====
+[13:19:59] Start collecting data...
+[13:19:59] Adding expression data (embedded)...
+[13:19:59] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:19:59] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/K2_kill_old_moving__abort/.cbr-89bc33cd73c43a68/stages/s-b85347c95f5c/01-visium-v1-visium.crb
+[13:20:00] Done!
+List of 26
+ $ case                           : chr "K2_kill_old_moving"
+ $ recovery_action                : chr "abort"
+ $ fault                          : chr "SIGKILL with journal at old_moving, before v1 is moved"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "child pid 51625 killed (SIGKILL) at old_moving; exit status -9"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "v1"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "old_moving"
+ $ discover_backup_exists         : logi FALSE
+ $ discover_message               : chr "An earlier release was interrupted during old_moving. No previous-release backup is present."
+ $ control_files_before_recovery  : int 219
+ $ control_listing_before_recovery: chr ".cbr-89bc33cd73c43a68/journal.rds | .cbr-89bc33cd73c43a68/lock/owner.rds | .cbr-89bc33cd73c43a68/stages/s-c9a922aad51f"
+ $ recover_result                 : chr "recovered=TRUE state="
+ $ final_release                  : chr "v1"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 31.1
+
+==== K3_kill_after_backup__restore ====
+[13:20:30] Start collecting data...
+[13:20:31] Adding expression data (embedded)...
+[13:20:31] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:20:31] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/K3_kill_after_backup__restore/.cbr-0e2a759eb0450653/stages/s-b8532d0f0389/01-visium-v1-visium.crb
+[13:20:31] Done!
+List of 26
+ $ case                           : chr "K3_kill_after_backup"
+ $ recovery_action                : chr "restore"
+ $ fault                          : chr "SIGKILL right after v1 was moved to the backup"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "child pid 51913 killed (SIGKILL) at move:old_to_backup; exit status -9"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "absent"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "old_moving"
+ $ discover_backup_exists         : logi TRUE
+ $ discover_message               : chr "An earlier release was interrupted during old_moving. The previous release backup was preserved: /home/wang/tmp"| __truncated__
+ $ control_files_before_recovery  : int 436
+ $ control_listing_before_recovery: chr ".cbr-0e2a759eb0450653/backup/.cerebro-builder-release-v1 | .cbr-0e2a759eb0450653/backup/build-report.json | .cb"| __truncated__
+ $ recover_result                 : chr "recovered=TRUE state="
+ $ final_release                  : chr "v1"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 30.1
+
+==== K3_kill_after_backup__abort ====
+[13:21:00] Start collecting data...
+[13:21:01] Adding expression data (embedded)...
+[13:21:01] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:21:01] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/K3_kill_after_backup__abort/.cbr-9556c8ca03a1381f/stages/s-b85347045f46/01-visium-v1-visium.crb
+[13:21:01] Done!
+List of 26
+ $ case                           : chr "K3_kill_after_backup"
+ $ recovery_action                : chr "abort"
+ $ fault                          : chr "SIGKILL right after v1 was moved to the backup"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "child pid 52197 killed (SIGKILL) at move:old_to_backup; exit status -9"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "absent"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "old_moving"
+ $ discover_backup_exists         : logi TRUE
+ $ discover_message               : chr "An earlier release was interrupted during old_moving. The previous release backup was preserved: /home/wang/tmp"| __truncated__
+ $ control_files_before_recovery  : int 436
+ $ control_listing_before_recovery: chr ".cbr-9556c8ca03a1381f/backup/.cerebro-builder-release-v1 | .cbr-9556c8ca03a1381f/backup/build-report.json | .cb"| __truncated__
+ $ recover_result                 : chr "error: A preserved prior release cannot be discarded by abort."
+ $ final_release                  : chr "absent"
+ $ final_crb_readable             : logi NA
+ $ final_crb_experiment           : logi NA
+ $ final_state                    : chr "recovery_required"
+ $ final_phase                    : chr "recovering_abort"
+ $ final_backup_exists            : logi TRUE
+ $ final_message                  : chr "An earlier release was interrupted during recovering_abort. The previous release backup was preserved: /home/wa"| __truncated__
+ $ control_files                  : int 435
+ $ control_backups                : int 4
+ $ control_stages                 : int 1
+ $ control_listing                : chr ".cbr-9556c8ca03a1381f/backup/.cerebro-builder-release-v1 | .cbr-9556c8ca03a1381f/backup/build-report.json | .cb"| __truncated__
+ $ seconds                        : num 28.7
+
+==== K4_kill_old_moved__restore ====
+[13:21:29] Start collecting data...
+[13:21:29] Adding expression data (embedded)...
+[13:21:29] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:21:29] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/K4_kill_old_moved__restore/.cbr-0f527c3288a187d7/stages/s-b8531d72b319/01-visium-v1-visium.crb
+[13:21:30] Done!
+List of 26
+ $ case                           : chr "K4_kill_old_moved"
+ $ recovery_action                : chr "restore"
+ $ fault                          : chr "SIGKILL with v1 in backup and v2 not installed"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "child pid 52484 killed (SIGKILL) at old_moved; exit status -9"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "absent"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "old_moved"
+ $ discover_backup_exists         : logi TRUE
+ $ discover_message               : chr "An earlier release was interrupted during old_moved. The previous release backup was preserved: /home/wang/tmp_"| __truncated__
+ $ control_files_before_recovery  : int 436
+ $ control_listing_before_recovery: chr ".cbr-0f527c3288a187d7/backup/.cerebro-builder-release-v1 | .cbr-0f527c3288a187d7/backup/build-report.json | .cb"| __truncated__
+ $ recover_result                 : chr "recovered=TRUE state="
+ $ final_release                  : chr "v1"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 29.5
+
+==== K4_kill_old_moved__abort ====
+[13:21:59] Start collecting data...
+[13:21:59] Adding expression data (embedded)...
+[13:21:59] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:21:59] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/K4_kill_old_moved__abort/.cbr-84c3bb52e93fa7f7/stages/s-b8536616b1bf/01-visium-v1-visium.crb
+[13:22:00] Done!
+List of 26
+ $ case                           : chr "K4_kill_old_moved"
+ $ recovery_action                : chr "abort"
+ $ fault                          : chr "SIGKILL with v1 in backup and v2 not installed"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "child pid 52768 killed (SIGKILL) at old_moved; exit status -9"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "absent"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "old_moved"
+ $ discover_backup_exists         : logi TRUE
+ $ discover_message               : chr "An earlier release was interrupted during old_moved. The previous release backup was preserved: /home/wang/tmp_"| __truncated__
+ $ control_files_before_recovery  : int 436
+ $ control_listing_before_recovery: chr ".cbr-84c3bb52e93fa7f7/backup/.cerebro-builder-release-v1 | .cbr-84c3bb52e93fa7f7/backup/build-report.json | .cb"| __truncated__
+ $ recover_result                 : chr "error: A preserved prior release cannot be discarded by abort."
+ $ final_release                  : chr "absent"
+ $ final_crb_readable             : logi NA
+ $ final_crb_experiment           : logi NA
+ $ final_state                    : chr "recovery_required"
+ $ final_phase                    : chr "recovering_abort"
+ $ final_backup_exists            : logi TRUE
+ $ final_message                  : chr "An earlier release was interrupted during recovering_abort. The previous release backup was preserved: /home/wa"| __truncated__
+ $ control_files                  : int 435
+ $ control_backups                : int 4
+ $ control_stages                 : int 1
+ $ control_listing                : chr ".cbr-84c3bb52e93fa7f7/backup/.cerebro-builder-release-v1 | .cbr-84c3bb52e93fa7f7/backup/build-report.json | .cb"| __truncated__
+ $ seconds                        : num 29.1
+
+==== K5_kill_new_published__restore ====
+[13:22:27] Start collecting data...
+[13:22:28] Adding expression data (embedded)...
+[13:22:28] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:22:28] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/K5_kill_new_published__restore/.cbr-27d79a3adf0ef45f/stages/s-b8536ba75890/01-visium-v1-visium.crb
+[13:22:28] Done!
+List of 26
+ $ case                           : chr "K5_kill_new_published"
+ $ recovery_action                : chr "restore"
+ $ fault                          : chr "SIGKILL after v2 was installed, before completion"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "child pid 53069 killed (SIGKILL) at new_published; exit status -9"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "v2"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "new_published"
+ $ discover_backup_exists         : logi TRUE
+ $ discover_message               : chr "An earlier release was interrupted during new_published. The previous release backup was preserved: /home/wang/"| __truncated__
+ $ control_files_before_recovery  : int 219
+ $ control_listing_before_recovery: chr ".cbr-27d79a3adf0ef45f/backup/.cerebro-builder-release-v1 | .cbr-27d79a3adf0ef45f/backup/build-report.json | .cb"| __truncated__
+ $ recover_result                 : chr "recovered=TRUE state="
+ $ final_release                  : chr "v1"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 30.9
+
+==== K5_kill_new_published__abort ====
+[13:22:58] Start collecting data...
+[13:22:59] Adding expression data (embedded)...
+[13:22:59] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:22:59] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/K5_kill_new_published__abort/.cbr-b64878a7e8201c08/stages/s-b853a3e0980/01-visium-v1-visium.crb
+[13:23:00] Done!
+List of 26
+ $ case                           : chr "K5_kill_new_published"
+ $ recovery_action                : chr "abort"
+ $ fault                          : chr "SIGKILL after v2 was installed, before completion"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "child pid 53376 killed (SIGKILL) at new_published; exit status -9"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "v2"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "new_published"
+ $ discover_backup_exists         : logi TRUE
+ $ discover_message               : chr "An earlier release was interrupted during new_published. The previous release backup was preserved: /home/wang/"| __truncated__
+ $ control_files_before_recovery  : int 219
+ $ control_listing_before_recovery: chr ".cbr-b64878a7e8201c08/backup/.cerebro-builder-release-v1 | .cbr-b64878a7e8201c08/backup/build-report.json | .cb"| __truncated__
+ $ recover_result                 : chr "error: A preserved prior release cannot be discarded by abort."
+ $ final_release                  : chr "v2"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v2"
+ $ final_state                    : chr "recovery_required"
+ $ final_phase                    : chr "recovering_abort"
+ $ final_backup_exists            : logi TRUE
+ $ final_message                  : chr "An earlier release was interrupted during recovering_abort. The previous release backup was preserved: /home/wa"| __truncated__
+ $ control_files                  : int 218
+ $ control_backups                : int 3
+ $ control_stages                 : int 0
+ $ control_listing                : chr ".cbr-b64878a7e8201c08/backup/.cerebro-builder-release-v1 | .cbr-b64878a7e8201c08/backup/build-report.json | .cb"| __truncated__
+ $ seconds                        : num 32.1
+
+==== X1_error_after_backup_then_exit__restore ====
+[13:23:31] Start collecting data...
+[13:23:31] Adding expression data (embedded)...
+[13:23:31] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:23:31] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/X1_error_after_backup_then_exit__restore/.cbr-1cc9630812da2d09/stages/s-b8537ed939a3/01-visium-v1-visium.crb
+[13:23:32] Done!
+List of 26
+ $ case                           : chr "X1_error_after_backup_then_exit"
+ $ recovery_action                : chr "restore"
+ $ fault                          : chr "error thrown right after v1 was moved to the backup, in a child that then exits (as C04, owner gone)"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "child pid 53701 threw at exit:move:old_to_backup and exited; exit status 1"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "absent"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "old_moving"
+ $ discover_backup_exists         : logi TRUE
+ $ discover_message               : chr "An earlier release was interrupted during old_moving. The previous release backup was preserved: /home/wang/tmp"| __truncated__
+ $ control_files_before_recovery  : int 436
+ $ control_listing_before_recovery: chr ".cbr-1cc9630812da2d09/backup/.cerebro-builder-release-v1 | .cbr-1cc9630812da2d09/backup/build-report.json | .cb"| __truncated__
+ $ recover_result                 : chr "recovered=TRUE state="
+ $ final_release                  : chr "v1"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 29.9
+
+==== X1_error_after_backup_then_exit__abort ====
+[13:24:01] Start collecting data...
+[13:24:01] Adding expression data (embedded)...
+[13:24:01] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:24:01] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/X1_error_after_backup_then_exit__abort/.cbr-75f6fec25e387cd0/stages/s-b8531c3ea57/01-visium-v1-visium.crb
+[13:24:02] Done!
+List of 26
+ $ case                           : chr "X1_error_after_backup_then_exit"
+ $ recovery_action                : chr "abort"
+ $ fault                          : chr "error thrown right after v1 was moved to the backup, in a child that then exits (as C04, owner gone)"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "child pid 54043 threw at exit:move:old_to_backup and exited; exit status 1"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "absent"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "old_moving"
+ $ discover_backup_exists         : logi TRUE
+ $ discover_message               : chr "An earlier release was interrupted during old_moving. The previous release backup was preserved: /home/wang/tmp"| __truncated__
+ $ control_files_before_recovery  : int 436
+ $ control_listing_before_recovery: chr ".cbr-75f6fec25e387cd0/backup/.cerebro-builder-release-v1 | .cbr-75f6fec25e387cd0/backup/build-report.json | .cb"| __truncated__
+ $ recover_result                 : chr "error: A preserved prior release cannot be discarded by abort."
+ $ final_release                  : chr "absent"
+ $ final_crb_readable             : logi NA
+ $ final_crb_experiment           : logi NA
+ $ final_state                    : chr "recovery_required"
+ $ final_phase                    : chr "recovering_abort"
+ $ final_backup_exists            : logi TRUE
+ $ final_message                  : chr "An earlier release was interrupted during recovering_abort. The previous release backup was preserved: /home/wa"| __truncated__
+ $ control_files                  : int 435
+ $ control_backups                : int 4
+ $ control_stages                 : int 1
+ $ control_listing                : chr ".cbr-75f6fec25e387cd0/backup/.cerebro-builder-release-v1 | .cbr-75f6fec25e387cd0/backup/build-report.json | .cb"| __truncated__
+ $ seconds                        : num 28.9
+
+==== X2_error_after_new_published_then_exit__restore ====
+[13:24:29] Start collecting data...
+[13:24:29] Adding expression data (embedded)...
+[13:24:29] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:24:29] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/X2_error_after_new_published_then_exit__restore/.cbr-70c6facc18d26ab4/stages/s-b85320488702/01-visium-v1-visium.crb
+[13:24:30] Done!
+List of 26
+ $ case                           : chr "X2_error_after_new_published_then_exit"
+ $ recovery_action                : chr "restore"
+ $ fault                          : chr "error thrown after new_published, in a child that then exits (as C07, owner gone)"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "child pid 54335 threw at new_published and exited; exit status 1"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "v2"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "new_published"
+ $ discover_backup_exists         : logi TRUE
+ $ discover_message               : chr "An earlier release was interrupted during new_published. The previous release backup was preserved: /home/wang/"| __truncated__
+ $ control_files_before_recovery  : int 219
+ $ control_listing_before_recovery: chr ".cbr-70c6facc18d26ab4/backup/.cerebro-builder-release-v1 | .cbr-70c6facc18d26ab4/backup/build-report.json | .cb"| __truncated__
+ $ recover_result                 : chr "recovered=TRUE state="
+ $ final_release                  : chr "v1"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 31.8
+
+==== X2_error_after_new_published_then_exit__abort ====
+[13:25:01] Start collecting data...
+[13:25:02] Adding expression data (embedded)...
+[13:25:02] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:25:02] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/X2_error_after_new_published_then_exit__abort/.cbr-db4c37bbfd37d25d/stages/s-b8534b5a1671/01-visium-v1-visium.crb
+[13:25:02] Done!
+List of 26
+ $ case                           : chr "X2_error_after_new_published_then_exit"
+ $ recovery_action                : chr "abort"
+ $ fault                          : chr "error thrown after new_published, in a child that then exits (as C07, owner gone)"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "child pid 54716 threw at new_published and exited; exit status 1"
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "v2"
+ $ discover_state                 : chr "recovery_required"
+ $ discover_phase                 : chr "new_published"
+ $ discover_backup_exists         : logi TRUE
+ $ discover_message               : chr "An earlier release was interrupted during new_published. The previous release backup was preserved: /home/wang/"| __truncated__
+ $ control_files_before_recovery  : int 219
+ $ control_listing_before_recovery: chr ".cbr-db4c37bbfd37d25d/backup/.cerebro-builder-release-v1 | .cbr-db4c37bbfd37d25d/backup/build-report.json | .cb"| __truncated__
+ $ recover_result                 : chr "error: A preserved prior release cannot be discarded by abort."
+ $ final_release                  : chr "v2"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v2"
+ $ final_state                    : chr "recovery_required"
+ $ final_phase                    : chr "recovering_abort"
+ $ final_backup_exists            : logi TRUE
+ $ final_message                  : chr "An earlier release was interrupted during recovering_abort. The previous release backup was preserved: /home/wa"| __truncated__
+ $ control_files                  : int 218
+ $ control_backups                : int 3
+ $ control_stages                 : int 0
+ $ control_listing                : chr ".cbr-db4c37bbfd37d25d/backup/.cerebro-builder-release-v1 | .cbr-db4c37bbfd37d25d/backup/build-report.json | .cb"| __truncated__
+ $ seconds                        : num 31.4
+
+==== T1_tamper_stage_before_publish ====
+[13:25:33] Start collecting data...
+[13:25:33] Adding expression data (embedded)...
+[13:25:33] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:25:33] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/T1_tamper_stage_before_publish/.cbr-8f399bc07dfe7137/stages/s-b853716966a1/01-visium-v1-visium.crb
+[13:25:34] Done!
+[13:25:44] Start collecting data...
+[13:25:44] Adding expression data (embedded)...
+[13:25:44] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v2
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:25:44] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/T1_tamper_stage_before_publish/.cbr-8f399bc07dfe7137/stages/s-b85339ee3657/01-visium-v2-visium.crb
+[13:25:45] Done!
+List of 26
+ $ case                           : chr "T1_tamper_stage_before_publish"
+ $ recovery_action                : chr "restore"
+ $ fault                          : chr "one byte appended to the staged v2 CRB after the build, before publish"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "Parent App verification failed: The staged App copied content differs from frozen input."
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "v1"
+ $ discover_state                 : chr "ready"
+ $ discover_phase                 : logi NA
+ $ discover_backup_exists         : logi FALSE
+ $ discover_message               : chr ""
+ $ control_files_before_recovery  : int 0
+ $ control_listing_before_recovery: chr ""
+ $ recover_result                 : chr "not needed: recovered=FALSE state=ready"
+ $ final_release                  : chr "v1"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 20.7
+
+==== T2_tamper_stage_after_record ====
+[13:25:53] Start collecting data...
+[13:25:53] Adding expression data (embedded)...
+[13:25:53] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:25:53] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/T2_tamper_stage_after_record/.cbr-85671ecef0550ffb/stages/s-b85312d722e6/01-visium-v1-visium.crb
+[13:25:54] Done!
+[13:26:05] Start collecting data...
+[13:26:05] Adding expression data (embedded)...
+[13:26:05] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v2
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:26:05] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/T2_tamper_stage_after_record/.cbr-85671ecef0550ffb/stages/s-b8533944392c/01-visium-v2-visium.crb
+[13:26:06] Done!
+List of 26
+ $ case                           : chr "T2_tamper_stage_after_record"
+ $ recovery_action                : chr "restore"
+ $ fault                          : chr "one byte appended to the staged v2 CRB after the ownership record, before the release lock"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "The verified stage changed before publication."
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "v1"
+ $ discover_state                 : chr "ready"
+ $ discover_phase                 : logi NA
+ $ discover_backup_exists         : logi FALSE
+ $ discover_message               : chr ""
+ $ control_files_before_recovery  : int 0
+ $ control_listing_before_recovery: chr ""
+ $ recover_result                 : chr "not needed: recovered=FALSE state=ready"
+ $ final_release                  : chr "v1"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 22.2
+
+==== T3_tamper_stage_mid_publish ====
+[13:26:16] Start collecting data...
+[13:26:16] Adding expression data (embedded)...
+[13:26:16] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:26:16] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/T3_tamper_stage_mid_publish/.cbr-a4aad5e39c811671/stages/s-b85338dc1703/01-visium-v1-visium.crb
+[13:26:16] Done!
+[13:26:26] Start collecting data...
+[13:26:27] Adding expression data (embedded)...
+[13:26:27] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v2
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:26:27] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/T3_tamper_stage_mid_publish/.cbr-a4aad5e39c811671/stages/s-b85349c94a5f/01-visium-v2-visium.crb
+[13:26:27] Done!
+List of 26
+ $ case                           : chr "T3_tamper_stage_mid_publish"
+ $ recovery_action                : chr "restore"
+ $ fault                          : chr "one byte appended to the staged v2 CRB after v1 was moved to the backup"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "Publication verification failed; the prior release was restored."
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "v1"
+ $ discover_state                 : chr "ready"
+ $ discover_phase                 : logi NA
+ $ discover_backup_exists         : logi FALSE
+ $ discover_message               : chr ""
+ $ control_files_before_recovery  : int 0
+ $ control_listing_before_recovery: chr ""
+ $ recover_result                 : chr "not needed: recovered=FALSE state=ready"
+ $ final_release                  : chr "v1"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 23.4
+
+==== T4_tamper_published_v1 ====
+[13:26:39] Start collecting data...
+[13:26:39] Adding expression data (embedded)...
+[13:26:39] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:26:39] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/T4_tamper_published_v1/.cbr-74d0776163f12fc3/stages/s-b8537559568b/01-visium-v1-visium.crb
+[13:26:40] Done!
+[13:26:50] Start collecting data...
+[13:26:50] Adding expression data (embedded)...
+[13:26:50] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v2
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:26:50] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/T4_tamper_published_v1/.cbr-74d0776163f12fc3/stages/s-b853781cdb0c/01-visium-v2-visium.crb
+[13:26:51] Done!
+List of 26
+ $ case                           : chr "T4_tamper_published_v1"
+ $ recovery_action                : chr "restore"
+ $ fault                          : chr "one byte appended to the published v1 CRB after v2 was planned and built"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "The release changed after Review; nothing was published."
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "other (Visium v1)"
+ $ discover_state                 : chr "ready"
+ $ discover_phase                 : logi NA
+ $ discover_backup_exists         : logi FALSE
+ $ discover_message               : chr ""
+ $ control_files_before_recovery  : int 0
+ $ control_listing_before_recovery: chr ""
+ $ recover_result                 : chr "not needed: recovered=FALSE state=ready"
+ $ final_release                  : chr "other (Visium v1)"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 23.7
+
+==== T5_foreign_file_in_release ====
+[13:27:03] Start collecting data...
+[13:27:03] Adding expression data (embedded)...
+[13:27:03] Overview of Cerebro object:
+
+class: Cerebro
+exporter package version: 8.3.0
+experiment name: Visium v1
+organism: mm
+date of analysis: 
+date of export: 2026-11-13
+number of cells: 2,696
+number of genes: 31,053
+grouping variables (3): seurat_clusters, Spatial_snn_res.0.5, cluster
+cell cycle variables (0): 
+projections (1): umap
+trees (0): 
+most expressed genes: 
+marker genes:
+enriched pathways:
+trajectories:
+extra material:
+Immune repertoire:
+HLA typing: none
+Spatial data:anterior1
+
+[13:27:03] Saving Cerebro object to: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/data/C_e927cbf18/T5_foreign_file_in_release/.cbr-aafc88ad84a997c5/stages/s-b8536e1d6ddf/01-visium-v1-visium.crb
+[13:27:04] Done!
+List of 26
+ $ case                           : chr "T5_foreign_file_in_release"
+ $ recovery_action                : chr "restore"
+ $ fault                          : chr "a foreign file written into the published v1 release before v2 is prepared"
+ $ v1_published                   : logi TRUE
+ $ publish_v2_error               : chr "The output directory contains foreign release entries: notes.txt. They were preserved."
+ $ publish_v2_succeeded           : logi FALSE
+ $ after_fault_release            : chr "other (Visium v1)"
+ $ discover_state                 : chr "ready"
+ $ discover_phase                 : logi NA
+ $ discover_backup_exists         : logi FALSE
+ $ discover_message               : chr ""
+ $ control_files_before_recovery  : int 0
+ $ control_listing_before_recovery: chr ""
+ $ recover_result                 : chr "not needed: recovered=FALSE state=ready"
+ $ final_release                  : chr "other (Visium v1)"
+ $ final_crb_readable             : logi TRUE
+ $ final_crb_experiment           : chr "Visium v1"
+ $ final_state                    : chr "ready"
+ $ final_phase                    : logi NA
+ $ final_backup_exists            : logi FALSE
+ $ final_message                  : chr ""
+ $ control_files                  : int 0
+ $ control_backups                : int 0
+ $ control_stages                 : int 0
+ $ control_listing                : chr ""
+ $ seconds                        : num 16.6
+                                                                                  case
+C00_no_fault                                                              C00_no_fault
+C01_verify_app_fails__restore                                     C01_verify_app_fails
+C01_verify_app_fails__abort                                       C01_verify_app_fails
+C02_payload_check_fails_before_rename__restore   C02_payload_check_fails_before_rename
+C02_payload_check_fails_before_rename__abort     C02_payload_check_fails_before_rename
+C03_install_move_fails__restore                                 C03_install_move_fails
+C03_install_move_fails__abort                                   C03_install_move_fails
+C04_error_after_backup_move__restore                       C04_error_after_backup_move
+C04_error_after_backup_move__abort                         C04_error_after_backup_move
+C05_error_after_old_moved_phase__restore               C05_error_after_old_moved_phase
+C05_error_after_old_moved_phase__abort                 C05_error_after_old_moved_phase
+C06_post_install_check_fails__restore                     C06_post_install_check_fails
+C06_post_install_check_fails__abort                       C06_post_install_check_fails
+C07_error_after_new_published__restore                   C07_error_after_new_published
+C07_error_after_new_published__abort                     C07_error_after_new_published
+C08_restore_also_fails__restore                                 C08_restore_also_fails
+C08_restore_also_fails__abort                                   C08_restore_also_fails
+K1_kill_before_lock__restore                                       K1_kill_before_lock
+K1_kill_before_lock__abort                                         K1_kill_before_lock
+K2_kill_old_moving__restore                                         K2_kill_old_moving
+K2_kill_old_moving__abort                                           K2_kill_old_moving
+K3_kill_after_backup__restore                                     K3_kill_after_backup
+K3_kill_after_backup__abort                                       K3_kill_after_backup
+K4_kill_old_moved__restore                                           K4_kill_old_moved
+K4_kill_old_moved__abort                                             K4_kill_old_moved
+K5_kill_new_published__restore                                   K5_kill_new_published
+K5_kill_new_published__abort                                     K5_kill_new_published
+X1_error_after_backup_then_exit__restore               X1_error_after_backup_then_exit
+X1_error_after_backup_then_exit__abort                 X1_error_after_backup_then_exit
+X2_error_after_new_published_then_exit__restore X2_error_after_new_published_then_exit
+X2_error_after_new_published_then_exit__abort   X2_error_after_new_published_then_exit
+T1_tamper_stage_before_publish                          T1_tamper_stage_before_publish
+T2_tamper_stage_after_record                              T2_tamper_stage_after_record
+T3_tamper_stage_mid_publish                                T3_tamper_stage_mid_publish
+T4_tamper_published_v1                                          T4_tamper_published_v1
+T5_foreign_file_in_release                                  T5_foreign_file_in_release
+                                                recovery_action
+C00_no_fault                                            restore
+C01_verify_app_fails__restore                           restore
+C01_verify_app_fails__abort                               abort
+C02_payload_check_fails_before_rename__restore          restore
+C02_payload_check_fails_before_rename__abort              abort
+C03_install_move_fails__restore                         restore
+C03_install_move_fails__abort                             abort
+C04_error_after_backup_move__restore                    restore
+C04_error_after_backup_move__abort                        abort
+C05_error_after_old_moved_phase__restore                restore
+C05_error_after_old_moved_phase__abort                    abort
+C06_post_install_check_fails__restore                   restore
+C06_post_install_check_fails__abort                       abort
+C07_error_after_new_published__restore                  restore
+C07_error_after_new_published__abort                      abort
+C08_restore_also_fails__restore                         restore
+C08_restore_also_fails__abort                             abort
+K1_kill_before_lock__restore                            restore
+K1_kill_before_lock__abort                                abort
+K2_kill_old_moving__restore                             restore
+K2_kill_old_moving__abort                                 abort
+K3_kill_after_backup__restore                           restore
+K3_kill_after_backup__abort                               abort
+K4_kill_old_moved__restore                              restore
+K4_kill_old_moved__abort                                  abort
+K5_kill_new_published__restore                          restore
+K5_kill_new_published__abort                              abort
+X1_error_after_backup_then_exit__restore                restore
+X1_error_after_backup_then_exit__abort                    abort
+X2_error_after_new_published_then_exit__restore         restore
+X2_error_after_new_published_then_exit__abort             abort
+T1_tamper_stage_before_publish                          restore
+T2_tamper_stage_after_record                            restore
+T3_tamper_stage_mid_publish                             restore
+T4_tamper_published_v1                                  restore
+T5_foreign_file_in_release                              restore
+                                                after_fault_release
+C00_no_fault                                                     v2
+C01_verify_app_fails__restore                                    v1
+C01_verify_app_fails__abort                                      v1
+C02_payload_check_fails_before_rename__restore                   v1
+C02_payload_check_fails_before_rename__abort                     v1
+C03_install_move_fails__restore                                  v1
+C03_install_move_fails__abort                                    v1
+C04_error_after_backup_move__restore                         absent
+C04_error_after_backup_move__abort                           absent
+C05_error_after_old_moved_phase__restore                     absent
+C05_error_after_old_moved_phase__abort                       absent
+C06_post_install_check_fails__restore                            v1
+C06_post_install_check_fails__abort                              v1
+C07_error_after_new_published__restore                           v2
+C07_error_after_new_published__abort                             v2
+C08_restore_also_fails__restore                              absent
+C08_restore_also_fails__abort                                absent
+K1_kill_before_lock__restore                                     v1
+K1_kill_before_lock__abort                                       v1
+K2_kill_old_moving__restore                                      v1
+K2_kill_old_moving__abort                                        v1
+K3_kill_after_backup__restore                                absent
+K3_kill_after_backup__abort                                  absent
+K4_kill_old_moved__restore                                   absent
+K4_kill_old_moved__abort                                     absent
+K5_kill_new_published__restore                                   v2
+K5_kill_new_published__abort                                     v2
+X1_error_after_backup_then_exit__restore                     absent
+X1_error_after_backup_then_exit__abort                       absent
+X2_error_after_new_published_then_exit__restore                  v2
+X2_error_after_new_published_then_exit__abort                    v2
+T1_tamper_stage_before_publish                                   v1
+T2_tamper_stage_after_record                                     v1
+T3_tamper_stage_mid_publish                                      v1
+T4_tamper_published_v1                            other (Visium v1)
+T5_foreign_file_in_release                        other (Visium v1)
+                                                   discover_state
+C00_no_fault                                                ready
+C01_verify_app_fails__restore                               ready
+C01_verify_app_fails__abort                                 ready
+C02_payload_check_fails_before_rename__restore              ready
+C02_payload_check_fails_before_rename__abort                ready
+C03_install_move_fails__restore                             ready
+C03_install_move_fails__abort                               ready
+C04_error_after_backup_move__restore            recovery_required
+C04_error_after_backup_move__abort              recovery_required
+C05_error_after_old_moved_phase__restore        recovery_required
+C05_error_after_old_moved_phase__abort          recovery_required
+C06_post_install_check_fails__restore                       ready
+C06_post_install_check_fails__abort                         ready
+C07_error_after_new_published__restore          recovery_required
+C07_error_after_new_published__abort            recovery_required
+C08_restore_also_fails__restore                 recovery_required
+C08_restore_also_fails__abort                   recovery_required
+K1_kill_before_lock__restore                    recovery_required
+K1_kill_before_lock__abort                      recovery_required
+K2_kill_old_moving__restore                     recovery_required
+K2_kill_old_moving__abort                       recovery_required
+K3_kill_after_backup__restore                   recovery_required
+K3_kill_after_backup__abort                     recovery_required
+K4_kill_old_moved__restore                      recovery_required
+K4_kill_old_moved__abort                        recovery_required
+K5_kill_new_published__restore                  recovery_required
+K5_kill_new_published__abort                    recovery_required
+X1_error_after_backup_then_exit__restore        recovery_required
+X1_error_after_backup_then_exit__abort          recovery_required
+X2_error_after_new_published_then_exit__restore recovery_required
+X2_error_after_new_published_then_exit__abort   recovery_required
+T1_tamper_stage_before_publish                              ready
+T2_tamper_stage_after_record                                ready
+T3_tamper_stage_mid_publish                                 ready
+T4_tamper_published_v1                                      ready
+T5_foreign_file_in_release                                  ready
+                                                                                                                   recover_result
+C00_no_fault                                                                              not needed: recovered=FALSE state=ready
+C01_verify_app_fails__restore                                                             not needed: recovered=FALSE state=ready
+C01_verify_app_fails__abort                                                               not needed: recovered=FALSE state=ready
+C02_payload_check_fails_before_rename__restore                                            not needed: recovered=FALSE state=ready
+C02_payload_check_fails_before_rename__abort                                              not needed: recovered=FALSE state=ready
+C03_install_move_fails__restore                                                           not needed: recovered=FALSE state=ready
+C03_install_move_fails__abort                                                             not needed: recovered=FALSE state=ready
+C04_error_after_backup_move__restore            error: The release lock is not safely recoverable; manual inspection is required.
+C04_error_after_backup_move__abort              error: The release lock is not safely recoverable; manual inspection is required.
+C05_error_after_old_moved_phase__restore        error: The release lock is not safely recoverable; manual inspection is required.
+C05_error_after_old_moved_phase__abort          error: The release lock is not safely recoverable; manual inspection is required.
+C06_post_install_check_fails__restore                                                     not needed: recovered=FALSE state=ready
+C06_post_install_check_fails__abort                                                       not needed: recovered=FALSE state=ready
+C07_error_after_new_published__restore          error: The release lock is not safely recoverable; manual inspection is required.
+C07_error_after_new_published__abort            error: The release lock is not safely recoverable; manual inspection is required.
+C08_restore_also_fails__restore                 error: The release lock is not safely recoverable; manual inspection is required.
+C08_restore_also_fails__abort                   error: The release lock is not safely recoverable; manual inspection is required.
+K1_kill_before_lock__restore                                                                                recovered=TRUE state=
+K1_kill_before_lock__abort                                                                                  recovered=TRUE state=
+K2_kill_old_moving__restore                                                                                 recovered=TRUE state=
+K2_kill_old_moving__abort                                                                                   recovered=TRUE state=
+K3_kill_after_backup__restore                                                                               recovered=TRUE state=
+K3_kill_after_backup__abort                                        error: A preserved prior release cannot be discarded by abort.
+K4_kill_old_moved__restore                                                                                  recovered=TRUE state=
+K4_kill_old_moved__abort                                           error: A preserved prior release cannot be discarded by abort.
+K5_kill_new_published__restore                                                                              recovered=TRUE state=
+K5_kill_new_published__abort                                       error: A preserved prior release cannot be discarded by abort.
+X1_error_after_backup_then_exit__restore                                                                    recovered=TRUE state=
+X1_error_after_backup_then_exit__abort                             error: A preserved prior release cannot be discarded by abort.
+X2_error_after_new_published_then_exit__restore                                                             recovered=TRUE state=
+X2_error_after_new_published_then_exit__abort                      error: A preserved prior release cannot be discarded by abort.
+T1_tamper_stage_before_publish                                                            not needed: recovered=FALSE state=ready
+T2_tamper_stage_after_record                                                              not needed: recovered=FALSE state=ready
+T3_tamper_stage_mid_publish                                                               not needed: recovered=FALSE state=ready
+T4_tamper_published_v1                                                                    not needed: recovered=FALSE state=ready
+T5_foreign_file_in_release                                                                not needed: recovered=FALSE state=ready
+                                                    final_release
+C00_no_fault                                                   v2
+C01_verify_app_fails__restore                                  v1
+C01_verify_app_fails__abort                                    v1
+C02_payload_check_fails_before_rename__restore                 v1
+C02_payload_check_fails_before_rename__abort                   v1
+C03_install_move_fails__restore                                v1
+C03_install_move_fails__abort                                  v1
+C04_error_after_backup_move__restore                       absent
+C04_error_after_backup_move__abort                         absent
+C05_error_after_old_moved_phase__restore                   absent
+C05_error_after_old_moved_phase__abort                     absent
+C06_post_install_check_fails__restore                          v1
+C06_post_install_check_fails__abort                            v1
+C07_error_after_new_published__restore                         v2
+C07_error_after_new_published__abort                           v2
+C08_restore_also_fails__restore                            absent
+C08_restore_also_fails__abort                              absent
+K1_kill_before_lock__restore                                   v1
+K1_kill_before_lock__abort                                     v1
+K2_kill_old_moving__restore                                    v1
+K2_kill_old_moving__abort                                      v1
+K3_kill_after_backup__restore                                  v1
+K3_kill_after_backup__abort                                absent
+K4_kill_old_moved__restore                                     v1
+K4_kill_old_moved__abort                                   absent
+K5_kill_new_published__restore                                 v1
+K5_kill_new_published__abort                                   v2
+X1_error_after_backup_then_exit__restore                       v1
+X1_error_after_backup_then_exit__abort                     absent
+X2_error_after_new_published_then_exit__restore                v1
+X2_error_after_new_published_then_exit__abort                  v2
+T1_tamper_stage_before_publish                                 v1
+T2_tamper_stage_after_record                                   v1
+T3_tamper_stage_mid_publish                                    v1
+T4_tamper_published_v1                          other (Visium v1)
+T5_foreign_file_in_release                      other (Visium v1)
+                                                final_crb_experiment
+C00_no_fault                                               Visium v2
+C01_verify_app_fails__restore                              Visium v1
+C01_verify_app_fails__abort                                Visium v1
+C02_payload_check_fails_before_rename__restore             Visium v1
+C02_payload_check_fails_before_rename__abort               Visium v1
+C03_install_move_fails__restore                            Visium v1
+C03_install_move_fails__abort                              Visium v1
+C04_error_after_backup_move__restore                            <NA>
+C04_error_after_backup_move__abort                              <NA>
+C05_error_after_old_moved_phase__restore                        <NA>
+C05_error_after_old_moved_phase__abort                          <NA>
+C06_post_install_check_fails__restore                      Visium v1
+C06_post_install_check_fails__abort                        Visium v1
+C07_error_after_new_published__restore                     Visium v2
+C07_error_after_new_published__abort                       Visium v2
+C08_restore_also_fails__restore                                 <NA>
+C08_restore_also_fails__abort                                   <NA>
+K1_kill_before_lock__restore                               Visium v1
+K1_kill_before_lock__abort                                 Visium v1
+K2_kill_old_moving__restore                                Visium v1
+K2_kill_old_moving__abort                                  Visium v1
+K3_kill_after_backup__restore                              Visium v1
+K3_kill_after_backup__abort                                     <NA>
+K4_kill_old_moved__restore                                 Visium v1
+K4_kill_old_moved__abort                                        <NA>
+K5_kill_new_published__restore                             Visium v1
+K5_kill_new_published__abort                               Visium v2
+X1_error_after_backup_then_exit__restore                   Visium v1
+X1_error_after_backup_then_exit__abort                          <NA>
+X2_error_after_new_published_then_exit__restore            Visium v1
+X2_error_after_new_published_then_exit__abort              Visium v2
+T1_tamper_stage_before_publish                             Visium v1
+T2_tamper_stage_after_record                               Visium v1
+T3_tamper_stage_mid_publish                                Visium v1
+T4_tamper_published_v1                                     Visium v1
+T5_foreign_file_in_release                                 Visium v1

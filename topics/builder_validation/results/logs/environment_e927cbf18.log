@@ -1,0 +1,12 @@
+Date: 2026-11-13 13:30:48 UTC 
+CerebroNexus pin (topics/cerebronexus.pin): ref integration/8.3.0 commit e927cbf180fb1a50cf783245ab580e83a1334764 version 8.3.0 
+CerebroNexus installed: commit e927cbf180fb1a50cf783245ab580e83a1334764 version 8.3.0 
+Installed from: git archive of that commit ( /mnt/c/Users/wangx/Projects/CerebroNexus ), R CMD INSTALL --library=env/rlib, at 2026-11-13T09:57:30Z 
+CerebroNexus library: /home/wang/tmp_cerebro/20261113_1057_builder-validation/topics/builder_validation/env/rlib/CerebroNexus 
+Builder runtime files sourced (from inst/builder/app.R): 30 
+   core/bundle_path_contract.R publish.R app_bundle.R report.R coordinator.R notify.R io.R project.R ../viewer/core/viewer_content_contract.R ../viewer/core/spatial_coordinate_contract.R ../viewer/core/spatial_coordinate_transform.R spatial.R manifest.R content_tables.R content_immune.R content_spatial.R content.R profile.R inspect.R recommend.R adapters.R preview.R extras.R analysis.R marker_import.R build.R state.R review.R workflow.R plan.R 
+Builder runtime files app.R names that the install lacks:  
+Rscript: /usr/local/bin/Rscript 
+Chrome (chromote): /usr/bin/google-chrome 
+
+Seurat                 5.6.0
