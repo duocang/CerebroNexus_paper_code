@@ -1,0 +1,36 @@
+key	value
+run_id	cerebronexus-8.3.0_20261113-153410_e927cbf
+contract	builder-perf-v1
+version	8.3.0
+ref	e927cbf180fb1a50cf783245ab580e83a1334764
+sha	e927cbf180fb1a50cf783245ab580e83a1334764
+platform	windows
+rounds	5
+partial	FALSE
+scenarios	edit,import,build_embedded,build_h5,export_h5
+sessions	25
+failed_sessions	0
+pair_id	20261113-153410_e927cbf_6a67f6f
+pair_role	candidate
+pair_with	cerebronexus-8.0.1_20261113-153410_6a67f6f
+host	NUIOI
+os	Microsoft Windows 11 专业版 10.0.26300
+cpu	12th Gen Intel(R) Core(TM) i9-12900K
+cores	24
+mem_total_mib	130791
+r_version	R version 4.6.1 (2026-06-24 ucrt)
+harness_commit	bd588663897dccf05f00e8cdc4d369457bad42ee-dirty
+cerebro_repo	C:/Users/wangx/Projects/CerebroNexus
+fixtures	C:/Users/wangx/Projects/data/builder-perf
+fixtures_scale	1
+fixtures_md5	meta60.rds=bca2a7cebf75273f3fdd46e232d49e4e,meta_import.rds=947fb8fbb384e78c5b224b9f473c8dbd,cells100k.rds=38cdb798b83ebc259947b9a8692b1689
+scenarios_md5	cbafb3193c717d4eaf3b0417ae3a15a4
+canary_ms	380,370,390,390,580,370
+canary_ratio	1.568
+host_idle_pct	15
+host_idle_max_s	600
+host_busy_sessions	0
+host_cpu_pct_median	5.1
+checks_failed	0
+started	2026-11-13T15:34:10+0100
+ended	2026-11-13T16:27:17+0100

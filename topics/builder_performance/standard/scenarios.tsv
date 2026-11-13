@@ -1,0 +1,6 @@
+scenario	fixture	metrics	branch_change
+edit	meta60	edit_ms,reduce_ms	perf/builder-edit-latency: one Configure edit in the Shiny process
+import	meta_import	import_s	perf/builder-load-export: import inspection of high-cardinality metadata columns
+build_embedded	cells100k	import_s,freeze_s,build_s	perf/builder-load-export: Viewer Pack build without reading the CRB back
+build_h5	cells100k	import_s,freeze_s,build_s,rebuild_s	perf/builder-load-export: H5 export (build_s) and reuse of the sidecar when only the configuration changed (rebuild_s)
+export_h5	cells100k	export_s	perf/builder-load-export: scripted H5 export, dgCMatrix written straight into the TENx datasets

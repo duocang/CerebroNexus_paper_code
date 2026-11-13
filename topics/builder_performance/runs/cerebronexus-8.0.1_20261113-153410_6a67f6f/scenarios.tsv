@@ -1,0 +1,6 @@
+scenario	rounds	ok_rounds	edit_ms	reduce_ms	import_s	freeze_s	build_s	rebuild_s	export_s	cpu_s	peak_mib	out_mib
+build_embedded	5	5	NA	NA	27.36	1.35	20.64	NA	NA	50.15	11873.57421875	378.880402565002
+build_h5	5	5	NA	NA	26.85	1.32	70.86	65.87	NA	176.46	11157.19140625	2272.84409332275
+edit	5	5	299.999999999999	219.999999999999	NA	NA	NA	NA	NA	18.16	606.78125	NA
+export_h5	5	5	NA	NA	NA	NA	NA	NA	69.59	77.22	11463.30859375	2272.84354877472
+import	5	5	NA	NA	46.19	NA	NA	NA	NA	48.1	877.390625	NA

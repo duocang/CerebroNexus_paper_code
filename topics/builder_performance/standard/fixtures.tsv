@@ -1,0 +1,4 @@
+name	file	cells	genes	nnz_per_cell	meta_cols	cloud	why
+meta60	meta60.rds	20000	20	10	63	0	edit latency: 63 metadata columns, a small matrix (an edit must not depend on the size of the data)
+meta_import	meta_import.rds	200000	20	10	63	0	import inspection: many cells, 63 metadata columns of which one has 80000 distinct values
+cells100k	cells100k.rds	100000	27998	1980	6	0	build and export: 100000 cells, 198 M non-zero values
