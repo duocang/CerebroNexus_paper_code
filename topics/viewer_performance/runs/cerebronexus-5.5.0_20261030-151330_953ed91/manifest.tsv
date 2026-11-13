@@ -1,0 +1,46 @@
+key	value
+run_id	cerebronexus-5.5.0_20261030-151330_953ed91
+contract	blackbox-v5
+version	5.5.0
+ref	perf/viewer-page-open-round2
+sha	953ed9178ec73d5d7ffdd3f034a8e0f65ba20945
+platform	windows
+rounds	3
+partial	FALSE
+datasets	1m,ren,cosmx,example,demo_trekker
+sessions	51
+failed_sessions	0
+host	NUIOI
+os	Microsoft Windows 11 Pro 10.0.26300
+cpu	12th Gen Intel(R) Core(TM) i9-12900K
+cores	24
+mem_total_mib	130791
+gpu	GameViewer Virtual Display Adapter / Intel(R) UHD Graphics 770 / NVIDIA GeForce RTX 4060
+renderer	ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11); webgpu
+memory_measure	private bytes (Windows has no PSS)
+r_version	R version 4.6.1 (2026-06-24 ucrt)
+chrome	Chrome/156.0.8078.76
+chromote	0.5.1
+harness_commit	6866cef773a5bdfa2ed00e33fe5e332e91b4ed66-dirty
+cerebro_repo	C:/Users/wangx/Projects/CerebroNexus
+large_examples	C:/Users/wangx/Projects/data/large-examples
+plan_md5	4d17e4ebf65a15ce91c7cb83033c93ad
+fixtures_md5	54fa528ad6511a5e85dbd508a438a5bf,71d9b9af1b822bc1affe90ca7db9f960,33fdb5b5fbda4dd85bf07e79b02845bd
+uncovered_pages	
+canary_before_ms	60
+canary_after_ms	100
+canary_ratio	1.667
+started	2026-10-30T15:13:30+0100
+ended	2026-10-30T15:48:05+0100
+fixture.1m.crb	1m/cerebro-v2/cerebro_mouse_brain_1m_compressed.crb
+fixture.1m.md5	54fa528ad6511a5e85dbd508a438a5bf
+fixture.1m.h5_bytes	3153135630
+fixture.1m.version_stamp	2
+fixture.ren.crb	ren/cerebro-v2/cerebro_ren_covid_1.46m_compressed.crb
+fixture.ren.md5	71d9b9af1b822bc1affe90ca7db9f960
+fixture.ren.h5_bytes	3051149823
+fixture.ren.version_stamp	2
+fixture.cosmx.crb	cosmx/cerebro-v2/cerebro_cosmx_nsclc_compressed.crb
+fixture.cosmx.md5	33fdb5b5fbda4dd85bf07e79b02845bd
+fixture.cosmx.h5_bytes	724568918
+fixture.cosmx.version_stamp	2

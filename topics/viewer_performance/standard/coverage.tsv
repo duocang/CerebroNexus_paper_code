@@ -1,18 +1,21 @@
-page	fixture	fallback
-loadData	mouse1m	example
-overview	mouse1m	example
-coordinated_views	mouse1m	example
-groups	mouse1m	example
-geneExpression	mouse1m	example
-trajectory	mouse1m	demo_full_tcr_bcr
-color_management	mouse1m	example
-geneIdConversion	mouse1m	example
-about	mouse1m	example
-immune_repertoire	ren	demo_full_tcr_bcr
-extra_material	ren	example
-spatial	cosmx	demo_spatial_visium
-markerGenes	-	example
-mostExpressedGenes	-	example
-enrichedPathways	-	example
-trekker	-	demo_trekker
-hla_tcr_motifs	-	demo_hla_tcr_dextramer
+# Every page once, on one dataset: a large fixture (fixtures.tsv) or a demo CRB that ships with
+# CerebroNexus (inst/extdata/examples), for the pages none of the large datasets has.
+# first_plot = yes: the page also gets a session of its own that times the start to its first plot (STANDARD.md, section 1).
+page	dataset	first_plot
+loadData	1m
+overview	1m	yes
+coordinated_views	1m
+groups	1m
+geneExpression	1m
+trajectory	1m
+color_management	1m
+geneIdConversion	1m
+about	1m
+immune_repertoire	ren
+hla_tcr_motifs	ren
+extra_material	ren
+spatial	cosmx
+markerGenes	example
+mostExpressedGenes	example
+enrichedPathways	example
+trekker	demo_trekker

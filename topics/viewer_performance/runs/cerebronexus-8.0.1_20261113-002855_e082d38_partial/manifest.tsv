@@ -1,0 +1,45 @@
+key	value
+run_id	cerebronexus-8.0.1_20261113-002855_e082d38_partial
+contract	blackbox-v7
+version	8.0.1
+ref	e082d38e9
+sha	e082d38e9a95c445c5f7655ae449381cf3fc432e
+platform	windows
+rounds	2
+partial	TRUE
+datasets	1m,example
+sessions	8
+failed_sessions	0
+pair_id	20261113-002855_e082d38_6a67f6f
+pair_role	candidate
+pair_with	cerebronexus-8.0.1_20261113-002855_6a67f6f_partial
+host	NUIOI
+os	Microsoft Windows 11 专业版 10.0.26300
+cpu	12th Gen Intel(R) Core(TM) i9-12900K
+cores	24
+mem_total_mib	130791
+gpu	GameViewer Virtual Display Adapter / Microsoft Remote Display Adapter / Intel(R) UHD Graphics 770 / NVIDIA GeForce RTX 4060
+renderer	ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11); webgpu
+memory_measure	private bytes (Windows has no PSS)
+r_version	R version 4.6.1 (2026-06-24 ucrt)
+chrome	Chrome/157.0.8103.52
+chromote	0.5.1
+harness_commit	bd588663897dccf05f00e8cdc4d369457bad42ee-dirty
+cerebro_repo	C:/Users/wangx/Projects/CerebroNexus
+large_examples	C:/Users/wangx/Projects/data/large-examples
+plan_md5	b35940832a2ffe136a4d281ba5d2698a
+fixtures_md5	54fa528ad6511a5e85dbd508a438a5bf
+uncovered_pages	
+cache	a directory of this run and revision (R_USER_CACHE_DIR): filled by the warm-up and kept; emptied before every first_start session
+canary_ms	370,390,390
+canary_ratio	1.054
+host_idle_pct	15
+host_idle_max_s	120
+host_busy_sessions	0
+host_cpu_pct_median	5.4
+started	2026-11-13T00:28:55+0100
+ended	2026-11-13T00:41:47+0100
+fixture.1m.crb	1m/cerebro-v2/cerebro_mouse_brain_1m_compressed.crb
+fixture.1m.md5	54fa528ad6511a5e85dbd508a438a5bf
+fixture.1m.h5_bytes	3153135630
+fixture.1m.version_stamp	2

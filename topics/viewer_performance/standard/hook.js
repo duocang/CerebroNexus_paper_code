@@ -1,4 +1,4 @@
-// In-page hook, contract "blackbox-v4". It only watches the DOM, so it works on any CerebroNexus
+// In-page hook, contract "blackbox-v7". It only watches the DOM, so it works on any CerebroNexus
 // version. The KPI (visual_complete_ms) is not measured here: it comes from screenshots taken by
 // measure_session.R, because the DOM cannot tell when a plot has finished drawing. This hook
 // supplies the rest:
@@ -133,6 +133,21 @@
       run: function (arg) { choose(id, arg); }
     };
   }
+  // Like selectAction, over several selects: the first of `ids` that has another option is switched
+  // (a dataset with one grouping or one FOV per sample still exercises the page). arg is "id=value".
+  function firstSelectAction(page, ids) {
+    return {
+      page: page,
+      prep: function () {
+        for (var i = 0; i < ids.length; i++) {
+          var v = nextChoice(ids[i]);
+          if (v !== null) return { ready: true, arg: ids[i] + '=' + v };
+        }
+        return { available: false };
+      },
+      run: function (arg) { var k = arg.indexOf('='); choose(arg.slice(0, k), arg.slice(k + 1)); }
+    };
+  }
   // Immune repertoire: the tab after the active one.
   function nextTab() {
     var tabs = Array.prototype.filter.call(document.querySelectorAll('#ir_tabs a[data-value]'), visible);
@@ -162,18 +177,46 @@
     }
     ev('mouseup', cx + rx, cy);
   }
+  // A shinyWidgets radio group: the button that is not checked (wrapping), clicked like a user would.
+  function otherRadio(id) {
+    var el = document.getElementById(id);
+    var r = el ? Array.prototype.filter.call(el.querySelectorAll('input[type="radio"]'), function (x) { return !x.disabled; }) : [];
+    if (r.length < 2 || !visible(el)) return null;
+    var i = r.findIndex(function (x) { return x.checked; });
+    return r[(i + 1) % r.length];
+  }
+  function radioAction(page, id) {
+    return {
+      page: page,
+      prep: function () { var x = otherRadio(id); return x ? { ready: true, arg: x.value } : { available: false }; },
+      run: function (arg) {
+        var x = document.querySelector('#' + id + ' input[type="radio"][value="' + arg.replace(/"/g, '\\"') + '"]');
+        var lbl = x.closest('label'); (lbl || x).click();
+      }
+    };
+  }
+  // A checkbox or switch: flip it.
+  function toggleAction(page, id) {
+    return {
+      page: page,
+      prep: function () { var el = document.getElementById(id); return el && visible(el.closest('.form-group') || el) ? { ready: true, arg: el.checked ? 'off' : 'on' } : { available: false }; },
+      run: function () { document.getElementById(id).click(); }
+    };
+  }
   // Dataset menu (only there when the server has more than one CRB): switch away to the second
   // dataset, then back to the one the session started with.
   var homeDataset = null;
   var geneQuery = 0, geneQueries = ['a', 'e', 'c'];
   cb.actions = {
     'groups.group': selectAction('groups', 'groups_selected_group'),
-    'markerGenes.table': selectAction('markerGenes', 'marker_genes_selected_table'),
+    'groups.plot_type': radioAction('groups', 'groups_by_other_group_plot_type'),
+    'groups.percent': toggleAction('groups', 'groups_by_other_group_show_as_percent'),
+    'markerGenes.table': firstSelectAction('markerGenes', ['marker_genes_selected_table', 'marker_genes_selected_method']),
     'mostExpressedGenes.group': selectAction('mostExpressedGenes', 'most_expressed_genes_selected_group'),
-    'enrichedPathways.table': selectAction('enrichedPathways', 'enriched_pathways_selected_table'),
+    'enrichedPathways.table': firstSelectAction('enrichedPathways', ['enriched_pathways_selected_table', 'enriched_pathways_selected_method']),
     'trajectory.colour_by': selectAction('trajectory', 'trajectory_point_color'),
-    'spatial.section': selectAction('spatial', 'spatial_projection_to_display'),
-    'extra_material.content': selectAction('extra_material', 'extra_material_selected_content'),
+    'spatial.section': firstSelectAction('spatial', ['spatial_projection_to_display', 'spatial_projection_sample']),
+    'extra_material.content': firstSelectAction('extra_material', ['extra_material_selected_content', 'extra_material_selected_file', 'extra_material_selected_category']),
     'hla_tcr_motifs.colour_by': selectAction('hla_tcr_motifs', 'hla_color_by'),
     'trekker.colour_by': selectAction('trekker', 'trekker_mode'),
     'coordinated_views.colour_by': selectAction('coordinated_views', 'cv-pick-color', function (o) { return o.optgroup === 'Expression'; }),
@@ -233,6 +276,27 @@
         return { ready: false };
       },
       run: function (arg) { var s = selectizeOf('expression_genes_input'); s.setValue([arg]); }
+    },
+    // Twelve genes at once (the multi-gene path: separate panels or a mean, depending on the version).
+    // Needs at least 2 genes in the box; asks the server-side list for more, as above.
+    'geneExpression.genes12': {
+      page: 'geneExpression',
+      prep: function () {
+        var s = selectizeOf('expression_genes_input');
+        if (!s) return { available: false };
+        var genes = Object.keys(s.options).sort();
+        if (genes.length >= 12 || (geneQuery >= geneQueries.length && !s.loading && genes.length >= 2)) {
+          return { ready: true, arg: genes.slice(0, 12).join(' ') };
+        }
+        if (typeof s.settings.load === 'function' && !s.loading && geneQuery < geneQueries.length) {
+          var q = geneQueries[geneQuery++];
+          s.load(function (callback) { s.settings.load.call(s, q, callback); });
+        } else if (typeof s.settings.load !== 'function' && genes.length >= 2) {
+          return { ready: true, arg: genes.slice(0, 12).join(' ') };
+        }
+        return { ready: false };
+      },
+      run: function (arg) { var s = selectizeOf('expression_genes_input'); s.setValue(arg.split(' ')); }
     }
   };
   cb.actionNames = function () { return JSON.stringify(Object.keys(cb.actions)); };
@@ -251,6 +315,24 @@
     cb.actions[name].run(arg);
     cb.raf = requestAnimationFrame(loop);
     return true;
+  };
+  // First plot from the start of the page (visit first_plot): called on every frame while the Viewer is
+  // loading. It opens the Projection page as soon as the sidebar offers it (the click of a user who is
+  // waiting for the plot), from then on reports state() and where the projection canvas is, in viewport
+  // pixels: [x, y, width, height]. `click_ms` is the click on the page's own clock, which starts at
+  // the navigation (performance.now()).
+  cb.fpClickT = 0;
+  cb.fpStep = function () {
+    if (!cb.fpClickT) {
+      var a = document.querySelector('ul.sidebar-menu a[data-value="overview"]');
+      if (!a || a.offsetParent === null || !document.getElementById('shiny-tab-overview')) return JSON.stringify({ done: false });
+      cb.begin('overview', false);
+      cb.fpClickT = cb.clickT;
+    }
+    var st = JSON.parse(cb.state()), c = overviewCanvas(), r = c ? c.getBoundingClientRect() : null;
+    st.click_ms = cb.fpClickT;
+    st.rect = r ? [r.left, r.top, r.width, r.height] : null;
+    return JSON.stringify(st);
   };
   cb.state = function () {
     var t = now(), pane = cb.pane;

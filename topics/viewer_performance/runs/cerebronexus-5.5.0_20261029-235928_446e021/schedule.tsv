@@ -1,0 +1,52 @@
+round	page	dataset	actions	position
+1	loadData	1m	loadData.switch,loadData.switch_back	1
+1	overview	1m	overview.colour_by,overview.zoom,overview.lasso	2
+1	coordinated_views	1m	coordinated_views.colour_by	3
+1	groups	1m	groups.group,groups.plot_type,groups.percent	4
+1	geneExpression	1m	geneExpression.gene,geneExpression.genes12	5
+1	trajectory	1m	trajectory.colour_by	6
+1	color_management	1m		7
+1	geneIdConversion	1m		8
+1	about	1m		9
+1	immune_repertoire	ren	immune_repertoire.tab	10
+1	hla_tcr_motifs	ren	hla_tcr_motifs.colour_by	11
+1	extra_material	ren	extra_material.content	12
+1	spatial	cosmx	spatial.section	13
+1	markerGenes	example	markerGenes.table	14
+1	mostExpressedGenes	example	mostExpressedGenes.group	15
+1	enrichedPathways	example	enrichedPathways.table	16
+1	trekker	demo_trekker	trekker.colour_by	17
+2	loadData	1m	loadData.switch,loadData.switch_back	18
+2	overview	1m	overview.colour_by,overview.zoom,overview.lasso	19
+2	coordinated_views	1m	coordinated_views.colour_by	20
+2	groups	1m	groups.group,groups.plot_type,groups.percent	21
+2	geneExpression	1m	geneExpression.gene,geneExpression.genes12	22
+2	trajectory	1m	trajectory.colour_by	23
+2	color_management	1m		24
+2	geneIdConversion	1m		25
+2	about	1m		26
+2	immune_repertoire	ren	immune_repertoire.tab	27
+2	hla_tcr_motifs	ren	hla_tcr_motifs.colour_by	28
+2	extra_material	ren	extra_material.content	29
+2	spatial	cosmx	spatial.section	30
+2	markerGenes	example	markerGenes.table	31
+2	mostExpressedGenes	example	mostExpressedGenes.group	32
+2	enrichedPathways	example	enrichedPathways.table	33
+2	trekker	demo_trekker	trekker.colour_by	34
+3	loadData	1m	loadData.switch,loadData.switch_back	35
+3	overview	1m	overview.colour_by,overview.zoom,overview.lasso	36
+3	coordinated_views	1m	coordinated_views.colour_by	37
+3	groups	1m	groups.group,groups.plot_type,groups.percent	38
+3	geneExpression	1m	geneExpression.gene,geneExpression.genes12	39
+3	trajectory	1m	trajectory.colour_by	40
+3	color_management	1m		41
+3	geneIdConversion	1m		42
+3	about	1m		43
+3	immune_repertoire	ren	immune_repertoire.tab	44
+3	hla_tcr_motifs	ren	hla_tcr_motifs.colour_by	45
+3	extra_material	ren	extra_material.content	46
+3	spatial	cosmx	spatial.section	47
+3	markerGenes	example	markerGenes.table	48
+3	mostExpressedGenes	example	mostExpressedGenes.group	49
+3	enrichedPathways	example	enrichedPathways.table	50
+3	trekker	demo_trekker	trekker.colour_by	51

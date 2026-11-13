@@ -1,0 +1,18 @@
+page	dataset	large	actions
+loadData	1m	TRUE	loadData.switch,loadData.switch_back
+overview	1m	TRUE	overview.colour_by,overview.zoom,overview.lasso
+coordinated_views	1m	TRUE	coordinated_views.colour_by
+groups	1m	TRUE	groups.group,groups.plot_type,groups.percent
+geneExpression	1m	TRUE	geneExpression.gene,geneExpression.genes12
+trajectory	1m	TRUE	trajectory.colour_by
+color_management	1m	TRUE	
+geneIdConversion	1m	TRUE	
+about	1m	TRUE	
+immune_repertoire	ren	TRUE	immune_repertoire.tab
+hla_tcr_motifs	ren	TRUE	hla_tcr_motifs.colour_by
+extra_material	ren	TRUE	extra_material.content
+spatial	cosmx	TRUE	spatial.section
+markerGenes	example	FALSE	markerGenes.table
+mostExpressedGenes	example	FALSE	mostExpressedGenes.group
+enrichedPathways	example	FALSE	enrichedPathways.table
+trekker	demo_trekker	FALSE	trekker.colour_by

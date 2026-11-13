@@ -29,7 +29,7 @@ default.nix     the one Nix environment (regenerate with generate_env.R)
 install.R       installs the R packages without Nix
 topics/
   expression_backends/   H5 / BPCells / embedded storage benchmark and its figures
-  viewer_performance/    Viewer performance standard (L0-L2 runs with verdicts, GPU renderer tier), Ren backend figure
+  viewer_performance/    Viewer page and action timings of one CerebroNexus version per run (Windows), runs/ and compare.R
   builder/               Builder builds from a SpatialData zip and a CITE-seq MuData file
   interface_figures/     scripted Viewer/Builder captures and Figures 1-7, S1-S2 (run.sh; not in targets)
   tool_comparison/       same-task comparison with ShinyCell, iSEE, cellxgene and Vitessce (Windows; not in targets)
@@ -68,7 +68,14 @@ A run is published to `topics/expression_backends/data/<quick|scale>/` and `CURR
 
 ## Viewer benchmarks
 
-Page speed and memory of the CerebroNexus Viewer are measured under one standard (tiers L0 to L2, a fixed measurement contract that also works on old revisions, a run record with SHAs and a verdict per run): see [topics/viewer_performance/STANDARD.md](topics/viewer_performance/STANDARD.md). It runs against a CerebroNexus checkout; the Ren backend figure is in the same folder, see [topics/viewer_performance/README.md](topics/viewer_performance/README.md).
+Page speed, action speed and memory of the CerebroNexus Viewer are measured for one CerebroNexus version per run, on Windows, with every page measured once on one of three large datasets (mouse brain 1.3M, Ren COVID-19 1.46M, CosMx NSCLC) or a demo CRB. Each run is saved in `topics/viewer_performance/runs/cerebronexus-<version>_<date>_<sha>/`, and `compare.R` compares two runs with an exact test over their rounds. `--baseline REF` measures a second revision in the same run, the sessions of the two taking turns:
+
+```bash
+Rscript topics/viewer_performance/standard/run.R --large-examples ../data/large-examples [--baseline REF]
+Rscript topics/viewer_performance/standard/compare.R topics/viewer_performance/runs/A topics/viewer_performance/runs/B
+```
+
+See [topics/viewer_performance/README.md](topics/viewer_performance/README.md) and [STANDARD.md](topics/viewer_performance/STANDARD.md).
 
 ## Builder builds
 

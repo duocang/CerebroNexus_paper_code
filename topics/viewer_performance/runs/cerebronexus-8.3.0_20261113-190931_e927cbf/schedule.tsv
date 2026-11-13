@@ -1,0 +1,191 @@
+round	revision	page	dataset	actions	kind	position	host_cpu_pct	host_wait_s	host_idle	ok
+1	candidate	loadData	1m	loadData.switch,loadData.switch_back	page	1	6.6	0.1	TRUE	TRUE
+1	baseline	loadData	1m	loadData.switch,loadData.switch_back	page	2	4.9	0.1	TRUE	TRUE
+1	baseline	overview	1m	overview.colour_by,overview.zoom,overview.lasso	page	3	5	0.1	TRUE	TRUE
+1	candidate	overview	1m	overview.colour_by,overview.zoom,overview.lasso	page	4	5.1	0.1	TRUE	TRUE
+1	baseline	overview	1m		first_start	5	4.3	0.1	TRUE	TRUE
+1	candidate	overview	1m		first_start	6	7.3	0.1	TRUE	TRUE
+1	baseline	overview	1m		first_plot	7	6.1	0.1	TRUE	TRUE
+1	candidate	overview	1m		first_plot	8	5.9	0.1	TRUE	TRUE
+1	candidate	coordinated_views	1m	coordinated_views.colour_by	page	9	4.6	0.1	TRUE	TRUE
+1	baseline	coordinated_views	1m	coordinated_views.colour_by	page	10	8.7	0.1	TRUE	TRUE
+1	baseline	groups	1m	groups.group,groups.plot_type,groups.percent	page	11	5.1	0.1	TRUE	TRUE
+1	candidate	groups	1m	groups.group,groups.plot_type,groups.percent	page	12	6.8	0.1	TRUE	TRUE
+1	candidate	geneExpression	1m	geneExpression.gene,geneExpression.genes12	page	13	5.8	1.1	TRUE	TRUE
+1	baseline	geneExpression	1m	geneExpression.gene,geneExpression.genes12	page	14	5.8	0.1	TRUE	TRUE
+1	baseline	trajectory	1m	trajectory.colour_by	page	15	8.9	0.1	TRUE	TRUE
+1	candidate	trajectory	1m	trajectory.colour_by	page	16	9.3	0.1	TRUE	TRUE
+1	candidate	color_management	1m		page	17	49.4	603.3	FALSE	TRUE
+1	baseline	color_management	1m		page	18	6.8	68.6	TRUE	TRUE
+1	baseline	geneIdConversion	1m		page	19	14.2	1.1	TRUE	TRUE
+1	candidate	geneIdConversion	1m		page	20	10	1.1	TRUE	TRUE
+1	candidate	about	1m		page	21	11.3	27.7	TRUE	TRUE
+1	baseline	about	1m		page	22	10.9	0.1	TRUE	TRUE
+1	baseline	immune_repertoire	ren	immune_repertoire.tab	page	23	10.2	0.1	TRUE	TRUE
+1	candidate	immune_repertoire	ren	immune_repertoire.tab	page	24	8.9	4.2	TRUE	TRUE
+1	candidate	hla_tcr_motifs	ren	hla_tcr_motifs.colour_by	page	25	11.1	0.1	TRUE	TRUE
+1	baseline	hla_tcr_motifs	ren	hla_tcr_motifs.colour_by	page	26	11.2	4.1	TRUE	TRUE
+1	baseline	extra_material	ren	extra_material.content	page	27	8	48.2	TRUE	TRUE
+1	candidate	extra_material	ren	extra_material.content	page	28	7.3	0.1	TRUE	TRUE
+1	candidate	spatial	cosmx	spatial.section	page	29	7.7	2.1	TRUE	TRUE
+1	baseline	spatial	cosmx	spatial.section	page	30	13.1	7.2	TRUE	TRUE
+1	baseline	markerGenes	example	markerGenes.table	page	31	10.4	8.3	TRUE	TRUE
+1	candidate	markerGenes	example	markerGenes.table	page	32	10.6	3.1	TRUE	TRUE
+1	candidate	mostExpressedGenes	example	mostExpressedGenes.group	page	33	6.9	0.1	TRUE	TRUE
+1	baseline	mostExpressedGenes	example	mostExpressedGenes.group	page	34	10.5	4.2	TRUE	TRUE
+1	baseline	enrichedPathways	example	enrichedPathways.table	page	35	7.4	0.1	TRUE	TRUE
+1	candidate	enrichedPathways	example	enrichedPathways.table	page	36	9.1	0.1	TRUE	TRUE
+1	candidate	trekker	demo_trekker	trekker.colour_by	page	37	11.7	5.2	TRUE	TRUE
+1	baseline	trekker	demo_trekker	trekker.colour_by	page	38	9.4	0.1	TRUE	TRUE
+2	baseline	loadData	1m	loadData.switch,loadData.switch_back	page	39	11.5	63.6	TRUE	TRUE
+2	candidate	loadData	1m	loadData.switch,loadData.switch_back	page	40	13.5	6.2	TRUE	TRUE
+2	candidate	overview	1m	overview.colour_by,overview.zoom,overview.lasso	page	41	13.6	56.4	TRUE	TRUE
+2	baseline	overview	1m	overview.colour_by,overview.zoom,overview.lasso	page	42	13.4	7.2	TRUE	TRUE
+2	candidate	overview	1m		first_start	43	12.6	36	TRUE	TRUE
+2	baseline	overview	1m		first_start	44	13.5	1.1	TRUE	TRUE
+2	candidate	overview	1m		first_plot	45	13.2	28.8	TRUE	TRUE
+2	baseline	overview	1m		first_plot	46	13.9	138.5	TRUE	TRUE
+2	baseline	coordinated_views	1m	coordinated_views.colour_by	page	47	10.3	4.1	TRUE	TRUE
+2	candidate	coordinated_views	1m	coordinated_views.colour_by	page	48	11.6	25.7	TRUE	TRUE
+2	candidate	groups	1m	groups.group,groups.plot_type,groups.percent	page	49	6.7	0.1	TRUE	TRUE
+2	baseline	groups	1m	groups.group,groups.plot_type,groups.percent	page	50	5.3	0.1	TRUE	TRUE
+2	baseline	geneExpression	1m	geneExpression.gene,geneExpression.genes12	page	51	6.2	0.1	TRUE	TRUE
+2	candidate	geneExpression	1m	geneExpression.gene,geneExpression.genes12	page	52	6.9	0.1	TRUE	TRUE
+2	candidate	trajectory	1m	trajectory.colour_by	page	53	6.5	0.1	TRUE	TRUE
+2	baseline	trajectory	1m	trajectory.colour_by	page	54	5.8	0.1	TRUE	TRUE
+2	baseline	color_management	1m		page	55	7.8	3.1	TRUE	TRUE
+2	candidate	color_management	1m		page	56	6.6	0.1	TRUE	TRUE
+2	candidate	geneIdConversion	1m		page	57	8.2	0.1	TRUE	TRUE
+2	baseline	geneIdConversion	1m		page	58	7.6	0.1	TRUE	TRUE
+2	baseline	about	1m		page	59	6.1	0.1	TRUE	TRUE
+2	candidate	about	1m		page	60	6.7	0.1	TRUE	TRUE
+2	candidate	immune_repertoire	ren	immune_repertoire.tab	page	61	13.1	7.3	TRUE	TRUE
+2	baseline	immune_repertoire	ren	immune_repertoire.tab	page	62	11	4.2	TRUE	TRUE
+2	baseline	hla_tcr_motifs	ren	hla_tcr_motifs.colour_by	page	63	6.3	1.1	TRUE	TRUE
+2	candidate	hla_tcr_motifs	ren	hla_tcr_motifs.colour_by	page	64	12.1	0.1	TRUE	TRUE
+2	candidate	extra_material	ren	extra_material.content	page	65	7.6	8.3	TRUE	TRUE
+2	baseline	extra_material	ren	extra_material.content	page	66	8	4.2	TRUE	TRUE
+2	baseline	spatial	cosmx	spatial.section	page	67	12.5	0.1	TRUE	TRUE
+2	candidate	spatial	cosmx	spatial.section	page	68	5.1	2.1	TRUE	TRUE
+2	candidate	markerGenes	example	markerGenes.table	page	69	6.4	0.1	TRUE	TRUE
+2	baseline	markerGenes	example	markerGenes.table	page	70	6.9	4.2	TRUE	TRUE
+2	baseline	mostExpressedGenes	example	mostExpressedGenes.group	page	71	10.5	0.1	TRUE	TRUE
+2	candidate	mostExpressedGenes	example	mostExpressedGenes.group	page	72	9.9	1.1	TRUE	TRUE
+2	candidate	enrichedPathways	example	enrichedPathways.table	page	73	6.9	0.1	TRUE	TRUE
+2	baseline	enrichedPathways	example	enrichedPathways.table	page	74	5.8	0.1	TRUE	TRUE
+2	baseline	trekker	demo_trekker	trekker.colour_by	page	75	6.2	0.1	TRUE	TRUE
+2	candidate	trekker	demo_trekker	trekker.colour_by	page	76	11.3	0.1	TRUE	TRUE
+3	candidate	loadData	1m	loadData.switch,loadData.switch_back	page	77	6.1	0.1	TRUE	TRUE
+3	baseline	loadData	1m	loadData.switch,loadData.switch_back	page	78	5.4	0.1	TRUE	TRUE
+3	baseline	overview	1m	overview.colour_by,overview.zoom,overview.lasso	page	79	6.1	0.1	TRUE	TRUE
+3	candidate	overview	1m	overview.colour_by,overview.zoom,overview.lasso	page	80	11.4	0.1	TRUE	TRUE
+3	baseline	overview	1m		first_start	81	8.4	1.1	TRUE	TRUE
+3	candidate	overview	1m		first_start	82	6.6	0.1	TRUE	TRUE
+3	baseline	overview	1m		first_plot	83	5.9	0.1	TRUE	TRUE
+3	candidate	overview	1m		first_plot	84	4.2	0.1	TRUE	TRUE
+3	candidate	coordinated_views	1m	coordinated_views.colour_by	page	85	5.8	0.1	TRUE	TRUE
+3	baseline	coordinated_views	1m	coordinated_views.colour_by	page	86	4.7	0.1	TRUE	TRUE
+3	baseline	groups	1m	groups.group,groups.plot_type,groups.percent	page	87	6.3	0.1	TRUE	TRUE
+3	candidate	groups	1m	groups.group,groups.plot_type,groups.percent	page	88	4.9	0.1	TRUE	TRUE
+3	candidate	geneExpression	1m	geneExpression.gene,geneExpression.genes12	page	89	5.9	0.1	TRUE	TRUE
+3	baseline	geneExpression	1m	geneExpression.gene,geneExpression.genes12	page	90	5.3	0.1	TRUE	TRUE
+3	baseline	trajectory	1m	trajectory.colour_by	page	91	6.4	0.1	TRUE	TRUE
+3	candidate	trajectory	1m	trajectory.colour_by	page	92	6.4	0.1	TRUE	TRUE
+3	candidate	color_management	1m		page	93	7.2	1.1	TRUE	TRUE
+3	baseline	color_management	1m		page	94	13.4	6.3	TRUE	TRUE
+3	baseline	geneIdConversion	1m		page	95	8.5	35.9	TRUE	TRUE
+3	candidate	geneIdConversion	1m		page	96	7.9	0.1	TRUE	TRUE
+3	candidate	about	1m		page	97	13.2	29.8	TRUE	TRUE
+3	baseline	about	1m		page	98	9.9	0	TRUE	TRUE
+3	baseline	immune_repertoire	ren	immune_repertoire.tab	page	99	13.8	0.1	TRUE	TRUE
+3	candidate	immune_repertoire	ren	immune_repertoire.tab	page	100	12.7	4.2	TRUE	TRUE
+3	candidate	hla_tcr_motifs	ren	hla_tcr_motifs.colour_by	page	101	13.4	27.8	TRUE	TRUE
+3	baseline	hla_tcr_motifs	ren	hla_tcr_motifs.colour_by	page	102	10.7	26.7	TRUE	TRUE
+3	baseline	extra_material	ren	extra_material.content	page	103	12.5	0.1	TRUE	TRUE
+3	candidate	extra_material	ren	extra_material.content	page	104	9.7	21.5	TRUE	TRUE
+3	candidate	spatial	cosmx	spatial.section	page	105	13.2	4.2	TRUE	TRUE
+3	baseline	spatial	cosmx	spatial.section	page	106	8.3	1.1	TRUE	TRUE
+3	baseline	markerGenes	example	markerGenes.table	page	107	7	0.1	TRUE	TRUE
+3	candidate	markerGenes	example	markerGenes.table	page	108	13.1	0.1	TRUE	TRUE
+3	candidate	mostExpressedGenes	example	mostExpressedGenes.group	page	109	11.4	1.1	TRUE	TRUE
+3	baseline	mostExpressedGenes	example	mostExpressedGenes.group	page	110	11.8	0.1	TRUE	TRUE
+3	baseline	enrichedPathways	example	enrichedPathways.table	page	111	10.1	1.1	TRUE	TRUE
+3	candidate	enrichedPathways	example	enrichedPathways.table	page	112	10	0.1	TRUE	TRUE
+3	candidate	trekker	demo_trekker	trekker.colour_by	page	113	10.6	5.2	TRUE	TRUE
+3	baseline	trekker	demo_trekker	trekker.colour_by	page	114	11.3	0.1	TRUE	TRUE
+4	baseline	loadData	1m	loadData.switch,loadData.switch_back	page	115	11.2	4.2	TRUE	TRUE
+4	candidate	loadData	1m	loadData.switch,loadData.switch_back	page	116	10.6	2.1	TRUE	TRUE
+4	candidate	overview	1m	overview.colour_by,overview.zoom,overview.lasso	page	117	11.5	0.1	TRUE	TRUE
+4	baseline	overview	1m	overview.colour_by,overview.zoom,overview.lasso	page	118	12	1.1	TRUE	TRUE
+4	candidate	overview	1m		first_start	119	12.5	0.1	TRUE	TRUE
+4	baseline	overview	1m		first_start	120	14.3	3.1	TRUE	TRUE
+4	candidate	overview	1m		first_plot	121	12.9	7.3	TRUE	TRUE
+4	baseline	overview	1m		first_plot	122	10.8	8.3	TRUE	TRUE
+4	baseline	coordinated_views	1m	coordinated_views.colour_by	page	123	11.1	21.6	TRUE	TRUE
+4	candidate	coordinated_views	1m	coordinated_views.colour_by	page	124	13.2	1.1	TRUE	TRUE
+4	candidate	groups	1m	groups.group,groups.plot_type,groups.percent	page	125	10.6	0.1	TRUE	TRUE
+4	baseline	groups	1m	groups.group,groups.plot_type,groups.percent	page	126	10.2	0.1	TRUE	TRUE
+4	baseline	geneExpression	1m	geneExpression.gene,geneExpression.genes12	page	127	10.4	0.1	TRUE	TRUE
+4	candidate	geneExpression	1m	geneExpression.gene,geneExpression.genes12	page	128	11	0	TRUE	TRUE
+4	candidate	trajectory	1m	trajectory.colour_by	page	129	11	3.1	TRUE	TRUE
+4	baseline	trajectory	1m	trajectory.colour_by	page	130	10.9	0.1	TRUE	TRUE
+4	baseline	color_management	1m		page	131	9.5	0.1	TRUE	TRUE
+4	candidate	color_management	1m		page	132	10.4	3.2	TRUE	TRUE
+4	candidate	geneIdConversion	1m		page	133	10.9	0.1	TRUE	TRUE
+4	baseline	geneIdConversion	1m		page	134	9.2	6.2	TRUE	TRUE
+4	baseline	about	1m		page	135	10.8	0.1	TRUE	TRUE
+4	candidate	about	1m		page	136	10	0.1	TRUE	TRUE
+4	candidate	immune_repertoire	ren	immune_repertoire.tab	page	137	13.1	0.1	TRUE	TRUE
+4	baseline	immune_repertoire	ren	immune_repertoire.tab	page	138	8.8	0.1	TRUE	TRUE
+4	baseline	hla_tcr_motifs	ren	hla_tcr_motifs.colour_by	page	139	10.1	3.1	TRUE	TRUE
+4	candidate	hla_tcr_motifs	ren	hla_tcr_motifs.colour_by	page	140	10.3	0.1	TRUE	TRUE
+4	candidate	extra_material	ren	extra_material.content	page	141	8.9	0.1	TRUE	TRUE
+4	baseline	extra_material	ren	extra_material.content	page	142	9.1	0.1	TRUE	TRUE
+4	baseline	spatial	cosmx	spatial.section	page	143	9.4	0	TRUE	TRUE
+4	candidate	spatial	cosmx	spatial.section	page	144	12.8	0.1	TRUE	TRUE
+4	candidate	markerGenes	example	markerGenes.table	page	145	11.3	0.1	TRUE	TRUE
+4	baseline	markerGenes	example	markerGenes.table	page	146	8.8	0.1	TRUE	TRUE
+4	baseline	mostExpressedGenes	example	mostExpressedGenes.group	page	147	8.2	4.2	TRUE	TRUE
+4	candidate	mostExpressedGenes	example	mostExpressedGenes.group	page	148	10.7	5.2	TRUE	TRUE
+4	candidate	enrichedPathways	example	enrichedPathways.table	page	149	9.4	6.2	TRUE	TRUE
+4	baseline	enrichedPathways	example	enrichedPathways.table	page	150	9.2	0.1	TRUE	TRUE
+4	baseline	trekker	demo_trekker	trekker.colour_by	page	151	12.3	0.1	TRUE	TRUE
+4	candidate	trekker	demo_trekker	trekker.colour_by	page	152	11.7	2.1	TRUE	TRUE
+5	candidate	loadData	1m	loadData.switch,loadData.switch_back	page	153	14.3	9.3	TRUE	TRUE
+5	baseline	loadData	1m	loadData.switch,loadData.switch_back	page	154	11.5	32.8	TRUE	TRUE
+5	baseline	overview	1m	overview.colour_by,overview.zoom,overview.lasso	page	155	13.3	67.7	TRUE	TRUE
+5	candidate	overview	1m	overview.colour_by,overview.zoom,overview.lasso	page	156	10.6	9.3	TRUE	TRUE
+5	baseline	overview	1m		first_start	157	10.4	0.1	TRUE	TRUE
+5	candidate	overview	1m		first_start	158	10.5	3.2	TRUE	TRUE
+5	baseline	overview	1m		first_plot	159	10.4	0.1	TRUE	TRUE
+5	candidate	overview	1m		first_plot	160	11.3	0.1	TRUE	TRUE
+5	candidate	coordinated_views	1m	coordinated_views.colour_by	page	161	10.3	3.2	TRUE	TRUE
+5	baseline	coordinated_views	1m	coordinated_views.colour_by	page	162	10.6	3.1	TRUE	TRUE
+5	baseline	groups	1m	groups.group,groups.plot_type,groups.percent	page	163	10.9	0.1	TRUE	TRUE
+5	candidate	groups	1m	groups.group,groups.plot_type,groups.percent	page	164	9.8	3.1	TRUE	TRUE
+5	candidate	geneExpression	1m	geneExpression.gene,geneExpression.genes12	page	165	9.7	0.1	TRUE	TRUE
+5	baseline	geneExpression	1m	geneExpression.gene,geneExpression.genes12	page	166	13.3	1.1	TRUE	TRUE
+5	baseline	trajectory	1m	trajectory.colour_by	page	167	10.5	3.1	TRUE	TRUE
+5	candidate	trajectory	1m	trajectory.colour_by	page	168	10.1	1.1	TRUE	TRUE
+5	candidate	color_management	1m		page	169	11	0.1	TRUE	TRUE
+5	baseline	color_management	1m		page	170	6.5	0.1	TRUE	TRUE
+5	baseline	geneIdConversion	1m		page	171	6.6	0.1	TRUE	TRUE
+5	candidate	geneIdConversion	1m		page	172	10.4	1.1	TRUE	TRUE
+5	candidate	about	1m		page	173	10.4	0.1	TRUE	TRUE
+5	baseline	about	1m		page	174	13.5	0.1	TRUE	TRUE
+5	baseline	immune_repertoire	ren	immune_repertoire.tab	page	175	12	0.1	TRUE	TRUE
+5	candidate	immune_repertoire	ren	immune_repertoire.tab	page	176	10.8	0.1	TRUE	TRUE
+5	candidate	hla_tcr_motifs	ren	hla_tcr_motifs.colour_by	page	177	9.4	0.1	TRUE	TRUE
+5	baseline	hla_tcr_motifs	ren	hla_tcr_motifs.colour_by	page	178	9.4	0.1	TRUE	TRUE
+5	baseline	extra_material	ren	extra_material.content	page	179	4.2	0.1	TRUE	TRUE
+5	candidate	extra_material	ren	extra_material.content	page	180	5.6	0.1	TRUE	TRUE
+5	candidate	spatial	cosmx	spatial.section	page	181	7.1	0.1	TRUE	TRUE
+5	baseline	spatial	cosmx	spatial.section	page	182	9.1	15.4	TRUE	TRUE
+5	baseline	markerGenes	example	markerGenes.table	page	183	5.6	0.1	TRUE	TRUE
+5	candidate	markerGenes	example	markerGenes.table	page	184	6.6	0.1	TRUE	TRUE
+5	candidate	mostExpressedGenes	example	mostExpressedGenes.group	page	185	5.7	1.1	TRUE	TRUE
+5	baseline	mostExpressedGenes	example	mostExpressedGenes.group	page	186	12.3	3.1	TRUE	TRUE
+5	baseline	enrichedPathways	example	enrichedPathways.table	page	187	98.7	603.6	FALSE	TRUE
+5	candidate	enrichedPathways	example	enrichedPathways.table	page	188	54.1	603.6	FALSE	TRUE
+5	candidate	trekker	demo_trekker	trekker.colour_by	page	189	11.9	152.4	TRUE	TRUE
+5	baseline	trekker	demo_trekker	trekker.colour_by	page	190	12.5	9.3	TRUE	TRUE

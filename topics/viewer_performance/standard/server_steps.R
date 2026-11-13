@@ -3,6 +3,7 @@
 # page can be traced to the step that got slower. One fresh R process per revision, dataset and round.
 #
 # usage: server_steps.R --label L --sha S --lib DIR --src DIR --crb FILE --dataset NAME --round N --out FILE
+#        [--cache-dir DIR]   the user cache directory (R_USER_CACHE_DIR) the package may keep files in
 #
 # Only the Cerebro object's public methods are called, plus two Viewer helpers sourced from the
 # revision's own inst/viewer when they exist there. A step whose method a revision does not have is
@@ -11,6 +12,10 @@
 here <- dirname(normalizePath(sub("^--file=", "", grep("^--file=", commandArgs(), value = TRUE)[[1L]])))
 source(file.path(here, "cli.R"))
 opt <- parse_cli(commandArgs(trailingOnly = TRUE))
+if (!is.null(opt$cache_dir) && !isTRUE(opt$cache_dir)) {
+  dir.create(opt$cache_dir, recursive = TRUE, showWarnings = FALSE)
+  Sys.setenv(R_USER_CACHE_DIR = normalizePath(opt$cache_dir, winslash = "/"))
+}
 .libPaths(c(opt$lib, .libPaths()))
 suppressPackageStartupMessages(library(CerebroNexus, lib.loc = opt$lib))
 stopifnot(startsWith(normalizePath(find.package("CerebroNexus")), normalizePath(opt$lib)))

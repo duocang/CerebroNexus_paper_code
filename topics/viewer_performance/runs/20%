@@ -1,0 +1,16 @@
+cerebronexus-5.5.0_20261029-235928_446e021 rows 37 
+ rel range (max-min)/median:  25%   50%   75%   90%  100% 
+ 0.28  0.60  1.08  1.60 17.46 
+ abs range ms: 25%  50%  75%  90% 100% 
+  45  198  432  615 1715 
+ median KPI ms:10% 25% 50% 75% 90% 
+ 12 135 323 589 943 
+ rows where range  + 300ms: 8 
+cerebronexus-5.5.0_20261030-151330_953ed91 rows 37 
+ rel range (max-min)/median:  25%   50%   75%   90%  100% 
+ 0.09  0.18  0.32  0.42 10.41 
+ abs range ms: 25%  50%  75%  90% 100% 
+  23   69  142  205  401 
+ median KPI ms:10% 25% 50% 75% 90% 
+ 53 176 516 820 983 
+ rows where range  + 300ms: 0 

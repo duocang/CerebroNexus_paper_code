@@ -98,6 +98,40 @@ wait_quiet <- function(trace, thr = quiet_thr, need = quiet_need_s, max_s = 120,
   }
 }
 
+# ---- the machine as a whole ----------------------------------------------------------------------------
+
+# CPU canary: the time (ms) of a fixed single-threaded computation, the fastest of `reps`. It moves when the
+# machine is busy with something else, changes its clock frequency or is throttled. About half a second per
+# repetition, so that the timer's resolution (10 to 16 ms on Windows) is a few percent of it.
+canary_ms <- function(reps = 5L) {
+  work <- function() { x <- 0; for (j in seq_len(2e7)) x <- x + sqrt(j); x }
+  min(vapply(seq_len(reps), function(i) system.time(work())[["elapsed"]], 0)) * 1000
+}
+
+# Share (percent) of all CPUs of the machine that was in use over `window_s` seconds, whoever used it. NA
+# without the ps package.
+host_cpu_pct <- function(window_s = 1) {
+  if (!requireNamespace("ps", quietly = TRUE)) return(NA_real_)
+  a <- ps::ps_system_cpu_times(); Sys.sleep(window_s); d <- ps::ps_system_cpu_times() - a
+  busy <- d[["user"]] + d[["system"]]; total <- busy + d[["idle"]]
+  if (!is.finite(total) || total <= 0) NA_real_ else 100 * busy / total
+}
+
+# Wait for an idle machine: `need` windows of one second in a row below `thr` percent. Returns the seconds
+# waited before that stretch began, the mean of the stretch and idle = TRUE; after `max_s` seconds without one,
+# the last reading and idle = FALSE; idle = NA when the machine's CPU cannot be read.
+wait_host_idle <- function(thr = host_idle_pct, need = quiet_need_s, max_s = host_idle_max_s) {
+  t0 <- Sys.time(); run <- numeric()
+  repeat {
+    p <- host_cpu_pct(1)
+    if (is.na(p)) return(list(waited_s = 0, cpu_pct = NA_real_, idle = NA))
+    run <- if (p < thr) c(run, p) else numeric()
+    waited <- as.numeric(difftime(Sys.time(), t0, units = "secs"))
+    if (length(run) >= need) return(list(waited_s = max(0, waited - need), cpu_pct = mean(run), idle = TRUE))
+    if (waited > max_s + need) return(list(waited_s = waited, cpu_pct = p, idle = FALSE))
+  }
+}
+
 # ---- platform facts for run.R --------------------------------------------------------------------------
 
 # "windows", "linux-wsl", "linux", or NA (not supported).

@@ -1,0 +1,3 @@
+page	dataset	large	first_plot	actions
+overview	1m	TRUE	TRUE	overview.colour_by,overview.zoom,overview.lasso
+markerGenes	example	FALSE	FALSE	markerGenes.table

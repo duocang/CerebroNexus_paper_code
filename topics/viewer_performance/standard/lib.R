@@ -1,24 +1,41 @@
-# Pure functions of the Viewer performance standard: policy, aggregation, the verdict and the
-# records it writes. No browser and no R app here, so they are unit tested
+# Pure functions of the Viewer performance measurement: the plan, aggregation, the records a run
+# writes and the comparison of two runs. No browser and no R app here, so they are unit tested
 # (topics/viewer_performance/tests/test-standard.R). The rules are in ../STANDARD.md.
 
-standard_contract <- "blackbox-v4"
-standard_metrics <- c("visual_complete_ms", "visual_90_ms", "settled_ms", "loader_visible_ms", "visible_ms", "js_peak_mib",
-                      "server_busy_ms", "chrome_busy_ms", "trail_ms", "ws_in_bytes", "ws_out_bytes", "ws_max_msg_bytes")
-# initial      Data info loading the dataset (journey session)
-# cold         a page opened in a fresh server and Chrome, after Data info only: pays its own first-use cost
-# journey      a page opened in sidebar order in one session: what it costs depends on the pages before it
-# repeat       the same page again, right after going back to Data info (cold session)
-# revisit_after_tour  the page again after the whole journey (journey session)
-# action       one thing done on an open page (actions.tsv, journey session)
-standard_visits <- c("initial", "cold", "journey", "repeat", "revisit_after_tour", "action")
-first_visits <- c("cold", "journey")
-slow_pages <- c("hla_tcr_motifs", "trajectory")
+standard_contract <- "blackbox-v7"
+standard_metrics <- c("visual_complete_ms", "visual_90_ms", "first_plot_ms", "settled_ms", "loader_visible_ms", "visible_ms", "js_peak_mib",
+                      "server_busy_ms", "chrome_busy_ms", "trail_ms", "ws_in_bytes", "ws_out_bytes", "ws_max_msg_bytes",
+                      "r_peak_mib", "chrome_peak_mib")
+# initial  Data info loading the dataset (the session of the loadData page)
+# cold     a page opened in a fresh server and Chrome, after Data info only: pays its own first-use cost
+# first_start  a page opened from the start, with nothing kept from an earlier start: the user cache directory
+#          of the server is emptied before the session (a new installation)
+# first_plot  the same from a later start: the cache directory holds what earlier sessions of the run left. The
+#          clock starts when Chrome navigates to the Viewer (not at a click) and runs to the first plot; the same
+#          event the tool comparison times (coverage.tsv, column first_plot)
+# action   one thing done on the open page (actions.tsv), right after its cold visit
+standard_visits <- c("initial", "cold", "first_start", "first_plot", "action")
+start_visits <- c("first_start", "first_plot")
 
 # Quiet: below this many CPU seconds per second, over 1 s, for each tree (R server, Chrome), for
 # quiet_need_s seconds in a row. Headless Chrome uses 0.1-0.2 of a core while idle (software rendering).
 quiet_thr <- c(r = 0.05, chrome = 0.25)
 quiet_need_s <- 3
+
+# The machine as a whole: a session starts only when all its CPUs together were below host_idle_pct percent
+# for quiet_need_s one-second windows in a row; after host_idle_max_s seconds of waiting it starts anyway and
+# is counted as started on a busy host. A run whose CPU canary (proc.R) moved by more than canary_limit
+# between any two of its readings says so.
+host_idle_pct <- 15
+host_idle_max_s <- 600
+canary_limit <- 1.2
+
+# What compare.R calls a difference: an exact two-sided rank-sum test over the rounds at compare_alpha, and
+# a difference of the medians above one frame. Rounds per page a run makes by default.
+compare_alpha <- 0.05
+default_rounds <- 5L
+
+`%||%` <- function(a, b) if (is.null(a)) b else a
 
 # Start (ms) of the quiet stretch that lasts to the last sample. `t` are sample times (ms), `cpu` the
 # cumulative CPU seconds, one column per tree, `thr` the threshold per column. A 1 s window ending at a
@@ -66,420 +83,549 @@ visual_from_similarity <- function(t, sim, t_click, tol = 0.0005, progress = 0.9
        visual_90_ms = if (length(first90)) max(0, t[[first90[[1L]]]] - t_click) else NA_real_)
 }
 
+# First plot, as the tool comparison defines it (topics/tool_comparison/scripts/run/harness.py): a frame
+# shows the plot when the plot element is at least `min_px` wide and tall and at least `min_ink` of its
+# pixels are "ink". A pixel is ink when its colour is further than `dist` (0-255 RGB distance) from the most
+# frequent colour of the element and it is dark (V < 0.5) or coloured (saturation above `sat`). The first
+# plot is the first frame of a run of at least two frames that show it.
+ink_params <- c(dist = 60, sat = 0.1, min_ink = 0.01, min_px = 200)
+
+# Share of ink pixels of an image array (height x width x 3, values 0-1, as png::readPNG returns).
+ink_fraction <- function(img, dist = ink_params[["dist"]], sat = ink_params[["sat"]]) {
+  d <- dim(img)
+  if (length(d) != 3L || d[[3L]] < 3L || prod(d[1:2]) == 0L) return(0)
+  r <- round(img[, , 1L] * 255); g <- round(img[, , 2L] * 255); b <- round(img[, , 3L] * 255)
+  flat <- r * 65536 + g * 256 + b
+  u <- unique(as.vector(flat))
+  bg <- u[[which.max(tabulate(match(as.vector(flat), u)))]]
+  br <- bg %/% 65536; bgc <- (bg %/% 256) %% 256; bb <- bg %% 256
+  far <- sqrt((r - br)^2 + (g - bgc)^2 + (b - bb)^2) > dist
+  mx <- pmax(r, g, b); mn <- pmin(r, g, b)
+  s <- ifelse(mx > 0, (mx - mn) / pmax(mx, 1), 0)
+  mean(far & (mx / 255 < 0.5 | s > sat))
+}
+
+# The part of a screenshot that is the plot element. `rect` = c(x, y, width, height) in CSS pixels as the page
+# reports it, `scale` = pixels of the screenshot per CSS pixel. NULL when nothing of the element is on screen.
+crop_to_rect <- function(img, rect, scale = 1) {
+  h <- dim(img)[[1L]]; w <- dim(img)[[2L]]
+  x0 <- max(0, round(rect[[1L]] * scale)); y0 <- max(0, round(rect[[2L]] * scale))
+  x1 <- min(w, round((rect[[1L]] + rect[[3L]]) * scale)); y1 <- min(h, round((rect[[2L]] + rect[[4L]]) * scale))
+  if (x1 <= x0 || y1 <= y0) return(NULL)
+  img[(y0 + 1L):y1, (x0 + 1L):x1, , drop = FALSE]
+}
+
+# Does this frame show the plot? The element must be at least min_px wide and tall on screen and have at least
+# min_ink ink. Returns the verdict and the ink share (NA when the element is too small to ask).
+plot_shown <- function(img, rect, scale = 1, min_px = ink_params[["min_px"]], min_ink = ink_params[["min_ink"]]) {
+  crop <- crop_to_rect(img, rect, scale)
+  if (is.null(crop) || dim(crop)[[2L]] / scale < min_px || dim(crop)[[1L]] / scale < min_px) return(list(shows = FALSE, ink = NA_real_))
+  ink <- ink_fraction(crop)
+  list(shows = ink >= min_ink, ink = ink)
+}
+
+# Index of the first frame of the first run of two frames in a row that show the plot; NA when there is none.
+first_accepted_frame <- function(shows) {
+  shows[is.na(shows)] <- FALSE
+  n <- length(shows)
+  if (n < 2L) return(NA_integer_)
+  hit <- which(shows[-n] & shows[-1L])
+  if (length(hit)) hit[[1L]] else NA_integer_
+}
+
 med <- function(x) if (all(is.na(x))) NA_real_ else stats::median(x, na.rm = TRUE)
 
-read_policy <- function(path) {
-  p <- utils::read.delim(path, stringsAsFactors = FALSE, colClasses = c(calibrated_by = "character"))
-  stats::setNames(lapply(seq_len(nrow(p)), function(i) as.list(p[i, ])), p$tier)
-}
-
 # ---- what is measured where ------------------------------------------------------------------------
-# coverage.tsv says, per page, which large dataset it is measured on and which demo CRB stands in when
-# that dataset is not given. Every page is measured on exactly one dataset per run: a page that
-# does not depend on the data (About, Gene ID conversion) is not repeated on every dataset.
-read_coverage <- function(path) utils::read.delim(path, stringsAsFactors = FALSE)
+# fixtures.tsv names the large datasets and where each CRB lies below --large-examples.
+# coverage.tsv gives every page exactly one dataset: a large fixture, or a demo CRB that ships with
+# CerebroNexus (inst/extdata/examples) for the pages no large dataset has. A page is never measured twice.
+read_tsv <- function(path) utils::read.delim(path, stringsAsFactors = FALSE, comment.char = "#")
 
-# A page uses its large dataset when that was given on the command line and its demo CRB otherwise.
-# Pages with no dataset are returned in attr "uncovered".
-build_plan <- function(coverage, large_available = character(), demos_available = character()) {
-  rows <- lapply(seq_len(nrow(coverage)), function(i) {
-    cv <- coverage[i, ]
-    ds <- if (cv$fixture != "-" && cv$fixture %in% large_available) cv$fixture
-          else if (cv$fallback %in% demos_available) cv$fallback else NA_character_
-    data.frame(page = cv$page, dataset = ds, large = !is.na(ds) && ds %in% large_available, stringsAsFactors = FALSE)
-  })
-  plan <- do.call(rbind, rows)
-  out <- plan[!is.na(plan$dataset), ]
-  # large fixtures first: they take the longest and are the ones that need a warm-up
-  out <- out[order(!out$large, match(out$dataset, unique(out$dataset)), match(out$page, coverage$page)), ]
+# The CRB of every fixture below `root`. Stops when one is missing: a run always measures the whole plan.
+fixture_paths <- function(fixtures, root) {
+  if (!dir.exists(root)) stop("--large-examples: no such directory: ", root, call. = FALSE)
+  paths <- stats::setNames(file.path(root, fixtures$crb), fixtures$name)
+  missing <- paths[!file.exists(paths)]
+  if (length(missing)) stop("missing in --large-examples: ", paste(sprintf("%s (%s)", names(missing), missing), collapse = ", "), call. = FALSE)
+  vapply(paths, normalizePath, "", winslash = "/")
+}
+
+# One row per page: its dataset, whether that is a large fixture, whether its first plot from the start of
+# the page is timed (coverage.tsv column first_plot, "yes"), and its actions (comma separated, in
+# actions.tsv order). Pages whose demo CRB the revision does not ship are returned in attr "uncovered".
+build_plan <- function(coverage, actions, fixtures = character(), demos_available = character()) {
+  if (anyDuplicated(coverage$page)) stop("coverage.tsv lists a page twice: ", paste(unique(coverage$page[duplicated(coverage$page)]), collapse = ", "))
+  if (length(stray <- setdiff(actions$page, coverage$page))) stop("actions.tsv names pages that coverage.tsv does not: ", paste(stray, collapse = ", "))
+  large <- coverage$dataset %in% fixtures
+  ok <- large | coverage$dataset %in% demos_available
+  fp <- if (is.null(coverage$first_plot)) rep(FALSE, nrow(coverage)) else coverage$first_plot %in% "yes"
+  plan <- data.frame(page = coverage$page, dataset = coverage$dataset, large = large, first_plot = fp, stringsAsFactors = FALSE)
+  plan$actions <- vapply(plan$page, function(p) paste(actions$action[actions$page == p], collapse = ","), "", USE.NAMES = FALSE)
+  out <- plan[ok, , drop = FALSE]
+  # large fixtures first, in the order of fixtures.tsv: they take the longest and need the warm-up
+  out <- out[order(!out$large, match(out$dataset, unique(c(fixtures, out$dataset))), match(out$page, coverage$page)), , drop = FALSE]
   rownames(out) <- NULL
-  attr(out, "uncovered") <- plan$page[is.na(plan$dataset)]
+  attr(out, "uncovered") <- plan$page[!ok]
   out
 }
 
-# actions.tsv lists the in-page actions (changing the colour, zooming, switching the gene). An action
-# runs on the dataset of its page and enters the plan as one more row, named "<page>.<action>".
-read_actions <- function(path) utils::read.delim(path, stringsAsFactors = FALSE)
+# The sessions of a run: every round, every page once (with its actions), and for a page with first_plot two
+# sessions of their own right after it, in which Chrome navigates to a Viewer that has only just started and
+# the page is the first thing opened: once with an emptied cache directory (first_start), once with the kept
+# one (first_plot). kind is "page", "first_start" or "first_plot".
+# `plans` is one plan, or a named list of plans, one per revision measured in the same run (candidate,
+# baseline). The revisions then take turns session by session, so that both meet the same state of the
+# machine, and which one goes first changes with every page and every round.
+build_schedule <- function(plans, rounds) {
+  if (is.data.frame(plans)) plans <- list(candidate = plans)
+  pages <- unique(unlist(lapply(plans, function(p) p$page)))
+  rows <- list()
+  for (r in seq_len(rounds)) for (k in seq_along(pages)) {
+    revs <- names(plans)
+    if ((r + k) %% 2L == 1L) revs <- rev(revs)
+    for (kind in c("page", start_visits)) for (rv in revs) {
+      p <- plans[[rv]][plans[[rv]]$page == pages[[k]], , drop = FALSE]
+      if (!nrow(p) || (kind != "page" && !isTRUE(p$first_plot))) next
+      rows[[length(rows) + 1L]] <- data.frame(round = r, revision = rv, page = p$page, dataset = p$dataset,
+                                              actions = if (kind == "page") p$actions else "", kind = kind, stringsAsFactors = FALSE)
+    }
+  }
+  sched <- do.call(rbind, rows)
+  sched$position <- seq_len(nrow(sched))
+  rownames(sched) <- NULL
+  sched
+}
 
-add_actions <- function(plan, actions) {
-  rows <- actions[actions$page %in% plan$page, ]
-  if (!nrow(rows)) return(plan)
-  at <- match(rows$page, plan$page)
-  extra <- data.frame(page = rows$action, dataset = plan$dataset[at], large = plan$large[at], stringsAsFactors = FALSE)
-  out <- rbind(plan, extra)
-  out <- out[order(match(out$dataset, unique(plan$dataset))), ]
+# --pages a,b: only these pages (and their actions).
+subset_plan <- function(plan, pages) {
+  unknown <- setdiff(pages, plan$page)
+  if (length(unknown)) stop("--pages: not in the plan: ", paste(unknown, collapse = ", "), call. = FALSE)
+  out <- plan[plan$page %in% pages, , drop = FALSE]
   rownames(out) <- NULL
-  attr(out, "uncovered") <- attr(plan, "uncovered")
-  out
+  structure(out, uncovered = attr(plan, "uncovered"))
 }
 
-# Page budgets (STANDARD.md): first visit (cold, journey) 2 s (3 s for Trajectory and HLA), repeat visit
-# (repeat, revisit_after_tour) 500 ms. Data info's initial load and actions have no budget yet.
-page_budget_ms <- function(page, visit) {
-  if (visit %in% first_visits) { if (page %in% slow_pages) 3000 else 2000 }
-  else if (visit %in% c("repeat", "revisit_after_tour")) 500 else NA_real_
+# ---- the run directory ---------------------------------------------------------------------------------
+# runs/cerebronexus-<version>_<YYYYMMDD-HHMMSS>_<sha7>[_<tag>][_partial]: sorted by version, then by date.
+# `tag` tells two runs of one revision made together apart (the baseline of a noise check: "base").
+run_dir_name <- function(version, sha, time = Sys.time(), partial = FALSE, tag = "") {
+  sprintf("cerebronexus-%s_%s_%s%s%s", version, format(time, "%Y%m%d-%H%M%S"), substr(sha, 1L, 7L),
+          if (nzchar(tag)) paste0("_", tag) else "", if (partial) "_partial" else "")
 }
 
-# What a page is held against its budget: the later of the screen looking final and the server going
-# quiet, because a user who clicks on waits for both.
-budget_time_ms <- function(visual, busy) ifelse(is.na(busy), visual, pmax(visual, busy, na.rm = TRUE))
+# Version field of a package's DESCRIPTION file.
+description_version <- function(path) {
+  v <- read.dcf(path, fields = "Version")[1L, "Version"]
+  if (is.na(v)) stop("no Version in ", path)
+  unname(v)
+}
 
-# One row per label x dataset x page x visit: medians over rounds and the share of rounds that
-# finished ("ok").
-cell_table <- function(raw) {
-  key <- paste(raw$label, raw$dataset, raw$page, raw$visit, sep = "\r")
+# ---- aggregation ----------------------------------------------------------------------------------------
+# One row per page x visit: medians over the rounds that finished, the range of the KPI, and the share of
+# rounds that finished ("ok").
+page_table <- function(raw) {
+  key <- paste(raw$page, raw$visit, sep = "\r")
   rows <- lapply(split(raw, key), function(d) {
+    ok <- d$status == "ok"
+    vc <- d$visual_complete_ms[ok]
     out <- data.frame(
-      label = d$label[[1L]], dataset = d$dataset[[1L]], page = d$page[[1L]], visit = d$visit[[1L]],
-      n = nrow(d), ok_frac = mean(d$status == "ok"),
-      not_ok = paste(sort(unique(d$status[d$status != "ok"])), collapse = ","),
+      page = d$page[[1L]], visit = d$visit[[1L]], dataset = d$dataset[[1L]],
+      n = nrow(d), ok_frac = mean(ok),
+      not_ok = paste(sort(unique(d$status[!ok])), collapse = ","),
       arg = if (is.null(d$arg)) "" else paste(sort(unique(stats::na.omit(d$arg))), collapse = ","),
+      visual_min_ms = if (length(vc)) min(vc) else NA_real_, visual_max_ms = if (length(vc)) max(vc) else NA_real_,
       stringsAsFactors = FALSE
     )
-    for (m in standard_metrics) out[[m]] <- if (is.null(d[[m]])) NA_real_ else med(d[[m]])
+    for (m in standard_metrics) out[[m]] <- if (is.null(d[[m]])) NA_real_ else med(d[[m]][ok])
     out
   })
-  do.call(rbind, unname(rows))
+  out <- do.call(rbind, unname(rows))
+  out <- out[order(match(out$page, unique(raw$page)), match(out$visit, standard_visits)), , drop = FALSE]
+  rownames(out) <- NULL
+  out
 }
 
-# Run-level memory: peak of each session, median over rounds, then median over datasets.
+# Session peaks per dataset: the largest peak of any session on it, and the median server start.
 memory_table <- function(raw) {
-  s <- unique(raw[c("label", "dataset", "round", "run_peak_r_pss_mib", "run_peak_chrome_pss_mib", "server_start_s")])
-  per_ds <- do.call(rbind, lapply(split(s, paste(s$label, s$dataset)), function(d) {
-    data.frame(label = d$label[[1L]], dataset = d$dataset[[1L]], r = med(d$run_peak_r_pss_mib),
-               chrome = med(d$run_peak_chrome_pss_mib), start = med(d$server_start_s), stringsAsFactors = FALSE)
-  }))
-  do.call(rbind, lapply(split(per_ds, per_ds$label), function(d) {
-    data.frame(label = d$label[[1L]], r_peak_mib = med(d$r), chrome_peak_mib = med(d$chrome),
-               server_start_s = med(d$start), stringsAsFactors = FALSE)
-  }))
-}
-
-verdict_row <- function(metric, scope, visit, base, cand, rule, verdict, note = "") {
-  data.frame(metric = metric, scope = scope, visit = visit, baseline = base, candidate = cand,
-             delta_pct = if (is.na(base) || base == 0) NA_real_ else round((cand / base - 1) * 100, 1),
-             rule = rule, verdict = verdict, note = note, stringsAsFactors = FALSE)
-}
-
-latency_verdict <- function(base, cand, rel, floor) {
-  if (is.na(base) || is.na(cand)) return("SKIP")
-  if (cand > base * (1 + rel) + floor) "FAIL" else if (cand < base * (1 - rel) - floor) "IMPROVED" else "PASS"
-}
-
-# Compare candidate with baseline, measured in the same run. `pol` is one row of policy.tsv.
-# Returns list(verdict = PASS|FAIL|INVALID, invalid = reasons, table = rows, pages = per page).
-judge <- function(raw, pol, baseline, candidate, canary_ratio = NA_real_, plan = NULL, server = NULL) {
-  rows <- list()
-  add <- function(...) rows[[length(rows) + 1L]] <<- verdict_row(...)
-  invalid <- character()
-
-  rounds <- tapply(raw$round, raw$label, function(x) length(unique(x)))
-  if (!all(c(baseline, candidate) %in% names(rounds))) invalid <- c(invalid, "baseline or candidate has no observations")
-  else if (any(rounds[c(baseline, candidate)] < pol$rounds)) {
-    invalid <- c(invalid, sprintf("fewer than %d rounds (have %s)", pol$rounds, paste(rounds[c(baseline, candidate)], collapse = "/")))
-  }
-  cells <- cell_table(raw)
-  base_cells <- cells[cells$label == baseline, ]
-  cand_cells <- cells[cells$label == candidate, ]
-  if (length(unique(cand_cells$page)) < pol$min_pages) {
-    invalid <- c(invalid, sprintf("fewer than %d pages measured on the candidate", pol$min_pages))
-  }
-  if (!is.na(canary_ratio) && canary_ratio > pol$canary_max_ratio) {
-    invalid <- c(invalid, sprintf("machine noise: canary drifted x%.2f (limit x%.2f)", canary_ratio, pol$canary_max_ratio))
-  }
-
-  m <- merge(base_cells, cand_cells, by = c("dataset", "page", "visit"), suffixes = c(".b", ".c"))
-  # 1. Completion: a page that finished on the baseline must finish on the candidate.
-  for (i in which(m$ok_frac.b == 1 & m$ok_frac.c < 1)) {
-    add("completion", paste(m$dataset[i], m$page[i], sep = "/"), m$visit[i], 1, m$ok_frac.c[i], "ok on baseline", "FAIL",
-        sprintf("did not finish on the candidate (%s)", m$not_ok.c[i]))
-  }
-  for (i in which(m$ok_frac.b < 1)) {
-    add("completion", paste(m$dataset[i], m$page[i], sep = "/"), m$visit[i], m$ok_frac.b[i], m$ok_frac.c[i], "baseline did not finish",
-        "SKIP", "excluded: the baseline itself does not finish here")
-  }
-  ok <- m[m$ok_frac.b == 1 & m$ok_frac.c == 1, ]
-  # A planned page that the baseline measured but the candidate did not has disappeared.
-  if (!is.null(plan)) {
-    have <- function(cells) paste(cells$dataset, cells$page)
-    for (i in seq_len(nrow(plan))) {
-      key <- paste(plan$dataset[i], plan$page[i])
-      if (key %in% have(base_cells) && !key %in% have(cand_cells)) {
-        add("completion", paste(plan$dataset[i], plan$page[i], sep = "/"), "-", NA, NA, "page measured on the baseline", "FAIL", "page is missing on the candidate")
-      }
-    }
-  }
-
-  # 2. Latency per page and visit: median over datasets of the per-dataset medians.
-  pages <- NULL
-  for (v in standard_visits) {
-    for (p in unique(ok$page[ok$visit == v])) {
-      d <- ok[ok$visit == v & ok$page == p, ]
-      bb <- med(d$visual_complete_ms.b); cc <- med(d$visual_complete_ms.c)
-      rule <- sprintf("visual_complete_ms > base x %.2f + %d ms", 1 + pol$latency_rel, pol$latency_floor_ms)
-      lv <- latency_verdict(bb, cc, pol$latency_rel, pol$latency_floor_ms)
-      note <- sprintf("%d datasets", nrow(d))
-      # An action that picked a different value on the two revisions (another gene, another colour
-      # column) did not do the same work, so it is reported, not judged.
-      if (any(d$arg.b != d$arg.c)) {
-        if (lv == "FAIL") lv <- "REPORT"
-        note <- sprintf("different argument: %s vs %s", paste(d$arg.b, collapse = ","), paste(d$arg.c, collapse = ","))
-      }
-      add("visual_complete_ms", p, v, bb, cc, rule, lv, note)
-      add("visual_90_ms", p, v, med(d$visual_90_ms.b), med(d$visual_90_ms.c), "reported", "REPORT")
-      add("settled_ms", p, v, med(d$settled_ms.b), med(d$settled_ms.c), "diagnostic", "REPORT")
-      sb <- med(d$server_busy_ms.b); sc <- med(d$server_busy_ms.c)
-      add("server_busy_ms", p, v, sb, sc, "reported; counts towards the budget", "REPORT")
-      add("trail_ms", p, v, med(d$trail_ms.b), med(d$trail_ms.c), "reported", "REPORT")
-      add("ws_max_msg_bytes", p, v, med(d$ws_max_msg_bytes.b), med(d$ws_max_msg_bytes.c), "reported", "REPORT")
-      lb <- med(d$loader_visible_ms.b); lc <- med(d$loader_visible_ms.c)
-      add("loader_visible_ms", p, v, lb, lc, sprintf("loader > base + %d ms", pol$loader_floor_ms),
-          if (is.na(lb) || is.na(lc)) "SKIP" else if (lc > lb + pol$loader_floor_ms) "FAIL" else "PASS")
-      # 3. Budgets, on the later of visual completion and the server going quiet: pass on the baseline,
-      # fail on the candidate is a regression.
-      budget <- page_budget_ms(p, v)
-      tb <- budget_time_ms(bb, sb); tc <- budget_time_ms(cc, sc)
-      by <- if (!is.na(sc) && !is.na(cc) && sc > cc) "server_busy_ms" else "visual_complete_ms"
-      # Only a clear crossing counts: a page that sits right at the budget moves across it with noise.
-      if (!is.na(budget) && !is.na(tb) && !is.na(tc) && tb < budget && tc >= budget + pol$latency_floor_ms) {
-        add("budget", p, v, tb, tc, sprintf("< %d ms (+ %d ms tolerance)", budget, pol$latency_floor_ms), "FAIL",
-            sprintf("crosses the page budget (%s)", by))
-      }
-      # Where the page stands against its budget is always reported (it is the 3-second target).
-      if (!is.na(budget) && !is.na(tc) && tc >= budget) {
-        add("over_budget", p, v, tb, tc, sprintf("< %d ms", budget), "REPORT", sprintf("candidate is over the page budget (%s)", by))
-      }
-      pages <- rbind(pages, data.frame(page = p, visit = v, datasets = nrow(d), base_visual_ms = bb, cand_visual_ms = cc,
-                                       base_visual_90_ms = med(d$visual_90_ms.b), cand_visual_90_ms = med(d$visual_90_ms.c),
-                                       base_busy_ms = sb, cand_busy_ms = sc,
-                                       base_trail_ms = med(d$trail_ms.b), cand_trail_ms = med(d$trail_ms.c),
-                                       base_ws_max = med(d$ws_max_msg_bytes.b), cand_ws_max = med(d$ws_max_msg_bytes.c),
-                                       base_loader_ms = lb, cand_loader_ms = lc,
-                                       base_js_mib = med(d$js_peak_mib.b), cand_js_mib = med(d$js_peak_mib.c), stringsAsFactors = FALSE))
-    }
-  }
-
-  # 4. Memory: reported at L0/L1, gated at L2.
-  mem <- memory_table(raw)
-  mb <- mem[mem$label == baseline, ]; mc <- mem[mem$label == candidate, ]
-  if (nrow(mb) && nrow(mc)) {
-    for (k in c("r_peak_mib", "chrome_peak_mib")) {
-      verdict <- latency_verdict(mb[[k]], mc[[k]], pol$mem_rel, pol$mem_floor_mib)
-      if (verdict == "FAIL" && !isTRUE(pol$mem_gate == 1)) verdict <- "REPORT"
-      add(k, "session", "-", mb[[k]], mc[[k]], if (isTRUE(pol$mem_gate == 1)) sprintf("> base x %.2f + %d MiB", 1 + pol$mem_rel, pol$mem_floor_mib) else "reported",
-          verdict)
-    }
-  }
-  # 5. Server steps (server_steps.R): reported, with a note when the two revisions return different results.
-  srv <- if (!is.null(server) && nrow(server)) server_table(server) else NULL
-  if (!is.null(srv)) {
-    sm <- merge(srv[srv$label == baseline, ], srv[srv$label == candidate, ], by = c("dataset", "step"), suffixes = c(".b", ".c"))
-    for (i in seq_len(nrow(sm))) {
-      note <- if (sm$status.b[i] != "ok" || sm$status.c[i] != "ok") sprintf("status %s / %s", sm$status.b[i], sm$status.c[i])
-              else if (sm$hash.b[i] != sm$hash.c[i]) "results differ between the revisions" else ""
-      add("server_ms", paste(sm$dataset[i], sm$step[i], sep = "/"), "-", sm$ms.b[i], sm$ms.c[i], "reported", "REPORT", note)
-    }
-  }
-  tab <- if (length(rows)) do.call(rbind, rows) else verdict_row("none", "-", "-", NA, NA, "-", "SKIP")
-  # A loading card is a shared mechanism: a real regression shows on several pages at once, noise on one
-  # (the card appears only if the page is not ready after 180 ms, so a page near that line flips between 0 and 150 ms).
-  lf <- tab$metric == "loader_visible_ms" & tab$verdict == "FAIL"
-  if (sum(lf) < pol$loader_min_pages) {
-    tab$verdict[lf] <- "REPORT"; tab$note[lf] <- "not corroborated by another page"
-  }
-  overall <- if (length(invalid)) "INVALID" else if (any(tab$verdict == "FAIL")) "FAIL" else "PASS"
-  list(verdict = overall, invalid = invalid, table = tab, pages = pages, memory = mem, server = srv,
-       journey = journey_order(raw, candidate))
-}
-
-# The order in which a label's journey session opened the pages, per dataset (its first round): a journey
-# visit pays for what the pages before it did not load yet, so its number belongs to this order.
-journey_order <- function(raw, label) {
-  j <- raw[raw$label == label & raw$visit == "journey", ]
-  if (!nrow(j) || is.null(j$seq)) return(NULL)
-  j <- j[j$round == min(j$round), ]
-  do.call(rbind, unname(lapply(split(j, j$dataset), function(d) {
-    data.frame(dataset = d$dataset[[1L]], order = paste(d$page[order(d$seq)], collapse = " -> "), stringsAsFactors = FALSE)
+  s <- unique(raw[c("dataset", "session", "run_peak_r_mib", "run_peak_chrome_mib", "server_start_s")])
+  out <- do.call(rbind, unname(lapply(split(s, s$dataset), function(d) {
+    data.frame(dataset = d$dataset[[1L]], sessions = nrow(d), r_peak_mib = max(d$run_peak_r_mib, na.rm = TRUE),
+               chrome_peak_mib = max(d$run_peak_chrome_mib, na.rm = TRUE), server_start_s = med(d$server_start_s), stringsAsFactors = FALSE)
   })))
+  out[order(match(out$dataset, unique(raw$dataset))), , drop = FALSE]
 }
 
-# Server steps per label, dataset and step: median time over rounds, the worst status, and the result
-# hash (one value when every round returned the same result).
+# Server steps per dataset and step: median time over rounds, the worst status, and the result hash (one
+# value when every round returned the same result).
 server_table <- function(server) {
-  key <- paste(server$label, server$dataset, server$step, sep = "")
-  do.call(rbind, unname(lapply(split(server, key), function(d) {
+  key <- paste(server$dataset, server$step, sep = "\r")
+  out <- do.call(rbind, unname(lapply(split(server, key), function(d) {
     ok <- d$status == "ok"
-    data.frame(label = d$label[[1L]], dataset = d$dataset[[1L]], step = d$step[[1L]],
+    data.frame(dataset = d$dataset[[1L]], step = d$step[[1L]],
                ms = if (any(ok)) med(d$ms[ok]) else NA_real_, value = if (any(ok)) med(d$value[ok]) else NA_real_,
                status = if (all(ok)) "ok" else paste(sort(unique(d$status[!ok])), collapse = ","),
                hash = paste(sort(unique(d$hash[ok])), collapse = ","), stringsAsFactors = FALSE)
   })))
+  out <- out[order(match(out$dataset, unique(server$dataset)), match(out$step, unique(server$step))), , drop = FALSE]
+  rownames(out) <- NULL
+  out
 }
 
-# One revision only (--solo): its times per page and visit, nothing judged. The evidence checks of
-# judge() still apply (rounds, pages, machine noise), so an INVALID run is not recorded.
-# Returns list(verdict = RECORDED|INVALID, invalid, pages, memory, server).
-record_only <- function(raw, pol, label, canary_ratio = NA_real_, server = NULL) {
-  invalid <- character()
-  raw <- raw[raw$label == label, ]
-  n_rounds <- length(unique(raw$round))
-  if (n_rounds < pol$rounds) invalid <- c(invalid, sprintf("fewer than %d rounds (have %d)", pol$rounds, n_rounds))
-  cells <- if (nrow(raw)) cell_table(raw) else NULL
-  if (is.null(cells) || length(unique(cells$page)) < pol$min_pages) invalid <- c(invalid, sprintf("fewer than %d pages measured", pol$min_pages))
-  if (!is.na(canary_ratio) && canary_ratio > pol$canary_max_ratio) {
-    invalid <- c(invalid, sprintf("machine noise: canary drifted x%.2f (limit x%.2f)", canary_ratio, pol$canary_max_ratio))
-  }
-  pages <- NULL
-  if (!is.null(cells)) {
-    pages <- data.frame(page = cells$page, visit = cells$visit, dataset = cells$dataset, rounds_ok = round(cells$ok_frac * cells$n),
-                        rounds = cells$n, not_ok = cells$not_ok, visual_ms = cells$visual_complete_ms, visual_90_ms = cells$visual_90_ms,
-                        busy_ms = cells$server_busy_ms, trail_ms = cells$trail_ms, ws_max = cells$ws_max_msg_bytes,
-                        loader_ms = cells$loader_visible_ms, js_mib = cells$js_peak_mib, stringsAsFactors = FALSE)
-    pages$budget_ms <- mapply(page_budget_ms, pages$page, pages$visit)
-    pages <- pages[order(match(pages$visit, standard_visits), pages$page), ]
-    rownames(pages) <- NULL
-  }
-  srv <- if (!is.null(server) && nrow(server)) server_table(server[server$label == label, ]) else NULL
-  list(verdict = if (length(invalid)) "INVALID" else "RECORDED", invalid = invalid, table = NULL, pages = pages,
-       memory = if (nrow(raw)) memory_table(raw) else NULL, server = srv, journey = journey_order(raw, label))
-}
-
-verdict_exit_code <- function(verdict) c(PASS = 0L, RECORDED = 0L, FAIL = 1L, INVALID = 2L)[[verdict]]
-
-# Numbers that go into runs/INDEX.tsv so a trend can be drawn without opening each run.
-headline <- function(raw, label, pages = NULL) {
-  cells <- cell_table(raw[raw$label == label, ])
-  ok <- cells[cells$ok_frac == 1, ]
-  g <- function(v) med(vapply(split(ok[ok$visit == v, ], ok$page[ok$visit == v]), function(d) med(d$visual_complete_ms), numeric(1)))
-  mem <- memory_table(raw[raw$label == label, ])
-  list(initial_visual_ms = g("initial"), cold_visual_ms = g("cold"), repeat_visual_ms = g("repeat"),
-       unfinished_cells = sum(cells$ok_frac < 1), r_peak_mib = mem$r_peak_mib, chrome_peak_mib = mem$chrome_peak_mib)
-}
-
-fmt_num <- function(x) ifelse(is.na(x), "-", format(round(x), big.mark = ","))
+# ---- summary --------------------------------------------------------------------------------------------
+fmt_num <- function(x) ifelse(is.na(x), "-", format(round(x), big.mark = ",", trim = TRUE))
 fmt_mb <- function(x) ifelse(is.na(x), "-", ifelse(x < 1e5, "<0.1", sprintf("%.1f", x / 1e6)))
-
-budget_line <- "Budget: first visit (cold, journey) 2 s, 3 s for Trajectory and HLA; repeat visit (repeat, revisit_after_tour) 500 ms. A page is held against it with the later of visual_complete_ms and server_busy_ms."
-
-journey_lines <- function(j) {
-  if (is.null(j) || !nrow(j)) return(character())
-  c("## Journey order", "", "The journey visits opened the pages in this order, one session per dataset; each pays for what the pages before it did not load.", "",
-    sprintf("- %s: %s", j$dataset, j$order), "")
+md_table <- function(df) {
+  df[] <- lapply(df, as.character)
+  c(paste0("| ", paste(names(df), collapse = " | "), " |"), paste0("|", paste(rep("---", ncol(df)), collapse = "|"), "|"),
+    if (nrow(df)) apply(df, 1L, function(r) paste0("| ", paste(r, collapse = " | "), " |")))
 }
 
-write_summary <- function(path, info, result) {
-  t <- result$table
+write_summary <- function(path, info, pages, memory = NULL, server = NULL, problems = character()) {
+  status <- ifelse(pages$ok_frac == 1, "ok", sprintf("%s (%d/%d ok)", pages$not_ok, round(pages$ok_frac * pages$n), pages$n))
+  tab <- data.frame(Page = pages$page, Visit = pages$visit, Dataset = pages$dataset, Status = status,
+                    `Visual (ms)` = fmt_num(pages$visual_complete_ms),
+                    `First plot (ms)` = fmt_num(pages$first_plot_ms),
+                    `Range (ms)` = ifelse(is.na(pages$visual_min_ms), "-", paste0(fmt_num(pages$visual_min_ms), "-", fmt_num(pages$visual_max_ms))),
+                    `Server busy (ms)` = fmt_num(pages$server_busy_ms), `Trail (ms)` = fmt_num(pages$trail_ms),
+                    `Largest msg (MB)` = fmt_mb(pages$ws_max_msg_bytes), `Loader (ms)` = fmt_num(pages$loader_visible_ms),
+                    `R peak (MiB)` = fmt_num(pages$r_peak_mib), `Chrome peak (MiB)` = fmt_num(pages$chrome_peak_mib),
+                    Value = pages$arg, check.names = FALSE, stringsAsFactors = FALSE)
   lines <- c(
-    sprintf("# Viewer performance run %s", info$run_id), "",
-    sprintf("**Verdict: %s** (tier %s, contract %s)", result$verdict, info$tier, standard_contract), "",
-    sprintf("- candidate `%s` (%s), baseline `%s` (%s)", info$candidate_ref, info$candidate_sha, info$baseline_ref, info$baseline_sha),
-    sprintf("- %s rounds, datasets: %s", info$rounds, info$datasets),
-    sprintf("- host %s, %s, R %s, %s", info$host, info$os, info$r_version, info$chrome), ""
+    sprintf("# Viewer performance: CerebroNexus %s", info$version), "",
+    sprintf("- Run: `%s`", info$run_id),
+    sprintf("- Revision: %s (`%s`)", info$ref, info$sha),
+    sprintf("- Rounds: %d; sessions: %d, failed twice: %d", info$rounds, info$sessions, info$failed),
+    sprintf("- Datasets: %s", info$datasets),
+    sprintf("- Machine: %s; %s; %s", info$host, info$os, info$cpu),
+    sprintf("- %s; %s, drawn by %s", info$r_version, info$chrome, info$renderer),
+    if (!is.null(info$pair)) sprintf("- Measured together with `%s` (%s), session by session in turn", info$pair, info$pair_role) else character(),
+    if (!is.null(info$host_load)) sprintf("- Host before the sessions: %s", info$host_load) else character(), "",
+    if (length(problems)) c("## Problems", "", paste0("- ", problems), "") else character(),
+    if (length(info$uncovered)) c(sprintf("Not measured (this revision ships no dataset for them): %s", paste(info$uncovered, collapse = ", ")), "") else character(),
+    "## Pages and actions", "",
+    "Medians over the rounds that finished. Visual = click to the last frame that changes (the KPI); range = fastest and slowest round.",
+    "On the `first_start` and `first_plot` rows both times run from Chrome's navigation to the Viewer instead of from a click: First plot = to the first frame that shows the projection, Visual = to the last frame that changes. `first_start`: the server's cache directory was emptied before the session; `first_plot`: it held what earlier sessions left.", "",
+    md_table(tab), ""
   )
-  if (length(result$invalid)) lines <- c(lines, "## Invalid evidence", "", paste0("- ", result$invalid), "")
-  if (!is.null(info$plan)) {
-    lines <- c(lines, "## Coverage", "", "Every page is measured on one dataset (coverage.tsv): cold in a session of its own, and in the journey.", "",
-               "| page | dataset |", "|---|---|", sprintf("| %s | %s |", info$plan$page, info$plan$dataset), "")
-    if (length(info$uncovered)) lines <- c(lines, sprintf("Not measured, no dataset available: %s", paste(info$uncovered, collapse = ", ")), "")
+  if (!is.null(memory) && nrow(memory)) {
+    lines <- c(lines, "## Memory per dataset", "", "Largest peak of any session on the dataset (R server tree, Chrome tree) and the median server start.", "",
+               md_table(data.frame(Dataset = memory$dataset, Sessions = memory$sessions, `R peak (MiB)` = fmt_num(memory$r_peak_mib),
+                                   `Chrome peak (MiB)` = fmt_num(memory$chrome_peak_mib), `Server start (s)` = sprintf("%.1f", memory$server_start_s),
+                                   check.names = FALSE)), "")
   }
-  over <- t[t$metric == "over_budget", ]
-  fails <- t[t$verdict == "FAIL", ]
-  if (nrow(fails)) {
-    lines <- c(lines, "## Failures", "", "| metric | scope | visit | baseline | candidate | change | rule |", "|---|---|---|---:|---:|---:|---|",
-               sprintf("| %s | %s | %s | %s | %s | %s%% | %s |", fails$metric, fails$scope, fails$visit, fmt_num(fails$baseline), fmt_num(fails$candidate),
-                       ifelse(is.na(fails$delta_pct), "-", sprintf("%+.0f", fails$delta_pct)), fails$rule), "")
-  }
-  if (nrow(over)) {
-    lines <- c(lines, "## Pages over their budget", "", budget_line, "",
-               "| page | visit | baseline | candidate | held by |", "|---|---|---:|---:|---|",
-               sprintf("| %s | %s | %s | %s | %s |", over$scope, over$visit, fmt_num(over$baseline), fmt_num(over$candidate),
-                       sub("^.*\\((.*)\\)$", "\\1", over$note)), "")
-  }
-  lines <- c(lines, journey_lines(result$journey))
-  p <- result$pages
-  if (!is.null(p)) {
-    p <- p[order(match(p$visit, standard_visits), p$page), ]
-    lines <- c(lines, "## Pages and actions (ms, median over rounds)", "",
-               "visual: the screen looks final. busy: the R server is quiet again. trail: R or Chrome kept working after the page was finished. ws max: the largest single websocket message (MB).", "",
-               "| page | visit | visual base | visual cand | change | busy base | busy cand | trail base | trail cand | ws max base | ws max cand | loader base | loader cand | JS heap base MiB | JS heap cand MiB |",
-               "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
-               sprintf("| %s | %s | %s | %s | %+.0f%% | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s |", p$page, p$visit,
-                       fmt_num(p$base_visual_ms), fmt_num(p$cand_visual_ms), (p$cand_visual_ms / p$base_visual_ms - 1) * 100,
-                       fmt_num(p$base_busy_ms), fmt_num(p$cand_busy_ms), fmt_num(p$base_trail_ms), fmt_num(p$cand_trail_ms),
-                       fmt_mb(p$base_ws_max), fmt_mb(p$cand_ws_max), fmt_num(p$base_loader_ms), fmt_num(p$cand_loader_ms),
-                       fmt_num(p$base_js_mib), fmt_num(p$cand_js_mib)), "")
-  }
-  srv <- t[t$metric == "server_ms", ]
-  if (nrow(srv)) {
-    lines <- c(lines, "## Server steps (ms, median over rounds; reported, not judged)", "",
-               "| dataset/step | baseline | candidate | change | note |", "|---|---:|---:|---:|---|",
-               sprintf("| %s | %s | %s | %s | %s |", srv$scope, fmt_num(srv$baseline), fmt_num(srv$candidate),
-                       ifelse(is.na(srv$delta_pct), "-", sprintf("%+.0f%%", srv$delta_pct)), srv$note), "")
-  }
-  m <- result$memory
-  if (!is.null(m) && nrow(m)) {
-    lines <- c(lines, "## Memory (session peak, PSS, median over datasets)", "", "| label | R tree MiB | Chrome tree MiB | R start s |", "|---|---:|---:|---:|",
-               sprintf("| %s | %s | %s | %.1f |", m$label, fmt_num(m$r_peak_mib), fmt_num(m$chrome_peak_mib), m$server_start_s), "")
+  if (!is.null(server) && nrow(server)) {
+    lines <- c(lines, "## Server steps", "", "The R work behind the pages, without a browser (one fresh R process per dataset and round).", "",
+               md_table(data.frame(Dataset = server$dataset, Step = server$step, `Time (ms)` = fmt_num(server$ms), Status = server$status, check.names = FALSE)), "")
   }
   writeLines(lines, path)
 }
 
-# Summary of a --solo run: the revision's own times, no comparison.
-write_solo_summary <- function(path, info, result) {
-  lines <- c(
-    sprintf("# Viewer performance run %s", info$run_id), "",
-    sprintf("**%s** (tier %s, contract %s, one revision only: times are recorded, nothing is judged)", result$verdict, info$tier, standard_contract), "",
-    sprintf("- revision `%s` (%s)", info$candidate_ref, info$candidate_sha),
-    sprintf("- %s rounds, datasets: %s", info$rounds, info$datasets),
-    sprintf("- host %s, %s, R %s, %s", info$host, info$os, info$r_version, info$chrome), ""
+# ---- comparing two runs (compare.R) -----------------------------------------------------------------------
+# Manifest facts that should agree for two runs to compare like for like. A difference is reported, not
+# refused: comparing across machines can still be useful when it is labelled.
+comparable_keys <- c("contract", "platform", "host", "cpu", "memory_measure", "plan_md5", "fixtures_md5")
+
+# A run folder as given, or else the folder of that name under `runs_root` (topics/viewer_performance/runs).
+resolve_run <- function(dir, runs_root) {
+  if (dir.exists(dir) || is.null(runs_root)) return(dir)
+  inside <- file.path(runs_root, basename(dir))
+  if (dir.exists(inside)) inside else dir
+}
+
+# A run directory as compare_runs() needs it: its id, manifest (named character), pages.tsv and, when it is
+# there, raw.tsv (one row per observation: what the test of compare_runs() is made on).
+read_run <- function(dir, runs_root = NULL) {
+  dir <- resolve_run(dir, runs_root)
+  if (!file.exists(file.path(dir, "pages.tsv"))) stop("not a run directory (no pages.tsv): ", dir, call. = FALSE)
+  m <- utils::read.delim(file.path(dir, "manifest.tsv"), stringsAsFactors = FALSE, colClasses = "character")
+  raw <- file.path(dir, "raw.tsv")
+  list(id = basename(normalizePath(dir)), manifest = stats::setNames(m$value, m$key),
+       pages = utils::read.delim(file.path(dir, "pages.tsv"), stringsAsFactors = FALSE, colClasses = c(arg = "character")),
+       raw = if (file.exists(raw)) utils::read.delim(raw, stringsAsFactors = FALSE, colClasses = c(arg = "character")) else NULL)
+}
+
+# Exact two-sided p-value of the rank-sum (Mann-Whitney) test of two small samples: the share of all ways to
+# deal the observed values into two groups of these sizes whose rank sum lies at least as far from its
+# expectation as the observed one. Equal values share their rank, so ties are exact too. Above `max_perm`
+# ways the normal approximation is used. NA when a sample is empty.
+rank_sum_p <- function(x, y, max_perm = 50000) {
+  x <- x[!is.na(x)]; y <- y[!is.na(y)]
+  nx <- length(x); n <- nx + length(y)
+  if (!nx || n == nx) return(NA_real_)
+  if (choose(n, nx) > max_perm) return(suppressWarnings(stats::wilcox.test(x, y, exact = FALSE)$p.value))
+  r <- rank(c(x, y)); centre <- nx * (n + 1) / 2
+  w <- utils::combn(n, nx, function(i) sum(r[i]))
+  mean(abs(w - centre) >= abs(sum(r[seq_len(nx)]) - centre) - 1e-9)
+}
+
+# The smallest p-value rank_sum_p() can return for samples of these sizes (no ties): the two samples do not
+# overlap. 3 and 3 rounds give 0.10, 4 and 4 give 0.029, 5 and 5 give 0.008.
+rank_sum_min_p <- function(nx, ny) if (!nx || !ny) NA_real_ else 2 / choose(nx + ny, nx)
+
+# Metrics that are read off frames: a difference below the time between two frames cannot be seen.
+frame_metrics <- c("visual_complete_ms", "visual_90_ms", "first_plot_ms")
+
+# Compare two runs row by row (page x visit) on `metric`, from the observations of the rounds that finished.
+#   slower / faster   the exact rank-sum test over the rounds gives p <= alpha, and the medians differ by more
+#                     than the resolution (frame metrics: the median time between two frames of that row, in
+#                     either run; 100 ms when it was not recorded; other metrics: no floor)
+#   not resolved      neither: the rounds overlap, or the difference is below one frame
+#   too few rounds    with these numbers of rounds no outcome could give p <= alpha (3 against 3 cannot)
+# and, as before, pages that stopped finishing, finish now, or are in one run only. Runs made together
+# (same pair_id in their manifests) also get the range of B - A within each round.
+compare_runs <- function(a, b, metric = "visual_complete_ms", alpha = compare_alpha) {
+  key <- function(p) paste(p$page, p$visit, sep = "\r")
+  ka <- key(a$pages); kb <- key(b$pages)
+  all_keys <- c(ka, setdiff(kb, ka))
+  pick <- function(p, col) if (is.null(p[[col]])) rep(NA, length(all_keys)) else p[[col]][match(all_keys, key(p))]
+  oka <- pick(a$pages, "ok_frac"); okb <- pick(b$pages, "ok_frac")
+  arga <- pick(a$pages, "arg"); argb <- pick(b$pages, "arg")
+  arga[is.na(arga)] <- ""; argb[is.na(argb)] <- ""
+  # the observations of one row: value and round of the rounds that finished, and the time between frames
+  obs <- function(run, k) {
+    r <- run$raw
+    if (is.null(r) || is.null(r[[metric]])) return(list(x = numeric(), round = integer(), frame = NA_real_))
+    d <- r[key(r) == k & r$status == "ok" & !is.na(r[[metric]]), , drop = FALSE]
+    list(x = d[[metric]], round = d$round, frame = if (is.null(d$frame_ms)) NA_real_ else med(d$frame_ms))
+  }
+  pair_id <- function(r) if ("pair_id" %in% names(r$manifest) && !is.na(r$manifest[["pair_id"]])) r$manifest[["pair_id"]] else ""
+  paired <- nzchar(pair_id(a)) && identical(pair_id(a), pair_id(b))
+  rows <- lapply(all_keys, function(k) {
+    oa <- obs(a, k); ob <- obs(b, k)
+    ma <- med(oa$x); mb <- med(ob$x)
+    res <- if (metric %in% frame_metrics) { f <- suppressWarnings(max(oa$frame, ob$frame, na.rm = TRUE)); if (is.finite(f)) f else 100 } else 0
+    p <- rank_sum_p(oa$x, ob$x); min_p <- rank_sum_min_p(length(oa$x), length(ob$x))
+    change <- if (is.na(p)) "-" else if (min_p > alpha) "too few rounds"
+              else if (p <= alpha && abs(mb - ma) > res) (if (mb > ma) "slower" else "faster") else "not resolved"
+    both <- intersect(oa$round, ob$round)
+    rd <- if (paired && length(both)) vapply(both, function(r) ob$x[match(r, ob$round)] - oa$x[match(r, oa$round)], 0) else numeric()
+    data.frame(a = ma, b = mb, n_a = length(oa$x), n_b = length(ob$x), p = p, resolution = res, change = change,
+               round_delta_min = if (length(rd)) min(rd) else NA_real_, round_delta_max = if (length(rd)) max(rd) else NA_real_,
+               stringsAsFactors = FALSE)
+  })
+  st <- do.call(rbind, rows)
+  change <- st$change
+  change[!is.na(oka) & !is.na(okb) & oka == 1 & okb < 1] <- "stopped finishing"
+  change[!is.na(oka) & !is.na(okb) & oka < 1 & okb == 1] <- "finishes now"
+  change[is.na(oka)] <- "only in B"; change[is.na(okb)] <- "only in A"
+  ds <- pick(a$pages, "dataset"); ds[is.na(ds)] <- pick(b$pages, "dataset")[is.na(ds)]
+  out <- data.frame(
+    page = sub("\r.*", "", all_keys), visit = sub(".*\r", "", all_keys), dataset = ds,
+    a = st$a, b = st$b, delta = st$b - st$a,
+    delta_pct = ifelse(is.na(st$a) | is.na(st$b) | st$a == 0, NA_real_, round((st$b / st$a - 1) * 100, 1)),
+    n_a = st$n_a, n_b = st$n_b, p = st$p, resolution = st$resolution,
+    round_delta_min = st$round_delta_min, round_delta_max = st$round_delta_max,
+    a_server_busy_ms = pick(a$pages, "server_busy_ms"), b_server_busy_ms = pick(b$pages, "server_busy_ms"),
+    a_r_peak_mib = pick(a$pages, "r_peak_mib"), b_r_peak_mib = pick(b$pages, "r_peak_mib"),
+    change = change,
+    note = ifelse(!is.na(oka) & !is.na(okb) & arga != argb, sprintf("different value: %s vs %s", arga, argb), ""),
+    stringsAsFactors = FALSE
   )
-  if (length(result$invalid)) lines <- c(lines, "## Invalid evidence", "", paste0("- ", result$invalid), "")
-  if (length(info$uncovered)) lines <- c(lines, sprintf("Not measured, no dataset available: %s", paste(info$uncovered, collapse = ", ")), "")
-  lines <- c(lines, journey_lines(result$journey))
-  p <- result$pages
-  if (!is.null(p) && nrow(p)) {
-    held <- budget_time_ms(p$visual_ms, p$busy_ms)
-    over <- !is.na(p$budget_ms) & !is.na(held) & held >= p$budget_ms
-    lines <- c(lines, "## Pages and actions (median over rounds, ms)", "",
-               paste(budget_line, "Over budget is marked **over**."), "",
-               "visual: the screen looks final. busy: the R server is quiet again. trail: R or Chrome kept working after the page was finished. ws max: the largest single websocket message (MB).", "",
-               "| page | visit | dataset | finished | visual | visual_90 | busy | trail | ws max MB | loader | JS heap MiB | budget |",
-               "|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|",
-               sprintf("| %s | %s | %s | %d/%d%s | %s | %s | %s | %s | %s | %s | %s | %s |", p$page, p$visit, p$dataset, p$rounds_ok, p$rounds,
-                       ifelse(nzchar(p$not_ok), paste0(" (", p$not_ok, ")"), ""), fmt_num(p$visual_ms), fmt_num(p$visual_90_ms),
-                       fmt_num(p$busy_ms), fmt_num(p$trail_ms), fmt_mb(p$ws_max),
-                       fmt_num(p$loader_ms), fmt_num(p$js_mib), ifelse(is.na(p$budget_ms), "-", ifelse(over, "**over**", "ok"))), "")
-  }
-  s <- result$server
-  if (!is.null(s) && nrow(s)) {
-    lines <- c(lines, "## Server steps (ms, median over rounds)", "", "| dataset/step | ms | status |", "|---|---:|---|",
-               sprintf("| %s/%s | %s | %s |", s$dataset, s$step, fmt_num(s$ms), s$status), "")
-  }
-  m <- result$memory
-  if (!is.null(m) && nrow(m)) {
-    lines <- c(lines, "## Memory (session peak, PSS, median over datasets)", "", "| R tree MiB | Chrome tree MiB | R start s |", "|---:|---:|---:|",
-               sprintf("| %s | %s | %.1f |", fmt_num(m$r_peak_mib), fmt_num(m$chrome_peak_mib), m$server_start_s), "")
-  }
-  writeLines(lines, path)
+  fact <- function(m) vapply(comparable_keys, function(k) if (k %in% names(m)) m[[k]] else NA_character_, "")
+  facts <- data.frame(key = comparable_keys, A = fact(a$manifest), B = fact(b$manifest), stringsAsFactors = FALSE, row.names = NULL)
+  sha <- function(r) if ("sha" %in% names(r$manifest)) r$manifest[["sha"]] else NA_character_
+  list(table = out, differ = facts$key[!mapply(identical, facts$A, facts$B)], facts = facts, metric = metric, alpha = alpha,
+       paired = paired, same_revision = !is.na(sha(a)) && identical(sha(a), sha(b)))
 }
 
-index_columns <- c("run_id", "utc", "tier", "platform", "candidate_ref", "candidate_sha", "baseline_ref", "baseline_sha", "verdict",
-                   "rounds", "datasets", "cand_initial_visual_ms", "cand_cold_visual_ms", "cand_repeat_visual_ms",
-                   "base_initial_visual_ms", "base_cold_visual_ms", "base_repeat_visual_ms", "cand_r_peak_mib", "cand_chrome_peak_mib",
-                   "unfinished_cells_cand", "path")
-
-append_index <- function(index_path, row) {
-  stopifnot(setequal(names(row), index_columns))
-  row <- row[index_columns]
-  new <- !file.exists(index_path)
-  utils::write.table(as.data.frame(row, stringsAsFactors = FALSE), index_path, sep = "\t", quote = FALSE, row.names = FALSE,
-                     col.names = new, append = !new)
+compare_lines <- function(cmp, a, b) {
+  t <- cmp$table
+  unit <- if (grepl("_ms$", cmp$metric)) "ms" else if (grepl("_mib$", cmp$metric)) "MiB" else if (grepl("_bytes$", cmp$metric)) "bytes" else ""
+  u <- function(s) if (nzchar(unit)) sprintf("%s (%s)", s, unit) else s
+  tab <- data.frame(Page = t$page, Visit = t$visit, Dataset = t$dataset, A = fmt_num(t$a), B = fmt_num(t$b), Delta = fmt_num(t$delta),
+                    `Delta (%)` = ifelse(is.na(t$delta_pct), "-", sprintf("%+.1f", t$delta_pct)),
+                    `Rounds A / B` = paste0(t$n_a, " / ", t$n_b), p = ifelse(is.na(t$p), "-", sprintf("%.3f", t$p)),
+                    check.names = FALSE, stringsAsFactors = FALSE)
+  names(tab)[names(tab) %in% c("A", "B", "Delta")] <- c(u("A"), u("B"), u("Delta"))
+  if (cmp$paired) tab[[u("B - A per round")]] <- ifelse(is.na(t$round_delta_min), "-", paste0(fmt_num(t$round_delta_min), " to ", fmt_num(t$round_delta_max)))
+  tab[["Busy A / B (ms)"]] <- paste0(fmt_num(t$a_server_busy_ms), " / ", fmt_num(t$b_server_busy_ms))
+  tab[["R peak A / B (MiB)"]] <- paste0(fmt_num(t$a_r_peak_mib), " / ", fmt_num(t$b_r_peak_mib))
+  tab$Change <- t$change; tab$Note <- t$note
+  version <- function(r) if ("version" %in% names(r$manifest)) r$manifest[["version"]] else "?"
+  tested <- t$change %in% c("slower", "faster", "not resolved")
+  flagged <- t$change %in% c("slower", "faster")
+  few <- sum(t$change == "too few rounds")
+  c(sprintf("# Viewer performance: CerebroNexus %s (A) vs %s (B)", version(a), version(b)), "",
+    sprintf("- A: `%s`", a$id), sprintf("- B: `%s`", b$id), sprintf("- Metric: `%s`, median over the rounds that finished", cmp$metric), "",
+    if (cmp$same_revision) c("**Noise check:** both runs measured the same revision, so every difference below is noise of the measurement. No row should be marked slower or faster.", "") else character(),
+    if (length(cmp$differ)) c(sprintf("**Not like for like:** the runs differ in %s, so part of any difference comes from the setup, not the code.", paste(cmp$differ, collapse = ", ")), "",
+                              md_table(cmp$facts[cmp$facts$key %in% cmp$differ, , drop = FALSE]), "")
+    else c("Both runs have the same contract, platform, host, CPU, plan and large datasets.", ""),
+    if (cmp$paired) c("The two runs were made together, their sessions taking turns, so both met the same state of the machine.", "")
+    else c("The two runs were not made together: a machine that was busier during one of them shows as a difference. Measure both in one run (`run.R --baseline`) to rule that out.", ""),
+    sprintf("Change: `slower` or `faster` when the exact two-sided rank-sum test over the rounds gives p <= %s and the medians differ by more than one frame; `not resolved` otherwise; `too few rounds` when the numbers of rounds cannot give such a p at all (3 against 3 cannot, 4 against 4 can).",
+            format(cmp$alpha)), "",
+    md_table(tab), "",
+    sprintf("Slower: %d; faster: %d; stopped finishing: %d; not resolved: %d; too few rounds: %d.", sum(t$change == "slower"), sum(t$change == "faster"),
+            sum(t$change == "stopped finishing"), sum(t$change == "not resolved"), few),
+    if (any(tested)) sprintf("%d rows were tested, each at %s: up to %.1f of them would be marked by chance alone if nothing had changed.",
+                             sum(tested), format(cmp$alpha), sum(tested) * cmp$alpha) else character(),
+    if (cmp$same_revision && any(!is.na(t$delta))) sprintf("Noise: the medians of the two runs differ by %s %s in the median row, by %s at the 90th percentile and by %s at most; %d of %d tested rows marked.",
+                                    fmt_num(stats::median(abs(t$delta), na.rm = TRUE)), unit, fmt_num(stats::quantile(abs(t$delta), 0.9, na.rm = TRUE, names = FALSE)),
+                                    fmt_num(max(abs(t$delta), na.rm = TRUE)), sum(flagged), sum(tested)) else character())
 }
 
-# SHA of the candidate of the newest recorded run of a tier (for --track and --baseline auto).
-last_recorded_sha <- function(index_path, tier) {
-  if (!file.exists(index_path)) return(NA_character_)
-  idx <- utils::read.delim(index_path, stringsAsFactors = FALSE, colClasses = "character")
-  idx <- idx[idx$tier == tier & idx$verdict != "INVALID", ]
-  if (!nrow(idx)) NA_character_ else idx$candidate_sha[[nrow(idx)]]
+# ---- plotting several runs (plot.R) ------------------------------------------------------------------------
+# Legend labels: the CerebroNexus version; when two runs share a version, the date is added, and when they
+# also share the date, the start time.
+run_labels <- function(version, started) {
+  t <- as.POSIXct(substr(started, 1L, 19L), format = "%Y-%m-%dT%H:%M:%S", tz = "UTC")
+  day <- format(t, "%Y-%m-%d"); hm <- format(t, "%Y-%m-%d %H:%M")
+  lab <- version
+  dup <- version %in% version[duplicated(version)]
+  lab[dup] <- sprintf("%s (%s)", version[dup], day[dup])
+  dup2 <- lab %in% lab[duplicated(lab)]
+  lab[dup2] <- sprintf("%s (%s)", version[dup2], hm[dup2])
+  lab
+}
+
+# Runs by version, then by when they were made, whatever order the folders were given in.
+order_runs <- function(runs) {
+  v <- vapply(runs, function(r) r$manifest[["version"]] %||% "0", "")
+  v <- tryCatch(numeric_version(v), error = function(e) NULL)
+  started <- vapply(runs, function(r) r$manifest[["started"]] %||% "", "")
+  runs[if (is.null(v)) order(started) else order(v, started)]
+}
+
+# Font for figures: Arial or Helvetica as Genome Biology asks (Windows ships Arial). Without systemfonts the
+# name is used as is. No silent substitution: `substitute = TRUE` allows the closest sans font for a draft.
+figure_font <- function(substitute = FALSE) {
+  wanted <- c("Arial", "Helvetica", if (substitute) c("Liberation Sans", "Nimbus Sans", "DejaVu Sans"))
+  if (!requireNamespace("systemfonts", quietly = TRUE)) return("Arial")
+  have <- unique(systemfonts::system_fonts()$family)
+  hit <- wanted[wanted %in% have]
+  if (!length(hit)) stop("Arial or Helvetica is not installed; use --allow-font-substitute for a draft", call. = FALSE)
+  hit[[1L]]
+}
+
+# Rows split into columns: consecutive pages with their actions, never a page apart from its actions, in
+# about equal halves. Returns the column of each row.
+split_rows <- function(is_page, ncol) {
+  if (ncol <= 1L) return(rep(1L, length(is_page)))
+  block <- cumsum(is_page)
+  sizes <- tabulate(block)
+  cut_at <- findInterval(cumsum(sizes) - sizes / 2, seq(0, length(is_page), length.out = ncol + 1L)[-c(1L, ncol + 1L)]) + 1L
+  cut_at[block]
+}
+
+# Readable names for the figure: the sidebar name of each page, a short verb for each action and the dataset
+# a page was measured on. An id without an entry is shown as it is.
+PAGE_NAMES <- c(loadData = "Load data", overview = "Projection", coordinated_views = "Linked views", groups = "Groups",
+                geneExpression = "Gene expression", trajectory = "Trajectory", color_management = "Colour management",
+                geneIdConversion = "Gene ID conversion", about = "About", immune_repertoire = "Immune repertoire",
+                hla_tcr_motifs = "HLA & TCR motifs", extra_material = "Extra material", spatial = "Spatial",
+                markerGenes = "Marker genes", mostExpressedGenes = "Most expressed genes", enrichedPathways = "Enriched pathways",
+                trekker = "Trekker")
+ACTION_NAMES <- c(switch = "Switch dataset", switch_back = "Switch back", colour_by = "Change colouring", zoom = "Zoom",
+                  lasso = "Lasso select", group = "Change grouping", plot_type = "Change plot type", percent = "Show as percent",
+                  gene = "Show 1 gene", genes12 = "Show 12 genes", tab = "Switch tab", content = "Switch content",
+                  section = "Switch section", table = "Switch table")
+DATASET_NAMES <- c(`1m` = "mouse brain, 1.3 M", ren = "COVID-19, 1.46 M", cosmx = "CosMx NSCLC, 800 k",
+                   example = "example", demo_trekker = "Trekker demo")
+display_name <- function(id, table) ifelse(id %in% names(table), table[id], id)
+row_names <- function(page, is_page, visit = rep("cold", length(page))) {
+  ifelse(visit == "first_start", "From page load, nothing kept", ifelse(visit == "first_plot", "From page load",
+         ifelse(is_page, display_name(page, PAGE_NAMES), display_name(sub("^[^.]*[.]", "", page), ACTION_NAMES))))
+}
+
+# One dot per run and page or action (the median of `metric`), with a line over the fastest and slowest
+# round for the KPI. Runs are ordered by version, then date. Rows are every page and action with a value in
+# any run, in plan order, on a log time axis (actions take milliseconds, the largest pages seconds). Pages are
+# bold with their dataset in grey where it changes, actions are indented under them. `threshold` draws dashed vertical lines
+# (ms; default 1 s, NULL for none) for a response-time limit.
+# Genome Biology artwork rules, as in topics/expression_backends: 170 mm wide, at most 225 mm tall (two
+# columns when one would be taller), vector PDF with Arial, 7 pt text, lines >= 0.25 pt, Okabe-Ito colours,
+# legend in the figure, no title. Writes <stem>.pdf and <stem>.png; `out` may end in .pdf or .png.
+plot_runs <- function(runs, out, metric = "visual_complete_ms", family = figure_font(), threshold = 1000) {
+  if (!any(vapply(runs, function(r) metric %in% names(r$pages), TRUE))) stop("no values of ", metric, " in these runs", call. = FALSE)
+  runs <- order_runs(runs)
+  labs <- run_labels(vapply(runs, function(r) r$manifest[["version"]] %||% "?", ""), vapply(runs, function(r) r$manifest[["started"]] %||% "", ""))
+  key <- function(p) paste(p$page, p$visit, sep = "\r")
+  keys <- unique(unlist(lapply(runs, function(r) key(r$pages))))
+  col_of <- function(col) matrix(sapply(runs, function(r) {
+    m <- match(keys, key(r$pages)); v <- if (is.null(r$pages[[col]])) rep(NA_real_, length(keys)) else r$pages[[col]][m]
+    ifelse(!is.na(r$pages$ok_frac[m]) & r$pages$ok_frac[m] > 0, v, NA_real_)
+  }), nrow = length(keys))
+  val <- col_of(metric)
+  ranged <- identical(metric, "visual_complete_ms")
+  lo <- if (ranged) col_of("visual_min_ms") else val; hi <- if (ranged) col_of("visual_max_ms") else val
+  page_of <- sub("\r.*", "", keys); visit_of <- sub(".*\r", "", keys); is_page <- !visit_of %in% c("action", start_visits)
+  keep <- is_page | rowSums(!is.na(val)) > 0   # an action no run could do (e.g. one table only) has no row
+  val <- val[keep, , drop = FALSE]; lo <- lo[keep, , drop = FALSE]; hi <- hi[keep, , drop = FALSE]
+  keys <- keys[keep]; page_of <- page_of[keep]; is_page <- is_page[keep]; visit_of <- visit_of[keep]
+  row_lab <- row_names(page_of, is_page, visit_of)
+  dataset_of <- function(r) r$pages$dataset[match(keys, key(r$pages))]
+  ds <- Reduce(function(a, b) ifelse(is.na(a), b, a), lapply(runs, dataset_of))
+  ds_lab <- ifelse(is_page & !is.na(ds), display_name(ds, DATASET_NAMES), "")
+  pos <- c(val, lo, hi); pos <- pos[!is.na(pos) & pos > 0]
+  if (!length(pos)) stop("no values of ", metric, " in these runs", call. = FALSE)
+  xlim <- range(pos) * c(0.8, 1.25)
+  threshold <- threshold[!is.na(threshold) & threshold > 0]
+  if (!ranged) threshold <- NULL   # a time limit means nothing on another metric
+  n <- length(keys); k <- length(runs)
+  pal <- rep(c("#0072B2", "#E69F00", "#009E73", "#CC79A7", "#56B4E9", "#D55E00", "#F0E442", "#000000"), length.out = k)
+  grey <- "#595959"
+  # Sizes in points: 482 pt = 170 mm wide, at most 637.8 pt = 225 mm tall.
+  width_pt <- 482; max_pt <- 637.8
+  row_pt <- max(9, 2 + 2.4 * k)
+  n_leg <- k + length(threshold)
+  leg_cols <- min(n_leg, 4L); top_pt <- 19 + 11 * ceiling(n_leg / leg_cols)
+  chrome_pt <- top_pt + 34   # legend on top (four entries per line), axis and its title below
+  ncol <- if (n * row_pt + chrome_pt <= max_pt) 1L else 2L
+  col <- split_rows(is_page, ncol)
+  rows_per_col <- max(tabulate(col, ncol))
+  if (rows_per_col * row_pt + chrome_pt > max_pt) row_pt <- (max_pt - chrome_pt) / rows_per_col
+  height_pt <- rows_per_col * row_pt + chrome_pt
+  stem <- sub("[.](pdf|png)$", "", out, ignore.case = TRUE)
+  fmt_ms <- function(t) ifelse(t >= 1000, paste0(t / 1000, " s"), paste0(t, " ms"))
+  draw <- function() {
+    graphics::par(family = family, ps = 7, cex = 1, mgp = c(1.4, 0.3, 0), tcl = -0.2, lwd = 0.5,
+                  omi = c(0, 0, top_pt / 72, 0), mfrow = c(1L, ncol), xpd = FALSE)
+    off <- if (k > 1L) seq(0.3, -0.3, length.out = k) else 0
+    ticks <- c(1, 3, 10, 30, 100, 300, 1000, 3000, 10000, 30000, 1e5)
+    ticks <- ticks[ticks >= xlim[[1L]] & ticks <= xlim[[2L]]]
+    sw <- function(s, font = 1) graphics::strwidth(s, units = "inches", font = font, family = family)
+    indent_in <- 0.1; gap_in <- 0.08
+    name_in <- max(sw(row_lab[is_page], 2), indent_in + sw(row_lab[!is_page]), 0.3)
+    ds_in <- max(sw(ds_lab), 0)
+    label_in <- name_in + (if (ds_in > 0) gap_in + ds_in else 0) + 0.1
+    for (cc in seq_len(ncol)) {
+      rows <- which(col == cc); m <- length(rows)
+      graphics::par(mai = c(34 / 72, label_in, 0.02, 0.05))
+      y <- rev(seq_len(m)) + (rows_per_col - m)
+      graphics::plot(NA, xlim = xlim, ylim = c(0.5, rows_per_col + 0.5), log = "x", yaxs = "i", axes = FALSE, xlab = "", ylab = "")
+      graphics::abline(v = ticks, col = "#E6E6E6", lwd = 0.5)
+      graphics::abline(h = y[is_page[rows]] + 0.5, col = "#D0D0D0", lwd = 0.5, lty = 3)
+      if (length(threshold)) graphics::abline(v = threshold, col = grey, lwd = 0.8, lty = "22")
+      graphics::axis(1, at = ticks, labels = fmt_ms(ticks), lwd = 0.5, lwd.ticks = 0.5)
+      graphics::mtext(if (ranged) "Click (or page load) to final frame (log scale)" else paste(metric, "(log scale)"), side = 1, line = 1.3, cex = 1)
+      # labels left-aligned in the margin: page name bold, its actions indented; dataset in grey before the axis
+      left_in <- graphics::grconvertX(10^graphics::par("usr")[[1L]], "user", "inches") - label_in + 0.02
+      at_in <- function(dx) graphics::grconvertX(left_in + dx, "inches", "user")
+      x0 <- at_in(0); x_act <- at_in(indent_in); x_ds <- at_in(name_in + gap_in)
+      graphics::par(xpd = NA)
+      p <- is_page[rows]
+      graphics::text(ifelse(p, x0, x_act), y, row_lab[rows], adj = c(0, 0.5), font = ifelse(p, 2, 1), col = ifelse(p, "black", "#333333"))
+      # the dataset only where it changes (and at the top of a column)
+      d <- ds_lab[rows]; first <- p & c(TRUE, d[-1L] != Reduce(function(a, b) if (nzchar(b)) b else a, d, accumulate = TRUE)[-m])
+      if (ds_in > 0) graphics::text(x_ds, y[first], d[first], adj = c(0, 0.5), col = grey)
+      graphics::par(xpd = FALSE)
+      for (j in seq_len(k)) {
+        if (ranged) graphics::segments(lo[rows, j], y + off[[j]], hi[rows, j], y + off[[j]], col = grDevices::adjustcolor(pal[[j]], 0.55), lwd = 0.8)
+        graphics::points(val[rows, j], y + off[[j]], pch = 19, cex = 0.45, col = pal[[j]])
+      }
+    }
+    graphics::par(xpd = NA)
+    th <- length(threshold)
+    graphics::legend(graphics::grconvertX(0.5, "ndc", "user"), graphics::grconvertY(1, "ndc", "user"),
+                     legend = c(labs, if (th) paste(fmt_ms(threshold), "threshold")),
+                     col = c(pal, rep(grey, th)), pch = c(rep(19, k), rep(NA, th)), lty = c(rep(NA, k), rep("22", th)),
+                     lwd = c(rep(NA, k), rep(0.8, th)), seg.len = 1.6, y.intersp = 0.8, title.adj = 0.5,
+                     pt.cex = 0.6, ncol = leg_cols, bty = "n", xjust = 0.5, yjust = 1, title = if (ranged) "CerebroNexus (dot = median over rounds; line = fastest to slowest round)" else "CerebroNexus (median over rounds)")
+  }
+  grDevices::cairo_pdf(paste0(stem, ".pdf"), width = width_pt / 72, height = height_pt / 72, family = family, bg = "white")
+  tryCatch(draw(), finally = grDevices::dev.off())
+  grDevices::png(paste0(stem, ".png"), width = width_pt / 72, height = height_pt / 72, units = "in", res = 300, type = if (capabilities("cairo")) "cairo" else "windows", family = family, bg = "white")
+  tryCatch(draw(), finally = grDevices::dev.off())
+  invisible(c(pdf = paste0(stem, ".pdf"), png = paste0(stem, ".png"), width_mm = width_pt / 72 * 25.4, height_mm = height_pt / 72 * 25.4))
 }

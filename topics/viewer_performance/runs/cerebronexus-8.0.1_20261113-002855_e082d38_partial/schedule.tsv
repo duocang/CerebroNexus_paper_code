@@ -1,0 +1,17 @@
+round	revision	page	dataset	actions	kind	position	host_cpu_pct	host_wait_s	host_idle	ok
+1	candidate	overview	1m	overview.colour_by,overview.zoom,overview.lasso	page	1	9.8	0.1	TRUE	TRUE
+1	baseline	overview	1m	overview.colour_by,overview.zoom,overview.lasso	page	2	5.5	0.1	TRUE	TRUE
+1	candidate	overview	1m		first_start	3	9.5	6.2	TRUE	TRUE
+1	baseline	overview	1m		first_start	4	5.7	0.1	TRUE	TRUE
+1	candidate	overview	1m		first_plot	5	8	0.1	TRUE	TRUE
+1	baseline	overview	1m		first_plot	6	5.2	0.1	TRUE	TRUE
+1	baseline	markerGenes	example	markerGenes.table	page	7	7.7	0.1	TRUE	TRUE
+1	candidate	markerGenes	example	markerGenes.table	page	8	5.6	0.1	TRUE	TRUE
+2	baseline	overview	1m	overview.colour_by,overview.zoom,overview.lasso	page	9	6.7	2.1	TRUE	TRUE
+2	candidate	overview	1m	overview.colour_by,overview.zoom,overview.lasso	page	10	5.2	0.1	TRUE	TRUE
+2	baseline	overview	1m		first_start	11	5.2	0.1	TRUE	TRUE
+2	candidate	overview	1m		first_start	12	4.5	0.1	TRUE	TRUE
+2	baseline	overview	1m		first_plot	13	6.3	0.1	TRUE	TRUE
+2	candidate	overview	1m		first_plot	14	4.1	0.1	TRUE	TRUE
+2	candidate	markerGenes	example	markerGenes.table	page	15	4.6	0.1	TRUE	TRUE
+2	baseline	markerGenes	example	markerGenes.table	page	16	5.3	0.1	TRUE	TRUE
