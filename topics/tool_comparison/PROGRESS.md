@@ -90,3 +90,8 @@ Correction (same day): the whole-file hash above is that of the PROTOCOL.md as f
 ## 2026-10-27, iSEE box brush re-run (Deviation D9)
 
 - Only the iSEE box-brush route of Task 2 was run again: the drag now forms a selection (S1 0.545, 628 cells; S2 0.379, 29 cells in two runs and one run without a selection). The earlier rows (whole table) are in `results/superseded/isee_box_brush_no_selection/`.
+
+## 2026-11-13, round 3 drafted on the common pin
+
+- Round 3 text (`PROTOCOL_round3.md`) now names the commit of `topics/cerebronexus.pin` (`integration/8.3.0`, 8.3.0) instead of `perf/viewer-startup`; open decision 1 is decided; pilot items 10 to 12 added (Task 7 control paths, Task 8 inputs and grades, the old pilot findings repeated on the pin).
+- Added Task 7 (twenty genes in turn on the large tiers), Task 8 (which analysis results each viewer shows, graded auto / manual / absent by two people), and section 15 (frozen first, each tool's best documented route, predictions written down, everything reported). Not frozen; nothing measured; no harness code for Tasks 5 to 8 yet.

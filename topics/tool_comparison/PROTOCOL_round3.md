@@ -5,6 +5,12 @@
 text is frozen as round 2 was (SHA-256 in `results/round3/PROTOCOL.sha256`, later changes only under
 **Deviations**).
 
+**Revision under test (changed 2026-11-13).** CerebroNexus is the commit in [`../cerebronexus.pin`](../cerebronexus.pin):
+branch `integration/8.3.0`, version 8.3.0, the same commit every other topic of this repository measures. It
+replaces the `perf/viewer-startup` pin of the first draft. Findings 1 and 2 of the pilot record are expected to
+be settled by the branch (the H5 file is hashed once, in the background; the H5 writer of the round-2 pin is in
+it); the pilot is repeated on the new commit and says whether they are.
+
 Round 2 ([PROTOCOL.md](PROTOCOL.md), Deviations D1-D9) stays as it is and its results stay in `results/`.
 Round 3 repeats Task 3 with a changed measurement and adds two tasks. Tasks 1, 2 and 4 are not repeated.
 
@@ -34,7 +40,7 @@ configurations in which CerebroNexus is slow. No run is excluded.
 
 | | Round 2 | Round 3 |
 |---|---|---|
-| CerebroNexus | `tmp/应急` at `f86667ae` (6.0.0) | branch `perf/viewer-startup`, the commit pinned when this text is frozen; installed from `git archive` of that commit |
+| CerebroNexus | `tmp/应急` at `f86667ae` (6.0.0) | the commit of `../cerebronexus.pin` (`integration/8.3.0`, 8.3.0); installed from `git archive` of that commit |
 | CerebroNexus configurations | `cerebronexus_default` (embedded), `cerebronexus_h5` | the same two, and `cerebronexus_h5_start` (the same artifact started with `start.R`) |
 | Other tools | pinned in round 2 | the same pins; versions recorded again |
 | Tiers | 10,000, 100,000, 500,000 | the same, and all 1,306,127 cells |
@@ -48,6 +54,9 @@ configurations in which CerebroNexus is slow. No run is excluded.
 | Host | idle sample stored | a start waits for an idle host; CPU canary per round (section 4) |
 | After the first plot | nothing | Task 5: three actions (section 8) |
 | Client | GPU, local network | also without GPU and on a throttled connection: Task 6 (section 9) |
+| Gene access | one gene in Task 2 and 3 only | twenty genes in turn, at the large tiers: Task 7 (section 13) |
+| Results shown | what is recognised on import (Task 1) | which analysis results each viewer can show: Task 8 (section 14) |
+| Fairness | stated in the limits | rules, predictions written down before the run: section 15 |
 
 Round-2 and round-3 numbers are not paired: the clock for `t_ready`, the frames and the route differ.
 
@@ -232,7 +241,7 @@ Run only if the pilot shows that every tool starts under both conditions; a tool
 
 ## 10. Outputs and figures
 
-`results/round3/task3/`, `task5/`, `task6/` (one row per run, including failed, `host_busy` and not-run),
+`results/round3/task3/`, `task5/`, `task6/`, `task7/`, `task8/` (one row per run, including failed, `host_busy` and not-run),
 `summary_*.csv|md`, `environment.json`, `inputs.csv`, the frame series and the accepted frames in
 `results/round3/evidence/`. Figures as round 2, section 10, in `figures/round3/`. Candidates: first pixels and
 interactive time against the cell number, one panel per start class; the decomposition of the total; server
@@ -249,6 +258,9 @@ chooses after the results exist.
 - `t_ready` compares a static file server with application servers.
 - Task 5 times three actions on one data set; it says nothing about the analyses each tool offers.
 - The full tier has its own embedding.
+- Not measured, and not in our favour: many visitors at once. A static server (Vitessce) serves any number of
+  visitors from files; CerebroNexus runs one R process per application and keeps the data in it. Hosting a
+  static page costs less than hosting a Shiny application, and this study does not measure it.
 - CerebroNexus is developed by the authors of this comparison and was changed with these measurements in
   view. The other tools run as released.
 
@@ -272,6 +284,94 @@ frozen; what fails changes the text above, not the result.
 8. Both conditions of Task 6 start every tool once.
 9. The idle gate and the canary: one tier is run with and without a background load to see that the gate
    holds runs back and the canary marks the round.
+10. Task 7: a control path for "colour by this gene" in each tool, the twenty genes colour in turn without the
+    page failing in any tool, and the quiet wait between genes is reached (three runs each on 10,000 cells).
+11. Task 8: the inputs are made and hashed, and for every tool and result the documented route is tried and the
+    evidence stored. A result for which two people cannot agree on the grade is described in the text first.
+12. The pin: the pilot of findings 1 and 2 (the H5 hash before the first plot; the H5 written by the pinned
+    commit) is repeated on the pinned commit, with the numbers next to the old ones.
+
+## 13. Task 7: many genes, one after another
+
+A viewer is used to look at gene after gene. Task 5 colours by one gene; this task colours by twenty, in turn,
+on the open plot, and asks what the twentieth costs as well as the first.
+
+- **Genes.** `data/inputs/sweep_genes.txt`: 20 genes drawn once, with seed 20261113, from the genes detected in
+  at least 1 % and at most 50 % of the cells of the 10,000-cell tier, and written down **before** the first
+  measured run (its SHA-256 goes into `results/round3/inputs.csv`). All 20 are in every tier. Nobody chooses a
+  gene after seeing a result.
+- **Run.** One session per build, as in Task 5: open the plot, wait until the server and Chrome have been quiet
+  for 3 s, then colour by gene 1, wait for the same quiet, gene 2, and so on to gene 20. The order is the file's.
+- **Metric.** For each gene, as in Task 5: the gesture that starts the colouring to the last frame that differs
+  from the final one. Per session: the first gene alone (nothing of the expression matrix is warm yet), and the
+  median, 90th percentile and maximum of genes 2 to 20. Over builds and starts: median and range.
+- **Tiers.** 100,000, 500,000 and the full tier. The expression layer is the one the tool documents for large
+  data (section 15, rule 2).
+- **Failures.** A gene that does not finish in 60 s is `timeout`; a session with three timeouts is stopped and
+  recorded as it is. Memory (server and Chrome) at gene 1 and at gene 20 is recorded, so growth is visible.
+
+What this tests is what each design pays for random access into a matrix with a million columns: the page a
+gene is read from, whether the browser or the server holds it, and whether the cost of gene 20 differs from
+that of gene 1. It says nothing about the analysis that follows the colouring.
+
+## 14. Task 8: which results a viewer can show
+
+Task 1 asks what a viewer recognises in an input. This task asks what it can **show** of the results that an
+analysis leaves behind, with the documented route and without writing a viewer.
+
+Inputs are produced once, by a fixed script, from the pbmc3k input (I1), the scRepertoire example with TCR (I2)
+and the Visium H&E input (I3) of round 2, and are hashed: marker genes per cluster, enriched pathways per
+cluster, a pseudotime along the embedding, clonotype size and clonotype sharing between groups, and a numeric
+result column on the tissue image. Each result is stored in the place the target tool documents for it (for
+the AnnData tools `uns` and `obs`; for the R tools the object's metadata, or `misc`, as the build route reads
+it); where a tool documents no place, the result is stored in the most conventional one and that is recorded.
+
+| Result | Shown when |
+|---|---|
+| marker genes per cluster | a table of the genes of the chosen cluster, with their statistics, is on the screen |
+| enriched pathways per cluster | a table or chart of the terms of the chosen cluster is on the screen |
+| trajectory | the pseudotime is drawn on the embedding as a colour scale |
+| clonotype size | the cells are coloured or sized by the size of their clonotype |
+| clonotype sharing | a view shows which clonotypes occur in more than one group, and from it the cells of one clonotype can be selected |
+| result on a tissue | the result column is drawn over the tissue image, aligned |
+
+Grade per tool and result, as in Task 1: `auto` (the documented build route, with no argument that the other
+tools are not also given, shows it), `manual` (it needs code or a configuration the user writes beyond the
+build route), `absent` (no way found in the documentation, searched with the same words for every tool; the
+search terms are stored), `rejected`. The evidence is a screenshot and the commands. Two people grade; a
+disagreement is shown, not settled in our favour.
+
+A grade is a statement about the documented routes on the day of the pin; it is not a statement about what a
+skilled user could build. `manual` is as much a result as `auto` and is reported as such.
+
+## 15. Rules that keep Tasks 3, 5, 6, 7 and 8 fair
+
+1. **Frozen first.** The tasks, the genes, the gestures, the grades and the predictions below are hashed before
+   the first measured run (`results/round3/PROTOCOL.sha256`). Changes after that are Deviations, with the date
+   and the reason, and are shown in the same table as the results.
+2. **Each tool gets its best documented route for the size.** Vitessce: `optimize_adata()` with the layout its
+   documentation recommends for gene access, chunked Zarr, served by a static server; cellxgene as released;
+   ShinyCell with its H5 option; iSEE as the Bioconductor release builds it; CerebroNexus with the H5 backend.
+   The build script of every tool is stored with the results and named in the text. A developer of any of the
+   tools is invited to read their tool's script before the measured run; a change they show to be better
+   documented practice is made for the whole run, not for one task.
+3. **Same input, same gestures, same clock.** One input file per tier, one gene list, one set of regions, and the
+   clock of section 7. No tool is started, warmed or timed in a way another is not, except where a start class
+   (7.6) says so for everyone.
+4. **Predictions are written down.** Before the first measured run, the authors write what they expect, and it
+   is kept in `results/round3/PREDICTIONS.md`:
+   - CerebroNexus with the H5 backend has the lowest server memory among the tools that need an application
+     server, and the lowest browser memory of all tools at the full tier;
+   - at 10,000 cells Vitessce has the shortest `t_first_pixels`;
+   - at the full tier the time per gene of Task 7 grows with the cell number for the tools that read the
+     expression into the browser or into the server, and stays flat for the H5 backend;
+   - Vitessce builds fastest and needs the fewest build steps;
+   - only CerebroNexus shows the clonotype results of Task 8 with `auto`.
+   A prediction that fails is reported with the others; none is removed.
+5. **Everything is reported.** The summary tables list every task, tool, tier and class that was run, in the
+   same order, whoever is fastest. Figures may select a panel for space; the table with all of them is in the
+   same supplementary file. Tasks where CerebroNexus is expected to lose are kept (Task 3 at 10,000 cells,
+   section 11).
 
 ## Pilot record (2026-11-12)
 
@@ -341,9 +441,9 @@ separate pair of starts after its gesture was found; both are starts of the same
 
 ## Open decisions (owner)
 
-1. **Pin.** Which commit of `perf/viewer-startup`; whether `start.R` is part of it. Not before findings 1 and 2
-   of the pilot record are settled: with them the CerebroNexus numbers of round 3 would be worse than those
-   of round 2 for reasons that have nothing to do with what round 3 is meant to show.
+1. **Pin.** Decided 2026-11-13: the commit of `../cerebronexus.pin` (`integration/8.3.0`), for every topic.
+   Whether `start.R` is one of the measured routes is decision 2. The commit is on this machine only: it has
+   to be pushed before the topics that fetch it from GitHub can run, and before a reader can reproduce it.
 2. **`start.R` as a configuration.** It is a second way to start the same Viewer. Measured as its own
    configuration here; the alternative is to measure only the route the paper recommends.
 3. **Embedded configuration on the full tier.** Kept under the stop rule here. Dropping it would hide the
@@ -364,16 +464,23 @@ None: not frozen.
 ## Appendix: the Viewer standard (`topics/viewer_performance`)
 
 Not part of this protocol. The Viewer standard measures one CerebroNexus revision against another and has
-the same blind spots; these changes would make contract `blackbox-v7`.
+the same blind spots.
 
-- `first_plot` visit: open `/?page=projection` instead of clicking; report first pixels in the plot region and
+Done in contract `blackbox-v7` (2026-11-13; `topics/viewer_performance/STANDARD.md`):
+
+- `R_USER_CACHE_DIR` per run and revision, and the first plot once with an emptied cache (`first_start`) and
+  once as a later start (`first_plot`), as two visits.
+- Candidate and baseline run alternately in one run (`run.R --baseline`). `compare.R` decides with an exact
+  rank-sum test over the rounds and a floor of one frame instead of the threshold of 20 % + 300 ms, which was
+  wider than the changes now being made, and reports the differences within each round.
+- An idle machine before every session and a CPU canary per round, as in section 4.
+
+Still open:
+
+- First-plot visits: open `/?page=projection` instead of clicking; report first pixels in the plot region and
   the interactive time of 7.5 as two metrics.
 - A `ready_ms` metric: spawn to the first HTTP 200, with the socket probe.
-- `R_USER_CACHE_DIR` per run, and the `first_plot` visit once with an empty cache and once after a discarded
-  session, as two visits.
 - A launch-route option (`launchCerebro()` or `start.R`), recorded in the manifest.
 - Fixtures in both CRB layouts. Revisions before the cell-index layout cannot read the new files, so a
   comparison across that change measures the layout and the code together; `compare.R` already reports
   differing CRB checksums and should name this case.
-- Candidate and baseline run alternately in one run, and `compare.R` reports paired differences. The present
-  threshold (20 % + 300 ms) is wider than the changes now being made.

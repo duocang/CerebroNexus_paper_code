@@ -8,6 +8,8 @@ Same-task comparison of five single-cell viewers on one native Windows 11 host (
 - Task 3: E18 first 10k / 100k / 500k cells, 3 builds x 3 starts per tool and size; build time, artifact size, service-ready time, first plot, peak RSS.
 - Task 4 (separate, one Mac): building a shareable artifact, deploying it, saving and restoring a view, and a killed update; see [Task 4](#task-4-building-deployment-and-saverestore) below.
 
+Round 3 is drafted in [PROTOCOL_round3.md](PROTOCOL_round3.md) (not frozen, nothing measured yet): it moves CerebroNexus to the commit every topic uses ([`../cerebronexus.pin`](../cerebronexus.pin)), adds the full 1.3 M-cell tier, a client without GPU, a twenty-gene sweep (Task 7) and a comparison of which analysis results each viewer can show (Task 8), and writes its fairness rules and predictions down before the first run.
+
 Results: [results/SUMMARY.md](results/SUMMARY.md) and [results/summary_task3.md](results/summary_task3.md); one file or row per run, with per-tool tables, in `results/task1/`, `results/task2/` and `results/task3/`; logs and screenshots behind them in `results/evidence/`.
 
 Figures (R, ggplot2, Genome Biology rules; `functions.R` and `targets.R`): `figures/fig-tool-comparison.pdf` (a: capability matrix, b: Jaccard per route, c: build time, artifact size, ready + first plot and server and browser memory at 10k / 100k / 500k cells) and `figures/fig-tool-comparison-start.pdf` (service-ready and first-plot time, every single start). Checked with `topics/interface_figures/scripts/check_figures.R`. The screenshot panels of [FIGURES.md](FIGURES.md) are not redone yet.
