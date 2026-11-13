@@ -1,6 +1,16 @@
 {
-  "cerebronexus_src": "/private/tmp/claude-501/-Users-nuioi-projects-2026-07-01-cerebreNexus-CerebroNexus--claude-worktrees-vigorous-colden-10c602/f7cacb28-9b17-410d-9953-c1cd9de33521/scratchpad/work/src-d7b773d6b020",
+  "cerebronexus": {
+    "version": "8.3.0",
+    "commit": "e927cbf180fb1a50cf783245ab580e83a1334764"
+  },
+  "rules": {
+    "hla_strict": "cells whose TRB has the genes TRBV19.None.TRBJ1-5.TRBC1 and the CDR3 CASSIYSNQPQHF",
+    "hla_gene": "cells whose CTgene is TRAV27.TRAJ42.TRAC_TRBV19.None.TRBJ2-7.TRBC2",
+    "xenium": "cells with UMAP 1 in [-4.165, 0.447] and UMAP 2 >= 6.67",
+    "ren": "the saved selection data/selections/ren-linked-local.json, kept and checked against the Ren data"
+  },
   "ren": {
+    "data": "cerebro-v2",
     "cells": 1462702,
     "tcr_cells": 220968,
     "receptor_records": 503432,
@@ -14,23 +24,68 @@
     }
   },
   "hla": {
-    "cells": 12000,
-    "strict": 10,
-    "gene": 293,
+    "cells": 2000,
+    "strict": 2,
+    "gene": 55,
     "strict_by_donor": {
-      "donor1": 2,
-      "donor2": 8
+      "donor1": 1,
+      "donor2": 1
     },
     "gene_by_donor": {
-      "donor1": 142,
-      "donor2": 151
+      "donor1": 32,
+      "donor2": 23
     },
-    "gene_trb_cdr3": 10,
-    "largest_cdr3": 227
+    "gene_trb_cdr3": 5,
+    "largest_cdr3": 41,
+    "gene_clone_column": 4
   },
   "xenium": {
-    "cells": 5000,
-    "selected": 500,
+    "cells": 2000,
+    "selected": 197,
     "clusters": 24
+  },
+  "e18": {
+    "data": "cerebro-v3",
+    "cells": 1306127
+  },
+  "viewer_pages": {
+    "hla_motif_points": 23,
+    "hla_motifs": 2,
+    "hla_allele": "HLA-A*02:01",
+    "hla_locked_feature": "TRBV19::M13_4 (12 CDR3)",
+    "hla_donor_table": [
+      {
+        "donor": "donor1",
+        "unit": "donor",
+        "hla_status": "carrier",
+        "feature_present": "true",
+        "cells": "492",
+        "feature_cells": "54"
+      },
+      {
+        "donor": "donor2",
+        "unit": "donor",
+        "hla_status": "carrier",
+        "feature_present": "true",
+        "cells": "510",
+        "feature_cells": "44"
+      },
+      {
+        "donor": "donor3",
+        "unit": "donor",
+        "hla_status": "non-carrier",
+        "feature_present": "false",
+        "cells": "473",
+        "feature_cells": "0"
+      },
+      {
+        "donor": "donor4",
+        "unit": "donor",
+        "hla_status": "non-carrier",
+        "feature_present": "false",
+        "cells": "525",
+        "feature_cells": "0"
+      }
+    ]
   }
 }

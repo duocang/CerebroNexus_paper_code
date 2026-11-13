@@ -147,6 +147,15 @@ capture <- function(b, name, out_dir, scroll_to = NULL) {
       ".map(p=>({tag:p[0].tagName.toLowerCase(),id:p[0].id,cls:String(p[0].className.baseVal||p[0].className||'').slice(0,60),",
       "x:p[1].left,y:p[1].top,w:p[1].width,h:p[1].height,pixel_width:p[0].width||null}))"
     )),
+    # Buttons that lie over a plot surface (the plot toolbar); a crop that shows
+    # only the plot ends before them.
+    overlays = js(b, paste0(
+      "(function(){var s=Array.from(document.querySelectorAll('canvas,img,svg')).map(e=>e.getBoundingClientRect())",
+      ".filter(r=>r.width>=80&&r.height>=80&&r.bottom>0&&r.top<innerHeight);",
+      "return Array.from(document.querySelectorAll('button')).map(e=>e.getBoundingClientRect())",
+      ".filter(r=>r.width>0&&r.height>0&&r.bottom>0&&r.top<innerHeight&&s.some(q=>r.left<q.right&&r.right>q.left&&r.top<q.bottom&&r.bottom>q.top))",
+      ".map(r=>({x:r.left,y:r.top,w:r.width,h:r.height}));})()"
+    )),
     page_text = js(b, "document.body.innerText")
   )
   jsonlite::write_json(record, file.path(out_dir, paste0(name, ".json")),

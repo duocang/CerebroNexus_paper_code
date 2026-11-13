@@ -1,8 +1,8 @@
-# CerebroNexus commits the interface figures are captured from.
+# CerebroNexus commit the interface figures are captured from: the commit in ../cerebronexus.pin, for the Viewer
+# and the Builder alike (tests/test-pin.R checks it). Change the pin, not this file.
 # viewer: the Viewer and the large demo data recipe (data-raw/large-demo, run-demo.R).
-# builder: the Builder, which is not yet on the viewer commit (mihem/CerebroNexus#216).
-# Re-capture after a release by pointing both at the release commit.
-viewer_repo=https://github.com/mihem/CerebroNexus.git
-viewer_commit=d7b773d6b0207c2456ee12e26d57a07a33825e89
+# builder: the Builder.
+viewer_repo=https://github.com/duocang/CerebroNexus.git
+viewer_commit=e927cbf180fb1a50cf783245ab580e83a1334764
 builder_repo=https://github.com/duocang/CerebroNexus.git
-builder_commit=13682caeb9909907515ee839063601f3cb685116
+builder_commit=e927cbf180fb1a50cf783245ab580e83a1334764

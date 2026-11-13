@@ -161,12 +161,14 @@ embedding <- function(d, colour, sel = NULL, xlab, ylab, xlim = NULL, ylim = NUL
 }
 
 TIERS <- c("Single (1)", "Small (2\u20135)", "Medium (6\u201320)", "Large (21\u2013100)", "Hyper (>100)")
-# The Viewer's Expansion bands layout: one band per clone-size tier, band
-# width = number of cells. Only cells with a TCR have a position.
+# The Viewer's Expansion bands layout: one band per clone-size tier that the
+# data set has, band width = number of cells. Only cells with a TCR have a
+# position.
 bands <- function(d, colour, sel = NULL, ...) {
   has <- !is.na(d$tier)
+  present <- sort(unique(d$tier[has]))
   cells_plot(d$band_x[has], d$band_y[has], colour[has], if (is.null(sel)) NULL else sel[has], ...) +
-    scale_y_continuous(breaks = 0:4 + 0.5, labels = TIERS, limits = c(0, 5), expand = c(0, 0)) +
+    scale_y_continuous(breaks = seq_along(present) - 0.5, labels = TIERS[present], limits = c(0, length(present)), expand = c(0, 0)) +
     scale_x_continuous(expand = c(0.01, 0)) +
     labs(x = "Cells in tier (band width = cell count)", y = NULL) +
     theme_gb() + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
@@ -247,6 +249,10 @@ status_row <- function(name) {
   c(x0, anchor$y - 12, x1 - x0, anchor$h + 24)
 }
 
+checks_file <- file.path(dirname(captures), "data", "checks.json")
+checks <- jsonlite::read_json(checks_file)
+count <- function(n) format(n, big.mark = ",", scientific = FALSE)
+
 ren <- readRDS(file.path(inputs, "ren.rds"))
 hla <- readRDS(file.path(inputs, "hla.rds"))
 xen <- readRDS(file.path(inputs, "xenium.rds"))
@@ -293,7 +299,9 @@ fig2 <- function() {
   conf_end <- text_box("builder-configure", "^Available metadata$")
   rect_a <- span(conf_title[2] - 14, conf_end[2] + conf_end[4] + 12)
   rev_title <- text_box("builder-review", "^Review before building$")
-  rev_end <- text_box("builder-review", "^Spatial alignment demo$", which = 2L)
+  # The Review page lists the datasets below its summary; the crop ends under
+  # the last dataset card (the Output section is behind the page's footer bar).
+  rev_end <- text_box("builder-review", "^Visium breast cancer demo$", which = 2L)
   rect_b <- span(rev_title[2] - 14, rev_end[2] + rev_end[4] + 26)
   a <- shot("Figure 2", "a", "builder-configure", rect_a, WIDTH)
   b <- shot("Figure 2", "b", "builder-review", rect_b, WIDTH)
@@ -371,8 +379,18 @@ fig4 <- function() {
   third <- (WIDTH - 6) / 3
   half <- (WIDTH - 4) / 2
   canvas <- function(name) largest_surface(name)
-  ra <- dark_box("xenium-cluster", canvas("xenium-cluster"))
-  rb <- dark_box("xenium-feature", canvas("xenium-feature"))
+  # The plot toolbar floats over the right edge of the image; the crop of the
+  # tissue ends before it (the buttons are recorded with each capture).
+  before_toolbar <- function(name, r) {
+    o <- capture_record(name)$overlays
+    if (is.data.frame(o) && nrow(o)) {
+      o <- o[o$x > r[1] + r[3] / 2 & o$y < r[2] + r[4] & o$y + o$h > r[2], , drop = FALSE]
+      if (nrow(o)) r[3] <- min(o$x) - 4 - r[1]
+    }
+    r
+  }
+  ra <- before_toolbar("xenium-cluster", dark_box("xenium-cluster", canvas("xenium-cluster")))
+  rb <- before_toolbar("xenium-feature", dark_box("xenium-feature", canvas("xenium-feature")))
   # The RGB view draws no tissue image; it uses the same plot extent as b.
   cb <- canvas("xenium-feature")
   cc <- canvas("xenium-rgb")
@@ -395,7 +413,7 @@ fig4 <- function() {
   d <- embedding(x, grey, sel = x$selected, xlab = "UMAP 1", ylab = "UMAP 2", size = 0.3, sel_size = 0.6)
   e <- cells_plot(x$sx, x$sy, grey, x$selected, size = 0.3, sel_size = 0.6) +
     coord_fixed() + labs(x = "x (\u00b5m)", y = "y (\u00b5m)") + theme_gb()
-  sel_key <- key_plot(c("Selected (500)", "Other cells"), c(SELECTED, OTHER), ncol = 2)
+  sel_key <- key_plot(c(sprintf("Selected (%s)", count(checks$xenium$selected)), "Other cells"), c(SELECTED, OTHER), ncol = 2)
   h1 <- shot_height(ra, third)
   plot <- (a + b + c + plot_layout(widths = c(1, 1, 1))) /
     (a_key + b_bar + rgb_key + plot_layout(widths = c(1, 1, 1))) /
@@ -428,17 +446,26 @@ fig5 <- function() {
   d <- hla$cells
   sel <- d$strict
   p <- hla_panels(sel, small = TRUE)
-  local <- sel & d$x < -6
-  stopifnot(sum(local) == 9L)
+  # Panel c zooms to the selected cells that lie together: those within 3 UMAP
+  # units of the median selected position (a selected cell far from the others
+  # is left out of the zoom, not out of the figure).
+  centre <- c(median(d$x[sel]), median(d$y[sel]))
+  local <- sel & sqrt((d$x - centre[1])^2 + (d$y - centre[2])^2) <= 3
+  stopifnot(any(local))
   pad <- 0.6
   c <- embedding(d, rep(OTHER, nrow(d)), sel = sel, sel_colour = DONORS[d$donor[sel]], xlab = "UMAP 1", ylab = "UMAP 2",
     size = 0.4, sel_size = 2, border = TRUE,
     xlim = range(d$x[local]) + c(-pad, pad), ylim = range(d$y[local]) + c(-pad, pad))
   rect <- status_row("hla-10")
-  strip <- shot("Figure 5", "status", "hla-10", rect, 80)
+  # The status row of this selection names its source ("From Clonal expansion
+  # (TCR)"), so it is wider than the others: the strip gets the width at which
+  # its smallest interface text prints at 6 pt or more (the bottom row is
+  # divided accordingly).
+  w_strip <- 96
+  strip <- shot("Figure 5", "status", "hla-10", rect, w_strip)
   plot <- donor_key(sel) /
     (p$a + p$b + plot_layout(widths = c(1, 1.15))) /
-    (c + (plot_spacer() / strip / plot_spacer() + plot_layout(heights = c(1, shot_height(rect, 80), 1))) + plot_layout(widths = c(1, 1.15))) +
+    (c + (plot_spacer() / strip / plot_spacer() + plot_layout(heights = c(1, shot_height(rect, w_strip), 1))) + plot_layout(widths = c(WIDTH - w_strip, w_strip))) +
     plot_layout(heights = c(5, 62, 45))
   plot <- plot + plot_annotation(tag_levels = list(c("", "a", "b", "c", "", "", "")))
   save_figure("fig05-hla-tcr-strict", plot, 5 + 62 + 45 + 8)
@@ -454,7 +481,7 @@ fig7 <- function() {
     geom_col(fill = "#0072B2", width = 0.7) +
     geom_text(aes(label = n), hjust = -0.2, size = TXT, family = FONT) +
     scale_x_continuous(expand = expansion(mult = c(0, 0.15))) +
-    labs(x = "Cells in the 293-cell selection", y = "TRB CDR3") + theme_gb()
+    labs(x = sprintf("Cells in the %s-cell selection", count(sum(sel))), y = "TRB CDR3") + theme_gb()
   rect <- status_row("hla-293")
   strip <- shot("Figure 7", "status", "hla-293", rect, 80)
   plot <- donor_key(sel) /
@@ -471,15 +498,29 @@ fig6 <- function() {
   net <- largest_surface("hla-motif")
   a <- shot("Figure 6", "a", "hla-motif", net, WIDTH)
   ha <- shot_height(net, WIDTH)
-  # Plotly's default qualitative colours, as the Viewer draws motifs.
-  motif_key <- key_plot(paste("Motif", 1:5), c("#636EFA", "#EF553B", "#00CC96", "#AB63FA", "#FFA15A"), ncol = 5)
+  # Plotly's default qualitative colours, as the Viewer draws motifs; one key
+  # entry for each "Motif n" of the Viewer's own legend in the capture.
+  motifs <- grep("^Motif [0-9]+$", capture_record("hla-motif")$text$text, value = TRUE)
+  motif_pal <- c("#636EFA", "#EF553B", "#00CC96", "#AB63FA", "#FFA15A", "#19D3F3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52")
+  stopifnot(length(motifs) >= 1L, length(motifs) <= length(motif_pal))
+  motif_key <- key_plot(motifs, motif_pal[seq_along(motifs)], ncol = length(motifs))
   page <- capture_record("hla-associations")$page_text
+  # The allele and the motif component the Associations tab opens on, and its
+  # per-donor table, are read from the captured page.
+  allele <- regmatches(page, regexpr("(?<=HLA allele:\\n)HLA-[A-Z0-9]+\\*[0-9:]+", page, perl = TRUE))
+  locked <- regmatches(page, regexpr("(?<=Locked feature: \\n)[^\\n]+", page, perl = TRUE))
   rows <- regmatches(page, gregexpr("donor[0-9]\\tdonor\\t[a-z-]+\\t(true|false)\\t[0-9]+\\t[0-9]+", page))[[1]]
-  stopifnot(length(rows) == 4L)
+  stopifnot(length(allele) == 1L, length(locked) == 1L, length(rows) >= 1L)
   tab <- do.call(rbind, strsplit(rows, "\t"))
+  checks$viewer_pages <<- list(
+    hla_motif_points = as.integer(sub(".*view with ([0-9]+) points.*", "\\1", grep("view with [0-9]+ points", capture_record("hla-motif")$text$text, value = TRUE)[1])),
+    hla_motifs = length(motifs), hla_allele = allele, hla_locked_feature = locked,
+    hla_donor_table = lapply(seq_len(nrow(tab)), function(i) setNames(as.list(tab[i, ]), c("donor", "unit", "hla_status", "feature_present", "cells", "feature_cells")))
+  )
   tab <- data.frame(Donor = tab[, 1], `HLA-A*02:01` = ifelse(tab[, 3] == "carrier", "Carrier", "Non-carrier"),
     `Motif cells` = formatC(as.integer(tab[, 6]), big.mark = ",", format = "d"), `Total cells` = formatC(as.integer(tab[, 5]), big.mark = ",", format = "d"),
     check.names = FALSE)
+  names(tab)[2] <- allele
   long <- data.frame(
     col = rep(seq_along(tab), each = nrow(tab) + 1),
     row = rep(0:nrow(tab), times = ncol(tab)),
@@ -516,7 +557,11 @@ figS1 <- function() {
     scale_colour_manual(values = pal, name = "Cell type") +
     labs(x = "Cells per clonotype", y = "Number of clonotypes") +
     theme_gb() + theme(legend.position = "inside", legend.position.inside = c(0.98, 0.98), legend.justification = c(1, 1))
-  sh <- data.frame(class = c("Private\n(1 sample)", "Shared within\nmajor type", "Shared across\nmajor types"), n = as.integer(ren$sharing))
+  # The class names are the Viewer's Clone sharing labels (sharing unit
+  # "sample", group "major_type"); stop if the classes are not the three the
+  # labels were written for.
+  stopifnot(identical(names(ren$sharing), c("Private", "Public (within-group)", "Public (cross-group)")))
+  sh <- data.frame(class = c("Private\n(1 sample)", "Shared within\ngroup", "Shared across\ngroups"), n = as.integer(ren$sharing))
   sh$class <- factor(sh$class, levels = sh$class)
   sh$label <- sprintf("%s (%.1f%%)", format(sh$n, big.mark = ","), 100 * sh$n / sum(sh$n))
   b <- ggplot(sh, aes(class, n, fill = class)) +
@@ -539,6 +584,23 @@ figS2 <- function() {
 }
 
 for (f in list(fig1, fig2, fig3, fig4, fig5, fig6, fig7, figS1, figS2)) f()
+
+# Every count the captured pages show must be the count checks.json holds for
+# the data (the page and the data are two independent computations).
+page_text <- function(name) capture_record(name)$page_text
+has <- function(name, pattern) grepl(pattern, page_text(name), perl = TRUE)
+pat <- function(n) gsub(",", ",?", count(n), fixed = TRUE)
+shows <- function(name, n, total) has(name, sprintf("(^|\\n)%s\\s*/\\s*%s selected", pat(n), pat(total)))
+agree <- c(
+  ren_selected = shows("ren-linked-local", checks$ren$selected, checks$ren$cells),
+  ren_tcr = has("ren-linked-local", paste0("TCR ", pat(checks$ren$selected_tcr))),
+  hla_strict = shows("hla-10", checks$hla$strict, checks$hla$cells),
+  hla_gene = shows("hla-293", checks$hla$gene, checks$hla$cells),
+  xenium = shows("xenium-linked-selected", checks$xenium$selected, checks$xenium$cells)
+)
+print(agree)
+if (!all(agree)) stop("A captured page disagrees with data/checks.json: ", paste(names(agree)[!agree], collapse = ", "), call. = FALSE)
+jsonlite::write_json(checks, checks_file, auto_unbox = TRUE, pretty = TRUE, digits = NA)
 qa <- do.call(rbind, QA)
 write.csv(qa, file.path(out, "qa", "screenshot-qa.csv"), row.names = FALSE)
 print(qa[, c("figure", "panel", "width_mm", "ppi", "min_text_pt", "below_6pt", "cut_text")])

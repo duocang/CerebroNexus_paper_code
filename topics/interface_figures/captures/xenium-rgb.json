@@ -1,324 +1,364 @@
 {
   "name": "xenium-rgb",
   "file": "xenium-rgb.png",
-  "sha256": "281570cca52de37c93e4fa49b56bfdb2d867a18990d82743ae0f927aba14b9b4",
+  "sha256": "bc0f1c85c6b32169860b27edcb9d7f205187c177bb9c34282bfb700d2f24d638",
   "viewport": {
     "width": 1024,
-    "height": 960,
+    "height": 1104,
     "dpr": 3
   },
   "text": [
     {
       "x": 239.5,
-      "y": 482.5,
-      "w": 174.4219,
+      "y": 554.5,
+      "w": 173.25,
       "h": 14,
       "px": 14,
       "text": "Toggle navigation"
     },
     {
-      "x": 181.0781,
+      "x": 183.4688,
       "y": 46.8594,
-      "w": 26.9219,
-      "h": 11,
+      "w": 24.5312,
+      "h": 10,
       "px": 9,
-      "text": "v5.2.0"
+      "text": "v8.3.0"
     },
     {
       "x": 14,
       "y": 65.8594,
-      "w": 52.5312,
-      "h": 17,
+      "w": 50.5938,
+      "h": 16,
       "px": 14,
       "text": "Dataset"
     },
     {
       "x": 27,
-      "y": 101.8594,
-      "w": 141.8594,
-      "h": 17,
+      "y": 102.8594,
+      "w": 137.7344,
+      "h": 16,
       "px": 14,
       "text": "Mouse brain (Xenium)"
     },
     {
-      "x": 60.7344,
+      "x": 60.8906,
       "y": 168.8594,
-      "w": 58.6094,
-      "h": 17,
+      "w": 56.0469,
+      "h": 16,
       "px": 14,
       "text": "Data info"
     },
     {
-      "x": 60.7344,
+      "x": 60.8906,
       "y": 209.8594,
-      "w": 66.0781,
-      "h": 17,
+      "w": 62.2656,
+      "h": 16,
       "px": 14,
       "text": "Projection"
     },
     {
-      "x": 60.7344,
+      "x": 60.8906,
       "y": 250.8594,
-      "w": 83.5781,
-      "h": 17,
+      "w": 80.1562,
+      "h": 16,
       "px": 14,
       "text": "Linked views"
     },
     {
-      "x": 60.7344,
+      "x": 60.8906,
       "y": 291.8594,
-      "w": 47.5156,
-      "h": 17,
+      "w": 45.9219,
+      "h": 16,
       "px": 14,
       "text": "Groups"
     },
     {
-      "x": 60.5781,
+      "x": 60.8906,
       "y": 332.8594,
-      "w": 46.5938,
-      "h": 17,
+      "w": 45.9062,
+      "h": 16,
       "px": 14,
       "text": "Spatial"
     },
     {
-      "x": 60.7344,
+      "x": 60.8906,
       "y": 373.8594,
-      "w": 108.625,
-      "h": 17,
+      "w": 105.8438,
+      "h": 16,
       "px": 14,
       "text": "Gene expression"
     },
     {
-      "x": 60.7344,
+      "x": 60.8906,
       "y": 414.8594,
-      "w": 126.6562,
-      "h": 17,
+      "w": 123.7344,
+      "h": 16,
       "px": 14,
       "text": "Gene ID conversion"
     },
     {
-      "x": 60.7344,
+      "x": 60.8906,
       "y": 455.8594,
-      "w": 132.2344,
-      "h": 17,
+      "w": 126.8594,
+      "h": 16,
       "px": 14,
       "text": "Colour management"
     },
     {
-      "x": 60.7344,
+      "x": 60.125,
       "y": 496.8594,
-      "w": 39.3281,
-      "h": 17,
+      "w": 36.5938,
+      "h": 16,
       "px": 14,
       "text": "About"
     },
     {
       "x": 14,
-      "y": 854,
-      "w": 71.3906,
-      "h": 15,
+      "y": 999,
+      "w": 68.7188,
+      "h": 14,
       "px": 12,
       "text": "Preferences"
     },
     {
       "x": 14,
-      "y": 886.25,
-      "w": 105.1875,
-      "h": 16,
+      "y": 1031.25,
+      "w": 101.8906,
+      "h": 15,
       "px": 13,
       "text": "GPU acceleration"
     },
     {
       "x": 13,
-      "y": 913,
-      "w": 1051.75,
-      "h": 17,
+      "y": 1057,
+      "w": 1019.625,
+      "h": 16,
       "px": 14,
       "text": "Automatically uses WebGPU or WebGL for supported plots. Turn"
     },
     {
       "x": 14,
-      "y": 920.25,
-      "w": 71.9375,
-      "h": 16,
+      "y": 1065.25,
+      "w": 67.2031,
+      "h": 15,
       "px": 13,
       "text": "Cell tooltips"
     },
     {
       "x": 13,
-      "y": 947,
-      "w": 1284.6719,
-      "h": 17,
+      "y": 1091,
+      "w": 1232.0781,
+      "h": 16,
       "px": 14,
       "text": "Show brief information on hover in all cell views and the HL"
     },
     {
+      "x": 256,
+      "y": 40.75,
+      "w": 57.6406,
+      "h": 20,
+      "px": 18,
+      "text": "Spatial"
+    },
+    {
+      "x": 322.6406,
+      "y": 43.625,
+      "w": 332.1406,
+      "h": 14,
+      "px": 12.5,
+      "text": "Explore spatial organization, expression, and tissue context"
+    },
+    {
+      "x": 945.3438,
+      "y": 43,
+      "w": 25.6562,
+      "h": 16,
+      "px": 14,
+      "text": "Info"
+    },
+    {
       "x": 269,
-      "y": 117,
-      "w": 89.4531,
-      "h": 17,
+      "y": 232,
+      "w": 89.4688,
+      "h": 16,
       "px": 14,
       "text": "FOV / section"
     },
     {
       "x": 282,
-      "y": 150,
-      "w": 19.9062,
-      "h": 17,
+      "y": 266,
+      "w": 18.6875,
+      "h": 16,
       "px": 14,
       "text": "fov"
     },
     {
       "x": 507.6562,
-      "y": 117,
-      "w": 60.4375,
-      "h": 17,
+      "y": 232,
+      "w": 59.125,
+      "h": 16,
       "px": 14,
       "text": "Plot type"
     },
     {
       "x": 520.6562,
-      "y": 150,
-      "w": 136.625,
-      "h": 17,
+      "y": 266,
+      "w": 133.8281,
+      "h": 16,
       "px": 14,
       "text": "Co-expression (RGB)"
     },
     {
+      "x": 746.3281,
+      "y": 88,
+      "w": 119.8125,
+      "h": 16,
+      "px": 14,
+      "text": "Red channel gene"
+    },
+    {
       "x": 759.3281,
-      "y": 6,
-      "w": 48.5938,
-      "h": 17,
+      "y": 122,
+      "w": 50.5938,
+      "h": 16,
       "px": 14,
       "text": "Slc17a7"
     },
     {
       "x": 746.3281,
-      "y": 45,
-      "w": 134.2656,
-      "h": 17,
+      "y": 160,
+      "w": 133.8281,
+      "h": 16,
       "px": 14,
       "text": "Green channel gene"
     },
     {
       "x": 759.3281,
-      "y": 78,
-      "w": 32.6719,
-      "h": 17,
+      "y": 194,
+      "w": 34.25,
+      "h": 16,
       "px": 14,
       "text": "Gad1"
     },
     {
       "x": 746.3281,
-      "y": 117,
-      "w": 123.375,
-      "h": 17,
+      "y": 232,
+      "w": 123.7031,
+      "h": 16,
       "px": 14,
       "text": "Blue channel gene"
     },
     {
       "x": 759.3281,
-      "y": 150,
-      "w": 34.625,
-      "h": 17,
+      "y": 266,
+      "w": 34.25,
+      "h": 16,
       "px": 14,
       "text": "Gad2"
     },
     {
       "x": 269,
-      "y": 187,
-      "w": 125.75,
-      "h": 17,
+      "y": 302,
+      "w": 126.0312,
+      "h": 16,
       "px": 14,
       "text": "Background image"
     },
     {
       "x": 291,
-      "y": 220,
-      "w": 114.875,
-      "h": 16,
+      "y": 336,
+      "w": 109.3594,
+      "h": 15,
       "px": 13,
       "text": "Tissue background"
     },
     {
-      "x": 419.875,
-      "y": 220,
-      "w": 8.75,
-      "h": 16,
+      "x": 414.3594,
+      "y": 336,
+      "w": 7.5938,
+      "h": 15,
       "px": 13,
       "text": "×"
     },
     {
-      "x": 805.9688,
-      "y": 219.5,
-      "w": 37.6094,
-      "h": 16,
+      "x": 810.5625,
+      "y": 336.5,
+      "w": 36.1406,
+      "h": 15,
       "px": 13,
       "text": "Share"
     },
     {
-      "x": 896.5781,
-      "y": 219.25,
-      "w": 54.4219,
-      "h": 16,
+      "x": 899.7031,
+      "y": 336.25,
+      "w": 51.2969,
+      "h": 15,
       "px": 13,
       "text": "Settings"
     },
     {
       "x": 281.0469,
-      "y": 271.125,
-      "w": 143.4688,
+      "y": 387.125,
+      "w": 140.625,
       "h": 12,
       "px": 10.5,
       "text": "Selection workspace"
     },
     {
-      "x": 432.5156,
-      "y": 271.375,
-      "w": 234.9062,
-      "h": 13,
+      "x": 429.6719,
+      "y": 387.375,
+      "w": 217.3594,
+      "h": 12,
       "px": 11.5,
       "text": "Drag on the plot to create an active cohort."
     },
     {
       "x": 258,
-      "y": 318.75,
-      "w": 16.4688,
-      "h": 13,
+      "y": 435.75,
+      "w": 15.2969,
+      "h": 12,
       "px": 11,
       "text": "0.0"
     },
     {
-      "x": 530.4688,
-      "y": 318.75,
-      "w": 16.4688,
-      "h": 13,
+      "x": 529.2969,
+      "y": 435.75,
+      "w": 15.2969,
+      "h": 12,
       "px": 11,
-      "text": "9.2"
+      "text": "7.4"
     },
     {
-      "x": 554.9375,
-      "y": 318.75,
-      "w": 39.4531,
-      "h": 13,
+      "x": 552.5938,
+      "y": 435.75,
+      "w": 39.7656,
+      "h": 12,
       "px": 11,
       "text": "Slc17a7"
     },
     {
       "x": 269,
-      "y": 356.25,
-      "w": 19.9375,
-      "h": 16,
+      "y": 472,
+      "w": 19.5,
+      "h": 15,
       "px": 13,
       "text": "fov"
     },
     {
-      "x": 286,
-      "y": 929,
-      "w": 102.0156,
-      "h": 17,
+      "x": 264,
+      "y": 1073.5,
+      "w": 231.1406,
+      "h": 16,
       "px": 14,
-      "text": "Moran's I 0.507"
+      "text": "fov view with 2000 points; 0 selected."
+    },
+    {
+      "x": 286,
+      "y": 1041.5,
+      "w": 96.0625,
+      "h": 16,
+      "px": 14,
+      "text": "Moran's I 0.537"
     }
   ],
   "surfaces": [
@@ -327,9 +367,9 @@
       "id": "cv-cv-a",
       "cls": "cv-layer-overlay",
       "x": 265,
-      "y": 384,
+      "y": 497.5,
       "w": 714,
-      "h": 576,
+      "h": 575,
       "pixel_width": 2142
     },
     {
@@ -337,9 +377,9 @@
       "id": "",
       "cls": "cv-underlay-layer",
       "x": 265,
-      "y": 384,
+      "y": 497.5,
       "w": 714,
-      "h": 576,
+      "h": 575,
       "pixel_width": 2142
     },
     {
@@ -347,9 +387,9 @@
       "id": "",
       "cls": "cv-interaction-layer",
       "x": 265,
-      "y": 384,
+      "y": 497.5,
       "w": 714,
-      "h": 576,
+      "h": 575,
       "pixel_width": 2142
     },
     {
@@ -357,11 +397,61 @@
       "id": "cv-mini-a",
       "cls": "cv-mini",
       "x": 885,
-      "y": 866,
+      "y": 978.5,
       "w": 84,
       "h": 84,
       "pixel_width": 252
     }
   ],
-  "page_text": "Skip to main content\nToggle navigation\nv5.2.0\nDataset\nMouse brain (Xenium)\n Data info\n Projection\n Linked views\n Groups\n Spatial\n Gene expression\n Gene ID conversion\n Colour management\n About\nPreferences\nGPU acceleration\nAutomatically uses WebGPU or WebGL for supported plots. Turn off to use CPU rendering. Small or unsupported cell views may use Canvas. Current plots: Canvas.\nCell tooltips\nShow brief information on hover in all cell views and the HLA motif network. Click a cell to pin its summary and open Details, even when tooltips are off. Cross-view highlighting is controlled separately.\nSpatial\nExplore spatial organization, expression, and tissue context.\nInfo\nFOV / section\nfov\nPlot type\nCo-expression (RGB)\nRed channel gene\nSlc17a7\nGreen channel gene\nGad1\nBlue channel gene\nGad2\nBackground image\nTissue background\n×\nShare\nSettings\nSELECTION WORKSPACE\nDrag on the plot to create an active cohort.\n0.0\n9.2\nSlc17a7\nfov\nfov view with 5000 points; 0 selected.\nMoran's I 0.507\nSelect...\n2010300C02Rik\n2010300C02Rik\n2010300C02Rik\n2010300C02Rik"
+  "overlays": [
+    {
+      "x": 937,
+      "y": 503.5,
+      "w": 36,
+      "h": 36
+    },
+    {
+      "x": 937,
+      "y": 543.5,
+      "w": 36,
+      "h": 36
+    },
+    {
+      "x": 937,
+      "y": 583.5,
+      "w": 36,
+      "h": 36
+    },
+    {
+      "x": 937,
+      "y": 623.5,
+      "w": 36,
+      "h": 36
+    },
+    {
+      "x": 937,
+      "y": 663.5,
+      "w": 36,
+      "h": 36
+    },
+    {
+      "x": 937,
+      "y": 703.5,
+      "w": 36,
+      "h": 36
+    },
+    {
+      "x": 937,
+      "y": 743.5,
+      "w": 36,
+      "h": 36
+    },
+    {
+      "x": 277,
+      "y": 1038.5,
+      "w": 114.0625,
+      "h": 22
+    }
+  ],
+  "page_text": "Skip to main content\nToggle navigation\nv8.3.0\nDataset\nMouse brain (Xenium)\n Data info\n Projection\n Linked views\n Groups\n Spatial\n Gene expression\n Gene ID conversion\n Colour management\n About\nPreferences\nGPU acceleration\nAutomatically uses WebGPU or WebGL for supported plots. Turn off to use CPU rendering. Small or unsupported cell views may use Canvas. Current plots: Canvas.\nCell tooltips\nShow brief information on hover in all cell views and the HLA motif network. Click a cell to pin its summary and open Details, even when tooltips are off. Cross-view highlighting is controlled separately.\nSpatial\nExplore spatial organization, expression, and tissue context.\nInfo\nFOV / section\nfov\nPlot type\nCo-expression (RGB)\nRed channel gene\nSlc17a7\nGreen channel gene\nGad1\nBlue channel gene\nGad2\nBackground image\nTissue background\n×\nShare\nSettings\nSELECTION WORKSPACE\nDrag on the plot to create an active cohort.\n0.0\n7.4\nSlc17a7\nfov\nfov view with 2000 points; 0 selected.\nMoran's I 0.537\nSelect..."
 }

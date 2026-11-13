@@ -23,8 +23,12 @@ b <- capture_session(url, 1024, 720)
 wait_for(b, "Array.from(document.querySelectorAll('button')).some(e => /Load example datasets/.test(e.innerText))",
   what = "the Builder start page"
 )
+# The button is in the first paint; a click before the Shiny session is
+# connected is lost.
+wait_for(b, "window.Shiny && Shiny.shinyapp && Shiny.shinyapp.isConnected()", what = "the Shiny session")
+wait_idle(b, 2, 300, ignore = RAIL)
 js(b, "Array.from(document.querySelectorAll('button')).find(e => /Load example datasets/.test(e.innerText)).click()")
-wait_for(b, "document.querySelectorAll('[id^=pick_ds]').length === 3 && !/Loading /.test(document.body.innerText)",
+wait_for(b, "document.querySelectorAll('#ds_ready_list [id^=pick_]').length === 3 && !/Loading /.test(document.body.innerText)",
   timeout = 600, what = "the three example datasets"
 )
 wait_idle(b, 5, 600, ignore = RAIL)
