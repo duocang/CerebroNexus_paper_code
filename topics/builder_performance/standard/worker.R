@@ -31,8 +31,20 @@ for (helper in list.files(
   try(sys.source(helper, envir = globalenv()), silent = TRUE)
 }
 builder_e2e_source_runtime(globalenv())
+# The Builder runs its runtime from the installed package, byte-compiled. Sourced here, each function would be
+# compiled by the JIT the first time it runs, inside the time of the first edit or Build (most of `freeze_s`
+# was that): compile them now, as the installation does.
+for (name in ls(globalenv(), all.names = TRUE)) {
+  f <- get(name, envir = globalenv())
+  if (is.function(f) && !is.primitive(f)) {
+    compiled <- tryCatch(compiler::cmpfun(f), error = function(e) NULL)
+    if (!is.null(compiled)) assign(name, compiled, envir = globalenv())
+  }
+}
 
-now <- function() proc.time()[["elapsed"]]
+# Wall time. Sys.time() reads Windows' precise clock (below 1 ms); proc.time()'s elapsed time there moves in
+# steps of 10 to 16 ms, too coarse for an edit of 50 ms.
+now <- function() as.numeric(Sys.time())
 timed <- function(expr) {
   t0 <- now()
   value <- expr

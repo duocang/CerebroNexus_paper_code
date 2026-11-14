@@ -3,7 +3,7 @@
 # ../STANDARD.md. The statistics (rank_sum_p, rank_sum_min_p, med) and the machine checks are those of
 # topics/viewer_performance/standard (lib.R, proc.R), sourced by run.R and compare.R, not copied.
 
-standard_contract <- "builder-perf-v1"
+standard_contract <- "builder-perf-v2"
 
 # Every number a worker can report, and whether it is a time (the comparison floor is a time resolution).
 # `edit_ms`, `reduce_ms`: milliseconds; the others seconds.

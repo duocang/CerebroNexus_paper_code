@@ -22,6 +22,13 @@ a **scenario** (`standard/scenarios.tsv`) that calls, in a fresh R process, the 
 
 Every session also reports `cpu_s`, `peak_mib` (peak memory of the worker process) and `out_mib` (what it wrote).
 
+**Clock and compiling (contract `builder-perf-v2`).** Times are wall time read with `Sys.time()`, which on
+Windows is precise to below a millisecond. The Builder runtime is sourced from the revision (as its own end-to-end
+tests do) and byte-compiled before anything is timed, as the installed package is. Under `builder-perf-v1` the JIT
+compiled each sourced function the first time it ran, inside the first edit and the first Build (`freeze_s` was
+mostly that), and `proc.time()` moved in steps of 10 to 16 ms on Windows, coarse for an edit of 50 ms. Runs of the
+two contracts are not comparable.
+
 **Why not a browser.** The slow steps of these five are in R: the Shiny process validating an entry, the worker
 decoding a file. A browser adds a second clock (the time Chrome needs to draw) that none of the optimisations
 touches, and a user-interface session is much noisier than a function call. The browser timing of an edit
@@ -74,7 +81,7 @@ fixtures on the same drive every time, and nothing else heavy running.
 
 ```
 runs/cerebronexus-<version>_<YYYYMMDD-HHMMSS>_<sha7>[_base][_partial]/
-  manifest.tsv   contract (builder-perf-v1), revision, machine, fixtures (MD5), scale, canary, host load, harness commit
+  manifest.tsv   contract (builder-perf-v2), revision, machine, fixtures (MD5), scale, canary, host load, harness commit
   raw.tsv        one row per session: every metric, status, wall time, the host's CPU before the session
   scenarios.tsv  one row per scenario: medians over the rounds that finished
   checks.tsv     the equivalence checks (section 7)
