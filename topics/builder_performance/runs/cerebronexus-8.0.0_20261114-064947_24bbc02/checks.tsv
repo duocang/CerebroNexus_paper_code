@@ -1,0 +1,6 @@
+check	result	detail
+sidecar_config_change_same_matrix	pass	matrix after a configuration change, offered the earlier sidecar vs offered nothing
+sidecar_changed_matrix_rewritten	pass	a changed matrix, offered the sidecar of the old one: the result holds the new matrix, not the old
+sidecar_wrong_md5_rewritten	pass	an offered sidecar whose MD5 does not match: the matrix is written again
+sidecar_missing_rewritten	pass	an offered sidecar that does not exist: the matrix is written again
+h5_content_digest	pass	digest eb69662063f42f6b33281a4207ef7808 over 6 datasets

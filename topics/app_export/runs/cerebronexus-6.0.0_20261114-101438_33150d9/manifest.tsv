@@ -1,0 +1,12 @@
+key	value
+contract	app-export-v1
+version	6.0.0
+sha	33150d9d7a957607ccf43a0296903e073be2408f
+ref	d5ad68c3255d3dbf84b4d108b0cc0e2074925ab3
+platform	x86_64-w64-mingw32
+host	NUIOI
+r	R version 4.6.1 (2026-06-24 ucrt)
+rounds	5
+scenarios	example,spatial_visium,1m,cosmx,embedded_100k,h5_100k
+fixture_md5	embedded_100k=720ca6f7595d06f69d442de6f50af0b4,h5_100k=0a048505aa80a0231aa0fb5c1bf83752
+started	2026-11-14 10:18:53

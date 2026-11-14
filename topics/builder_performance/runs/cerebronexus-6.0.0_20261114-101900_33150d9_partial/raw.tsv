@@ -1,0 +1,6 @@
+round	scenario	revision	position	wall_s	status	error	edit_ms	reduce_ms	import_s	freeze_s	build_s	rebuild_s	export_s	cpu_s	peak_mib	out_mib	rebuild_h5_same_md5	host_cpu_pct	host_idle
+1	export_h5	baseline	1	64.942046880722	ok		NA	NA	NA	NA	NA	NA	56.83	64.14	11474.69921875	2270.80481624603	NA	2.9	TRUE
+2	export_h5	baseline	4	64.8634400367737	ok		NA	NA	NA	NA	NA	NA	56.84	64.07	11475.39453125	2270.80481624603	NA	3	TRUE
+3	export_h5	baseline	5	64.6948478221893	ok		NA	NA	NA	NA	NA	NA	56.67	63.65	11474.0234375	2270.80481624603	NA	3.1	TRUE
+4	export_h5	baseline	8	64.8917639255524	ok		NA	NA	NA	NA	NA	NA	56.8	63.65	11475.15234375	2270.80481624603	NA	3.2	TRUE
+5	export_h5	baseline	9	64.8009397983551	ok		NA	NA	NA	NA	NA	NA	56.83	63.61	11475.24609375	2270.80481624603	NA	3.2	TRUE

@@ -1,0 +1,6 @@
+round	scenario	revision	position	wall_s	status	error	edit_ms	reduce_ms	import_s	freeze_s	build_s	rebuild_s	export_s	cpu_s	peak_mib	out_mib	rebuild_h5_same_md5	host_cpu_pct	host_idle
+1	export_h5	candidate	2	24.7594168186188	ok		NA	NA	NA	NA	NA	NA	17.06	24.09	11704.45703125	2272.84384632111	NA	3.3	TRUE
+2	export_h5	candidate	3	24.7717659473419	ok		NA	NA	NA	NA	NA	NA	17.03	24.02	11704.11328125	2272.84384632111	NA	6.7	TRUE
+3	export_h5	candidate	6	24.7070300579071	ok		NA	NA	NA	NA	NA	NA	16.94	24.01	11704.33984375	2272.84384632111	NA	3.6	TRUE
+4	export_h5	candidate	7	24.6529648303986	ok		NA	NA	NA	NA	NA	NA	16.86	24.03	11705.265625	2272.84384632111	NA	3	TRUE
+5	export_h5	candidate	10	24.7243280410767	ok		NA	NA	NA	NA	NA	NA	16.98	24.04	11704.52734375	2272.84384632111	NA	3	TRUE

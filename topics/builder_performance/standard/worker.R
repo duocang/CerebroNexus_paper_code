@@ -271,7 +271,8 @@ run <- function() {
     on_progress <- function(part) {
       stage_marks[[length(stage_marks) + 1L]] <<- list(part = part, at = now())
     }
-    ex <- timed(exportFromSeurat(
+    # An older revision lacks some arguments (6.0.0 has no `.on_progress`): pass only those it has.
+    args <- list(
       seurat,
       assay = "RNA",
       slot = "data",
@@ -286,7 +287,10 @@ run <- function() {
       codec = "qs2",
       verbose = FALSE,
       .on_progress = on_progress
-    ))
+    )
+    known <- names(formals(exportFromSeurat))
+    args <- args[names(args) == "" | names(args) %in% known]
+    ex <- timed(do.call(exportFromSeurat, args))
     out$export_s <<- ex$s
     files <- list.files(work, recursive = TRUE, full.names = TRUE)
     out$out_mib <<- sum(file.size(files)) / 2^20

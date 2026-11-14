@@ -1,0 +1,53 @@
+key	value
+run_id	cerebronexus-6.0.0_20261114-074022_33150d9
+contract	blackbox-v7
+version	6.0.0
+ref	d5ad68c3255d3dbf84b4d108b0cc0e2074925ab3
+sha	33150d9d7a957607ccf43a0296903e073be2408f
+platform	windows
+rounds	5
+partial	FALSE
+datasets	1m,ren,cosmx,example,demo_trekker
+sessions	95
+failed_sessions	0
+pair_id	20261114-074022_d79f5d8_33150d9
+pair_role	baseline
+pair_with	cerebronexus-8.1.1_20261114-074022_d79f5d8
+host	NUIOI
+os	Microsoft Windows 11 Pro 10.0.26300
+cpu	12th Gen Intel(R) Core(TM) i9-12900K
+cores	24
+mem_total_mib	130791
+gpu	GameViewer Virtual Display Adapter / Microsoft Remote Display Adapter / Intel(R) UHD Graphics 770 / NVIDIA GeForce RTX 4060
+renderer	ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11); webgpu
+memory_measure	private bytes (Windows has no PSS)
+r_version	R version 4.6.1 (2026-06-24 ucrt)
+chrome	Chrome/157.0.8103.52
+chromote	0.5.1
+harness_commit	295ceaca12ddbc96ed53426d0a9df426e0f321e1-dirty
+cerebro_repo	C:/Users/wangx/Projects/CerebroNexus
+large_examples	C:/Users/wangx/Projects/data/large-examples
+plan_md5	d33e46d509ebbbd3d99cce3d488e9383
+fixtures_md5	54fa528ad6511a5e85dbd508a438a5bf,71d9b9af1b822bc1affe90ca7db9f960,33fdb5b5fbda4dd85bf07e79b02845bd
+uncovered_pages	
+cache	a directory of this run and revision (R_USER_CACHE_DIR): filled by the warm-up and kept; emptied before every first_start session
+canary_ms	380,370,370,370,370,370
+canary_ratio	1.027
+host_idle_pct	15
+host_idle_max_s	600
+host_busy_sessions	0
+host_cpu_pct_median	3.2
+started	2026-11-14T07:40:22+0100
+ended	2026-11-14T09:36:47+0100
+fixture.1m.crb	1m/cerebro-v2/cerebro_mouse_brain_1m_compressed.crb
+fixture.1m.md5	54fa528ad6511a5e85dbd508a438a5bf
+fixture.1m.h5_bytes	3153135630
+fixture.1m.version_stamp	2
+fixture.ren.crb	ren/cerebro-v2/cerebro_ren_covid_1.46m_compressed.crb
+fixture.ren.md5	71d9b9af1b822bc1affe90ca7db9f960
+fixture.ren.h5_bytes	3051149823
+fixture.ren.version_stamp	2
+fixture.cosmx.crb	cosmx/cerebro-v2/cerebro_cosmx_nsclc_compressed.crb
+fixture.cosmx.md5	33fdb5b5fbda4dd85bf07e79b02845bd
+fixture.cosmx.h5_bytes	724568918
+fixture.cosmx.version_stamp	2

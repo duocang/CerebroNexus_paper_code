@@ -1,0 +1,36 @@
+key	value
+run_id	cerebronexus-6.0.0_20261114-101900_33150d9_partial
+contract	builder-perf-v1
+version	6.0.0
+ref	d5ad68c3255d3dbf84b4d108b0cc0e2074925ab3
+sha	33150d9d7a957607ccf43a0296903e073be2408f
+platform	windows
+rounds	5
+partial	TRUE
+scenarios	export_h5
+sessions	5
+failed_sessions	0
+pair_id	20261114-101900_d79f5d8_33150d9
+pair_role	baseline
+pair_with	cerebronexus-8.1.1_20261114-101900_d79f5d8_partial
+host	NUIOI
+os	Microsoft Windows 11 Pro 10.0.26300
+cpu	12th Gen Intel(R) Core(TM) i9-12900K
+cores	24
+mem_total_mib	130791
+r_version	R version 4.6.1 (2026-06-24 ucrt)
+harness_commit	295ceaca12ddbc96ed53426d0a9df426e0f321e1-dirty
+cerebro_repo	C:/Users/wangx/Projects/CerebroNexus
+fixtures	C:/Users/wangx/Projects/data/builder-perf
+fixtures_scale	1
+fixtures_md5	cells100k.rds=38cdb798b83ebc259947b9a8692b1689
+scenarios_md5	cbafb3193c717d4eaf3b0417ae3a15a4
+canary_ms	370,370,370,370,370,380
+canary_ratio	1.027
+host_idle_pct	15
+host_idle_max_s	600
+host_busy_sessions	0
+host_cpu_pct_median	3.1
+checks_failed	NA
+started	2026-11-14T10:19:00+0100
+ended	2026-11-14T10:27:24+0100
