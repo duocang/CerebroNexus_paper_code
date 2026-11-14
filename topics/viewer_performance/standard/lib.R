@@ -520,8 +520,8 @@ ACTION_NAMES <- c(switch = "Switch dataset", switch_back = "Switch back", colour
                   lasso = "Lasso select", group = "Change grouping", plot_type = "Change plot type", percent = "Show as percent",
                   gene = "Show 1 gene", genes12 = "Show 12 genes", tab = "Switch tab", content = "Switch content",
                   section = "Switch section", table = "Switch table")
-DATASET_NAMES <- c(`1m` = "mouse brain, 1.3 M", ren = "COVID-19, 1.46 M", cosmx = "CosMx NSCLC, 800 k",
-                   example = "example", demo_trekker = "Trekker demo")
+DATASET_NAMES <- c(mb = "mouse brain (fixture)", example = "example", demo_trekker = "Trekker demo",
+                   demo_full_tcr_bcr = "TCR/BCR demo", demo_hla_tcr_dextramer = "HLA/TCR demo", demo_spatial_visium = "Visium demo")
 display_name <- function(id, table) ifelse(id %in% names(table), table[id], id)
 row_names <- function(page, is_page, visit = rep("cold", length(page))) {
   ifelse(visit == "first_start", "From page load, nothing kept", ifelse(visit == "first_plot", "From page load",

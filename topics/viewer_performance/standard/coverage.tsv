@@ -1,20 +1,20 @@
-# Every page once, on one dataset: a large fixture (fixtures.tsv) or a demo CRB that ships with
-# CerebroNexus (inst/extdata/examples), for the pages none of the large datasets has.
+# Every page once, on one dataset: the large fixture `mb` (fixtures.tsv, made by standard/fixtures.R) or a demo CRB that ships with
+# CerebroNexus (inst/extdata/examples), for the pages the large fixture lacks (TCR/BCR, HLA, spatial, Trekker, marker genes).
 # first_plot = yes: the page also gets a session of its own that times the start to its first plot (STANDARD.md, section 1).
 page	dataset	first_plot
-loadData	1m
-overview	1m	yes
-coordinated_views	1m
-groups	1m
-geneExpression	1m
-trajectory	1m
-color_management	1m
-geneIdConversion	1m
-about	1m
-immune_repertoire	ren
-hla_tcr_motifs	ren
-extra_material	ren
-spatial	cosmx
+loadData	mb
+overview	mb	yes
+coordinated_views	mb
+groups	mb
+geneExpression	mb
+trajectory	mb
+color_management	mb
+geneIdConversion	mb
+about	mb
+immune_repertoire	demo_full_tcr_bcr
+hla_tcr_motifs	demo_hla_tcr_dextramer
+extra_material	demo_full_tcr_bcr
+spatial	demo_spatial_visium
 markerGenes	example
 mostExpressedGenes	example
 enrichedPathways	example

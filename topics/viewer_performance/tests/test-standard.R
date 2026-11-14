@@ -15,20 +15,20 @@ obs <- function(page, visit = "cold", visual = 1000, status = "ok", dataset = "1
   d
 }
 
-test_that("the shipped plan measures every page exactly once, on 1m, ren, cosmx or a demo", {
+test_that("the shipped plan measures every page exactly once, on mb or a demo", {
   cov <- tsv("coverage.tsv"); act <- tsv("actions.tsv"); fx <- tsv("fixtures.tsv")
   expect_false(anyDuplicated(cov$page) > 0)
-  expect_setequal(fx$name, c("1m", "ren", "cosmx"))
+  expect_setequal(fx$name, "mb")
   expect_false(any(grepl("^(/|[A-Za-z]:)", fx$crb)))   # paths below --large-examples, never absolute
-  plan <- build_plan(cov, act, fx$name, c("example", "demo_trekker"))
+  plan <- build_plan(cov, act, fx$name, c("example", "demo_trekker", "demo_full_tcr_bcr", "demo_hla_tcr_dextramer", "demo_spatial_visium"))
   expect_equal(nrow(plan), nrow(cov))
   expect_length(attr(plan, "uncovered"), 0L)
-  expect_equal(plan$dataset[plan$page == "overview"], "1m")
-  expect_equal(plan$dataset[plan$page == "immune_repertoire"], "ren")
-  expect_equal(plan$dataset[plan$page == "spatial"], "cosmx")
+  expect_equal(plan$dataset[plan$page == "overview"], "mb")
+  expect_equal(plan$dataset[plan$page == "immune_repertoire"], "demo_full_tcr_bcr")
+  expect_equal(plan$dataset[plan$page == "spatial"], "demo_spatial_visium")
   expect_true(all(plan$large[plan$dataset %in% fx$name]))
   # large fixtures first, in the order of fixtures.tsv
-  expect_equal(unique(plan$dataset)[1:3], c("1m", "ren", "cosmx"))
+  expect_equal(unique(plan$dataset)[1], "mb")
   expect_equal(plan$actions[plan$page == "overview"], "overview.colour_by,overview.zoom,overview.lasso")
   # every action in actions.tsv is implemented in hook.js
   hook <- paste(readLines(file.path("..", "standard", "hook.js")), collapse = "\n")

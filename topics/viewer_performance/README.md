@@ -7,18 +7,22 @@ two of them. How it measures is in [STANDARD.md](STANDARD.md).
 
 ## Before you start
 
-- Windows, with R (packages `chromote`, `processx`, `ps`, `jsonlite`, `png`, `base64enc`, `testthat`), Chrome and Git.
-- A CerebroNexus checkout beside this repository (`..\CerebroNexus`), or `--cerebro-repo DIR`.
-- The large example datasets, prepared once with CerebroNexus (`Rscript run-demo.R --prepare-only --cosmx` in
-  its checkout). The folder must contain:
+- R (packages `chromote`, `processx`, `ps`, `jsonlite`, `png`, `base64enc`, `testthat`), Chrome and Git. Linux or Windows;
+  Chrome must draw with the GPU. On Linux that needs a wrapper that clears `LD_LIBRARY_PATH` if R brings its own
+  libraries (`CHROMOTE_CHROME=/path/to/wrapper`), and the harness adds `--use-gl=angle --use-angle=gl`. The manifest's
+  `renderer` must name the GPU, not SwiftShader.
+- A CerebroNexus checkout beside this repository (`../CerebroNexus`), or `--cerebro-repo DIR`.
+- The one large fixture, `mb` (a mouse brain CRB with an H5 sidecar), made once from an h5ad of the 10x E18 mouse brain
+  (any size; the size is the dataset's size in every run). Convert with the **oldest** revision you will measure: newer
+  ones read its CRB, the other way round does not work.
 
-  | Dataset | File below the folder |
-  |---|---|
-  | `1m`: 10x E18 mouse brain, 1.3 M cells | `1m/cerebro-v2/cerebro_mouse_brain_1m_compressed.crb` |
-  | `ren`: Ren et al. COVID-19, 1.46 M cells, TCR and BCR | `ren/cerebro-v2/cerebro_ren_covid_1.46m_compressed.crb` |
-  | `cosmx`: CosMx NSCLC, 800 k cells | `cosmx/cerebro-v2/cerebro_cosmx_nsclc_compressed.crb` |
+  ```bash
+  Rscript topics/viewer_performance/standard/fixtures.R --h5ad e18_500000.h5ad --out ../data/viewer-fixtures --lib LIB_OF_OLDEST
+  ```
 
-  Each CRB needs its `.h5` sidecar and `.viewer` folder beside it. The list is [`standard/fixtures.tsv`](standard/fixtures.tsv).
+  The run then takes `--large-examples ../data/viewer-fixtures`; the file it needs is listed in
+  [`standard/fixtures.tsv`](standard/fixtures.tsv). Pages that `mb` cannot show (TCR/BCR, HLA, spatial, Trekker, marker
+  genes) use the demo CRBs that ship with each revision.
 - Run every command from the root of this repository.
 
 ## Measure one revision
@@ -47,10 +51,8 @@ Every page is measured **once, on one dataset** ([`standard/coverage.tsv`](stand
 
 | Dataset | Pages |
 |---|---|
-| `1m` | Data info, Projection, Linked views, Groups, Gene expression, Trajectory, Colour management, Gene ID conversion, About |
-| `ren` | Immune repertoire, HLA & TCR motifs, Extra material |
-| `cosmx` | Spatial |
-| demo CRBs that ship with CerebroNexus | Marker genes, Most expressed genes, Enriched pathways (`example`), Trekker (`demo_trekker`): none of the large datasets has them |
+| `mb` | Data info, Projection, Linked views, Groups, Gene expression, Trajectory, Colour management, Gene ID conversion, About |
+| demo CRBs that ship with CerebroNexus | Immune repertoire, Extra material (`demo_full_tcr_bcr`), HLA & TCR motifs (`demo_hla_tcr_dextramer`), Spatial (`demo_spatial_visium`), Marker genes, Most expressed genes, Enriched pathways (`example`), Trekker (`demo_trekker`) |
 
 The Projection page is also measured from the start: Chrome navigates to a Viewer that has just started and
 the clock runs to the first frame that shows the projection, the same event the tool comparison times for the

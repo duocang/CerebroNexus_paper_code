@@ -68,10 +68,11 @@ A run is published to `topics/expression_backends/data/<quick|scale>/` and `CURR
 
 ## Viewer benchmarks
 
-Page speed, action speed and memory of the CerebroNexus Viewer are measured for one CerebroNexus version per run, on Windows, with every page measured once on one of three large datasets (mouse brain 1.3M, Ren COVID-19 1.46M, CosMx NSCLC) or a demo CRB. Each run is saved in `topics/viewer_performance/runs/cerebronexus-<version>_<date>_<sha>/`, and `compare.R` compares two runs with an exact test over their rounds. `--baseline REF` measures a second revision in the same run, the sessions of the two taking turns:
+Page speed, action speed and memory of the CerebroNexus Viewer are measured for one CerebroNexus version per run, on Linux or Windows with the GPU, with every page measured once on one self-built mouse brain fixture or a demo CRB that ships with the revision. Each run is saved in `topics/viewer_performance/runs/cerebronexus-<version>_<date>_<sha>/`, and `compare.R` compares two runs with an exact test over their rounds. `--baseline REF` measures a second revision in the same run, the sessions of the two taking turns:
 
 ```bash
-Rscript topics/viewer_performance/standard/run.R --large-examples ../data/large-examples [--baseline REF]
+Rscript topics/viewer_performance/standard/fixtures.R --h5ad FILE.h5ad --out ../data/viewer-fixtures --lib LIB_OF_OLDEST
+Rscript topics/viewer_performance/standard/run.R --large-examples ../data/viewer-fixtures --candidate REF [--baseline REF]
 Rscript topics/viewer_performance/standard/compare.R topics/viewer_performance/runs/A topics/viewer_performance/runs/B
 ```
 

@@ -50,7 +50,9 @@ sh <- function(cmd, args, ...) {
   suppressWarnings(system2(cmd, args, stdout = TRUE, stderr = FALSE, ...))
 }
 git <- function(...) sh("git", c("-C", repo, ...))
-cache_root <- file.path(
+cache_root <- if (nzchar(Sys.getenv("PERF_CACHE"))) {
+  Sys.getenv("PERF_CACHE")   # the same sources and libraries as the Viewer topic
+} else file.path(
   if (on_windows) {
     Sys.getenv("LOCALAPPDATA")
   } else {

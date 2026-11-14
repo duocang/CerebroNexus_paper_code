@@ -322,12 +322,23 @@
   // pixels: [x, y, width, height]. `click_ms` is the click on the page's own clock, which starts at
   // the navigation (performance.now()).
   cb.fpClickT = 0;
+  cb.fpRetryT = 0;
   cb.fpStep = function () {
     if (!cb.fpClickT) {
       var a = document.querySelector('ul.sidebar-menu a[data-value="overview"]');
       if (!a || a.offsetParent === null || !document.getElementById('shiny-tab-overview')) return JSON.stringify({ done: false });
+      // Shiny has to be connected and idle: a click before that is dropped and the page stays on Data info.
+      if (!(window.Shiny && Shiny.shinyapp && Shiny.shinyapp.isConnected()) || document.documentElement.classList.contains('shiny-busy')) return JSON.stringify({ done: false });
       cb.begin('overview', false);
-      cb.fpClickT = cb.clickT;
+      cb.fpClickT = cb.clickT; cb.fpRetryT = now();
+    }
+    // A click that came before the session had loaded the data is lost (the page stays empty): a user would click
+    // again, so click again every 2 s until the page is shown. The clock stays at the first click.
+    var tabPane = document.getElementById('shiny-tab-overview');
+    if (tabPane && !tabPane.classList.contains('active') && now() - cb.fpRetryT > 2000) {
+      cb.fpRetryT = now();
+      var link = document.querySelector('ul.sidebar-menu a[data-value="overview"]');
+      if (link) link.click();
     }
     var st = JSON.parse(cb.state()), c = overviewCanvas(), r = c ? c.getBoundingClientRect() : null;
     st.click_ms = cb.fpClickT;

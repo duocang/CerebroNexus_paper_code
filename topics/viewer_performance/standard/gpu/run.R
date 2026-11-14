@@ -44,6 +44,7 @@ on.exit(httpuv::stopServer(srv), add = TRUE)
 
 # A fresh Chrome per measurement, with the GPU enabled (chromote turns it off by default).
 chrome_args <- c(setdiff(chromote::default_chrome_args(), "--disable-gpu"), "--enable-unsafe-webgpu", "--ignore-gpu-blocklist")
+if (.Platform$OS.type != "windows") chrome_args <- c(chrome_args, "--use-gl=angle", "--use-angle=gl")
 measure <- function(k, round) {
   br <- Chrome$new(args = chrome_args)
   cm <- Chromote$new(browser = br)

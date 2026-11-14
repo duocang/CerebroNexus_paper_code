@@ -75,8 +75,11 @@ info <- grep("^PERF_INFO", readLines(log_file, warn = FALSE), value = TRUE)
 pkg_version <- if (length(info)) sub(" path=.*", "", sub("^PERF_INFO version=", "", info[[1L]])) else NA_character_
 
 chrome_args <- chromote::default_chrome_args()
-# On Windows Chrome draws with the machine's GPU (WSL has none: there it renders in software).
-if (on_windows) chrome_args <- c(setdiff(chrome_args, "--disable-gpu"), "--enable-unsafe-webgpu", "--ignore-gpu-blocklist")
+# Chrome draws with the machine's GPU (WebGL), never in software. On Linux that is OpenGL through ANGLE (the
+# Vulkan path gives WebGPU but its canvas comes out blank in screenshots); without a GPU (WSL) Chrome renders in
+# software, which the manifest's `renderer` shows (SwiftShader).
+chrome_args <- c(setdiff(chrome_args, "--disable-gpu"), "--enable-unsafe-webgpu", "--ignore-gpu-blocklist")
+if (!on_windows) chrome_args <- c(chrome_args, "--use-gl=angle", "--use-angle=gl")
 extra <- Sys.getenv("PERF_CHROME_ARGS", "")
 if (nzchar(extra)) chrome_args <- c(chrome_args, strsplit(extra, " ", fixed = TRUE)[[1L]])
 # A loaded machine can take more than chromote's default 10 s to open the debugging port.
@@ -132,7 +135,10 @@ wait_done <- function(timeout_s, capture = TRUE, state_js = "window.__cb.state()
       st$status <- if (nzchar(st$error %||% "")) "error" else if (isTRUE(st$stuck)) "stuck_busy" else "ok"
       st$frames <- frames; return(st)
     }
-    if (as.numeric(difftime(Sys.time(), t0, units = "secs")) > timeout_s) { st$status <- "timeout"; st$frames <- frames; return(st) }
+    if (as.numeric(difftime(Sys.time(), t0, units = "secs")) > timeout_s) {
+      message("timeout; last page state: ", tryCatch(ev(state_js), error = function(e) conditionMessage(e)))
+      st$status <- "timeout"; st$frames <- frames; return(st)
+    }
     if (!capture) Sys.sleep(0.04)
   }
 }
