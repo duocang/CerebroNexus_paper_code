@@ -120,28 +120,28 @@ below it, and a missing one stops the run, so a run always measures the whole pl
 
 | Dataset | Pages | Why |
 |---|---|---|
-| `mb` (10x E18 mouse brain, made by `standard/fixtures.R` from an h5ad of any size) | Data info, Projection, Linked views, Groups, Gene expression, Trajectory, Colour management, Gene ID conversion, About | the pages every dataset has, at the size the fixture was made with |
-| demo CRBs of the measured revision | Immune repertoire, Extra material (`demo_full_tcr_bcr`); HLA & TCR motifs (`demo_hla_tcr_dextramer`); Spatial (`demo_spatial_visium`); Marker genes, Most expressed genes, Enriched pathways (`example`); Trekker (`demo_trekker`) | `mb` has none of them |
+| `1m` (10x E18 mouse brain, 1.3 M cells) | Data info, Projection, Linked views, Groups, Gene expression, Trajectory, Colour management, Gene ID conversion, About | the main dataset: the pages every dataset has |
+| `ren` (Ren et al. COVID-19, 1.46 M cells) | Immune repertoire, HLA & TCR motifs, Extra material | TCR and BCR, HLA: what the mouse brain lacks |
+| `cosmx` (CosMx NSCLC, 800 k cells, 8 FOVs) | Spatial | the only spatial dataset |
+| `example`, `demo_trekker` (demo CRBs of the measured revision) | Marker genes, Most expressed genes, Enriched pathways; Trekker | none of the large datasets has them |
 
-One fixture, built by the reader from public data, replaces the three large datasets of earlier runs (mouse brain 1.3 M, Ren COVID-19 1.46 M, CosMx NSCLC 800 k), whose preparation needed downloads of tens of GB: a run now needs one h5ad and no download beyond it. Runs on the old datasets (`runs/`, contract `blackbox-v7`, plan checksum differs) are not comparable with runs on `mb`.
+Shared pages (Projection, Groups, ...) are measured on `1m` only, not again on `ren` or `cosmx`. The fourth
+prepared dataset (`tcell`, pan-cancer T cells) adds no page the others do not cover and is not used.
 Switching datasets (`loadData.switch`) needs a second dataset in the menu: that session also loads the
 revision's `example` CRB. The demo CRBs come from the measured revision and change between versions, so
 those pages compare the data as much as the code across distant versions.
 
 ## 3. Platform
 
-Linux or Windows, with the data on a local disk. Revisions are installed with `R CMD INSTALL` from `git archive` of the
-commit into a cache library (`PERF_CACHE`), not loaded with `load_all`; the server refuses to start when the loaded
-package is not that library's.
+**Windows**, with the data on Windows (the reference platform). Revisions are installed with `R CMD INSTALL` from
+`git archive` of the commit into a cache library (`PERF_CACHE`, default `%LOCALAPPDATA%\cerebronexus-viewer-perf`), not
+loaded with `load_all`; the server refuses to start when the loaded package is not that library's. Chrome draws with
+the machine's GPU (`--disable-gpu` removed, `--ignore-gpu-blocklist`, WebGPU on). CPU and memory come from `sampler.ps1`. Screenshots are taken at full
+size and every 4th pixel is kept (Chrome's own downscaling alternates between two samplings with the GPU).
 
-**The GPU is used.** Chrome runs with `--disable-gpu` removed, `--ignore-gpu-blocklist` and WebGPU enabled; on Linux also
-`--use-gl=angle --use-angle=gl` (OpenGL through ANGLE: the Vulkan path gives WebGPU, but the Viewer's canvas then comes
-out blank in screenshots). Without a GPU (WSL) Chrome renders in software, and the manifest's `renderer` says SwiftShader:
-such numbers are not comparable. CPU and memory come from `sampler.ps1` (Windows) or `sampler.R` (Linux, PSS).
-Screenshots are taken at full size and every 4th pixel is kept.
-
-Numbers from different platforms, GPUs or machines are not comparable; `compare.R` says when two runs differ in platform,
-host or CPU.
+The harness also runs on Linux (`sampler.R`, PSS; Chrome with `--use-gl=angle --use-angle=gl`; without a GPU, as in WSL,
+it renders in software and the manifest's `renderer` says SwiftShader), but numbers from different platforms
+or machines are not comparable; `compare.R` says when two runs differ in platform, host or CPU.
 
 ## 4. Server steps
 
@@ -249,10 +249,9 @@ platform, host, CPU, memory measure, plan, large datasets). Compare runs from th
   coarse for the differences between ways of starting, and only `launchCerebro()` is used, not `start.R`.
 - **Cache.** Two states are measured, nothing kept and a later start; a data set that is new to a Viewer
   that has run before is not. The file cache of the operating system is always warm.
-- **Fixtures.** `mb` is written by the oldest revision of the comparison, so newer revisions measure it in the old layout:
-  what they gain or pay on files they write themselves is not in these numbers (the Builder topic measures that). It has one
-  grouping column (`cluster`), so the actions that switch the grouping or the colouring (`groups.*`,
-  `overview.colour_by`) are `unavailable` on it.
+- **Fixtures.** The large CRBs were written before the cell-index layout and before CRBs recorded the
+  checksum of their H5 file. A revision that reads both layouts is measured on the old one, so what it
+  gains or pays on files it writes itself is not in these numbers.
 - **Small differences.** With five rounds a row is marked only when the two revisions do not overlap at
   all, or nearly. A real difference smaller than the spread of the rounds stays `not resolved`.
 - **Actions.** Not scripted: Linked views filters and brushing, export and download, and most options inside

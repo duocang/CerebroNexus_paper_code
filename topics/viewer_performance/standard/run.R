@@ -5,7 +5,7 @@
 #   Rscript topics/viewer_performance/standard/run.R --large-examples DIR
 #           [--candidate REF] [--baseline REF] [--cerebro-repo DIR] [--rounds N] [--pages a,b]
 #
-#   --large-examples DIR  required: the folder with mb/cerebro_mb.crb (standard/fixtures.R makes it); relative to the
+#   --large-examples DIR  required: the folder with 1m/, ren/ and cosmx/ (fixtures.tsv); relative to the
 #                         current directory or absolute
 #   --candidate REF       the revision to measure (default HEAD of the CerebroNexus checkout)
 #   --baseline REF        a second revision, measured in the same run: the sessions of the two take turns, each
@@ -32,7 +32,7 @@ paper_repo <- normalizePath(file.path(topic, "..", ".."), winslash = "/")
 
 known <- c("large_examples", "candidate", "baseline", "cerebro_repo", "rounds", "pages")
 if (length(unknown <- setdiff(names(opt), known))) die("unknown option: --", paste(gsub("_", "-", unknown), collapse = ", --"))
-if (is.null(opt$large_examples) || isTRUE(opt$large_examples)) die("--large-examples DIR is required (the folder with mb/cerebro_mb.crb; standard/fixtures.R makes it)")
+if (is.null(opt$large_examples) || isTRUE(opt$large_examples)) die("--large-examples DIR is required (the folder with 1m/, ren/ and cosmx/)")
 rounds <- if (is.null(opt$rounds)) default_rounds else as.integer(opt$rounds)
 if (is.na(rounds) || rounds < 1L) die("--rounds must be a positive whole number")
 if (isTRUE(opt$baseline) || isTRUE(opt$candidate)) die("--candidate and --baseline take a revision")

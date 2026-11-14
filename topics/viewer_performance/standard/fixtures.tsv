@@ -1,2 +1,4 @@
 name	crb
-mb	mb/cerebro_mb.crb
+1m	1m/cerebro-v2/cerebro_mouse_brain_1m_compressed.crb
+ren	ren/cerebro-v2/cerebro_ren_covid_1.46m_compressed.crb
+cosmx	cosmx/cerebro-v2/cerebro_cosmx_nsclc_compressed.crb
