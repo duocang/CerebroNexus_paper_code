@@ -6,7 +6,11 @@
 #   --page none opens Data info only (a warm-up) and records nothing.
 #   --first-plot (with --page overview) is the other kind of session: Chrome navigates to a Viewer that has just
 #   started, opens the Projection page as soon as the sidebar offers it and the clock (visit `first_plot`) runs
-#   from the navigation to the first frame that shows the projection, and to the last frame that changes.
+#   from the navigation to the first frame that shows the projection, and to the last frame that changes;
+#   start_plot_ms runs from the launch of the R server to the same frame.
+#   --tour a,b,c is a third kind: the session opens the Viewer, stays tour_wait_s on the page it opens on, then
+#   opens the listed pages one after another (visit `tour`), tour_think_s after the last one finished, without
+#   waiting for a quiet server in between.
 # Every observation starts with the R server and Chrome quiet and ends when they are quiet again;
 # appends one row per observation to --out.
 #
@@ -19,6 +23,7 @@
 #        [--crb2 FILE]     a second CRB in the dataset menu, for the loadData.switch actions
 #        [--dataset NAME]  [--session ID]  Chrome flags: env PERF_CHROME_ARGS (e.g. --no-sandbox)
 #        [--trace FILE]    keep the CPU and memory samples (CSV) of the session
+#        [--tour a,b]      the pages of a tour (lib.R, tour_pages()); --page is then "tour"
 suppressPackageStartupMessages({
   library(chromote); library(processx); library(jsonlite)
 })
@@ -38,6 +43,8 @@ first_plot_mode <- !is.null(opt$first_plot)
 first_plot_visit <- if (isTRUE(opt$first_plot)) "first_plot" else opt$first_plot
 if (first_plot_mode && !first_plot_visit %in% start_visits) stop("--first-plot takes ", paste(start_visits, collapse = " or "))
 if (first_plot_mode && (!identical(page, "overview") || length(actions))) stop("--first-plot is for --page overview, without actions")
+tour <- if (is.null(opt$tour) || isTRUE(opt$tour)) character() else strsplit(opt$tour, ",", fixed = TRUE)[[1L]]
+if (length(tour) && (first_plot_mode || length(actions))) stop("--tour goes without --first-plot and --actions")
 now_ms <- function() as.numeric(Sys.time()) * 1000
 
 # The cache directory of the server, and how many files it holds before the server starts (0: nothing kept).
@@ -46,6 +53,8 @@ if (!is.null(cache_dir)) dir.create(cache_dir, recursive = TRUE, showWarnings = 
 cache_files <- if (is.null(cache_dir)) NA_integer_ else length(list.files(cache_dir, recursive = TRUE, all.files = TRUE, no.. = TRUE))
 
 log_file <- tempfile(fileext = ".log")
+# The launch of the R server: start_plot_ms of the first-plot visits runs from here.
+t_launch <- now_ms()
 server <- process$new(
   r_bin("Rscript"), c("--no-save", "--no-restore", file.path(here, "server.R")),
   env = c("current", PERF_LIB = lib, PERF_CRB = crb, PERF_CRB2 = if (is.null(opt$crb2)) "" else opt$crb2, PERF_PORT = port, R_LIBS = lib, R_PROFILE_USER = nullfile(),
@@ -61,16 +70,20 @@ cleanup <- function() {
 }
 on.exit(cleanup(), add = TRUE)
 
+# The server is up when Shiny says it listens (read from its log every 20 ms: a refused connection takes up to
+# a second to fail on Windows, which made the start time that coarse), and a connection is accepted.
 t_wait <- Sys.time()
 repeat {
-  ok <- tryCatch({ con <- socketConnection("127.0.0.1", port, open = "r+", timeout = 1); close(con); TRUE },
-                 error = function(e) FALSE, warning = function(w) FALSE)
+  listening <- any(grepl("Listening on", readLines(log_file, warn = FALSE), fixed = TRUE)) ||
+    as.numeric(difftime(Sys.time(), t_wait, units = "secs")) > 30   # a Shiny that does not say so
+  ok <- listening && tryCatch({ con <- socketConnection("127.0.0.1", port, open = "r+", timeout = 1); close(con); TRUE },
+                              error = function(e) FALSE, warning = function(w) FALSE)
   if (ok) break
   if (!server$is_alive()) stop("server died:\n", paste(utils::tail(readLines(log_file, warn = FALSE), 25), collapse = "\n"))
   if (as.numeric(difftime(Sys.time(), t_wait, units = "secs")) > 240) stop("server start timeout")
-  Sys.sleep(0.2)
+  Sys.sleep(0.02)
 }
-server_start_s <- as.numeric(difftime(Sys.time(), t_wait, units = "secs"))
+server_start_s <- (now_ms() - t_launch) / 1000
 info <- grep("^PERF_INFO", readLines(log_file, warn = FALSE), value = TRUE)
 pkg_version <- if (length(info)) sub(" path=.*", "", sub("^PERF_INFO version=", "", info[[1L]])) else NA_character_
 
@@ -177,7 +190,8 @@ add_row <- function(page, visit, status, arg = NA_character_, error = NA_charact
     contract = standard_contract, sha = sha, pkg_version = pkg_version, dataset = dataset, round = round, session = session_id,
     seq = length(rows) + 1L, browser = browser, gpu = gpu, page = page, visit = visit, status = status, arg = arg, error = error,
     visual_complete_ms = vis$visual_complete_ms %||% NA_real_, visual_90_ms = vis$visual_90_ms %||% NA_real_,
-    first_plot_ms = nz(fp$first_plot_ms), plot_click_ms = nz(fp$click_ms), plot_ink = nz(fp$ink), settled_ms = nz(st$settled_ms),
+    first_plot_ms = nz(fp$first_plot_ms), start_plot_ms = nz(fp$start_plot_ms), page_ready_ms = nz(st$page_ready_ms),
+    plot_click_ms = nz(fp$click_ms), plot_ink = nz(fp$ink), settled_ms = nz(st$settled_ms),
     loader_visible_ms = nz(st$loader_ms), visible_ms = nz(st$visible_ms), js_peak_mib = if (is.null(vis)) NA_real_ else js_peak / 2^20,
     trail_ms = trail, ws_in_bytes = nz(ws$ws_in_bytes), ws_out_bytes = nz(ws$ws_out_bytes), ws_max_msg_bytes = nz(ws$ws_max_msg_bytes),
     idle_wait_s = idle_wait, frames = length(ft), frame_ms = if (length(ft) > 1L) stats::median(diff(ft)) else NA_real_,
@@ -214,7 +228,8 @@ first_plot_from_frames <- function(frames, t_start) {
 
 # `nav`: the first_plot observation. The clock starts when Chrome is told to navigate to the Viewer (the server
 # has just started: no wait for it to be quiet), the hook opens the Projection page as soon as it is offered.
-measure <- function(name, visit, initial = FALSE, timeout_s = 90, record = TRUE, action = FALSE, nav = FALSE) {
+# `tour`: a page of a tour, opened without waiting for a quiet server before or after it.
+measure <- function(name, visit, initial = FALSE, timeout_s = 90, record = TRUE, action = FALSE, nav = FALSE, tour = FALSE) {
   js_peak <<- 0
   arg <- NA_character_
   if (action) {
@@ -225,7 +240,7 @@ measure <- function(name, visit, initial = FALSE, timeout_s = 90, record = TRUE,
     }
   }
   # Start from a quiet server and Chrome; the wait is not part of the measurement.
-  idle_wait <- if (initial || nav) NA_real_ else if (quiet_now) 0 else wait_quiet(mem_csv)$waited_s
+  idle_wait <- if (initial || nav || tour) NA_real_ else if (quiet_now) 0 else wait_quiet(mem_csv)$waited_s
   if (!nav) ev("window.__cbws && window.__cbws.reset()")
   t_start <- now_ms()
   if (nav) invisible(b$Page$navigate(sprintf("http://127.0.0.1:%d/", port)))
@@ -237,8 +252,8 @@ measure <- function(name, visit, initial = FALSE, timeout_s = 90, record = TRUE,
   t_end <- now_ms()
   # The work the page leaves behind (a large message, a backend that loads in the background) belongs to
   # it: wait until both are quiet again, and count the websocket traffic up to then.
-  q <- wait_quiet(mem_csv)
-  quiet_now <<- TRUE
+  q <- if (tour) list(quiet_from_ms = NA_real_) else wait_quiet(mem_csv)
+  quiet_now <<- !tour
   t_quiet <- now_ms()
   if (nav) {
     if (!isTRUE(ev("!!window.__cbws"))) stop("the websocket counter (ws.js) is not in the page")
@@ -250,7 +265,11 @@ measure <- function(name, visit, initial = FALSE, timeout_s = 90, record = TRUE,
   sim <- frame_similarity(st$frames)
   vis <- visual_from_similarity(ft, sim, t_start)
   fp <- if (nav) first_plot_from_frames(st$frames, t_start) else list()
-  if (nav) fp$click_ms <- st$click_ms
+  if (nav) {
+    fp$click_ms <- st$click_ms; fp$start_plot_ms <- t_start - t_launch + fp$first_plot_ms
+    # the page's own event, on the clock of this visit (from the navigation, like its other times)
+    if (!is.null(st$page_ready_ms) && !is.null(st$click_ms)) st$page_ready_ms <- st$page_ready_ms + st$click_ms
+  }
   # A page that is done but never showed the projection is a result of its own, not a harness error.
   if (nav && identical(st$status, "ok") && is.na(fp$first_plot_ms)) st$status <- "no_plot"
   # PERF_DUMP_FRAMES=DIR keeps every frame of every observation, to see what changes on screen.
@@ -275,6 +294,28 @@ if (first_plot_mode) {
   invisible(b$Page$addScriptToEvaluateOnNewDocument(source = hook))
   measure("overview", first_plot_visit, timeout_s = 120, nav = TRUE)
   message("renderer: ", gpu, "; ", browser)
+  page_open <- FALSE
+} else if (length(tour)) {
+  invisible(b$Page$navigate(sprintf("http://127.0.0.1:%d/", port)))
+  t_nav <- Sys.time()
+  repeat {
+    tryCatch(ev(hook), error = function(e) NULL)
+    ready <- tryCatch(isTRUE(ev("!!(window.__cb && window.Shiny && Shiny.shinyapp && Shiny.shinyapp.isConnected && Shiny.shinyapp.isConnected() && window.__cb.activeTab())")), error = function(e) FALSE)
+    if (ready) break
+    if (as.numeric(difftime(Sys.time(), t_nav, units = "secs")) > 120) stop("page did not connect")
+    Sys.sleep(0.1)
+  }
+  probe_gpu()
+  message("renderer: ", gpu, "; ", browser)
+  # The page the Viewer opens on, until it is done; then the visitor reads it, and goes on.
+  measure(ev("window.__cb.activeTab()"), "initial", initial = TRUE, timeout_s = 120, record = FALSE)
+  Sys.sleep(tour_wait_s)
+  open_tabs <- fromJSON(ev("window.__cb.tabs()"))
+  for (p in tour) {
+    if (!p %in% open_tabs) { add_row(p, "tour", "unavailable"); next }
+    measure(p, "tour", tour = TRUE)
+    Sys.sleep(tour_think_s)
+  }
   page_open <- FALSE
 } else {
   invisible(b$Page$navigate(sprintf("http://127.0.0.1:%d/", port)))

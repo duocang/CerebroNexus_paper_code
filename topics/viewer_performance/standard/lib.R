@@ -2,8 +2,8 @@
 # writes and the comparison of two runs. No browser and no R app here, so they are unit tested
 # (topics/viewer_performance/tests/test-standard.R). The rules are in ../STANDARD.md.
 
-standard_contract <- "blackbox-v7"
-standard_metrics <- c("visual_complete_ms", "visual_90_ms", "first_plot_ms", "settled_ms", "loader_visible_ms", "visible_ms", "js_peak_mib",
+standard_contract <- "blackbox-v8"
+standard_metrics <- c("visual_complete_ms", "visual_90_ms", "first_plot_ms", "start_plot_ms", "page_ready_ms", "settled_ms", "loader_visible_ms", "visible_ms", "js_peak_mib",
                       "server_busy_ms", "chrome_busy_ms", "trail_ms", "ws_in_bytes", "ws_out_bytes", "ws_max_msg_bytes",
                       "r_peak_mib", "chrome_peak_mib")
 # initial  Data info loading the dataset (the session of the loadData page)
@@ -13,9 +13,15 @@ standard_metrics <- c("visual_complete_ms", "visual_90_ms", "first_plot_ms", "se
 # first_plot  the same from a later start: the cache directory holds what earlier sessions of the run left. The
 #          clock starts when Chrome navigates to the Viewer (not at a click) and runs to the first plot; the same
 #          event the tool comparison times (coverage.tsv, column first_plot)
+# tour     a page opened in a session that is already running, as a visitor goes on: the session opened the
+#          Viewer, stayed tour_wait_s on the page it opened on, then opened the tour's pages one after another,
+#          tour_think_s after the last one finished, without waiting for a quiet server (what the Viewer prepares
+#          while a page is read is part of what is measured)
 # action   one thing done on the open page (actions.tsv), right after its cold visit
-standard_visits <- c("initial", "cold", "first_start", "first_plot", "action")
+standard_visits <- c("initial", "cold", "first_start", "first_plot", "tour", "action")
 start_visits <- c("first_start", "first_plot")
+tour_wait_s <- 15
+tour_think_s <- 1.5
 
 # Quiet: below this many CPU seconds per second, over 1 s, for each tree (R server, Chrome), for
 # quiet_need_s seconds in a row. Headless Chrome uses 0.1-0.2 of a core while idle (software rendering).
@@ -32,8 +38,11 @@ canary_limit <- 1.2
 
 # What compare.R calls a difference: an exact two-sided rank-sum test over the rounds at compare_alpha, and
 # a difference of the medians above one frame. Rounds per page a run makes by default.
+# The rows of a comparison are tested together: a row is marked when its Holm-adjusted p-value (over every
+# row that was tested) is at or below compare_alpha. 7 rounds against 7 can mark a row among up to 85;
+# 5 against 5 among 6 at most.
 compare_alpha <- 0.05
-default_rounds <- 5L
+default_rounds <- 7L
 
 `%||%` <- function(a, b) if (is.null(a)) b else a
 
@@ -176,24 +185,44 @@ build_plan <- function(coverage, actions, fixtures = character(), demos_availabl
 # `plans` is one plan, or a named list of plans, one per revision measured in the same run (candidate,
 # baseline). The revisions then take turns session by session, so that both meet the same state of the
 # machine, and which one goes first changes with every page and every round.
-build_schedule <- function(plans, rounds) {
+# `tours`: per revision, list(dataset, pages) of its tour (tour_pages()), or NULL: one tour session per round
+# and revision, after the round's pages.
+build_schedule <- function(plans, rounds, tours = NULL) {
   if (is.data.frame(plans)) plans <- list(candidate = plans)
   pages <- unique(unlist(lapply(plans, function(p) p$page)))
   rows <- list()
-  for (r in seq_len(rounds)) for (k in seq_along(pages)) {
+  for (r in seq_len(rounds)) {
+    for (k in seq_along(pages)) {
+      revs <- names(plans)
+      if ((r + k) %% 2L == 1L) revs <- rev(revs)
+      for (kind in c("page", start_visits)) for (rv in revs) {
+        p <- plans[[rv]][plans[[rv]]$page == pages[[k]], , drop = FALSE]
+        if (!nrow(p) || (kind != "page" && !isTRUE(p$first_plot))) next
+        rows[[length(rows) + 1L]] <- data.frame(round = r, revision = rv, page = p$page, dataset = p$dataset,
+                                                actions = if (kind == "page") p$actions else "", kind = kind, tour = "",
+                                                stringsAsFactors = FALSE)
+      }
+    }
     revs <- names(plans)
-    if ((r + k) %% 2L == 1L) revs <- rev(revs)
-    for (kind in c("page", start_visits)) for (rv in revs) {
-      p <- plans[[rv]][plans[[rv]]$page == pages[[k]], , drop = FALSE]
-      if (!nrow(p) || (kind != "page" && !isTRUE(p$first_plot))) next
-      rows[[length(rows) + 1L]] <- data.frame(round = r, revision = rv, page = p$page, dataset = p$dataset,
-                                              actions = if (kind == "page") p$actions else "", kind = kind, stringsAsFactors = FALSE)
+    if (r %% 2L == 0L) revs <- rev(revs)
+    for (rv in intersect(revs, names(tours))) {
+      t <- tours[[rv]]
+      if (is.null(t) || !length(t$pages)) next
+      rows[[length(rows) + 1L]] <- data.frame(round = r, revision = rv, page = "tour", dataset = t$dataset, actions = "",
+                                              kind = "tour", tour = paste(t$pages, collapse = ","), stringsAsFactors = FALSE)
     }
   }
   sched <- do.call(rbind, rows)
   sched$position <- seq_len(nrow(sched))
   rownames(sched) <- NULL
   sched
+}
+
+# The tour of a plan: the pages of `dataset` in the plan's order, without Data info and the page the Viewer
+# opens on (overview), which the session is on already. NULL when the plan has none of them.
+tour_pages <- function(plan, dataset = "1m") {
+  pages <- plan$page[plan$dataset == dataset & !plan$page %in% c("loadData", "overview")]
+  if (length(pages)) list(dataset = dataset, pages = pages) else NULL
 }
 
 # --pages a,b: only these pages (and their actions).
@@ -363,14 +392,29 @@ rank_sum_p <- function(x, y, max_perm = 50000) {
 rank_sum_min_p <- function(nx, ny) if (!nx || !ny) NA_real_ else 2 / choose(nx + ny, nx)
 
 # Metrics that are read off frames: a difference below the time between two frames cannot be seen.
-frame_metrics <- c("visual_complete_ms", "visual_90_ms", "first_plot_ms")
+frame_metrics <- c("visual_complete_ms", "visual_90_ms", "first_plot_ms", "start_plot_ms")
+
+# The Hodges-Lehmann shift of y against x (the median of all differences y_j - x_i) and its 95 % confidence
+# interval from the rank-sum test (exact without ties). NA when a sample has fewer than two values.
+shift_ci <- function(x, y, level = 0.95) {
+  x <- x[!is.na(x)]; y <- y[!is.na(y)]
+  if (length(x) < 2L || length(y) < 2L) return(c(shift = NA_real_, lo = NA_real_, hi = NA_real_))
+  t <- tryCatch(suppressWarnings(stats::wilcox.test(y, x, conf.int = TRUE, conf.level = level, correct = FALSE)),
+                error = function(e) NULL)
+  if (is.null(t) || is.null(t$conf.int)) return(c(shift = stats::median(outer(y, x, "-")), lo = NA_real_, hi = NA_real_))
+  c(shift = unname(t$estimate), lo = t$conf.int[[1L]], hi = t$conf.int[[2L]])
+}
 
 # Compare two runs row by row (page x visit) on `metric`, from the observations of the rounds that finished.
-#   slower / faster   the exact rank-sum test over the rounds gives p <= alpha, and the medians differ by more
-#                     than the resolution (frame metrics: the median time between two frames of that row, in
-#                     either run; 100 ms when it was not recorded; other metrics: no floor)
+#   slower / faster   the exact rank-sum test over the rounds gives a Holm-adjusted p <= alpha (adjusted over
+#                     every row tested), and the medians differ by more than the resolution (frame metrics: the
+#                     median time between two frames of that row, in either run; 100 ms when it was not
+#                     recorded; other metrics: no floor)
+#   suggestive        p <= alpha and more than the resolution, but not after the adjustment: one of the rows
+#                     that chance alone would mark among many
 #   not resolved      neither: the rounds overlap, or the difference is below one frame
-#   too few rounds    with these numbers of rounds no outcome could give p <= alpha (3 against 3 cannot)
+#   too few rounds    with these numbers of rounds no outcome could survive the adjustment over the rows tested
+#                     (the smallest possible p times their number is above alpha; 3 against 3 never can)
 # and, as before, pages that stopped finishing, finish now, or are in one run only. Runs made together
 # (same pair_id in their manifests) also get the range of B - A within each round.
 compare_runs <- function(a, b, metric = "visual_complete_ms", alpha = compare_alpha) {
@@ -395,16 +439,25 @@ compare_runs <- function(a, b, metric = "visual_complete_ms", alpha = compare_al
     ma <- med(oa$x); mb <- med(ob$x)
     res <- if (metric %in% frame_metrics) { f <- suppressWarnings(max(oa$frame, ob$frame, na.rm = TRUE)); if (is.finite(f)) f else 100 } else 0
     p <- rank_sum_p(oa$x, ob$x); min_p <- rank_sum_min_p(length(oa$x), length(ob$x))
-    change <- if (is.na(p)) "-" else if (min_p > alpha) "too few rounds"
-              else if (p <= alpha && abs(mb - ma) > res) (if (mb > ma) "slower" else "faster") else "not resolved"
     both <- intersect(oa$round, ob$round)
     rd <- if (paired && length(both)) vapply(both, function(r) ob$x[match(r, ob$round)] - oa$x[match(r, oa$round)], 0) else numeric()
-    data.frame(a = ma, b = mb, n_a = length(oa$x), n_b = length(ob$x), p = p, resolution = res, change = change,
+    ci <- shift_ci(oa$x, ob$x)
+    data.frame(a = ma, b = mb, n_a = length(oa$x), n_b = length(ob$x), p = p, min_p = min_p, resolution = res,
+               shift = ci[["shift"]], shift_lo = ci[["lo"]], shift_hi = ci[["hi"]],
                round_delta_min = if (length(rd)) min(rd) else NA_real_, round_delta_max = if (length(rd)) max(rd) else NA_real_,
                stringsAsFactors = FALSE)
   })
   st <- do.call(rbind, rows)
-  change <- st$change
+  # Every row with observations in both runs is tested; their p-values are adjusted together (Holm).
+  tested <- !is.na(st$p)
+  st$p_holm <- NA_real_
+  st$p_holm[tested] <- stats::p.adjust(st$p[tested], method = "holm")
+  m <- sum(tested)
+  big <- abs(st$b - st$a) > st$resolution
+  change <- ifelse(!tested, "-",
+            ifelse(st$min_p * m > alpha, "too few rounds",
+            ifelse(st$p_holm <= alpha & big, ifelse(st$b > st$a, "slower", "faster"),
+            ifelse(st$p <= alpha & big, "suggestive", "not resolved"))))
   change[!is.na(oka) & !is.na(okb) & oka == 1 & okb < 1] <- "stopped finishing"
   change[!is.na(oka) & !is.na(okb) & oka < 1 & okb == 1] <- "finishes now"
   change[is.na(oka)] <- "only in B"; change[is.na(okb)] <- "only in A"
@@ -413,7 +466,8 @@ compare_runs <- function(a, b, metric = "visual_complete_ms", alpha = compare_al
     page = sub("\r.*", "", all_keys), visit = sub(".*\r", "", all_keys), dataset = ds,
     a = st$a, b = st$b, delta = st$b - st$a,
     delta_pct = ifelse(is.na(st$a) | is.na(st$b) | st$a == 0, NA_real_, round((st$b / st$a - 1) * 100, 1)),
-    n_a = st$n_a, n_b = st$n_b, p = st$p, resolution = st$resolution,
+    n_a = st$n_a, n_b = st$n_b, p = st$p, p_holm = st$p_holm, resolution = st$resolution,
+    shift = st$shift, shift_lo = st$shift_lo, shift_hi = st$shift_hi,
     round_delta_min = st$round_delta_min, round_delta_max = st$round_delta_max,
     a_server_busy_ms = pick(a$pages, "server_busy_ms"), b_server_busy_ms = pick(b$pages, "server_busy_ms"),
     a_r_peak_mib = pick(a$pages, "r_peak_mib"), b_r_peak_mib = pick(b$pages, "r_peak_mib"),
@@ -425,7 +479,7 @@ compare_runs <- function(a, b, metric = "visual_complete_ms", alpha = compare_al
   facts <- data.frame(key = comparable_keys, A = fact(a$manifest), B = fact(b$manifest), stringsAsFactors = FALSE, row.names = NULL)
   sha <- function(r) if ("sha" %in% names(r$manifest)) r$manifest[["sha"]] else NA_character_
   list(table = out, differ = facts$key[!mapply(identical, facts$A, facts$B)], facts = facts, metric = metric, alpha = alpha,
-       paired = paired, same_revision = !is.na(sha(a)) && identical(sha(a), sha(b)))
+       paired = paired, same_revision = !is.na(sha(a)) && identical(sha(a), sha(b)), tested = m)
 }
 
 compare_lines <- function(cmp, a, b) {
@@ -434,15 +488,18 @@ compare_lines <- function(cmp, a, b) {
   u <- function(s) if (nzchar(unit)) sprintf("%s (%s)", s, unit) else s
   tab <- data.frame(Page = t$page, Visit = t$visit, Dataset = t$dataset, A = fmt_num(t$a), B = fmt_num(t$b), Delta = fmt_num(t$delta),
                     `Delta (%)` = ifelse(is.na(t$delta_pct), "-", sprintf("%+.1f", t$delta_pct)),
+                    Shift = ifelse(is.na(t$shift), "-", ifelse(is.na(t$shift_lo), fmt_num(t$shift),
+                                   sprintf("%s [%s, %s]", fmt_num(t$shift), fmt_num(t$shift_lo), fmt_num(t$shift_hi)))),
                     `Rounds A / B` = paste0(t$n_a, " / ", t$n_b), p = ifelse(is.na(t$p), "-", sprintf("%.3f", t$p)),
+                    `p (Holm)` = ifelse(is.na(t$p_holm), "-", sprintf("%.3f", t$p_holm)),
                     check.names = FALSE, stringsAsFactors = FALSE)
-  names(tab)[names(tab) %in% c("A", "B", "Delta")] <- c(u("A"), u("B"), u("Delta"))
+  names(tab)[match(c("A", "B", "Delta", "Shift"), names(tab))] <- c(u("A"), u("B"), u("Delta"), u("Shift [95 % CI]"))
   if (cmp$paired) tab[[u("B - A per round")]] <- ifelse(is.na(t$round_delta_min), "-", paste0(fmt_num(t$round_delta_min), " to ", fmt_num(t$round_delta_max)))
   tab[["Busy A / B (ms)"]] <- paste0(fmt_num(t$a_server_busy_ms), " / ", fmt_num(t$b_server_busy_ms))
   tab[["R peak A / B (MiB)"]] <- paste0(fmt_num(t$a_r_peak_mib), " / ", fmt_num(t$b_r_peak_mib))
   tab$Change <- t$change; tab$Note <- t$note
   version <- function(r) if ("version" %in% names(r$manifest)) r$manifest[["version"]] else "?"
-  tested <- t$change %in% c("slower", "faster", "not resolved")
+  tested <- t$change %in% c("slower", "faster", "suggestive", "not resolved")
   flagged <- t$change %in% c("slower", "faster")
   few <- sum(t$change == "too few rounds")
   c(sprintf("# Viewer performance: CerebroNexus %s (A) vs %s (B)", version(a), version(b)), "",
@@ -453,12 +510,12 @@ compare_lines <- function(cmp, a, b) {
     else c("Both runs have the same contract, platform, host, CPU, plan and large datasets.", ""),
     if (cmp$paired) c("The two runs were made together, their sessions taking turns, so both met the same state of the machine.", "")
     else c("The two runs were not made together: a machine that was busier during one of them shows as a difference. Measure both in one run (`run.R --baseline`) to rule that out.", ""),
-    sprintf("Change: `slower` or `faster` when the exact two-sided rank-sum test over the rounds gives p <= %s and the medians differ by more than one frame; `not resolved` otherwise; `too few rounds` when the numbers of rounds cannot give such a p at all (3 against 3 cannot, 4 against 4 can).",
-            format(cmp$alpha)), "",
+    sprintf("Change: `slower` or `faster` when the exact two-sided rank-sum test over the rounds gives p <= %s after the Holm adjustment over the %d rows tested, and the medians differ by more than one frame; `suggestive` when only the unadjusted p does; `not resolved` otherwise; `too few rounds` when the numbers of rounds cannot survive the adjustment at all. Shift: the Hodges-Lehmann estimate of B - A with its 95 %% confidence interval.",
+            format(cmp$alpha), cmp$tested %||% 0L), "",
     md_table(tab), "",
-    sprintf("Slower: %d; faster: %d; stopped finishing: %d; not resolved: %d; too few rounds: %d.", sum(t$change == "slower"), sum(t$change == "faster"),
-            sum(t$change == "stopped finishing"), sum(t$change == "not resolved"), few),
-    if (any(tested)) sprintf("%d rows were tested, each at %s: up to %.1f of them would be marked by chance alone if nothing had changed.",
+    sprintf("Slower: %d; faster: %d; suggestive: %d; stopped finishing: %d; not resolved: %d; too few rounds: %d.", sum(t$change == "slower"), sum(t$change == "faster"),
+            sum(t$change == "suggestive"), sum(t$change == "stopped finishing"), sum(t$change == "not resolved"), few),
+    if (any(tested)) sprintf("%d rows were tested together: the chance that any of them is marked slower or faster when nothing changed is at most %s (Holm); without the adjustment up to %.1f would be marked by chance alone (the `suggestive` rows).",
                              sum(tested), format(cmp$alpha), sum(tested) * cmp$alpha) else character(),
     if (cmp$same_revision && any(!is.na(t$delta))) sprintf("Noise: the medians of the two runs differ by %s %s in the median row, by %s at the 90th percentile and by %s at most; %d of %d tested rows marked.",
                                     fmt_num(stats::median(abs(t$delta), na.rm = TRUE)), unit, fmt_num(stats::quantile(abs(t$delta), 0.9, na.rm = TRUE, names = FALSE)),
@@ -525,7 +582,8 @@ DATASET_NAMES <- c(`1m` = "mouse brain, 1.3 M", ren = "COVID-19, 1.46 M", cosmx 
 display_name <- function(id, table) ifelse(id %in% names(table), table[id], id)
 row_names <- function(page, is_page, visit = rep("cold", length(page))) {
   ifelse(visit == "first_start", "From page load, nothing kept", ifelse(visit == "first_plot", "From page load",
-         ifelse(is_page, display_name(page, PAGE_NAMES), display_name(sub("^[^.]*[.]", "", page), ACTION_NAMES))))
+         ifelse(visit == "tour", "On the way, one session",
+         ifelse(is_page, display_name(page, PAGE_NAMES), display_name(sub("^[^.]*[.]", "", page), ACTION_NAMES)))))
 }
 
 # One dot per run and page or action (the median of `metric`), with a line over the fastest and slowest
@@ -549,7 +607,7 @@ plot_runs <- function(runs, out, metric = "visual_complete_ms", family = figure_
   val <- col_of(metric)
   ranged <- identical(metric, "visual_complete_ms")
   lo <- if (ranged) col_of("visual_min_ms") else val; hi <- if (ranged) col_of("visual_max_ms") else val
-  page_of <- sub("\r.*", "", keys); visit_of <- sub(".*\r", "", keys); is_page <- !visit_of %in% c("action", start_visits)
+  page_of <- sub("\r.*", "", keys); visit_of <- sub(".*\r", "", keys); is_page <- !visit_of %in% c("action", "tour", start_visits)
   keep <- is_page | rowSums(!is.na(val)) > 0   # an action no run could do (e.g. one table only) has no row
   val <- val[keep, , drop = FALSE]; lo <- lo[keep, , drop = FALSE]; hi <- hi[keep, , drop = FALSE]
   keys <- keys[keep]; page_of <- page_of[keep]; is_page <- is_page[keep]; visit_of <- visit_of[keep]

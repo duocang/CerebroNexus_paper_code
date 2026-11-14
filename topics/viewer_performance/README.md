@@ -8,7 +8,7 @@ two of them. How it measures is in [STANDARD.md](STANDARD.md).
 ## Before you start
 
 - Windows (the reference platform; Linux works too, see STANDARD section 5), with R (packages `chromote`, `processx`, `ps`, `jsonlite`, `png`, `base64enc`, `testthat`), Chrome and Git.
-- A CerebroNexus checkout beside this repository (`..\CerebroNexus`), or `--cerebro-repo DIR`. `PERF_CACHE=DIR` moves the cache of sources, libraries and server caches.
+- A CerebroNexus checkout beside this repository (`..\CerebroNexus`), or `--cerebro-repo DIR`. `PERF_CACHE=DIR` moves the cache of sources and libraries; `PERF_RCACHE=DIR` the servers' cache directories (keep it short: default `C:/cnxp` on Windows, STANDARD.md section 1).
 - The large example datasets, prepared once with CerebroNexus (`Rscript run-demo.R --prepare-only --cosmx` in
   its checkout). The folder must contain:
 
@@ -35,7 +35,7 @@ path. Options:
 | `--candidate REF` | the CerebroNexus revision to measure (default: the commit in [`../cerebronexus.pin`](../cerebronexus.pin); only committed code is measured) |
 | `--baseline REF` | a second revision, measured in the same run with the sessions of the two taking turns (see "Measure a change" below) |
 | `--cerebro-repo DIR` | the CerebroNexus checkout (default `../CerebroNexus`) |
-| `--rounds N` | how often every page is measured (default 5; with fewer than 4, `compare.R` cannot call anything slower or faster) |
+| `--rounds N` | how often every page is measured (default 7; with 5 or fewer, `compare.R` cannot call anything slower or faster among the rows of a full plan) |
 | `--pages a,b` | only these pages and their actions, while working on them; the folder name ends in `_partial` |
 
 The servers of a run keep their files (the finished page, first views, cell names) in a cache directory of
@@ -56,8 +56,12 @@ The Projection page is also measured from the start: Chrome navigates to a Viewe
 the clock runs to the first frame that shows the projection, the same event the tool comparison times for the
 other viewers. Twice: with an emptied cache directory, as on a new installation (`first_start`, "From page
 load, nothing kept"), and with what earlier sessions left (`first_plot`, "From page load"). The rows sit under
-Projection in `figures/` and `summary.md`; `first_plot_ms` in `pages.tsv`; `plot.R --metric first_plot_ms`
+Projection in `figures/` and `summary.md`; `first_plot_ms` in `pages.tsv`, and `start_plot_ms`, the same frame from the launch of the R server, which is the number to compare across revisions; `plot.R --metric first_plot_ms`
 draws only them.
+
+Every round ends with a **tour** per revision: one session opens the Viewer, stays 15 s on the page it opens on, and then
+opens the other pages of `1m` one after another, 1.5 s apart, without waiting for a quiet server (visit `tour`). The `cold`
+rows say what a page costs on its own, the `tour` rows what a visitor who goes on from page to page waits.
 
 After a page opens, its actions run on it ([`standard/actions.tsv`](standard/actions.tsv)): switching the
 dataset and back, colouring by another column, zooming, a lasso selection, another grouping, plot type and

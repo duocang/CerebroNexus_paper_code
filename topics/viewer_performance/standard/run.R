@@ -12,10 +12,11 @@
 #                         revision gets a run folder of its own, and compare.R knows the two belong together.
 #                         The same revision as --candidate gives a noise check.
 #   --cerebro-repo DIR    the CerebroNexus checkout (default ../CerebroNexus beside this repository)
-#   --rounds N            how often every page is measured (default 5)
+#   --rounds N            how often every page is measured (default 7)
 #   --pages a,b           only these pages and their actions; the run folder ends in _partial
-# Environment: PERF_CACHE (where sources, libraries and the servers' cache directories go), PERF_IDLE_MAX_S
-# (how long a session waits for an idle machine, default 600).
+# Environment: PERF_CACHE (where sources and libraries go), PERF_RCACHE (where the servers' cache directories go:
+# a short path, default C:/cnxp on Windows), PERF_IDLE_MAX_S (how long a session waits for an idle machine,
+# default 600).
 # Exit code: 0 every session finished, 2 a session failed twice or setup error.
 args_all <- commandArgs(trailingOnly = FALSE)
 here <- dirname(normalizePath(sub("^--file=", "", grep("^--file=", args_all, value = TRUE)[[1L]])))
@@ -45,6 +46,12 @@ large_paths <- tryCatch(fixture_paths(fixtures, large_root), error = function(e)
 
 cache <- Sys.getenv("PERF_CACHE", default_cache())
 dir.create(cache, recursive = TRUE, showWarnings = FALSE)
+# The servers' cache directories need a short path. The Viewer writes files several directories deep below
+# R_USER_CACHE_DIR, and a write past Windows' 260 characters (long paths are off by default) fails without a
+# word: a run then kept nothing between starts and measured every start as the first. A process of a packaged
+# app (MSIX) also has its AppData redirected to a much longer path.
+rcache_root <- Sys.getenv("PERF_RCACHE", if (on_windows) "C:/cnxp" else file.path(cache, "rc"))
+dir.create(rcache_root, recursive = TRUE, showWarnings = FALSE)
 repo <- normalizePath(if (!is.null(opt$cerebro_repo)) opt$cerebro_repo else file.path(paper_repo, "..", "CerebroNexus"), winslash = "/", mustWork = FALSE)
 if (!dir.exists(file.path(repo, ".git")) && !file.exists(file.path(repo, ".git"))) die("not a CerebroNexus checkout: ", repo, " (use --cerebro-repo)")
 git <- function(...) sh("git", c("-C", repo, ...))
@@ -131,9 +138,15 @@ for (rv in names(revs)) {
   revs[[rv]]$raw_path <- file.path(revs[[rv]]$run_dir, "raw.tsv")
   revs[[rv]]$server_path <- file.path(revs[[rv]]$run_dir, "server.tsv")
   utils::write.table(revs[[rv]]$plan, file.path(revs[[rv]]$run_dir, "plan.tsv"), sep = "\t", quote = FALSE, row.names = FALSE)
-  revs[[rv]]$cache <- file.path(cache, "rcache", revs[[rv]]$run_id)
+  revs[[rv]]$cache <- file.path(rcache_root, paste0(format(t_start, "%m%d%H%M%S"), substr(rv, 1L, 1L)))
   unlink(revs[[rv]]$cache, recursive = TRUE)
   run_caches <- c(run_caches, revs[[rv]]$cache)
+  # A file as deep as the Viewer's deepest (160 characters below the directory) must be writable and readable.
+  probe <- file.path(revs[[rv]]$cache, "kept", "probe", strrep("p", 40), strrep("q", 40), paste0(strrep("r", 60), ".txt"))
+  dir.create(dirname(probe), recursive = TRUE, showWarnings = FALSE)
+  wrote <- tryCatch({ writeLines("probe", probe); identical(readLines(probe, warn = FALSE), "probe") }, error = function(e) FALSE, warning = function(w) FALSE)
+  if (!isTRUE(wrote)) die("cannot write ", nchar(probe), " characters deep below ", revs[[rv]]$cache, ": set PERF_RCACHE to a shorter directory")
+  unlink(file.path(revs[[rv]]$cache, "kept", "probe"), recursive = TRUE)
 }
 pair_id <- if (paired) sprintf("%s_%s_%s", format(t_start, "%Y%m%d-%H%M%S"), substr(revs$candidate$sha, 1L, 7L), substr(revs$baseline$sha, 1L, 7L)) else ""
 
@@ -141,7 +154,9 @@ canaries <- canary_ms()
 
 # ---- schedule: every round measures every page once, each page in its own fresh session; a page with a first
 # plot also gets two sessions of its own for it; two revisions take turns (build_schedule) -------------------
-sched <- build_schedule(lapply(revs, function(r) r$plan), rounds)
+# A tour per round and revision: the pages of 1m opened one after another in one session (lib.R, tour_pages()).
+tours <- lapply(revs, function(r) tour_pages(r$plan))
+sched <- build_schedule(lapply(revs, function(r) r$plan), rounds, tours)
 sched$host_cpu_pct <- NA_real_; sched$host_wait_s <- NA_real_; sched$host_idle <- NA; sched$ok <- NA
 write_schedule <- function() for (rv in names(revs)) utils::write.table(sched, file.path(revs[[rv]]$run_dir, "schedule.tsv"), sep = "\t", quote = FALSE, row.names = FALSE)
 write_schedule()
@@ -153,13 +168,14 @@ session <- function(row, attempt, out = revs[[row$revision]]$raw_path, tag = spr
   if (identical(row$kind, "first_start")) unlink(cache_dir, recursive = TRUE)
   dir.create(cache_dir, recursive = TRUE, showWarnings = FALSE)
   name <- sprintf("%s-%s-%s%s-r%d-a%d", tag, row$dataset, row$page, if (start) paste0("-", row$kind) else "", row$round, attempt)
+  tour <- if (identical(row$kind, "tour") && nzchar(row$tour %||% "")) c("--tour", row$tour)
   log <- file.path(r$run_dir, "logs", paste0(name, ".log"))
   # Switching datasets needs a second one in the menu: the revision's small example CRB.
   crb2 <- if (grepl("loadData.switch", row$actions, fixed = TRUE)) c("--crb2", crb_path(row$revision, "example"))
   rc <- system2(r_bin("Rscript"), c("--no-save", "--no-restore", file.path(here, "measure_session.R"), "--sha", r$sha,
                               "--lib", r$lib, "--crb", crb_path(row$revision, row$dataset), crb2, "--port", port_base + attempt, "--round", row$round,
                               "--out", out, "--dataset", row$dataset, "--page", row$page, "--session", name, "--cache-dir", cache_dir,
-                              if (nzchar(row$actions)) c("--actions", row$actions), if (start) c("--first-plot", row$kind),
+                              if (nzchar(row$actions)) c("--actions", row$actions), if (start) c("--first-plot", row$kind), tour,
                               "--trace", file.path(r$run_dir, "logs", paste0(name, "-trace.csv"))),
                 stdout = log, stderr = log, timeout = 3600)
   rc == 0L && any(grepl("rows,", readLines(log, warn = FALSE), fixed = TRUE))
@@ -174,9 +190,16 @@ for (rv in names(revs)) for (d in revs[[rv]]$opened) {
   message("warm-up: ", rv, " ", d)
   warm <- warm + 1L
   warm_page <- c(revs[[rv]]$plan$page[revs[[rv]]$plan$dataset == d & revs[[rv]]$plan$first_plot], "none")[[1L]]
-  invisible(session(data.frame(revision = rv, dataset = d, page = warm_page, actions = "", kind = "page", round = 0L, position = 0L, stringsAsFactors = FALSE), 1L,
+  invisible(session(data.frame(revision = rv, dataset = d, page = warm_page, actions = "", kind = "page", tour = "", round = 0L, position = 0L, stringsAsFactors = FALSE), 1L,
                     out = tempfile(fileext = ".tsv"), tag = paste0("warm-", rv), port_base = 19000L + warm * 3L))
 }
+# What the warm-up left for the later starts (0: the Viewer kept nothing, or could not write there).
+for (rv in names(revs)) revs[[rv]]$kept_files <- length(list.files(file.path(revs[[rv]]$cache, "kept"), recursive = TRUE, all.files = TRUE, no.. = TRUE))
+# The Viewer Pack of each large fixture, as each revision sees it (pack_state.R).
+for (rv in names(revs)) revs[[rv]]$packs <- vapply(intersect(revs[[rv]]$datasets, names(large_paths)), function(d) {
+  out <- sh(r_bin("Rscript"), c("--no-save", "--no-restore", file.path(here, "pack_state.R"), revs[[rv]]$lib, large_paths[[d]]))
+  if (length(out)) out[[length(out)]] else "unknown"
+}, "")
 for (r in seq_len(rounds)) {
   for (i in which(sched$round == r)) {
     row <- sched[i, ]
@@ -223,7 +246,11 @@ for (rv in names(revs)) {
   busy <- sum(mine$host_idle %in% FALSE)
   not_empty <- if (is.null(raw$cache_files)) 0L else sum(raw$visit == "first_start" & !is.na(raw$cache_files) & raw$cache_files > 0)
   unfinished <- pages$ok_frac < 1
+  stale_packs <- r$packs[!r$packs %in% c("current", "unsupported")]
   problems <- c(
+    if (length(stale_packs)) sprintf("the Viewer Pack of %s is not current for this revision: its pages take another path than with a Pack this revision built (%s)",
+                                     paste(names(stale_packs), collapse = ", "), paste(sprintf("%s: %s", names(stale_packs), stale_packs), collapse = "; ")),
+    if (identical(r$kept_files, 0L)) "the warm-up left nothing in the cache directory: every later start found it empty (a Viewer that keeps nothing, or a directory it could not write)",
     if (failed) sprintf("%d session(s) failed twice: their pages have fewer rounds (logs/)", failed),
     if (canary_ratio > canary_limit) sprintf("the CPU canary moved by a factor %.2f during the run (%s ms): the machine was busy with something else or changed its speed",
                                              canary_ratio, paste(round(canaries), collapse = ", ")),
@@ -255,11 +282,14 @@ for (rv in names(revs)) {
     fixtures_md5 = paste(vapply(fx, function(d) fixture_facts[[paste0("fixture.", d, ".md5")]], ""), collapse = ","),
     uncovered_pages = paste(r$uncovered, collapse = ","),
     cache = "a directory of this run and revision (R_USER_CACHE_DIR): filled by the warm-up and kept; emptied before every first_start session",
+    cache_dir = r$cache, kept_files_after_warmup = r$kept_files,
+    tour = if (!is.null(tours[[rv]])) sprintf("%s: %s; %g s on the first page, %g s between pages", tours[[rv]]$dataset, paste(tours[[rv]]$pages, collapse = ","), tour_wait_s, tour_think_s) else "",
     canary_ms = paste(round(canaries, 1), collapse = ","), canary_ratio = round(canary_ratio, 3),
     host_idle_pct = host_idle_pct, host_idle_max_s = idle_max_s, host_busy_sessions = busy,
     host_cpu_pct_median = if (all(is.na(mine$host_cpu_pct))) NA else round(stats::median(mine$host_cpu_pct, na.rm = TRUE), 1),
     started = format(t_start, "%Y-%m-%dT%H:%M:%S%z"), ended = format(t_end, "%Y-%m-%dT%H:%M:%S%z"),
-    fixture_facts
+    fixture_facts,
+    stats::setNames(unname(r$packs), paste0("fixture.", names(r$packs), ".pack"))
   )
   utils::write.table(data.frame(key = names(manifest), value = unname(manifest)), file.path(r$run_dir, "manifest.tsv"), sep = "\t", quote = FALSE, row.names = FALSE)
   write_summary(file.path(r$run_dir, "summary.md"),

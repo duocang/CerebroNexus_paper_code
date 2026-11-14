@@ -1,4 +1,4 @@
-// In-page hook, contract "blackbox-v7". It only watches the DOM, so it works on any CerebroNexus
+// In-page hook, contract "blackbox-v8". It only watches the DOM, so it works on any CerebroNexus
 // version. The KPI (visual_complete_ms) is not measured here: it comes from screenshots taken by
 // measure_session.R, because the DOM cannot tell when a plot has finished drawing. This hook
 // supplies the rest:
@@ -6,6 +6,8 @@
 //   visible_ms   last DOM change inside the page's tab pane   (diagnostic)
 //   settled_ms   last DOM change anywhere or long task          (diagnostic: includes work that
 //                happens after the page already looks finished)
+//   page_ready_ms  the page's own "cerebro:page-ready" event after the click (revisions that send it;
+//                diagnostic, beside the screenshots)
 //   done/stuck   when to stop waiting
 //   error        an output error or a lost connection on screen when the page is done: the page is
 //                then not counted as finished, however fast it was
@@ -14,8 +16,12 @@
 (function () {
   if (window.__cb) return;
   var cb = window.__cb = {
-    clickT: 0, paneLast: 0, anyLast: 0, busy: false, pane: null, active: false, loaderMs: 0, lastCheckT: 0, raf: 0
+    clickT: 0, paneLast: 0, anyLast: 0, busy: false, pane: null, active: false, loaderMs: 0, lastCheckT: 0, raf: 0,
+    readyT: 0
   };
+  window.addEventListener('cerebro:page-ready', function () {
+    if (cb.active && !cb.readyT) cb.readyT = now();
+  });
   var now = function () { return performance.now(); };
 
   function inPane(node) {
@@ -64,6 +70,11 @@
     }).observe({ entryTypes: ['longtask'] });
   } catch (e) {}
 
+  // The page the Viewer shows now (its sidebar value), or ''.
+  cb.activeTab = function () {
+    var p = document.querySelector('.tab-pane.active[id^="shiny-tab-"]');
+    return p ? p.id.replace('shiny-tab-', '') : '';
+  };
   cb.tabs = function () {
     var out = [];
     document.querySelectorAll('ul.sidebar-menu a[data-value]').forEach(function (a) {
@@ -77,7 +88,10 @@
     cb.pane = document.getElementById('shiny-tab-' + name);
     cb.active = true;
     cb.clickT = now(); cb.paneLast = cb.clickT; cb.anyLast = cb.clickT; cb.loaderMs = 0; cb.lastCheckT = cb.clickT;
-    if (!isInitial) {
+    cb.readyT = 0;
+    // The initial visit waits for a page the Viewer opened on by itself; a Viewer that opens on another page
+    // (8.2.1 and later open on the Projection) is taken to it, as a visitor would.
+    if (!isInitial || (cb.pane && !cb.pane.classList.contains('active'))) {
       var a = document.querySelector('ul.sidebar-menu a[data-value="' + name + '"]');
       if (a) a.click();
     }
@@ -312,6 +326,7 @@
     cb.pane = document.getElementById('shiny-tab-' + cb.actions[name].page);
     cb.active = true;
     cb.clickT = now(); cb.paneLast = cb.clickT; cb.anyLast = cb.clickT; cb.loaderMs = 0; cb.lastCheckT = cb.clickT;
+    cb.readyT = 0;
     cb.actions[name].run(arg);
     cb.raf = requestAnimationFrame(loop);
     return true;
@@ -362,6 +377,7 @@
       loader_ms: cb.loaderMs,
       visible_ms: cb.paneLast - cb.clickT,
       settled_ms: lastChange - cb.clickT,
+      page_ready_ms: cb.readyT ? cb.readyT - cb.clickT : null,
       busy: cb.busy
     });
   };

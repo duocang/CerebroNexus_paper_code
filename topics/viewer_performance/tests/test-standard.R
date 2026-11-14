@@ -116,7 +116,7 @@ test_that("the summary lists every page, problems and pages without a dataset", 
   expect_true(any(grepl("something", s)))
 })
 
-run_of <- function(pages, manifest = c(contract = "blackbox-v7", platform = "windows", host = "h", cpu = "c", memory_measure = "m", plan_md5 = "p", fixtures_md5 = "f", version = "5.4.0"), id = "A") {
+run_of <- function(pages, manifest = c(contract = "blackbox-v8", platform = "windows", host = "h", cpu = "c", memory_measure = "m", plan_md5 = "p", fixtures_md5 = "f", version = "5.4.0"), id = "A") {
   list(id = id, manifest = manifest, pages = page_table(pages), raw = pages)
 }
 # One page measured in several rounds: `visual` gives the value of each round.
@@ -164,8 +164,58 @@ test_that("comparing two runs marks slower and faster from the rounds, and pages
   out <- compare_lines(cmp, a, b)
   expect_true(any(grepl("same contract, platform", out)))
   expect_true(any(grepl("were not made together", out)))
-  expect_true(any(grepl("Slower: 1; faster: 1; stopped finishing: 1; not resolved: 3; too few rounds: 0.", out, fixed = TRUE)))
-  expect_true(any(grepl("5 rows were tested", out, fixed = TRUE)))
+  expect_true(any(grepl("Slower: 1; faster: 1; suggestive: 0; stopped finishing: 1; not resolved: 3; too few rounds: 0.", out, fixed = TRUE)))
+  expect_true(any(grepl("5 rows were tested together", out, fixed = TRUE)))
+  # Holm over the 5 rows tested: the two separated rows hold (2/252 times 5, then 4)
+  expect_equal(cmp$table$p_holm[cmp$table$page == "overview"], 5 * 2 / 252)
+  expect_equal(unname(cmp$table$shift[cmp$table$page == "trajectory"]), -600)
+})
+
+test_that("rows are tested together: a row that only chance among many would mark is suggestive, not slower", {
+  r7 <- function(page, v) rounds_of(page, v)
+  same <- do.call(rbind, lapply(sprintf("page%02d", 1:8), function(p) r7(p, rep(500, 7))))
+  a_vals <- 1000 + 100 * (1:7)
+  b2 <- a_vals + 350; b2[[1L]] <- a_vals[[7L]] - 50     # one round of B among those of A
+  a <- run_of(rbind(r7("overview", a_vals), r7("groups", a_vals), same))
+  b <- run_of(rbind(r7("overview", a_vals + 1000), r7("groups", b2), same), id = "B")
+  cmp <- compare_runs(a, b)
+  ch <- stats::setNames(cmp$table$change, cmp$table$page)
+  expect_equal(ch[["overview"]], "slower")            # 2/3432, times 10 rows: 0.006
+  expect_equal(ch[["groups"]], "suggestive")          # 0.0064 alone, times 9 after the first: 0.058
+  expect_true(cmp$table$p[cmp$table$page == "groups"] <= compare_alpha)
+  expect_gt(cmp$table$p_holm[cmp$table$page == "groups"], compare_alpha)
+  expect_true(any(grepl("suggestive: 1", compare_lines(cmp, a, b), fixed = TRUE)))
+  # 5 rounds against 5 cannot mark a row among 10: no outcome survives the adjustment
+  a5 <- run_of(rbind(rounds_of("overview", 1:5 * 100), do.call(rbind, lapply(sprintf("p%02d", 1:9), function(p) rounds_of(p, rep(1, 5))))))
+  b5 <- run_of(rbind(rounds_of("overview", 1:5 * 100 + 5000), do.call(rbind, lapply(sprintf("p%02d", 1:9), function(p) rounds_of(p, rep(1, 5))))), id = "B")
+  expect_equal(compare_runs(a5, b5)$table$change[[1L]], "too few rounds")
+  # the default number of rounds can mark a row among the about 40 rows of a full plan
+  expect_lte(rank_sum_min_p(default_rounds, default_rounds) * 40, compare_alpha)
+})
+
+test_that("the shift is the Hodges-Lehmann estimate with its confidence interval", {
+  ci <- shift_ci(1:7, 11:17)
+  expect_equal(ci[["shift"]], 10)
+  expect_true(ci[["lo"]] < 10 && ci[["hi"]] > 10)
+  expect_true(all(is.na(shift_ci(1, 2:5))))
+})
+
+test_that("a tour per round opens the pages of 1m one after another in one session", {
+  plan <- build_plan(data.frame(page = c("loadData", "overview", "groups", "about", "spatial"), dataset = c("1m", "1m", "1m", "1m", "cosmx")),
+                     data.frame(action = character(), page = character()), c("1m", "cosmx"))
+  t <- tour_pages(plan)
+  expect_equal(t$dataset, "1m")
+  expect_equal(t$pages, c("groups", "about"))           # not Data info, not the page the Viewer opens on, not another dataset
+  expect_null(tour_pages(plan[plan$page %in% c("loadData", "overview"), ]))
+  s <- build_schedule(plan, 2L, list(candidate = t))
+  tours <- s[s$kind == "tour", ]
+  expect_equal(nrow(tours), 2L)
+  expect_equal(tours$tour, c("groups,about", "groups,about"))
+  expect_equal(tours$round, 1:2)
+  expect_true(all(s$tour[s$kind != "tour"] == ""))
+  # each tour comes after the pages of its round
+  expect_equal(max(s$position[s$round == 1L]), tours$position[[1L]])
+  expect_true("tour" %in% standard_visits)
 })
 
 test_that("a threefold speed-up of a short action is a difference, and three rounds cannot show one", {
@@ -190,7 +240,7 @@ test_that("a threefold speed-up of a short action is a difference, and three rou
 })
 
 test_that("runs made together are compared round by round, and one revision against itself is a noise check", {
-  m <- c(contract = "blackbox-v7", platform = "windows", host = "h", cpu = "c", memory_measure = "m", plan_md5 = "p", fixtures_md5 = "f",
+  m <- c(contract = "blackbox-v8", platform = "windows", host = "h", cpu = "c", memory_measure = "m", plan_md5 = "p", fixtures_md5 = "f",
          version = "8.0.0", sha = "abc", pair_id = "20261113-100000_abc_abc")
   a <- run_of(rounds_of("overview", c(500, 520, 540, 560, 580)), m)
   b <- run_of(rounds_of("overview", c(510, 525, 530, 570, 600)), m, id = "B")
@@ -365,7 +415,7 @@ test_that("two revisions measured in one run take turns, and each goes first equ
 test_that("the shipped plan times the first plot of the projection, and the hook can open it", {
   plan <- build_plan(tsv("coverage.tsv"), tsv("actions.tsv"), tsv("fixtures.tsv")$name, c("example", "demo_trekker"))
   expect_equal(plan$page[plan$first_plot], "overview")
-  expect_equal(standard_contract, "blackbox-v7")
+  expect_equal(standard_contract, "blackbox-v8")
   expect_true("first_plot_ms" %in% standard_metrics)
   hook <- paste(readLines(file.path("..", "standard", "hook.js")), collapse = "
 ")
