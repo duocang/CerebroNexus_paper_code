@@ -3,6 +3,6 @@
 # viewer: the Viewer and the large demo data recipe (data-raw/large-demo, run-demo.R).
 # builder: the Builder.
 viewer_repo=https://github.com/duocang/CerebroNexus.git
-viewer_commit=e927cbf180fb1a50cf783245ab580e83a1334764
+viewer_commit=d79f5d8bb743287eb9325686ce697393964596be
 builder_repo=https://github.com/duocang/CerebroNexus.git
-builder_commit=e927cbf180fb1a50cf783245ab580e83a1334764
+builder_commit=d79f5d8bb743287eb9325686ce697393964596be

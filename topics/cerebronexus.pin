@@ -6,7 +6,7 @@
 # version  the DESCRIPTION version at that commit
 # repo    where the commit can be fetched from. NOTE: a commit that is only in a local clone cannot be fetched by
 #         the topics that clone from this URL (expression_backends, interface_figures); push the branch first.
-ref=integration/8.3.0
-commit=e927cbf180fb1a50cf783245ab580e83a1334764
-version=8.3.0
+ref=perf/edit-latency-plus-viewer-startup
+commit=d79f5d8bb743287eb9325686ce697393964596be
+version=8.1.1
 repo=https://github.com/duocang/CerebroNexus.git
