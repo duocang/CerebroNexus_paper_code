@@ -1,4 +1,4 @@
-// In-page hook, contract "blackbox-v8". It only watches the DOM, so it works on any CerebroNexus
+// In-page hook, contract "blackbox-v9". It only watches the DOM, so it works on any CerebroNexus
 // version. The KPI (visual_complete_ms) is not measured here: it comes from screenshots taken by
 // measure_session.R, because the DOM cannot tell when a plot has finished drawing. This hook
 // supplies the rest:
@@ -358,6 +358,9 @@
     var st = JSON.parse(cb.state()), c = overviewCanvas(), r = c ? c.getBoundingClientRect() : null;
     st.click_ms = cb.fpClickT;
     st.rect = r ? [r.left, r.top, r.width, r.height] : null;
+    // Not done before the projection's own canvas exists: while the server still reads the data set the
+    // page can show only the preview and stay quiet, and Shiny reports no busy state yet.
+    if (!r) st.done = false;
     return JSON.stringify(st);
   };
   cb.state = function () {

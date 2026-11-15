@@ -300,6 +300,80 @@ test_that("visual completion is the first frame that already looks final", {
   expect_equal(v$visual_90_ms, 200)
 })
 
+test_that("frames are captured by screenshot unless PERF_CAPTURE asks for a screencast", {
+  expect_equal(capture_mode(""), "screenshot")
+  expect_equal(capture_mode("screenshot"), "screenshot")
+  expect_equal(capture_mode("screencast"), "screencast")
+  expect_error(capture_mode("video"), "PERF_CAPTURE")
+})
+
+test_that("a screencast frame stays on screen until the next one: irregular frames give the same metrics", {
+  # the screen at the click (sent when the screencast started, 120 ms before), then only the changes
+  t <- c(-120, 40, 55, 900, 950); sim <- c(0.2, 0.5, 0.5, 0.97, 1)
+  v <- visual_from_similarity(t, sim, t_click = 0)
+  expect_equal(v$visual_complete_ms, 950)
+  expect_equal(v$visual_90_ms, 900)
+  # one change, 700 ms after the click, and nothing after it: complete when it came, however long it stays
+  v <- visual_from_similarity(c(-50, 700), c(0.3, 1), t_click = 0)
+  expect_equal(c(v$visual_complete_ms, v$visual_90_ms), c(700, 700))
+  # a frame that repeats the final screen is not a change
+  v <- visual_from_similarity(c(-50, 300, 310, 2000), c(0.3, 1, 1, 1), t_click = 0)
+  expect_equal(v$visual_complete_ms, 300)
+  # nothing changed after the click: only the screen at the click, which already is the final screen
+  v <- visual_from_similarity(-80, 1, t_click = 0)
+  expect_equal(c(v$visual_complete_ms, v$visual_90_ms), c(0, 0))
+  # no frame at all
+  expect_true(is.na(visual_from_similarity(numeric(), numeric(), 0)$visual_complete_ms))
+})
+
+test_that("an observation's frames start with the one on screen at the click", {
+  expect_equal(frames_in_window(c(-900, -500, -100, 50, 300), 0), 3:5)
+  expect_equal(frames_in_window(c(-100, 0, 50), 0), 2:3)        # a frame at the click is the screen at the click
+  expect_equal(frames_in_window(c(20, 50), 0), 1:2)             # no frame before the click: all of them
+  expect_equal(frames_in_window(-300, 0), 1L)
+  expect_length(frames_in_window(numeric(), 0), 0L)
+})
+
+test_that("frame_ms is the median interval of the frames after the click", {
+  expect_equal(frame_interval_ms(c(-2000, 40, 90, 140, 200), 0), 50)   # the frame before the click does not count
+  expect_equal(frame_interval_ms(c(110, 230, 340), 0), 115)            # screenshots: all after the click, as before
+  expect_true(is.na(frame_interval_ms(c(-100, 500), 0)))
+  expect_true(is.na(frame_interval_ms(numeric(), NA_real_)))
+})
+
+test_that("pixel similarity is the share of identical pixels, and 0 for frames of another size", {
+  a <- array(0, c(4, 5, 3)); b <- a; b[1, 1, 2] <- 1; b[2, 2, 3] <- 0.5
+  expect_equal(pixel_similarity(a, a), 1)
+  expect_equal(pixel_similarity(a, b), 1 - 2 / 20)
+  expect_equal(pixel_similarity(a, array(0, c(4, 6, 3))), 0)
+  # an alpha layer does not count
+  a4 <- array(0, c(2, 2, 4)); b4 <- a4; b4[1, 1, 4] <- 1
+  expect_equal(pixel_similarity(a4, b4), 1)
+})
+
+test_that("with a screencast a first plot that stays on screen counts without a second frame", {
+  # screenshots: two frames in a row, a frame alone never counts
+  expect_false(frame_accepted(c(FALSE, TRUE), 2L, c(0, 100), t_end = 5000))
+  expect_true(frame_accepted(c(TRUE, TRUE), 1L))
+  # screencast: the last frame shows the plot and stayed on screen until the capture stopped
+  expect_true(frame_accepted(c(FALSE, TRUE), 2L, c(0, 100), t_end = 5000, hold_ms = 100))
+  expect_equal(first_accepted_frame(c(FALSE, TRUE), c(0, 100), t_end = 5000, hold_ms = 100), 2L)
+  # a flash replaced 30 ms later does not count; one that stayed 150 ms does
+  expect_false(frame_accepted(c(TRUE, FALSE), 1L, c(0, 30), t_end = 5000, hold_ms = 100))
+  expect_true(frame_accepted(c(TRUE, FALSE), 1L, c(0, 150), t_end = 5000, hold_ms = 100))
+  expect_equal(first_accepted_frame(c(FALSE, TRUE, FALSE, TRUE, NA), c(0, 10, 40, 60, 200), t_end = 1000, hold_ms = 100), 4L)
+  # the last frame without the end of the capture cannot be held
+  expect_false(frame_accepted(TRUE, 1L, 0, hold_ms = 100))
+  expect_false(frame_accepted(c(TRUE, TRUE), 3L))
+})
+
+test_that("runs captured in different ways are labelled; a manifest without the mode took screenshots", {
+  m <- c(contract = "blackbox-v9", platform = "windows", host = "h", cpu = "c", memory_measure = "m", plan_md5 = "p", fixtures_md5 = "f")
+  sc <- c(m, capture = "screencast"); shot <- c(m, capture = "screenshot")
+  expect_equal(compare_runs(run_of(obs("overview"), m), run_of(obs("overview"), sc))$differ, "capture")
+  expect_length(compare_runs(run_of(obs("overview"), m), run_of(obs("overview"), shot))$differ, 0L)
+})
+
 test_that("plot legends use the version, adding the date and then the time only when needed", {
   expect_equal(run_labels(c("5.4.0", "5.5.0"), c("2026-10-29T20:54:09+0100", "2026-10-29T22:22:17+0100")), c("5.4.0", "5.5.0"))
   expect_equal(run_labels(c("5.5.0", "5.4.0", "5.5.0", "5.5.0"),
@@ -415,7 +489,7 @@ test_that("two revisions measured in one run take turns, and each goes first equ
 test_that("the shipped plan times the first plot of the projection, and the hook can open it", {
   plan <- build_plan(tsv("coverage.tsv"), tsv("actions.tsv"), tsv("fixtures.tsv")$name, c("example", "demo_trekker"))
   expect_equal(plan$page[plan$first_plot], "overview")
-  expect_equal(standard_contract, "blackbox-v8")
+  expect_equal(standard_contract, "blackbox-v9")
   expect_true("first_plot_ms" %in% standard_metrics)
   hook <- paste(readLines(file.path("..", "standard", "hook.js")), collapse = "
 ")

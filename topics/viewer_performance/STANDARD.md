@@ -49,9 +49,9 @@ how many files the warm-up left (`kept_files_after_warmup`), and a run where it 
 `first_start`). The operating system's file cache is not emptied: a `first_start` reads its files from memory,
 not from a cold disk.
 
-| Metric (contract `blackbox-v8`) | Meaning |
+| Metric (contract `blackbox-v9`) | Meaning |
 |---|---|
-| `visual_complete_ms` | **the KPI.** Click to the last frame that differs from the final screen. Screenshots back to back, as fast as a capture allows: on Windows, at full size, 75 to 130 ms apart (`frame_ms` in `raw.tsv`), so the KPI cannot resolve less than that; a frame counts as different when more than 0.05 % of its pixels differ from the last frame. A page that shows the Viewer's loading card (from 180 ms on) also counts the card's 150 ms fade: a page just slower than 180 ms reads about 150 ms slower than one just faster. |
+| `visual_complete_ms` | **the KPI.** Click to the last frame that differs from the final screen. By default screenshots back to back, as fast as a capture allows: on Windows, at full size, 75 to 140 ms apart (`frame_ms` in `raw.tsv`), so the KPI cannot resolve less than that; with `PERF_CAPTURE=screencast` every frame Chrome draws (**Frames** below). A frame counts as different when more than 0.05 % of its pixels differ from the last frame. A page that shows the Viewer's loading card (from 180 ms on) also counts the card's 150 ms fade: a page just slower than 180 ms reads about 150 ms slower than one just faster. |
 | `page_ready_ms` | click (on the first-plot visits: navigation) to the page's own `cerebro:page-ready` event, on revisions that send it, read from the DOM without the frame interval. Diagnostic: the page sends it when its outputs are drawn and Shiny is idle, which can be after the last visible change; actions do not send it |
 | `first_plot_ms` | only on the `first_start` and `first_plot` visits: navigation to the first frame that shows the projection (below). The number the tool comparison reports as "first plot". `plot_click_ms` (when the Projection page was opened, on the page's clock, which starts at the navigation) and `plot_ink` (the ink share of the accepted frame) are in `raw.tsv` |
 | `start_plot_ms` | the same frame, from the launch of the R server: **the first-plot number to compare across revisions** (below) |
@@ -62,13 +62,43 @@ not from a cold disk.
 | `visual_90_ms` | Click to the first frame that is 90 % identical to the final screen. |
 | `settled_ms`, `visible_ms`, `chrome_busy_ms` | Last DOM change anywhere / inside the page; when Chrome went quiet. Diagnostic. |
 | `r_peak_mib`, `chrome_peak_mib` | Peak memory of the R server's and Chrome's process trees during the observation and its trail, sampled every ~150 ms. On Windows private bytes (Windows has no PSS), on Linux PSS. |
-| `js_peak_mib` | JS heap (`JSHeapUsedSize`) peak per observation. |
+| `js_peak_mib` | JS heap (`JSHeapUsedSize`) peak per observation, read every 5th poll of the page (since `blackbox-v9`; before, every poll). |
 | Server steps | Time of each R step behind the pages, without a browser (section 4). |
 
 Why pixels: the Viewer cannot be asked when a plot has finished drawing in every version, and DOM signals
 exist in some versions only. Screenshots need no cooperation from the Viewer, so they are comparable across
 versions. Pixels miss work that changes none of them (on the mouse brain, Projection looks done while R
 still sends 29 MB of cell names), which `server_busy_ms`, `trail_ms` and the websocket counts show.
+
+**Frames.** How frames are captured is chosen with the environment variable `PERF_CAPTURE` and recorded as
+`capture` in `raw.tsv`, the manifest and the summary. Runs of `blackbox-v9` made with different modes are **not
+comparable**: `compare.R` lists `capture` among the facts in which they differ (a manifest without it took
+screenshots).
+
+- `screenshot` (the default): while the page works, the harness polls the hook and takes a full screenshot
+  (`Page.captureScreenshot`) after each poll, back to back; a frame is stamped half way through its poll and
+  capture. Frames come 110 to 140 ms apart on Windows whether the screen changed or not, so every frame metric
+  is quantised by about that much.
+- `screencast` (to be validated before it becomes the default): `Page.startScreencast` (PNG, every frame, at most
+  1619 x 950, the viewport: Chrome does not scale the frames) sends a frame each time Chrome's compositor draws a
+  new one; each is acknowledged at once, as Chrome sends the next only after that. Frames are stamped by Chrome
+  (`metadata.timestamp`, seconds since 1970 on the machine's wall clock, the clock of the click, `Sys.time()`).
+  No frame means no change: a frame stands for the screen until the next one. The screencast starts before the
+  click; the first frame it sends is the screen at the click (it counts as time 0). The hook is polled every 40 ms
+  meanwhile, without screenshots. When the page is done, the screencast is restarted once for a check frame of the
+  final screen: `capture_check` in `raw.tsv` is `same` when it equals the last frame received and `differs` when
+  the screen changed after it (a frame Chrome dropped, or a change after the page was done: such a row's visual
+  times are too early). `frame_lag_ms` is the median time from a frame's stamp to its arrival in R: it must be
+  small and positive, or the two clocks disagree. `frame_ms` is still the median interval of the frames received
+  after the click; frames only come with changes, so it is not the resolution of this mode (that is one frame of
+  the compositor, about 17 ms, plus the time stamp) but an upper bound of it, and `compare.R`, which takes it as
+  the smallest difference it marks, is then conservative.
+
+Screencast frames, like screenshots on Windows, are full size and every 4th pixel is compared (Chrome's own
+downscaling alternates between two samplings with the GPU; Linux screenshots are taken at quarter scale); a
+screencast frame of another size than the viewport is reported in the session log. The faster polling also
+makes the hook react sooner: on the first-plot visits it opens the Projection page up to about 100 ms earlier
+than with screenshots.
 
 **First plot from the start.** The click-to-last-frame KPI cannot be set beside the tool comparison
 (`topics/tool_comparison`), which times what the other viewers show without any click: from the browser's
@@ -77,7 +107,15 @@ navigation to the first plot. The `first_start` and `first_plot` visits measure 
 each other. Definition, as in the tool comparison (`harness.py`):
 
 - The clock of `first_plot_ms` starts when Chrome is told to navigate to the Viewer. The server has answered
-  its first connection and Chrome was started before, so neither start-up is in that time. Unlike the other
+  its first connection and Chrome was started before, so neither start-up is in that time. Chrome and the
+  CPU/memory sampler are started before the server is launched (since `blackbox-v9`; before, after the server
+  listened, which put their 1-1.5 s start in `start_plot_ms` and had the sampler compete with the server's
+  start for the CPU), as a visitor's browser is open before the App starts: `start_plot_ms` of `blackbox-v8`
+  and `blackbox-v9` are not comparable. On 1.3 million cells the two give about the same `start_plot_ms`
+  (4.0-4.2 s for 8.2.1 05b200515): the 1-1.5 s Chrome and the sampler took overlapped the server's reading of
+  the data set, which the page now waits for instead. Because Chrome now navigates while the server may still
+  read the data set, a first-plot observation is not done before the projection's own canvas exists (the page
+  can show only its preview and stay quiet meanwhile). Unlike the other
   visits it does not wait for a quiet server first: the work the server still has after starting is part of
   starting. Where the server's start ends is the revision's choice, though: a revision that answers sooner and
   prepares the data set afterwards moves that work into `first_plot_ms` (8.2 answers after 0.6 s, 8.0 after
@@ -90,7 +128,9 @@ each other. Definition, as in the tool comparison (`harness.py`):
 - A frame **shows the plot** when the projection canvas is at least 200 x 200 px on screen and at least 1 % of
   its pixels are ink: further than 60 (0-255 RGB distance) from the canvas's most frequent colour, and dark
   (V < 0.5) or coloured (saturation above 0.1). `first_plot_ms` is the time of the first of two frames in a
-  row that show it, so a flash that is gone the next frame does not count.
+  row that show it, so a flash that is gone the next frame does not count. With a screencast, where an
+  unchanged screen sends no second frame, a frame that shows it also counts when it stayed on screen 100 ms
+  (about one screenshot interval) before the next frame or the end of the capture.
 - `visual_complete_ms` and `visual_90_ms` of this visit run from the same navigation, to the last frame that
   differs from the final screen; `server_busy_ms`, memory and websocket traffic also start there. The session
   ends one second after the page finished, then the usual wait for a quiet server and Chrome.
@@ -167,8 +207,8 @@ those pages compare the data as much as the code across distant versions.
 **Windows**, with the data on Windows (the reference platform). Revisions are installed with `R CMD INSTALL` from
 `git archive` of the commit into a cache library (`PERF_CACHE`, default `%LOCALAPPDATA%\cerebronexus-viewer-perf`), not
 loaded with `load_all`; the server refuses to start when the loaded package is not that library's. Chrome draws with
-the machine's GPU (`--disable-gpu` removed, `--ignore-gpu-blocklist`, WebGPU on). CPU and memory come from `sampler.ps1`. Screenshots are taken at full
-size and every 4th pixel is kept (Chrome's own downscaling alternates between two samplings with the GPU).
+the machine's GPU (`--disable-gpu` removed, `--ignore-gpu-blocklist`, WebGPU on). CPU and memory come from `sampler.ps1`. Screenshots (and
+screencast frames) are taken at full size and every 4th pixel is kept (Chrome's own downscaling alternates between two samplings with the GPU).
 
 The harness also runs on Linux (`sampler.R`, PSS; Chrome with `--use-gl=angle --use-angle=gl`; without a GPU, as in WSL,
 it renders in software and the manifest's `renderer` says SwiftShader), but numbers from different platforms
@@ -259,7 +299,7 @@ one whose CPU canary moved, or whose sessions started on a busy machine, measure
 
 `compare.R` also marks pages that stopped finishing, pages present in one run only, actions that switched to a
 different value (another gene, another column), and the manifest facts in which the runs differ (contract,
-platform, host, CPU, memory measure, plan, large datasets). Compare runs from the same machine and plan.
+platform, host, CPU, memory measure, frame capture, plan, large datasets). Compare runs from the same machine and plan.
 
 ## 7. Changing the standard
 
@@ -271,8 +311,9 @@ platform, host, CPU, memory measure, plan, large datasets). Compare runs from th
 
 ## 8. Limits
 
-- **Resolution.** 75 to 130 ms per frame on Windows (`page_ready_ms` is finer where a revision sends the
-  event), about 150 ms CPU and memory samples. `server_busy_ms` cannot tell a
+- **Resolution.** 75 to 140 ms per frame on Windows with screenshots (`page_ready_ms` is finer where a revision
+  sends the event); a screencast resolves single compositor frames, but is not validated yet (section 1,
+  **Frames**). About 150 ms CPU and memory samples. `server_busy_ms` cannot tell a
   pause of 3 s or more from the end of the work, and sees only CPU: a server waiting on disk looks quiet.
 - **Cost.** One session per page and round and one tour per round, most of the time spent starting servers
   on the large datasets; seven rounds and a second revision make a run about five times as long as one

@@ -1,6 +1,8 @@
 # Windows version of sampler.R: samples the memory and CPU of two process trees (the R server and Chrome)
 # about every 150 ms and writes the same CSV columns.
 # usage: powershell -NoProfile -ExecutionPolicy Bypass -File sampler.ps1 SERVER_PID CHROME_PID OUT.csv STOP_FILE
+# SERVER_PID 0: the server is not started yet; its id is read from OUT.csv.pid once that file is there (the
+# server columns are 0 until then).
 # r_rss / c_rss are the working sets; r_pss / c_pss are private bytes (Windows has no PSS); r_cpu / c_cpu
 # the CPU seconds each tree has used so far. A tree is the process and every process whose parent is in
 # it and that started after that parent (Windows reuses process ids).
@@ -84,7 +86,12 @@ $w = New-Object System.IO.StreamWriter($Out, $false)
 $w.AutoFlush = $true
 $w.WriteLine('t_ms,r_rss,r_pss,c_rss,c_pss,r_cpu,c_cpu')
 $inv = [System.Globalization.CultureInfo]::InvariantCulture
+$PidFile = "$Out.pid"
 while (-not (Test-Path -LiteralPath $StopFile)) {
+  if ($ServerPid -eq 0 -and (Test-Path -LiteralPath $PidFile)) {
+    $line = Get-Content -LiteralPath $PidFile -TotalCount 1
+    if ($line -match '^\s*\d+\s*$') { $ServerPid = [uint32]$line.Trim() }
+  }
   $t = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds()
   $s = [PerfTree]::Sample($ServerPid, $ChromePid)
   $w.WriteLine([string]::Format($inv, '{0},{1:F0},{2:F0},{3:F0},{4:F0},{5:F3},{6:F3}', $t, $s[0], $s[1], $s[2], $s[3], $s[4], $s[5]))

@@ -16,7 +16,7 @@
 #   --pages a,b           only these pages and their actions; the run folder ends in _partial
 # Environment: PERF_CACHE (where sources and libraries go), PERF_RCACHE (where the servers' cache directories go:
 # a short path, default C:/cnxp on Windows), PERF_IDLE_MAX_S (how long a session waits for an idle machine,
-# default 600).
+# default 600), PERF_CAPTURE (how frames are captured: screenshot, the default, or screencast; lib.R).
 # Exit code: 0 every session finished, 2 a session failed twice or setup error.
 args_all <- commandArgs(trailingOnly = FALSE)
 here <- dirname(normalizePath(sub("^--file=", "", grep("^--file=", args_all, value = TRUE)[[1L]])))
@@ -39,6 +39,8 @@ if (is.na(rounds) || rounds < 1L) die("--rounds must be a positive whole number"
 if (isTRUE(opt$baseline) || isTRUE(opt$candidate)) die("--candidate and --baseline take a revision")
 idle_max_s <- as.numeric(Sys.getenv("PERF_IDLE_MAX_S", host_idle_max_s))
 if (is.na(idle_max_s) || idle_max_s < 0) die("PERF_IDLE_MAX_S must be a number of seconds")
+# How the sessions capture frames (lib.R, capture_mode()); they read PERF_CAPTURE themselves.
+capture <- tryCatch(capture_mode(), error = function(e) die(conditionMessage(e)))
 
 fixtures <- read_tsv(file.path(here, "fixtures.tsv"))
 large_root <- normalizePath(opt$large_examples, winslash = "/", mustWork = FALSE)
@@ -275,7 +277,7 @@ for (rv in names(revs)) {
     rounds = rounds, partial = partial, datasets = paste(r$datasets, collapse = ","), sessions = nrow(mine), failed_sessions = failed,
     pair_id = pair_id, pair_role = if (paired) rv else "", pair_with = if (paired) other$run_id else "",
     host = Sys.info()[["nodename"]], os = machine$os, cpu = machine$cpu, cores = parallel::detectCores(), mem_total_mib = machine$mem_total_mib,
-    gpu = machine$gpu, renderer = seen("gpu"), memory_measure = if (on_windows) "private bytes (Windows has no PSS)" else "PSS",
+    gpu = machine$gpu, renderer = seen("gpu"), capture = if (is.null(raw$capture)) capture else seen("capture"), memory_measure = if (on_windows) "private bytes (Windows has no PSS)" else "PSS",
     r_version = R.version.string, chrome = seen("browser"), chromote = tryCatch(as.character(utils::packageVersion("chromote")), error = function(e) NA_character_),
     harness_commit = paper_sha, cerebro_repo = repo, large_examples = large_root,
     plan_md5 = unname(tools::md5sum(file.path(r$run_dir, "plan.tsv"))),
@@ -295,7 +297,7 @@ for (rv in names(revs)) {
   write_summary(file.path(r$run_dir, "summary.md"),
                 list(version = r$version, run_id = r$run_id, ref = r$ref, sha = r$s12, rounds = rounds, sessions = nrow(mine), failed = failed,
                      datasets = paste(r$datasets, collapse = ", "), host = manifest[["host"]], os = manifest[["os"]], cpu = manifest[["cpu"]],
-                     r_version = R.version.string, chrome = manifest[["chrome"]], renderer = manifest[["renderer"]], uncovered = r$uncovered,
+                     r_version = R.version.string, chrome = manifest[["chrome"]], renderer = manifest[["renderer"]], capture = manifest[["capture"]], uncovered = r$uncovered,
                      pair = if (paired) other$run_id, pair_role = if (paired) sprintf("this run is the %s", rv),
                      host_load = if (!is.na(host_load)) host_load),
                 pages, memory_table(raw), server, problems)

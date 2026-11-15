@@ -23,6 +23,7 @@
 #        [--crb2 FILE]     a second CRB in the dataset menu, for the loadData.switch actions
 #        [--dataset NAME]  [--session ID]  Chrome flags: env PERF_CHROME_ARGS (e.g. --no-sandbox)
 #        [--trace FILE]    keep the CPU and memory samples (CSV) of the session
+#        env PERF_CAPTURE  screenshot (default) or screencast: how frames are captured (lib.R, capture_mode())
 #        [--tour a,b]      the pages of a tour (lib.R, tour_pages()); --page is then "tour"
 suppressPackageStartupMessages({
   library(chromote); library(processx); library(jsonlite)
@@ -52,41 +53,13 @@ cache_dir <- if (is.null(opt$cache_dir) || isTRUE(opt$cache_dir)) NULL else opt$
 if (!is.null(cache_dir)) dir.create(cache_dir, recursive = TRUE, showWarnings = FALSE)
 cache_files <- if (is.null(cache_dir)) NA_integer_ else length(list.files(cache_dir, recursive = TRUE, all.files = TRUE, no.. = TRUE))
 
-log_file <- tempfile(fileext = ".log")
-# The launch of the R server: start_plot_ms of the first-plot visits runs from here.
-t_launch <- now_ms()
-server <- process$new(
-  r_bin("Rscript"), c("--no-save", "--no-restore", file.path(here, "server.R")),
-  env = c("current", PERF_LIB = lib, PERF_CRB = crb, PERF_CRB2 = if (is.null(opt$crb2)) "" else opt$crb2, PERF_PORT = port, R_LIBS = lib, R_PROFILE_USER = nullfile(),
-          if (!is.null(cache_dir)) c(R_USER_CACHE_DIR = normalizePath(cache_dir, winslash = "/"))),
-  stdout = log_file, stderr = "2>&1", cleanup_tree = TRUE
-)
+# Chrome and the sampler start before the server, as a visitor's browser is open before the App starts: the
+# time they take to start is not part of start_plot_ms, and they do not compete with the server's start for
+# the CPU. The sampler learns the server's process id from a file (`<trace>.pid`) once it is launched.
 stop_file <- tempfile(fileext = ".stop"); mem_csv <- if (is.null(opt$trace)) tempfile(fileext = ".csv") else opt$trace
+pid_file <- paste0(mem_csv, ".pid"); unlink(pid_file)
 sampler <- NULL
-cleanup <- function() {
-  try(file.create(stop_file), silent = TRUE)
-  try(if (!is.null(sampler)) sampler$wait(3000), silent = TRUE)
-  try(server$kill_tree(), silent = TRUE)
-}
-on.exit(cleanup(), add = TRUE)
-
-# The server is up when Shiny says it listens (read from its log every 20 ms: a refused connection takes up to
-# a second to fail on Windows, which made the start time that coarse), and a connection is accepted.
-t_wait <- Sys.time()
-repeat {
-  listening <- any(grepl("Listening on", readLines(log_file, warn = FALSE), fixed = TRUE)) ||
-    as.numeric(difftime(Sys.time(), t_wait, units = "secs")) > 30   # a Shiny that does not say so
-  ok <- listening && tryCatch({ con <- socketConnection("127.0.0.1", port, open = "r+", timeout = 1); close(con); TRUE },
-                              error = function(e) FALSE, warning = function(w) FALSE)
-  if (ok) break
-  if (!server$is_alive()) stop("server died:\n", paste(utils::tail(readLines(log_file, warn = FALSE), 25), collapse = "\n"))
-  if (as.numeric(difftime(Sys.time(), t_wait, units = "secs")) > 240) stop("server start timeout")
-  Sys.sleep(0.02)
-}
-server_start_s <- (now_ms() - t_launch) / 1000
-info <- grep("^PERF_INFO", readLines(log_file, warn = FALSE), value = TRUE)
-pkg_version <- if (length(info)) sub(" path=.*", "", sub("^PERF_INFO version=", "", info[[1L]])) else NA_character_
-
+on.exit({ try(file.create(stop_file), silent = TRUE); try(if (!is.null(sampler)) sampler$wait(3000), silent = TRUE) }, add = TRUE)
 chrome_args <- chromote::default_chrome_args()
 # Chrome draws with the machine's GPU (WebGL), never in software. On Linux that is OpenGL through ANGLE (the
 # Vulkan path gives WebGPU but its canvas comes out blank in screenshots); without a GPU (WSL) Chrome renders in
@@ -108,10 +81,41 @@ invisible(b$Emulation$setDeviceMetricsOverride(width = 1619, height = 950, devic
 invisible(b$Page$enable())
 invisible(b$Page$addScriptToEvaluateOnNewDocument(source = paste(readLines(file.path(here, "ws.js"), warn = FALSE), collapse = "\n")))
 
-sampler <- start_sampler(here, server$get_pid(), chrome_pid, mem_csv, stop_file)
+sampler <- start_sampler(here, 0L, chrome_pid, mem_csv, stop_file)
 
-ev <- function(expr) {
-  r <- b$Runtime$evaluate(expr, returnByValue = TRUE, awaitPromise = FALSE)
+log_file <- tempfile(fileext = ".log")
+# The launch of the R server: start_plot_ms of the first-plot visits runs from here.
+t_launch <- now_ms()
+server <- process$new(
+  r_bin("Rscript"), c("--no-save", "--no-restore", file.path(here, "server.R")),
+  env = c("current", PERF_LIB = lib, PERF_CRB = crb, PERF_CRB2 = if (is.null(opt$crb2)) "" else opt$crb2, PERF_PORT = port, R_LIBS = lib, R_PROFILE_USER = nullfile(),
+          if (!is.null(cache_dir)) c(R_USER_CACHE_DIR = normalizePath(cache_dir, winslash = "/"))),
+  stdout = log_file, stderr = "2>&1", cleanup_tree = TRUE
+)
+writeLines(as.character(server$get_pid()), pid_file)
+on.exit(try(server$kill_tree(), silent = TRUE), add = TRUE, after = FALSE)
+
+# The server is up when Shiny says it listens (read from its log every 20 ms: a refused connection takes up to
+# a second to fail on Windows, which made the start time that coarse), and a connection is accepted.
+t_wait <- Sys.time()
+repeat {
+  listening <- any(grepl("Listening on", readLines(log_file, warn = FALSE), fixed = TRUE)) ||
+    as.numeric(difftime(Sys.time(), t_wait, units = "secs")) > 30   # a Shiny that does not say so
+  ok <- listening && tryCatch({ con <- socketConnection("127.0.0.1", port, open = "r+", timeout = 1); close(con); TRUE },
+                              error = function(e) FALSE, warning = function(w) FALSE)
+  if (ok) break
+  if (!server$is_alive()) stop("server died:\n", paste(utils::tail(readLines(log_file, warn = FALSE), 25), collapse = "\n"))
+  if (as.numeric(difftime(Sys.time(), t_wait, units = "secs")) > 240) stop("server start timeout")
+  Sys.sleep(0.02)
+}
+server_start_s <- (now_ms() - t_launch) / 1000
+info <- grep("^PERF_INFO", readLines(log_file, warn = FALSE), value = TRUE)
+pkg_version <- if (length(info)) sub(" path=.*", "", sub("^PERF_INFO version=", "", info[[1L]])) else NA_character_
+
+
+
+ev <- function(expr, await = FALSE) {
+  r <- b$Runtime$evaluate(expr, returnByValue = TRUE, awaitPromise = await)
   if (!is.null(r$exceptionDetails)) stop("JS error: ", r$exceptionDetails$text, " ", r$exceptionDetails$exception$description)
   r$result$value
 }
@@ -119,50 +123,132 @@ hook <- paste(readLines(file.path(here, "hook.js"), warn = FALSE), collapse = "\
 nz <- function(x) if (is.null(x)) NA_real_ else x
 
 js_peak <- 0
+# How frames are captured (PERF_CAPTURE, lib.R capture_mode()): "screenshot" or "screencast".
+capture_by <- capture_mode()
+screencast <- identical(capture_by, "screencast")
+message("frames: ", capture_by)
+vw <- 1619L; vh <- 950L
 # Frames are compared at quarter scale. With the GPU (Windows) a screenshot Chrome scales down alternates
 # between two samplings from one capture to the next (a 1-pixel line moves): capture at full size there
-# and take every 4th pixel, which is the same every time.
-shot_scale <- if (on_windows) 1 else 0.25
-viewport <- list(x = 0, y = 0, width = 1619, height = 950, scale = shot_scale)
+# and take every 4th pixel, which is the same every time. Screencast frames are asked for at the size of the
+# viewport (maxWidth/maxHeight), so Chrome does not scale them, on any platform; every 4th pixel is kept too.
+shot_scale <- if (on_windows || screencast) 1 else 0.25
+viewport <- list(x = 0, y = 0, width = vw, height = vh, scale = shot_scale)
 quarter <- function(m) if (shot_scale == 1) m[seq(1L, dim(m)[[1L]], 4L), seq(1L, dim(m)[[2L]], 4L), , drop = FALSE] else m
+decode <- function(img) png::readPNG(base64enc::base64decode(img))
 shot <- function() b$Page$captureScreenshot(format = "png", clip = viewport, optimizeForSpeed = TRUE)$data
 
-# Frames are captured back to back while waiting; the page-side hook decides when to stop. `tolerant` is for the
+# Screencast: Chrome sends a frame (Page.screencastFrame) each time its compositor draws a new one, and sends
+# the next only after the last ones were acknowledged, so every frame is acknowledged as soon as it arrives.
+# Events are handled while R waits for Chrome (any command), which the polling loop does all the time. A frame's
+# time is metadata$timestamp: seconds since 1970 on Chrome's clock when the frame was drawn. Chrome runs on this
+# machine, so that is the wall clock that now_ms() (Sys.time()) reads, the clock of t_start (the click).
+# `arrived` (now_ms() when R handled it) only serves to check that: arrived - t must be small and positive
+# (frame_lag_ms in raw.tsv).
+sc <- new.env()
+sc$frames <- list(); sc$rect <- NULL; sc$on <- FALSE; sc$size_said <- FALSE
+if (screencast) {
+  invisible(b$Page$screencastFrame(callback_ = function(p) {
+    try(b$Page$screencastFrameAck(sessionId = p$sessionId, wait_ = FALSE)$catch(function(e) NULL), silent = TRUE)
+    if (!isTRUE(sc$on)) return(invisible(NULL))
+    arrived <- now_ms(); ts <- p$metadata$timestamp
+    sc$frames[[length(sc$frames) + 1L]] <- list(t = if (is.numeric(ts) && length(ts) == 1L) ts * 1000 else arrived,
+                                                img = p$data, rect = sc$rect, arrived = arrived)
+  }))
+}
+# Wait `ms` in the page (a timer there), so that R handles Chrome's events meanwhile; Sys.sleep() would not.
+pump <- function(ms) tryCatch(invisible(ev(sprintf("new Promise(function (r) { setTimeout(function () { r(0); }, %d); })", ms), await = TRUE)),
+                              error = function(e) Sys.sleep(ms / 1000))
+# Start a screencast and wait (up to wait_s) for the frame Chrome sends at the start: the screen as it is.
+sc_start <- function(wait_s = 2) {
+  sc$frames <- list(); sc$on <- TRUE
+  invisible(b$Page$startScreencast(format = "png", maxWidth = vw, maxHeight = vh, everyNthFrame = 1L))
+  t0 <- now_ms()
+  while (!length(sc$frames) && now_ms() - t0 < wait_s * 1000) pump(20)
+  length(sc$frames) > 0L
+}
+# Stop it; frames Chrome sent before it stopped are still taken (they arrive before the answer).
+sc_stop <- function() {
+  invisible(tryCatch(b$Page$stopScreencast(), error = function(e) NULL))
+  sc$on <- FALSE
+}
+
+# Frames are captured while waiting; the page-side hook decides when to stop. `tolerant` is for the
 # page load of a first_plot session (Runtime.evaluate and screenshots can fail while Chrome navigates; the
 # hook may not be in the page yet); `grace_s` keeps capturing for that long after the page is done.
 # Each frame keeps `rect`, where the hook says the projection is (first_plot sessions).
-wait_done <- function(timeout_s, capture = TRUE, state_js = "window.__cb.state()", tolerant = FALSE, grace_s = 0) {
-  t0 <- Sys.time(); frames <- list(); done_at <- NULL
+# screenshot: one screenshot per poll, back to back. screencast: the hook is polled every 40 ms (a timer in
+# the page), frames arrive by themselves (sc_start() was called before the click); at the end the screencast is
+# restarted once for a check frame of the final screen: `capture_check` is "same" when it equals the last frame
+# received, "differs" when the screen changed after it (a frame Chrome dropped, or a change after the page was done).
+# The JS heap is read every 5th poll.
+wait_done <- function(timeout_s, state_js = "window.__cb.state()", tolerant = FALSE, grace_s = 0) {
+  t0 <- Sys.time(); frames <- list(); done_at <- NULL; polls <- 0L
+  poll_js <- sprintf("new Promise(function (res, rej) { setTimeout(function () { try { res(%s); } catch (e) { rej(e); } }, 40); })", state_js)
+  read_state <- function() {
+    if (!screencast) return(fromJSON(ev(state_js)))
+    st <- fromJSON(ev(poll_js, await = TRUE))
+    sc$rect <- st$rect
+    st
+  }
+  finish <- function(st, status) {
+    st$status <- status
+    st$t_stop <- now_ms()
+    if (screencast) {
+      sc_stop()
+      frames <- sc$frames
+      st$capture_check <- NA_character_
+      if (length(frames) && isTRUE(tryCatch(sc_start(1), error = function(e) FALSE))) {
+        chk <- sc$frames[[1L]]
+        st$capture_check <- if (pixel_similarity(quarter(decode(chk$img)), quarter(decode(frames[[length(frames)]]$img))) >= 1 - 0.0005) "same" else "differs"
+      }
+      sc_stop()
+      if (length(frames) && !sc$size_said) {
+        d <- dim(decode(frames[[1L]]$img))
+        if (d[[2L]] != vw || d[[1L]] != vh) message(sprintf("screencast frames are %d x %d, not %d x %d: Chrome scaled them", d[[2L]], d[[1L]], vw, vh))
+        sc$size_said <- TRUE
+      }
+    }
+    st$frames <- frames
+    st
+  }
   repeat {
+    polls <- polls + 1L
     t_a <- now_ms()
-    st <- if (tolerant) tryCatch(fromJSON(ev(state_js)), error = function(e) list()) else fromJSON(ev(state_js))
-    h <- tryCatch(b$Runtime$getHeapUsage()$usedSize, error = function(e) NA_real_)
-    if (!is.na(h) && h > js_peak) js_peak <<- h
-    if (capture) {
+    st <- if (tolerant) tryCatch(read_state(), error = function(e) { if (screencast) Sys.sleep(0.01); list() }) else read_state()
+    if (polls %% 5L == 1L) {
+      h <- tryCatch(b$Runtime$getHeapUsage()$usedSize, error = function(e) NA_real_)
+      if (!is.na(h) && h > js_peak) js_peak <<- h
+    }
+    if (!screencast) {
       t_f <- (t_a + now_ms()) / 2
       img <- if (tolerant) tryCatch(shot(), error = function(e) NULL) else shot()
       if (!is.null(img)) frames[[length(frames) + 1L]] <- list(t = t_f, img = img, rect = st$rect)
     }
     if (isTRUE(st$done) && is.null(done_at)) done_at <- Sys.time()
     if (!is.null(done_at) && as.numeric(difftime(Sys.time(), done_at, units = "secs")) >= grace_s) {
-      st$status <- if (nzchar(st$error %||% "")) "error" else if (isTRUE(st$stuck)) "stuck_busy" else "ok"
-      st$frames <- frames; return(st)
+      return(finish(st, if (nzchar(st$error %||% "")) "error" else if (isTRUE(st$stuck)) "stuck_busy" else "ok"))
     }
     if (as.numeric(difftime(Sys.time(), t0, units = "secs")) > timeout_s) {
       message("timeout; last page state: ", tryCatch(ev(state_js), error = function(e) conditionMessage(e)))
-      st$status <- "timeout"; st$frames <- frames; return(st)
+      return(finish(st, "timeout"))
     }
-    if (!capture) Sys.sleep(0.04)
   }
 }
 
-# Pixel similarity of every frame to the last one (share of identical pixels).
+# Pixel similarity of every frame to the last one (share of identical pixels). A frame that is the same PNG
+# as the last one or as the one before it is not decoded again.
 frame_similarity <- function(frames) {
-  mats <- lapply(frames, function(f) quarter(png::readPNG(base64enc::base64decode(f$img))))
-  fin <- mats[[length(mats)]]
-  vapply(mats, function(m) {
-    d <- abs(m - fin) > 1e-6
-    1 - mean(d[, , 1L] | d[, , 2L] | d[, , 3L])
+  n <- length(frames)
+  if (!n) return(numeric())
+  fin_img <- frames[[n]]$img; fin <- quarter(decode(fin_img))
+  prev_img <- NULL; prev_sim <- NA_real_
+  vapply(frames, function(f) {
+    if (identical(f$img, fin_img)) return(1)
+    if (identical(f$img, prev_img)) return(prev_sim)
+    s <- pixel_similarity(quarter(decode(f$img)), fin)
+    prev_img <<- f$img; prev_sim <<- s
+    s
   }, 0)
 }
 
@@ -194,7 +280,8 @@ add_row <- function(page, visit, status, arg = NA_character_, error = NA_charact
     plot_click_ms = nz(fp$click_ms), plot_ink = nz(fp$ink), settled_ms = nz(st$settled_ms),
     loader_visible_ms = nz(st$loader_ms), visible_ms = nz(st$visible_ms), js_peak_mib = if (is.null(vis)) NA_real_ else js_peak / 2^20,
     trail_ms = trail, ws_in_bytes = nz(ws$ws_in_bytes), ws_out_bytes = nz(ws$ws_out_bytes), ws_max_msg_bytes = nz(ws$ws_max_msg_bytes),
-    idle_wait_s = idle_wait, frames = length(ft), frame_ms = if (length(ft) > 1L) stats::median(diff(ft)) else NA_real_,
+    idle_wait_s = idle_wait, frames = length(ft), frame_ms = frame_interval_ms(ft, t_start),
+    capture = capture_by, capture_check = if (is.null(st$capture_check)) NA_character_ else st$capture_check, frame_lag_ms = nz(st$frame_lag_ms),
     cache_files = cache_files,
     t_start = t_start, t_end = t_end, t_quiet = t_quiet, stringsAsFactors = FALSE
   )
@@ -212,16 +299,24 @@ probe_gpu <- function() {
 }
 
 # The first frame that shows the projection (first_plot sessions): the first of two frames in a row for which
-# plot_shown() holds, and its time from the navigation. Frames are decoded in order and the search stops there.
-first_plot_from_frames <- function(frames, t_start) {
-  shows <- rep(FALSE, length(frames)); ink <- rep(NA_real_, length(frames)); hit <- NA_integer_
-  for (i in seq_along(frames)) {
+# plot_shown() holds, and its time from the navigation; with a screencast also a frame that stayed on screen
+# first_plot_hold_ms (lib.R, frame_accepted(); `t_end` is when the capture stopped). Frames are decoded in order
+# and the search stops there.
+first_plot_from_frames <- function(frames, t_start, t_end = NA_real_) {
+  n <- length(frames)
+  shows <- rep(FALSE, n); ink <- rep(NA_real_, n); hit <- NA_integer_
+  ft <- vapply(frames, function(f) f$t, 0)
+  hold <- if (screencast) first_plot_hold_ms else NA_real_
+  for (i in seq_len(n)) {
     r <- frames[[i]]$rect
-    if (length(r) != 4L) next
-    res <- plot_shown(png::readPNG(base64enc::base64decode(frames[[i]]$img)), r, shot_scale)
-    shows[[i]] <- res$shows; ink[[i]] <- res$ink
-    if (i > 1L && shows[[i]] && shows[[i - 1L]]) { hit <- i - 1L; break }
+    if (length(r) == 4L) {
+      img <- decode(frames[[i]]$img)
+      res <- plot_shown(img, r, if (screencast) dim(img)[[2L]] / vw else shot_scale)
+      shows[[i]] <- res$shows; ink[[i]] <- res$ink
+    }
+    if (i > 1L && frame_accepted(shows, i - 1L, ft, t_end, hold)) { hit <- i - 1L; break }
   }
+  if (is.na(hit) && n && frame_accepted(shows, n, ft, t_end, hold)) hit <- n
   if (is.na(hit)) return(list(first_plot_ms = NA_real_, ink = NA_real_))
   list(first_plot_ms = frames[[hit]]$t - t_start, ink = ink[[hit]])
 }
@@ -242,6 +337,8 @@ measure <- function(name, visit, initial = FALSE, timeout_s = 90, record = TRUE,
   # Start from a quiet server and Chrome; the wait is not part of the measurement.
   idle_wait <- if (initial || nav || tour) NA_real_ else if (quiet_now) 0 else wait_quiet(mem_csv)$waited_s
   if (!nav) ev("window.__cbws && window.__cbws.reset()")
+  # The screencast starts before the clock, with the screen as it is (its first frame): the screen at the click.
+  if (screencast && !sc_start()) message("  no screencast frame within 2 s of its start: the first frame after the click stands for the screen at the click")
   t_start <- now_ms()
   if (nav) invisible(b$Page$navigate(sprintf("http://127.0.0.1:%d/", port)))
   else if (action) ev(sprintf("window.__cb.actionBegin(%s, %s)", toJSON(name, auto_unbox = TRUE), toJSON(arg, auto_unbox = TRUE)))
@@ -262,9 +359,15 @@ measure <- function(name, visit, initial = FALSE, timeout_s = 90, record = TRUE,
   trail <- if (is.na(q$quiet_from_ms)) NA_real_ else max(0, q$quiet_from_ms - t_end)
   ws <- tryCatch(fromJSON(ev("window.__cbws ? window.__cbws.read() : '{}'")), error = function(e) list())
   ft <- vapply(st$frames, function(f) f$t, 0)
+  if (screencast) {   # the frame on screen at the click and every later one (lib.R)
+    keep <- frames_in_window(ft, t_start)
+    st$frames <- st$frames[keep]; ft <- ft[keep]
+    lag <- vapply(st$frames, function(f) f$arrived - f$t, 0)
+    st$frame_lag_ms <- if (length(lag)) stats::median(lag) else NA_real_
+  }
   sim <- frame_similarity(st$frames)
   vis <- visual_from_similarity(ft, sim, t_start)
-  fp <- if (nav) first_plot_from_frames(st$frames, t_start) else list()
+  fp <- if (nav) first_plot_from_frames(st$frames, t_start, st$t_stop) else list()
   if (nav) {
     fp$click_ms <- st$click_ms; fp$start_plot_ms <- t_start - t_launch + fp$first_plot_ms
     # the page's own event, on the clock of this visit (from the navigation, like its other times)
@@ -280,8 +383,9 @@ measure <- function(name, visit, initial = FALSE, timeout_s = 90, record = TRUE,
     utils::write.table(data.frame(t = ft - t_start, sim = sim), file.path(d, "similarity.tsv"), sep = "\t", row.names = FALSE, quote = FALSE)
   }
   if (!record) return(invisible(NULL))
-  message(sprintf("  %-28s %-8s %-10s visual=%6.0f v90=%6.0f first_plot=%6.0f loader=%5.0f trail=%6.0f ws_max=%9.0f frames=%d%s", name, visit, st$status,
-                  vis$visual_complete_ms, vis$visual_90_ms, nz(fp$first_plot_ms), nz(st$loader_ms), trail, nz(ws$ws_max_msg_bytes), length(ft),
+  message(sprintf("  %-28s %-8s %-10s visual=%6.0f v90=%6.0f first_plot=%6.0f loader=%5.0f trail=%6.0f ws_max=%9.0f frames=%d frame_ms=%.0f%s%s", name, visit, st$status,
+                  vis$visual_complete_ms, vis$visual_90_ms, nz(fp$first_plot_ms), nz(st$loader_ms), trail, nz(ws$ws_max_msg_bytes), length(ft), frame_interval_ms(ft, t_start),
+                  if (screencast) sprintf(" check=%s lag=%.0f", st$capture_check %||% NA_character_, nz(st$frame_lag_ms)) else "",
                   if (nzchar(st$error %||% "")) paste0("  error: ", st$error) else ""))
   add_row(name, visit, st$status, arg = arg, error = if (nzchar(st$error %||% "")) gsub("[\t\r\n]+", " ", st$error) else NA_character_,
           vis = vis, st = st, idle_wait = idle_wait, ft = ft, t_start = t_start, t_end = t_end, t_quiet = t_quiet, trail = trail, ws = ws, fp = fp)

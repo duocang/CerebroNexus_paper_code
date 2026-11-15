@@ -2,7 +2,7 @@
 # writes and the comparison of two runs. No browser and no R app here, so they are unit tested
 # (topics/viewer_performance/tests/test-standard.R). The rules are in ../STANDARD.md.
 
-standard_contract <- "blackbox-v8"
+standard_contract <- "blackbox-v9"
 standard_metrics <- c("visual_complete_ms", "visual_90_ms", "first_plot_ms", "start_plot_ms", "page_ready_ms", "settled_ms", "loader_visible_ms", "visible_ms", "js_peak_mib",
                       "server_busy_ms", "chrome_busy_ms", "trail_ms", "ws_in_bytes", "ws_out_bytes", "ws_max_msg_bytes",
                       "r_peak_mib", "chrome_peak_mib")
@@ -76,8 +76,46 @@ busy_ms <- function(t, cpu, t_click, t_stop, thr, window_ms = 1000) {
   if (is.na(q)) NA_real_ else q - t_click
 }
 
-# Visual metrics from screenshots taken back to back after a click. `sim` is the share of pixels of
-# each frame that equals the last frame; `t` the frame times (ms) and `t_click` the click time.
+# How frames are captured (env PERF_CAPTURE), recorded in raw.tsv and the manifest (`capture`):
+#   screenshot  Page.captureScreenshot back to back (the default): a frame every 75 to 140 ms, whether the
+#               screen changed or not
+#   screencast  Page.startScreencast: a frame each time Chrome's compositor draws a new one, stamped by Chrome.
+#               No frame means no change: a frame stays on screen until the next one
+# Runs made with different modes are not comparable (compare.R lists `capture` among the differences).
+capture_modes <- c("screenshot", "screencast")
+capture_mode <- function(x = Sys.getenv("PERF_CAPTURE", "")) {
+  if (!nzchar(x)) return(capture_modes[[1L]])
+  if (!x %in% capture_modes) stop("PERF_CAPTURE must be one of: ", paste(capture_modes, collapse = ", "), call. = FALSE)
+  x
+}
+
+# The frames of one observation (screencast): the frame on screen at the click (the last one at or before
+# `t_click`, which a screencast sends when it starts) and every later one. Indices into `t`.
+frames_in_window <- function(t, t_click) {
+  if (!length(t)) return(integer())
+  before <- which(t <= t_click)
+  seq.int(if (length(before)) max(before) else 1L, length(t))
+}
+
+# The median time between two frames after the click (`frame_ms`). A screencast frame from before the click
+# (the screen at the click) does not count.
+frame_interval_ms <- function(t, t_click) {
+  t <- t[t >= t_click]
+  if (length(t) > 1L) stats::median(diff(t)) else NA_real_
+}
+
+# Share of identical pixels of two frames (arrays as png::readPNG returns, colour in the first three
+# layers); 0 when their sizes differ.
+pixel_similarity <- function(a, b) {
+  if (!identical(dim(a), dim(b))) return(0)
+  d <- abs(a - b) > 1e-6
+  1 - mean(d[, , 1L] | d[, , 2L] | d[, , 3L])
+}
+
+# Visual metrics from the frames of an observation. `sim` is the share of pixels of each frame that
+# equals the last frame; `t` the frame times (ms, increasing) and `t_click` the click time. A frame stands
+# for the screen from its time until the next frame's, so frames need not be evenly spaced (screencast:
+# only changes arrive; a frame from before the click is the screen at the click and counts as 0).
 #   visual_complete_ms  when the page first looked the way it ends up (no later frame differs by
 #                       more than `tol` of the pixels). The KPI: it needs no cooperation from the
 #                       Viewer code, so it is comparable across versions.
@@ -133,13 +171,25 @@ plot_shown <- function(img, rect, scale = 1, min_px = ink_params[["min_px"]], mi
   list(shows = ink >= min_ink, ink = ink)
 }
 
-# Index of the first frame of the first run of two frames in a row that show the plot; NA when there is none.
-first_accepted_frame <- function(shows) {
+# Does frame k count as the first plot? It shows the plot and so does the next frame. With `hold_ms`
+# (screencast, where an unchanged screen sends no frame) it also counts when it stayed on screen that long:
+# until the next frame's time `t`, or for the last frame until `t_end`, when the capture stopped.
+first_plot_hold_ms <- 100   # about one screenshot interval: a flash the screenshots would see once does not count
+frame_accepted <- function(shows, k, t = NULL, t_end = NA_real_, hold_ms = NA_real_) {
   shows[is.na(shows)] <- FALSE
   n <- length(shows)
-  if (n < 2L) return(NA_integer_)
-  hit <- which(shows[-n] & shows[-1L])
-  if (length(hit)) hit[[1L]] else NA_integer_
+  if (k < 1L || k > n || !shows[[k]]) return(FALSE)
+  if (k < n && shows[[k + 1L]]) return(TRUE)
+  if (is.na(hold_ms) || is.null(t)) return(FALSE)
+  until <- if (k < n) t[[k + 1L]] else t_end
+  !is.na(until) && until - t[[k]] >= hold_ms
+}
+
+# Index of the first accepted frame (frame_accepted()); NA when there is none. Without `hold_ms`: the first
+# of two frames in a row that show the plot.
+first_accepted_frame <- function(shows, t = NULL, t_end = NA_real_, hold_ms = NA_real_) {
+  for (k in seq_along(shows)) if (frame_accepted(shows, k, t, t_end, hold_ms)) return(k)
+  NA_integer_
 }
 
 med <- function(x) if (all(is.na(x))) NA_real_ else stats::median(x, na.rm = TRUE)
@@ -327,6 +377,7 @@ write_summary <- function(path, info, pages, memory = NULL, server = NULL, probl
     sprintf("- Datasets: %s", info$datasets),
     sprintf("- Machine: %s; %s; %s", info$host, info$os, info$cpu),
     sprintf("- %s; %s, drawn by %s", info$r_version, info$chrome, info$renderer),
+    if (!is.null(info$capture)) sprintf("- Frames: %s (`PERF_CAPTURE`; runs with different modes are not comparable)", info$capture) else character(),
     if (!is.null(info$pair)) sprintf("- Measured together with `%s` (%s), session by session in turn", info$pair, info$pair_role) else character(),
     if (!is.null(info$host_load)) sprintf("- Host before the sessions: %s", info$host_load) else character(), "",
     if (length(problems)) c("## Problems", "", paste0("- ", problems), "") else character(),
@@ -352,7 +403,9 @@ write_summary <- function(path, info, pages, memory = NULL, server = NULL, probl
 # ---- comparing two runs (compare.R) -----------------------------------------------------------------------
 # Manifest facts that should agree for two runs to compare like for like. A difference is reported, not
 # refused: comparing across machines can still be useful when it is labelled.
-comparable_keys <- c("contract", "platform", "host", "cpu", "memory_measure", "plan_md5", "fixtures_md5")
+comparable_keys <- c("contract", "platform", "host", "cpu", "memory_measure", "capture", "plan_md5", "fixtures_md5")
+# A manifest without the key was made before it existed, with this value.
+manifest_defaults <- c(capture = "screenshot")
 
 # A run folder as given, or else the folder of that name under `runs_root` (topics/viewer_performance/runs).
 resolve_run <- function(dir, runs_root) {
@@ -475,7 +528,7 @@ compare_runs <- function(a, b, metric = "visual_complete_ms", alpha = compare_al
     note = ifelse(!is.na(oka) & !is.na(okb) & arga != argb, sprintf("different value: %s vs %s", arga, argb), ""),
     stringsAsFactors = FALSE
   )
-  fact <- function(m) vapply(comparable_keys, function(k) if (k %in% names(m)) m[[k]] else NA_character_, "")
+  fact <- function(m) vapply(comparable_keys, function(k) if (k %in% names(m)) m[[k]] else if (k %in% names(manifest_defaults)) manifest_defaults[[k]] else NA_character_, "")
   facts <- data.frame(key = comparable_keys, A = fact(a$manifest), B = fact(b$manifest), stringsAsFactors = FALSE, row.names = NULL)
   sha <- function(r) if ("sha" %in% names(r$manifest)) r$manifest[["sha"]] else NA_character_
   list(table = out, differ = facts$key[!mapply(identical, facts$A, facts$B)], facts = facts, metric = metric, alpha = alpha,
@@ -507,7 +560,7 @@ compare_lines <- function(cmp, a, b) {
     if (cmp$same_revision) c("**Noise check:** both runs measured the same revision, so every difference below is noise of the measurement. No row should be marked slower or faster.", "") else character(),
     if (length(cmp$differ)) c(sprintf("**Not like for like:** the runs differ in %s, so part of any difference comes from the setup, not the code.", paste(cmp$differ, collapse = ", ")), "",
                               md_table(cmp$facts[cmp$facts$key %in% cmp$differ, , drop = FALSE]), "")
-    else c("Both runs have the same contract, platform, host, CPU, plan and large datasets.", ""),
+    else c("Both runs have the same contract, platform, host, CPU, frame capture, plan and large datasets.", ""),
     if (cmp$paired) c("The two runs were made together, their sessions taking turns, so both met the same state of the machine.", "")
     else c("The two runs were not made together: a machine that was busier during one of them shows as a difference. Measure both in one run (`run.R --baseline`) to rule that out.", ""),
     sprintf("Change: `slower` or `faster` when the exact two-sided rank-sum test over the rounds gives p <= %s after the Holm adjustment over the %d rows tested, and the medians differ by more than one frame; `suggestive` when only the unadjusted p does; `not resolved` otherwise; `too few rounds` when the numbers of rounds cannot survive the adjustment at all. Shift: the Hodges-Lehmann estimate of B - A with its 95 %% confidence interval.",
