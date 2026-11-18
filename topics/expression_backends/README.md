@@ -6,7 +6,9 @@
 > measurement made on CerebroNexus `17a6a35` (version 5.1.x); the harness cannot run on a later revision (it calls
 > `.writeBpcellsGeneMajor`, `setExpression(..., "external")` and an `h5` file layout the package no longer reads).
 > The H5 and embedded storage of the current package are measured by `../builder_performance` (`build_h5`,
-> `build_embedded`, `export_h5`) and `../app_export`.
+> `build_embedded`, `export_h5`) and `../app_export`. The streaming writer of the H5 file for matrices too large to
+> read into R (more than 2^31 - 1 values) is measured by the separate [H5 writer](#h5-writer) harness below, which
+> runs on the current package; the results of the retired benchmark are untouched by it.
 
 Compare expression-storage backends by build time, file size, memory, startup and gene-read speed. Use the commands below from the repository root on Linux or WSL, with a clean Git checkout. CerebroNexus is installed from the commit in `topics/expression_backends/cerebronexus.lock`, fetched from GitHub into the cache; set `CEREBRONEXUS_SRC=/path/to/CerebroNexus` to test a clean local checkout instead (the manifest records `cerebronexus_source` as `lock` or `local`). They use `nix-shell` with the root `default.nix` by default; with `BENCH_NIX=0` they use your own R instead (install its packages with `Rscript install.R benchmark`). The full run needs a machine with substantial memory and disk space; the runner checks capacity before downloading the data.
 
@@ -98,3 +100,38 @@ All implementation lives in `scripts/`:
 
 Reuse verified downloads and the fixed query plan. Keep Viewer checks separate,
 and avoid adding overlapping launchers or configuration layers.
+
+## H5 writer
+
+The writer of the H5 file for a matrix too large to read into R: the streaming writer of the current package
+(`.h5adStreamWriteTENx`, `R/h5ad_stream.R`), which turns a cell-major 10x or h5ad matrix into the gene-major TENx file
+the Viewer reads. Two revisions are measured in turns on the same source. It is a harness of its own and does not use
+the retired benchmark's runner or settings.
+
+```bash
+Rscript topics/expression_backends/scripts/h5_writer_run.R   --cerebro-repo ../CerebroNexus --candidate integration/8.4.1 --baseline 1c77c35be   --source ../data/large-examples/1m/source/1M_neurons_filtered_gene_bc_matrices_h5.h5   --rounds 5 --workers 4
+```
+
+| Option | Meaning |
+|---|---|
+| `--cerebro-repo` | a CerebroNexus checkout; each revision is installed from `git archive` of its commit (committed code only) into `%LOCALAPPDATA%/cerebronexus-h5writer-bench/lib/<commit>` |
+| `--candidate`, `--baseline` | the two revisions (any ref); the same ref twice measures the noise |
+| `--source`, `--group` | the cell-major 10x HDF5 file and its group (`mm10` for the 10x 1.3 M neurons file) |
+| `--rounds` | rounds; at least 5, or no outcome can be resolved |
+| `--workers` | R processes of the writer (`cerebro.h5ad_stream_workers`) |
+| `--work` | where the H5 files are written (each is deleted after its measurement) |
+
+Every measurement is a fresh R process (`scripts/h5_writer_measure.R`) that writes the gene-major H5 file at gzip
+level 1 (`write_s`, `file_bytes`), then reads 20 fixed genes through HDF5Array as the Viewer does, twice
+(`read_genes_s`, `read_genes_again_s`), and 12 more genes for 100,000 fixed random cells (`read_subset_s`); the file
+was just written, so these are warm-cache reads. The revision that goes first alternates with the round. Before each
+measurement the machine has to be idle (total CPU under 15 % over 3 s, at most 120 s of waiting; both recorded). The
+two files of round 1 are compared value by value: a faster writer has to write the same file. Outcome per metric
+(`../STANDARDS.md`): the exact two-sided rank-sum test over the rounds, p <= 0.05, and a difference of medians above
+3 % and 15 ms.
+
+Results go to `data/h5_writer/<stamp>_<candidate>_vs_<baseline>/` (`manifest.tsv`, `raw.tsv`, `checks.tsv`,
+`summary.md`, a log per measurement); a complete run (at least 5 rounds, every measurement finished, the files equal)
+is named in `data/h5_writer/CURRENT`. A smoke run on synthetic data
+(`Rscript topics/expression_backends/scripts/make_smoke_source.R smoke.h5`, then `--source smoke.h5 --rounds 1`) is
+never a result and does not become current.
