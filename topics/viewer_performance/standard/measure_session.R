@@ -277,6 +277,7 @@ add_row <- function(page, visit, status, arg = NA_character_, error = NA_charact
     seq = length(rows) + 1L, browser = browser, gpu = gpu, page = page, visit = visit, status = status, arg = arg, error = error,
     visual_complete_ms = vis$visual_complete_ms %||% NA_real_, visual_90_ms = vis$visual_90_ms %||% NA_real_,
     first_plot_ms = nz(fp$first_plot_ms), start_plot_ms = nz(fp$start_plot_ms), page_ready_ms = nz(st$page_ready_ms),
+    painted_ms = nz(st$painted_ms),
     plot_click_ms = nz(fp$click_ms), plot_ink = nz(fp$ink), settled_ms = nz(st$settled_ms),
     loader_visible_ms = nz(st$loader_ms), visible_ms = nz(st$visible_ms), js_peak_mib = if (is.null(vis)) NA_real_ else js_peak / 2^20,
     trail_ms = trail, ws_in_bytes = nz(ws$ws_in_bytes), ws_out_bytes = nz(ws$ws_out_bytes), ws_max_msg_bytes = nz(ws$ws_max_msg_bytes),
@@ -372,6 +373,7 @@ measure <- function(name, visit, initial = FALSE, timeout_s = 90, record = TRUE,
     fp$click_ms <- st$click_ms; fp$start_plot_ms <- t_start - t_launch + fp$first_plot_ms
     # the page's own event, on the clock of this visit (from the navigation, like its other times)
     if (!is.null(st$page_ready_ms) && !is.null(st$click_ms)) st$page_ready_ms <- st$page_ready_ms + st$click_ms
+    if (!is.null(st$painted_ms) && !is.null(st$click_ms)) st$painted_ms <- st$painted_ms + st$click_ms
   }
   # A page that is done but never showed the projection is a result of its own, not a harness error.
   if (nav && identical(st$status, "ok") && is.na(fp$first_plot_ms)) st$status <- "no_plot"

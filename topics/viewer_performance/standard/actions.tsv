@@ -14,9 +14,9 @@ geneExpression.genes12	geneExpression	Show 12 genes at once: the alphabetically 
 trajectory.colour_by	trajectory	Colour the trajectory by the next column
 immune_repertoire.tab	immune_repertoire	Open the next analysis tab
 hla_tcr_motifs.colour_by	hla_tcr_motifs	Colour the motif network by the next variable
-extra_material.content	extra_material	Show the next content (table or plot); with one content, the next file, then the next category
+extra_material.content	extra_material	Show the next content (table or plot); with one content, the next file, then the next category; with one of each, flip "Automatically format numbers"
 spatial.section	spatial	Show the next FOV / section; when the sample has one, the next sample
-markerGenes.table	markerGenes	Switch "Grouping variable" of the marker gene table to the next one; with one grouping, the next method
+markerGenes.table	markerGenes	Switch "Grouping variable" of the marker gene table to the next one; with one grouping, the next method; with one method, the next subgroup of the table filter
 mostExpressedGenes.group	mostExpressedGenes	Switch the grouping variable to the next one
 enrichedPathways.table	enrichedPathways	Switch "Grouping variable" of the pathway table to the next one; with one grouping, the next method
 trekker.colour_by	trekker	Colour the Trekker view by the next mode

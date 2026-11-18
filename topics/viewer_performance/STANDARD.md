@@ -49,10 +49,11 @@ how many files the warm-up left (`kept_files_after_warmup`), and a run where it 
 `first_start`). The operating system's file cache is not emptied: a `first_start` reads its files from memory,
 not from a cold disk.
 
-| Metric (contract `blackbox-v9`) | Meaning |
+| Metric (contract `blackbox-v10`) | Meaning |
 |---|---|
 | `visual_complete_ms` | **the KPI.** Click to the last frame that differs from the final screen. By default screenshots back to back, as fast as a capture allows: on Windows, at full size, 75 to 140 ms apart (`frame_ms` in `raw.tsv`), so the KPI cannot resolve less than that; with `PERF_CAPTURE=screencast` every frame Chrome draws (**Frames** below). A frame counts as different when more than 0.05 % of its pixels differ from the last frame. A page that shows the Viewer's loading card (from 180 ms on) also counts the card's 150 ms fade: a page just slower than 180 ms reads about 150 ms slower than one just faster. |
 | `page_ready_ms` | click (on the first-plot visits: navigation) to the page's own `cerebro:page-ready` event, on revisions that send it, read from the DOM without the frame interval. Diagnostic: the page sends it when its outputs are drawn and Shiny is idle, which can be after the last visible change; actions do not send it |
+| `painted_ms` | on the same clock, the cell view's first `cerebro:cell-view-ready` event with `painted` for the overview projection, on revisions that send it (since `blackbox-v10`). Diagnostic, not a first-pixel time: the view sends it after the GPU queue is idle and two more frames, so it can trail the first frame that shows the points by a few hundred milliseconds (up to about 225 ms on 1.3 million cells). Re-renders do not move it |
 | `first_plot_ms` | only on the `first_start` and `first_plot` visits: navigation to the first frame that shows the projection (below). The number the tool comparison reports as "first plot". `plot_click_ms` (when the Projection page was opened, on the page's clock, which starts at the navigation) and `plot_ink` (the ink share of the accepted frame) are in `raw.tsv` |
 | `start_plot_ms` | the same frame, from the launch of the R server: **the first-plot number to compare across revisions** (below) |
 | `server_busy_ms` | Click to the moment the R server's process tree goes quiet: from then on every 1 s window stays under 5 % of a core until the harness has seen 3 quiet seconds. A shorter pause is part of the work. |

@@ -1,4 +1,4 @@
-// In-page hook, contract "blackbox-v9". It only watches the DOM, so it works on any CerebroNexus
+// In-page hook, contract "blackbox-v10". It only watches the DOM, so it works on any CerebroNexus
 // version. The KPI (visual_complete_ms) is not measured here: it comes from screenshots taken by
 // measure_session.R, because the DOM cannot tell when a plot has finished drawing. This hook
 // supplies the rest:
@@ -17,10 +17,20 @@
   if (window.__cb) return;
   var cb = window.__cb = {
     clickT: 0, paneLast: 0, anyLast: 0, busy: false, pane: null, active: false, loaderMs: 0, lastCheckT: 0, raf: 0,
-    readyT: 0
+    readyT: 0, paintedT: 0
   };
   window.addEventListener('cerebro:page-ready', function () {
     if (cb.active && !cb.readyT) cb.readyT = now();
+  });
+  // The cell view's own "canvas is painted" signal (revisions that send it):
+  // recorded as painted_ms beside the screenshot-based first_plot_ms.
+  // Only the first paint of the overview projection is kept; re-renders
+  // (colour-by switches, zoom) are ignored.
+  window.addEventListener('cerebro:cell-view-ready', function (e) {
+    var d = e.detail;
+    if (cb.active && !cb.paintedT && d && d.id === 'overview_projection' && d.painted) {
+      cb.paintedT = now();
+    }
   });
   var now = function () { return performance.now(); };
 
@@ -149,7 +159,9 @@
   }
   // Like selectAction, over several selects: the first of `ids` that has another option is switched
   // (a dataset with one grouping or one FOV per sample still exercises the page). arg is "id=value".
-  function firstSelectAction(page, ids) {
+  // `fallback` (a switch id, optional): flipped when no select has a second option, so a page with
+  // one table still gets an action; its arg is "id=on|off".
+  function firstSelectAction(page, ids, fallback) {
     return {
       page: page,
       prep: function () {
@@ -157,9 +169,16 @@
           var v = nextChoice(ids[i]);
           if (v !== null) return { ready: true, arg: ids[i] + '=' + v };
         }
+        if (fallback) {
+          var p = toggleAction(page, fallback).prep();
+          if (p.ready) return { ready: true, arg: fallback + '=' + p.arg };
+        }
         return { available: false };
       },
-      run: function (arg) { var k = arg.indexOf('='); choose(arg.slice(0, k), arg.slice(k + 1)); }
+      run: function (arg) {
+        var k = arg.indexOf('='), id = arg.slice(0, k);
+        if (id === fallback) document.getElementById(id).click(); else choose(id, arg.slice(k + 1));
+      }
     };
   }
   // Immune repertoire: the tab after the active one.
@@ -225,12 +244,12 @@
     'groups.group': selectAction('groups', 'groups_selected_group'),
     'groups.plot_type': radioAction('groups', 'groups_by_other_group_plot_type'),
     'groups.percent': toggleAction('groups', 'groups_by_other_group_show_as_percent'),
-    'markerGenes.table': firstSelectAction('markerGenes', ['marker_genes_selected_table', 'marker_genes_selected_method']),
+    'markerGenes.table': firstSelectAction('markerGenes', ['marker_genes_selected_table', 'marker_genes_selected_method', 'marker_genes_table_select_group_level']),
     'mostExpressedGenes.group': selectAction('mostExpressedGenes', 'most_expressed_genes_selected_group'),
     'enrichedPathways.table': firstSelectAction('enrichedPathways', ['enriched_pathways_selected_table', 'enriched_pathways_selected_method']),
     'trajectory.colour_by': selectAction('trajectory', 'trajectory_point_color'),
     'spatial.section': firstSelectAction('spatial', ['spatial_projection_to_display', 'spatial_projection_sample']),
-    'extra_material.content': firstSelectAction('extra_material', ['extra_material_selected_content', 'extra_material_selected_file', 'extra_material_selected_category']),
+    'extra_material.content': firstSelectAction('extra_material', ['extra_material_selected_content', 'extra_material_selected_file', 'extra_material_selected_category'], 'extra_material_table_number_formatting'),
     'hla_tcr_motifs.colour_by': selectAction('hla_tcr_motifs', 'hla_color_by'),
     'trekker.colour_by': selectAction('trekker', 'trekker_mode'),
     'coordinated_views.colour_by': selectAction('coordinated_views', 'cv-pick-color', function (o) { return o.optgroup === 'Expression'; }),
@@ -381,6 +400,7 @@
       visible_ms: cb.paneLast - cb.clickT,
       settled_ms: lastChange - cb.clickT,
       page_ready_ms: cb.readyT ? cb.readyT - cb.clickT : null,
+      painted_ms: cb.paintedT ? cb.paintedT - cb.clickT : null,
       busy: cb.busy
     });
   };

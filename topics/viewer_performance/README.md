@@ -95,6 +95,14 @@ same machine. Each revision gets its own run folder; the command to compare them
 runs made on different days can be compared too, but a busier machine on one of the days then looks like a
 change in the code.
 
+A pair of revisions takes about 3 hours with the default 7 rounds. Start it as a process of its own, so that
+closing the terminal or the session that started it does not stop it half way (a stopped run keeps its
+folder with `_partial`), for example from PowerShell:
+
+```powershell
+Start-Process Rscript -ArgumentList "topics/viewer_performance/standard/run.R --large-examples ../data/large-examples --candidate B --baseline A" -RedirectStandardOutput run.log -RedirectStandardError run.err -WindowStyle Minimized
+```
+
 Once per machine, measure a revision against itself (`--candidate A --baseline A`; the second folder ends in
 `_base`): what `compare.R` reports for that pair is the noise, and nothing smaller can be claimed.
 

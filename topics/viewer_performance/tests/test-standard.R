@@ -489,7 +489,7 @@ test_that("two revisions measured in one run take turns, and each goes first equ
 test_that("the shipped plan times the first plot of the projection, and the hook can open it", {
   plan <- build_plan(tsv("coverage.tsv"), tsv("actions.tsv"), tsv("fixtures.tsv")$name, c("example", "demo_trekker"))
   expect_equal(plan$page[plan$first_plot], "overview")
-  expect_equal(standard_contract, "blackbox-v9")
+  expect_equal(standard_contract, "blackbox-v10")
   expect_true("first_plot_ms" %in% standard_metrics)
   hook <- paste(readLines(file.path("..", "standard", "hook.js")), collapse = "
 ")
@@ -530,4 +530,19 @@ test_that("a figure draws the first-plot row under its page, for either metric",
   r <- run_of(rbind(obs("overview", visual = 600), obs("overview", "first_plot", 3000, first_plot_ms = 2500), obs("overview.zoom", "action", visual = 100)), m)
   expect_true(file.exists(plot_runs(list(r), tempfile(fileext = ".pdf"), family = "sans")[["pdf"]]))
   expect_true(file.exists(plot_runs(list(r), tempfile(fileext = ".pdf"), metric = "first_plot_ms", family = "sans")[["pdf"]]))
+})
+
+test_that("figure rows that only a later run has stay under their page", {
+  k <- function(page, visit) paste(page, visit, sep = "\r")
+  keys <- c(k("overview", "cold"), k("overview.zoom", "action"), k("groups", "cold"), k("trekker", "cold"),
+            k("overview", "first_plot"), k("groups", "tour"))
+  expect_equal(order_rows(keys), keys[c(1, 2, 5, 3, 6, 4)])
+  # a page whose own row comes later in the list still heads its rows
+  expect_equal(order_rows(c(k("groups.group", "action"), k("groups", "cold"))), c(k("groups", "cold"), k("groups.group", "action")))
+})
+
+test_that("the table actions fall back when the data set has one table", {
+  hook <- paste(readLines(file.path("..", "standard", "hook.js")), collapse = "\n")
+  expect_match(hook, "'marker_genes_table_select_group_level'", fixed = TRUE)
+  expect_match(hook, "'extra_material_table_number_formatting')", fixed = TRUE)
 })

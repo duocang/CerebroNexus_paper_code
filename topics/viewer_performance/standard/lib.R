@@ -2,8 +2,8 @@
 # writes and the comparison of two runs. No browser and no R app here, so they are unit tested
 # (topics/viewer_performance/tests/test-standard.R). The rules are in ../STANDARD.md.
 
-standard_contract <- "blackbox-v9"
-standard_metrics <- c("visual_complete_ms", "visual_90_ms", "first_plot_ms", "start_plot_ms", "page_ready_ms", "settled_ms", "loader_visible_ms", "visible_ms", "js_peak_mib",
+standard_contract <- "blackbox-v10"
+standard_metrics <- c("visual_complete_ms", "visual_90_ms", "first_plot_ms", "start_plot_ms", "page_ready_ms", "painted_ms", "settled_ms", "loader_visible_ms", "visible_ms", "js_peak_mib",
                       "server_busy_ms", "chrome_busy_ms", "trail_ms", "ws_in_bytes", "ws_out_bytes", "ws_max_msg_bytes",
                       "r_peak_mib", "chrome_peak_mib")
 # initial  Data info loading the dataset (the session of the loadData page)
@@ -639,6 +639,15 @@ row_names <- function(page, is_page, visit = rep("cold", length(page))) {
          ifelse(is_page, display_name(page, PAGE_NAMES), display_name(sub("^[^.]*[.]", "", page), ACTION_NAMES)))))
 }
 
+# The figure's rows ("page\rvisit" keys, in the order the runs list them) with each row under its page: a
+# visit or action that only a later run has (a tour, the first plot) would otherwise come after the last page of
+# the earlier runs. The page's own row stays first.
+order_rows <- function(keys) {
+  kp <- sub("\r.*", "", keys); kv <- sub(".*\r", "", keys); grp <- sub("[.].*", "", kp)
+  head_row <- kp == grp & !kv %in% c("action", "tour", start_visits)
+  keys[order(match(grp, unique(grp)), !head_row, seq_along(keys))]
+}
+
 # One dot per run and page or action (the median of `metric`), with a line over the fastest and slowest
 # round for the KPI. Runs are ordered by version, then date. Rows are every page and action with a value in
 # any run, in plan order, on a log time axis (actions take milliseconds, the largest pages seconds). Pages are
@@ -652,7 +661,7 @@ plot_runs <- function(runs, out, metric = "visual_complete_ms", family = figure_
   runs <- order_runs(runs)
   labs <- run_labels(vapply(runs, function(r) r$manifest[["version"]] %||% "?", ""), vapply(runs, function(r) r$manifest[["started"]] %||% "", ""))
   key <- function(p) paste(p$page, p$visit, sep = "\r")
-  keys <- unique(unlist(lapply(runs, function(r) key(r$pages))))
+  keys <- order_rows(unique(unlist(lapply(runs, function(r) key(r$pages)))))
   col_of <- function(col) matrix(sapply(runs, function(r) {
     m <- match(keys, key(r$pages)); v <- if (is.null(r$pages[[col]])) rep(NA_real_, length(keys)) else r$pages[[col]][m]
     ifelse(!is.na(r$pages$ok_frac[m]) & r$pages$ok_frac[m] > 0, v, NA_real_)
