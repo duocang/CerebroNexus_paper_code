@@ -4,7 +4,7 @@
 scenario	source	crb
 example	demo	example
 spatial_visium	demo	demo_spatial_visium
-1m	large	1m/cerebro-v2/cerebro_mouse_brain_1m_compressed.crb
-cosmx	large	cosmx/cerebro-v2/cerebro_cosmx_nsclc_compressed.crb
+1m	large	1m/prepared/cerebro_mouse_brain_1m.crb
+cosmx	large	cosmx/prepared/cerebro_cosmx_nsclc.crb
 embedded_100k	fixture	embedded_100k/cerebro_embedded_100k.crb
 h5_100k	fixture	h5_100k/cerebro_h5_100k.crb

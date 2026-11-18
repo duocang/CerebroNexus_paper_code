@@ -14,9 +14,9 @@ two of them. How it measures is in [STANDARD.md](STANDARD.md).
 
   | Dataset | File below the folder |
   |---|---|
-  | `1m`: 10x E18 mouse brain, 1.3 M cells | `1m/cerebro-v2/cerebro_mouse_brain_1m_compressed.crb` |
-  | `ren`: Ren et al. COVID-19, 1.46 M cells, TCR and BCR | `ren/cerebro-v2/cerebro_ren_covid_1.46m_compressed.crb` |
-  | `cosmx`: CosMx NSCLC, 800 k cells | `cosmx/cerebro-v2/cerebro_cosmx_nsclc_compressed.crb` |
+  | `1m`: 10x E18 mouse brain, 1.3 M cells | `1m/prepared/cerebro_mouse_brain_1m.crb` |
+  | `ren`: Ren et al. COVID-19, 1.46 M cells, TCR and BCR | `ren/prepared/cerebro_ren_covid_1.46m.crb` |
+  | `cosmx`: CosMx NSCLC, 800 k cells | `cosmx/prepared/cerebro_cosmx_nsclc.crb` |
 
   Each CRB needs its `.h5` sidecar and `.viewer` folder beside it. The list is [`standard/fixtures.tsv`](standard/fixtures.tsv).
 - Run every command from the root of this repository.
