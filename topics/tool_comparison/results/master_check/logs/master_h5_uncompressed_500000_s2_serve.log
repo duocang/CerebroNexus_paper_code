@@ -1,9 +1,0 @@
-##---------------------------------------------------------------------------##
-## Launching CerebroNexus
-##---------------------------------------------------------------------------##
-Loading required package: shiny
-Warning: package 'shiny' was built under R version 4.5.3
-
-Listening on http://127.0.0.1:8822
-[2026-10-23 14:27:15.580933] CRB cache hit: cerebro_e18.crb
-[2026-10-23 14:27:15.636747] Data loaded; expression backend will attach on first use.

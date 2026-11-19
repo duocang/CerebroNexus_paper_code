@@ -2,3 +2,8 @@ data/
 env/
 __pycache__/
 *.pyc
+runs/*/art/
+runs/*/cache/
+runs/*/logs/
+runs/*/screens/
+runs/_smoke*/

@@ -1,6 +1,0 @@
-master_embedded build ok 602.4 s
-master_embedded start 1 ok ready 22.261788700008765 first_plot 3.82530240000051 total 26.087091100009275
-master_embedded start 2 ok ready 23.265486199990846 first_plot 3.9304837999952724 total 27.19596999998612
-master_h5_uncompressed build ok 1525.1 s
-master_h5_uncompressed start 1 ok ready 5.953362100000959 first_plot 3.269284499998321 total 9.22264659999928
-master_h5_uncompressed start 2 ok ready 4.795397800000501 first_plot 2.8505853000096977 total 7.6459831000101985

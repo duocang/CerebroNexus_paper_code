@@ -11,6 +11,5 @@ tar_source(c(
 
 list(
   targets_expression_backends,
-  targets_viewer_performance,
-  targets_tool_comparison
+  targets_viewer_performance
 )

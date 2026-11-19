@@ -1,0 +1,41 @@
+tool,feature,group,grade
+CerebroNexus,Import,Import and display,auto
+CerebroNexus,Embeddings,Import and display,auto
+CerebroNexus,Clusters,Import and display,auto
+CerebroNexus,TCR view,Immune repertoire,auto
+CerebroNexus,TCR column,Immune repertoire,auto
+CerebroNexus,Spatial,Spatial,auto
+CerebroNexus,Tissue image,Spatial,auto
+CerebroNexus,Duplicate names,Robustness,rejected
+ShinyCell,Import,Import and display,manual
+ShinyCell,Embeddings,Import and display,auto
+ShinyCell,Clusters,Import and display,auto
+ShinyCell,TCR view,Immune repertoire,absent
+ShinyCell,TCR column,Immune repertoire,absent
+ShinyCell,Spatial,Spatial,absent
+ShinyCell,Tissue image,Spatial,absent
+ShinyCell,Duplicate names,Robustness,silent
+iSEE,Import,Import and display,manual
+iSEE,Embeddings,Import and display,auto
+iSEE,Clusters,Import and display,auto
+iSEE,TCR view,Immune repertoire,absent
+iSEE,TCR column,Immune repertoire,auto
+iSEE,Spatial,Spatial,absent
+iSEE,Tissue image,Spatial,absent
+iSEE,Duplicate names,Robustness,silent
+cellxgene,Import,Import and display,auto
+cellxgene,Embeddings,Import and display,auto
+cellxgene,Clusters,Import and display,auto
+cellxgene,TCR view,Immune repertoire,absent
+cellxgene,TCR column,Immune repertoire,auto
+cellxgene,Spatial,Spatial,absent
+cellxgene,Tissue image,Spatial,absent
+cellxgene,Duplicate names,Robustness,rejected
+Vitessce,Import,Import and display,auto
+Vitessce,Embeddings,Import and display,manual
+Vitessce,Clusters,Import and display,manual
+Vitessce,TCR view,Immune repertoire,absent
+Vitessce,TCR column,Immune repertoire,manual
+Vitessce,Spatial,Spatial,manual
+Vitessce,Tissue image,Spatial,absent
+Vitessce,Duplicate names,Robustness,silent

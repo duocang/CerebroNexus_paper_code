@@ -1,6 +1,0 @@
-# Usage: cerebronexus_master_serve.R <crb> <port>   (CerebroNexus master: launchCerebro has no expression_matrix_* arguments; a sidecar next to the CRB is found by the viewer)
-a <- commandArgs(TRUE)
-suppressMessages(library(CerebroNexus))
-stopifnot(as.character(packageVersion("CerebroNexus")) == "5.3.1")
-app <- launchCerebro(mode = "closed", crb_file_to_load = a[1])
-shiny::runApp(app, host = "127.0.0.1", port = as.integer(a[2]), launch.browser = FALSE)

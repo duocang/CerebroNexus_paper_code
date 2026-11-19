@@ -32,7 +32,7 @@ topics/
   viewer_performance/    Viewer page and action timings of one CerebroNexus version per run (Windows), runs/ and compare.R
   builder/               Builder builds from a SpatialData zip and a CITE-seq MuData file
   interface_figures/     scripted Viewer/Builder captures and Figures 1-7, S1-S2 (run.sh; not in targets)
-  tool_comparison/       same-task comparison with ShinyCell, iSEE, cellxgene and Vitessce (Windows; not in targets)
+  tool_comparison/       start, restart and gene-switching time against ShinyCell, iSEE, cellxgene and Vitessce (Windows; not in targets)
 ```
 
 A topic folder holds what it needs of:
@@ -87,7 +87,7 @@ Rscript --vanilla topics/builder/build_crbs.R <library with CerebroNexus 6.0.0> 
 
 ## Tool comparison
 
-`topics/tool_comparison/` compares CerebroNexus 6.0.0 with ShinyCell, iSEE, cellxgene and Vitessce on the same tasks (import and capability recognition, selection retrieval, and build and start cost at 10k / 100k / 500k cells), run on one native Windows host under a pre-registered protocol. Results are in [topics/tool_comparison/results/SUMMARY.md](topics/tool_comparison/results/SUMMARY.md); see [topics/tool_comparison/README.md](topics/tool_comparison/README.md).
+`topics/tool_comparison/` times CerebroNexus (the HEAD of the checkout next to this repository) against ShinyCell, iSEE, cellxgene and Vitessce on the first 10k / 100k / 500k cells of one data set: build, launch to the first plot (first start and started again), colouring by a gene, memory. One native Windows host, `python bench.py`, no frozen protocol. Each run is a folder in [topics/tool_comparison/runs/](topics/tool_comparison/runs); see [topics/tool_comparison/README.md](topics/tool_comparison/README.md).
 
 ## Notes
 

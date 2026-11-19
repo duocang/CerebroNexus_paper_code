@@ -1,0 +1,661 @@
+tier	tool	gene_idx	gene	status	t_s	server_rss_gb	browser_peak_gb	error
+5000	cerebronexus_embedded	1	3110045C21Rik	ok	1.568	0.593	0.86	
+5000	cerebronexus_embedded	2	5730455P16Rik	ok	1.446			
+5000	cerebronexus_embedded	3	Ccdc71l	ok	1.62			
+5000	cerebronexus_embedded	4	Ccna2	ok	1.162			
+5000	cerebronexus_embedded	5	Dnajc6	ok	1.367			
+5000	cerebronexus_embedded	6	Efcab6	ok	1.167			
+5000	cerebronexus_embedded	7	Fam212b	ok	1.258			
+5000	cerebronexus_embedded	8	Haus8	ok	1.053			
+5000	cerebronexus_embedded	9	Herpud2	ok	1.223			
+5000	cerebronexus_embedded	10	Kcnh2	ok	1.09			
+5000	cerebronexus_embedded	11	Lrpprc	ok	1.129			
+5000	cerebronexus_embedded	12	Mta2	ok	1.059			
+5000	cerebronexus_embedded	13	Myh9	ok	1.151			
+5000	cerebronexus_embedded	14	Ncoa3	ok	1.237			
+5000	cerebronexus_embedded	15	Pcdh15	ok	1.164			
+5000	cerebronexus_embedded	16	Prdm10	ok	1.194			
+5000	cerebronexus_embedded	17	Sat1	ok	1.091			
+5000	cerebronexus_embedded	18	Thoc3	ok	1.148			
+5000	cerebronexus_embedded	19	Trpc5	ok	1.064			
+5000	cerebronexus_embedded	20	Ypel5	ok	1.102	0.781	1.045	
+5000	shinycell	1	3110045C21Rik	ok	1.706	0.462	0.682	
+5000	shinycell	2	5730455P16Rik	ok	1.675			
+5000	shinycell	3	Ccdc71l	ok	1.371			
+5000	shinycell	4	Ccna2	ok	1.278			
+5000	shinycell	5	Dnajc6	ok	1.329			
+5000	shinycell	6	Efcab6	ok	1.347			
+5000	shinycell	7	Fam212b	ok	1.373			
+5000	shinycell	8	Haus8	ok	1.725			
+5000	shinycell	9	Herpud2	ok	1.415			
+5000	shinycell	10	Kcnh2	ok	1.223			
+5000	shinycell	11	Lrpprc	ok	1.445			
+5000	shinycell	12	Mta2	ok	1.229			
+5000	shinycell	13	Myh9	ok	1.253			
+5000	shinycell	14	Ncoa3	ok	1.217			
+5000	shinycell	15	Pcdh15	ok	1.23			
+5000	shinycell	16	Prdm10	ok	1.249			
+5000	shinycell	17	Sat1	ok	1.261			
+5000	shinycell	18	Thoc3	ok	1.254			
+5000	shinycell	19	Trpc5	ok	1.313			
+5000	shinycell	20	Ypel5	ok	1.573	0.416	0.722	
+5000	isee	1	3110045C21Rik	ok	2.306	1.313	0.842	
+5000	isee	2	5730455P16Rik	ok	2.21			
+5000	isee	3	Ccdc71l	ok	1.817			
+5000	isee	4	Ccna2	ok	1.614			
+5000	isee	5	Dnajc6	ok	1.714			
+5000	isee	6	Efcab6	ok	1.751			
+5000	isee	7	Fam212b	ok	1.843			
+5000	isee	8	Haus8	ok	1.694			
+5000	isee	9	Herpud2	ok	1.802			
+5000	isee	10	Kcnh2	ok	1.622			
+5000	isee	11	Lrpprc	ok	1.806			
+5000	isee	12	Mta2	ok	1.59			
+5000	isee	13	Myh9	ok	1.635			
+5000	isee	14	Ncoa3	ok	1.647			
+5000	isee	15	Pcdh15	ok	2.102			
+5000	isee	16	Prdm10	ok	1.71			
+5000	isee	17	Sat1	ok	1.594			
+5000	isee	18	Thoc3	ok	1.634			
+5000	isee	19	Trpc5	ok	1.633			
+5000	isee	20	Ypel5	ok	1.644	1.262	0.94	
+5000	cellxgene	1	3110045C21Rik	ok	1.9	0.319	0.691	
+5000	cellxgene	2	5730455P16Rik	ok	1.835			
+5000	cellxgene	3	Ccdc71l	ok	1.841			
+5000	cellxgene	4	Ccna2	ok	1.867			
+5000	cellxgene	5	Dnajc6	ok	1.935			
+5000	cellxgene	6	Efcab6	ok	1.85			
+5000	cellxgene	7	Fam212b	ok	1.862			
+5000	cellxgene	8	Haus8	ok	1.866			
+5000	cellxgene	9	Herpud2	ok	1.912			
+5000	cellxgene	10	Kcnh2	ok	1.876			
+5000	cellxgene	11	Lrpprc	ok	1.903			
+5000	cellxgene	12	Mta2	ok	1.866			
+5000	cellxgene	13	Myh9	ok	1.901			
+5000	cellxgene	14	Ncoa3	ok	1.876			
+5000	cellxgene	15	Pcdh15	ok	1.838			
+5000	cellxgene	16	Prdm10	ok	1.871			
+5000	cellxgene	17	Sat1	ok	1.917			
+5000	cellxgene	18	Thoc3	ok	1.872			
+5000	cellxgene	19	Trpc5	ok	1.876			
+5000	cellxgene	20	Ypel5	ok	1.874	0.319	0.694	
+5000	vitessce	1	3110045C21Rik	ok	1.878	0.028	0.797	
+5000	vitessce	2	5730455P16Rik	ok	1.859			
+5000	vitessce	3	Ccdc71l	ok	1.813			
+5000	vitessce	4	Ccna2	ok	1.847			
+5000	vitessce	5	Dnajc6	ok	1.898			
+5000	vitessce	6	Efcab6	ok	1.817			
+5000	vitessce	7	Fam212b	ok	1.84			
+5000	vitessce	8	Haus8	ok	1.779			
+5000	vitessce	9	Herpud2	ok	1.886			
+5000	vitessce	10	Kcnh2	ok	1.85			
+5000	vitessce	11	Lrpprc	ok	1.764			
+5000	vitessce	12	Mta2	ok	1.737			
+5000	vitessce	13	Myh9	ok	1.813			
+5000	vitessce	14	Ncoa3	ok	1.785			
+5000	vitessce	15	Pcdh15	ok	1.83			
+5000	vitessce	16	Prdm10	ok	1.824			
+5000	vitessce	17	Sat1	ok	1.837			
+5000	vitessce	18	Thoc3	ok	1.78			
+5000	vitessce	19	Trpc5	ok	1.812			
+5000	vitessce	20	Ypel5	ok	1.75	0.028	0.801	
+10000	cerebronexus_embedded	1	3110045C21Rik	ok	1.723	0.73	0.886	
+10000	cerebronexus_embedded	2	5730455P16Rik	ok	1.497			
+10000	cerebronexus_embedded	3	Ccdc71l	ok	1.331			
+10000	cerebronexus_embedded	4	Ccna2	ok	1.157			
+10000	cerebronexus_embedded	5	Dnajc6	ok	1.215			
+10000	cerebronexus_embedded	6	Efcab6	ok	1.065			
+10000	cerebronexus_embedded	7	Fam212b	ok	1.25			
+10000	cerebronexus_embedded	8	Haus8	ok	1.149			
+10000	cerebronexus_embedded	9	Herpud2	ok	1.258			
+10000	cerebronexus_embedded	10	Kcnh2	ok	1.152			
+10000	cerebronexus_embedded	11	Lrpprc	ok	1.184			
+10000	cerebronexus_embedded	12	Mta2	ok	1.121			
+10000	cerebronexus_embedded	13	Myh9	ok	1.136			
+10000	cerebronexus_embedded	14	Ncoa3	ok	1.182			
+10000	cerebronexus_embedded	15	Pcdh15	ok	1.195			
+10000	cerebronexus_embedded	16	Prdm10	ok	1.19			
+10000	cerebronexus_embedded	17	Sat1	ok	1.116			
+10000	cerebronexus_embedded	18	Thoc3	ok	1.189			
+10000	cerebronexus_embedded	19	Trpc5	ok	1.216			
+10000	cerebronexus_embedded	20	Ypel5	ok	1.117	0.829	1.038	
+10000	shinycell	1	3110045C21Rik	ok	1.629	0.471	0.695	
+10000	shinycell	2	5730455P16Rik	ok	1.681			
+10000	shinycell	3	Ccdc71l	ok	1.35			
+10000	shinycell	4	Ccna2	ok	1.205			
+10000	shinycell	5	Dnajc6	ok	1.37			
+10000	shinycell	6	Efcab6	ok	1.302			
+10000	shinycell	7	Fam212b	ok	1.379			
+10000	shinycell	8	Haus8	ok	1.201			
+10000	shinycell	9	Herpud2	ok	1.436			
+10000	shinycell	10	Kcnh2	ok	1.283			
+10000	shinycell	11	Lrpprc	ok	1.343			
+10000	shinycell	12	Mta2	ok	1.29			
+10000	shinycell	13	Myh9	ok	1.269			
+10000	shinycell	14	Ncoa3	ok	1.254			
+10000	shinycell	15	Pcdh15	ok	1.284			
+10000	shinycell	16	Prdm10	ok	1.371			
+10000	shinycell	17	Sat1	ok	1.196			
+10000	shinycell	18	Thoc3	ok	1.336			
+10000	shinycell	19	Trpc5	ok	1.278			
+10000	shinycell	20	Ypel5	ok	1.289	0.424	0.749	
+10000	isee	1	3110045C21Rik	ok	2.294	1.421	0.838	
+10000	isee	2	5730455P16Rik	ok	2.338			
+10000	isee	3	Ccdc71l	ok	1.801			
+10000	isee	4	Ccna2	ok	1.638			
+10000	isee	5	Dnajc6	ok	1.707			
+10000	isee	6	Efcab6	ok	1.696			
+10000	isee	7	Fam212b	ok	1.873			
+10000	isee	8	Haus8	ok	1.591			
+10000	isee	9	Herpud2	ok	1.782			
+10000	isee	10	Kcnh2	ok	1.618			
+10000	isee	11	Lrpprc	ok	1.663			
+10000	isee	12	Mta2	ok	1.535			
+10000	isee	13	Myh9	ok	1.483			
+10000	isee	14	Ncoa3	ok	1.644			
+10000	isee	15	Pcdh15	ok	1.797			
+10000	isee	16	Prdm10	ok	1.7			
+10000	isee	17	Sat1	ok	1.556			
+10000	isee	18	Thoc3	ok	1.63			
+10000	isee	19	Trpc5	ok	1.622			
+10000	isee	20	Ypel5	ok	1.59	1.373	0.939	
+10000	cellxgene	1	3110045C21Rik	ok	1.91	0.397	0.689	
+10000	cellxgene	2	5730455P16Rik	ok	1.98			
+10000	cellxgene	3	Ccdc71l	ok	1.871			
+10000	cellxgene	4	Ccna2	ok	1.876			
+10000	cellxgene	5	Dnajc6	ok	1.807			
+10000	cellxgene	6	Efcab6	ok	1.94			
+10000	cellxgene	7	Fam212b	ok	1.905			
+10000	cellxgene	8	Haus8	ok	1.834			
+10000	cellxgene	9	Herpud2	ok	1.856			
+10000	cellxgene	10	Kcnh2	ok	1.828			
+10000	cellxgene	11	Lrpprc	ok	1.897			
+10000	cellxgene	12	Mta2	ok	1.903			
+10000	cellxgene	13	Myh9	ok	1.942			
+10000	cellxgene	14	Ncoa3	ok	1.853			
+10000	cellxgene	15	Pcdh15	ok	1.835			
+10000	cellxgene	16	Prdm10	ok	1.854			
+10000	cellxgene	17	Sat1	ok	1.906			
+10000	cellxgene	18	Thoc3	ok	1.909			
+10000	cellxgene	19	Trpc5	ok	1.807			
+10000	cellxgene	20	Ypel5	ok	1.902	0.397	0.694	
+10000	vitessce	1	3110045C21Rik	ok	1.904	0.028	0.84	
+10000	vitessce	2	5730455P16Rik	ok	1.921			
+10000	vitessce	3	Ccdc71l	ok	1.838			
+10000	vitessce	4	Ccna2	ok	1.882			
+10000	vitessce	5	Dnajc6	ok	1.838			
+10000	vitessce	6	Efcab6	ok	1.839			
+10000	vitessce	7	Fam212b	ok	1.877			
+10000	vitessce	8	Haus8	ok	1.906			
+10000	vitessce	9	Herpud2	ok	1.787			
+10000	vitessce	10	Kcnh2	ok	1.837			
+10000	vitessce	11	Lrpprc	ok	1.817			
+10000	vitessce	12	Mta2	ok	1.836			
+10000	vitessce	13	Myh9	ok	1.871			
+10000	vitessce	14	Ncoa3	ok	1.851			
+10000	vitessce	15	Pcdh15	ok	1.845			
+10000	vitessce	16	Prdm10	ok	1.829			
+10000	vitessce	17	Sat1	ok	1.85			
+10000	vitessce	18	Thoc3	ok	1.848			
+10000	vitessce	19	Trpc5	ok	1.9			
+10000	vitessce	20	Ypel5	ok	1.917	0.028	0.845	
+20000	cerebronexus_embedded	1	3110045C21Rik	ok	1.579	0.92	0.902	
+20000	cerebronexus_embedded	2	5730455P16Rik	ok	1.761			
+20000	cerebronexus_embedded	3	Ccdc71l	ok	1.252			
+20000	cerebronexus_embedded	4	Ccna2	ok	1.085			
+20000	cerebronexus_embedded	5	Dnajc6	ok	1.172			
+20000	cerebronexus_embedded	6	Efcab6	ok	1.179			
+20000	cerebronexus_embedded	7	Fam212b	ok	1.409			
+20000	cerebronexus_embedded	8	Haus8	ok	1.163			
+20000	cerebronexus_embedded	9	Herpud2	ok	1.292			
+20000	cerebronexus_embedded	10	Kcnh2	ok	1.165			
+20000	cerebronexus_embedded	11	Lrpprc	ok	1.227			
+20000	cerebronexus_embedded	12	Mta2	ok	1.092			
+20000	cerebronexus_embedded	13	Myh9	ok	1.089			
+20000	cerebronexus_embedded	14	Ncoa3	ok	1.208			
+20000	cerebronexus_embedded	15	Pcdh15	ok	1.198			
+20000	cerebronexus_embedded	16	Prdm10	ok	1.28			
+20000	cerebronexus_embedded	17	Sat1	ok	1.007			
+20000	cerebronexus_embedded	18	Thoc3	ok	1.067			
+20000	cerebronexus_embedded	19	Trpc5	ok	1.055			
+20000	cerebronexus_embedded	20	Ypel5	ok	1.167	1.063	1.068	
+20000	shinycell	1	3110045C21Rik	ok	1.61	0.488	0.704	
+20000	shinycell	2	5730455P16Rik	ok	1.686			
+20000	shinycell	3	Ccdc71l	ok	1.479			
+20000	shinycell	4	Ccna2	ok	1.307			
+20000	shinycell	5	Dnajc6	ok	1.355			
+20000	shinycell	6	Efcab6	ok	1.31			
+20000	shinycell	7	Fam212b	ok	1.309			
+20000	shinycell	8	Haus8	ok	1.22			
+20000	shinycell	9	Herpud2	ok	1.377			
+20000	shinycell	10	Kcnh2	ok	1.257			
+20000	shinycell	11	Lrpprc	ok	1.334			
+20000	shinycell	12	Mta2	ok	1.291			
+20000	shinycell	13	Myh9	ok	1.24			
+20000	shinycell	14	Ncoa3	ok	1.249			
+20000	shinycell	15	Pcdh15	ok	1.347			
+20000	shinycell	16	Prdm10	ok	1.249			
+20000	shinycell	17	Sat1	ok	1.343			
+20000	shinycell	18	Thoc3	ok	1.254			
+20000	shinycell	19	Trpc5	ok	1.268			
+20000	shinycell	20	Ypel5	ok	1.233	0.442	0.75	
+20000	isee	1	3110045C21Rik	ok	2.287	1.69	0.834	
+20000	isee	2	5730455P16Rik	ok	2.254			
+20000	isee	3	Ccdc71l	ok	1.749			
+20000	isee	4	Ccna2	ok	1.611			
+20000	isee	5	Dnajc6	ok	1.706			
+20000	isee	6	Efcab6	ok	1.686			
+20000	isee	7	Fam212b	ok	1.848			
+20000	isee	8	Haus8	ok	1.555			
+20000	isee	9	Herpud2	ok	1.777			
+20000	isee	10	Kcnh2	ok	1.62			
+20000	isee	11	Lrpprc	ok	1.697			
+20000	isee	12	Mta2	ok	1.562			
+20000	isee	13	Myh9	ok	1.597			
+20000	isee	14	Ncoa3	ok	1.658			
+20000	isee	15	Pcdh15	ok	1.737			
+20000	isee	16	Prdm10	ok	1.681			
+20000	isee	17	Sat1	ok	1.539			
+20000	isee	18	Thoc3	ok	1.618			
+20000	isee	19	Trpc5	ok	1.559			
+20000	isee	20	Ypel5	ok	1.699	1.759	0.921	
+20000	cellxgene	1	3110045C21Rik	ok	1.906	0.547	0.689	
+20000	cellxgene	2	5730455P16Rik	ok	1.856			
+20000	cellxgene	3	Ccdc71l	ok	1.798			
+20000	cellxgene	4	Ccna2	ok	1.905			
+20000	cellxgene	5	Dnajc6	ok	1.845			
+20000	cellxgene	6	Efcab6	ok	1.878			
+20000	cellxgene	7	Fam212b	ok	1.864			
+20000	cellxgene	8	Haus8	ok	1.854			
+20000	cellxgene	9	Herpud2	ok	1.901			
+20000	cellxgene	10	Kcnh2	ok	1.844			
+20000	cellxgene	11	Lrpprc	ok	1.885			
+20000	cellxgene	12	Mta2	ok	1.865			
+20000	cellxgene	13	Myh9	ok	1.903			
+20000	cellxgene	14	Ncoa3	ok	1.865			
+20000	cellxgene	15	Pcdh15	ok	1.778			
+20000	cellxgene	16	Prdm10	ok	1.867			
+20000	cellxgene	17	Sat1	ok	1.91			
+20000	cellxgene	18	Thoc3	ok	1.878			
+20000	cellxgene	19	Trpc5	ok	1.859			
+20000	cellxgene	20	Ypel5	ok	1.92	0.547	0.701	
+20000	vitessce	1	3110045C21Rik	ok	1.964	0.028	0.874	
+20000	vitessce	2	5730455P16Rik	ok	1.929			
+20000	vitessce	3	Ccdc71l	ok	1.869			
+20000	vitessce	4	Ccna2	ok	2.028			
+20000	vitessce	5	Dnajc6	ok	1.944			
+20000	vitessce	6	Efcab6	ok	1.898			
+20000	vitessce	7	Fam212b	ok	1.901			
+20000	vitessce	8	Haus8	ok	1.877			
+20000	vitessce	9	Herpud2	ok	1.911			
+20000	vitessce	10	Kcnh2	ok	1.874			
+20000	vitessce	11	Lrpprc	ok	1.885			
+20000	vitessce	12	Mta2	ok	2.042			
+20000	vitessce	13	Myh9	ok	1.926			
+20000	vitessce	14	Ncoa3	ok	1.898			
+20000	vitessce	15	Pcdh15	ok	1.933			
+20000	vitessce	16	Prdm10	ok	1.948			
+20000	vitessce	17	Sat1	ok	1.901			
+20000	vitessce	18	Thoc3	ok	1.95			
+20000	vitessce	19	Trpc5	ok	1.917			
+20000	vitessce	20	Ypel5	ok	1.908	0.028	0.88	
+50000	cerebronexus_embedded	1	3110045C21Rik	ok	1.554	1.598	0.928	
+50000	cerebronexus_embedded	2	5730455P16Rik	ok	1.624			
+50000	cerebronexus_embedded	3	Ccdc71l	ok	1.25			
+50000	cerebronexus_embedded	4	Ccna2	ok	1.146			
+50000	cerebronexus_embedded	5	Dnajc6	ok	1.146			
+50000	cerebronexus_embedded	6	Efcab6	ok	1.192			
+50000	cerebronexus_embedded	7	Fam212b	ok	1.248			
+50000	cerebronexus_embedded	8	Haus8	ok	1.312			
+50000	cerebronexus_embedded	9	Herpud2	ok	1.505			
+50000	cerebronexus_embedded	10	Kcnh2	ok	1.08			
+50000	cerebronexus_embedded	11	Lrpprc	ok	1.236			
+50000	cerebronexus_embedded	12	Mta2	ok	1.22			
+50000	cerebronexus_embedded	13	Myh9	ok	1.305			
+50000	cerebronexus_embedded	14	Ncoa3	ok	1.169			
+50000	cerebronexus_embedded	15	Pcdh15	ok	1.531			
+50000	cerebronexus_embedded	16	Prdm10	ok	1.621			
+50000	cerebronexus_embedded	17	Sat1	ok	1.366			
+50000	cerebronexus_embedded	18	Thoc3	ok	1.404			
+50000	cerebronexus_embedded	19	Trpc5	ok	1.256			
+50000	cerebronexus_embedded	20	Ypel5	ok	1.167	1.69	1.095	
+50000	shinycell	1	3110045C21Rik	ok	2.012	0.5	0.691	
+50000	shinycell	2	5730455P16Rik	ok	1.808			
+50000	shinycell	3	Ccdc71l	ok	1.81			
+50000	shinycell	4	Ccna2	ok	1.619			
+50000	shinycell	5	Dnajc6	ok	1.318			
+50000	shinycell	6	Efcab6	ok	1.721			
+50000	shinycell	7	Fam212b	ok	1.368			
+50000	shinycell	8	Haus8	ok	1.387			
+50000	shinycell	9	Herpud2	ok	1.373			
+50000	shinycell	10	Kcnh2	ok	1.527			
+50000	shinycell	11	Lrpprc	ok	1.79			
+50000	shinycell	12	Mta2	ok	1.615			
+50000	shinycell	13	Myh9	ok	1.656			
+50000	shinycell	14	Ncoa3	ok	1.322			
+50000	shinycell	15	Pcdh15	ok	1.799			
+50000	shinycell	16	Prdm10	ok	1.296			
+50000	shinycell	17	Sat1	ok	1.271			
+50000	shinycell	18	Thoc3	ok	1.339			
+50000	shinycell	19	Trpc5	ok	1.62			
+50000	shinycell	20	Ypel5	ok	1.629	0.445	0.726	
+50000	isee	1	3110045C21Rik	ok	2.69	2.476	0.855	
+50000	isee	2	5730455P16Rik	ok	2.574			
+50000	isee	3	Ccdc71l	ok	2.158			
+50000	isee	4	Ccna2	ok	2.024			
+50000	isee	5	Dnajc6	ok	2.135			
+50000	isee	6	Efcab6	ok	2.091			
+50000	isee	7	Fam212b	ok	2.207			
+50000	isee	8	Haus8	ok	2.074			
+50000	isee	9	Herpud2	ok	2.267			
+50000	isee	10	Kcnh2	ok	2.123			
+50000	isee	11	Lrpprc	ok	2.108			
+50000	isee	12	Mta2	ok	2.02			
+50000	isee	13	Myh9	ok	1.907			
+50000	isee	14	Ncoa3	ok	2.028			
+50000	isee	15	Pcdh15	ok	2.225			
+50000	isee	16	Prdm10	ok	2.252			
+50000	isee	17	Sat1	ok	1.97			
+50000	isee	18	Thoc3	ok	2.055			
+50000	isee	19	Trpc5	ok	2.064			
+50000	isee	20	Ypel5	ok	2.059	2.466	0.937	
+50000	cellxgene	1	3110045C21Rik	ok	1.896	1.013	0.694	
+50000	cellxgene	2	5730455P16Rik	ok	1.849			
+50000	cellxgene	3	Ccdc71l	ok	1.851			
+50000	cellxgene	4	Ccna2	ok	1.847			
+50000	cellxgene	5	Dnajc6	ok	1.946			
+50000	cellxgene	6	Efcab6	ok	1.846			
+50000	cellxgene	7	Fam212b	ok	1.84			
+50000	cellxgene	8	Haus8	ok	1.905			
+50000	cellxgene	9	Herpud2	ok	1.87			
+50000	cellxgene	10	Kcnh2	ok	1.988			
+50000	cellxgene	11	Lrpprc	ok	1.879			
+50000	cellxgene	12	Mta2	ok	1.847			
+50000	cellxgene	13	Myh9	ok	1.865			
+50000	cellxgene	14	Ncoa3	ok	1.851			
+50000	cellxgene	15	Pcdh15	ok	1.939			
+50000	cellxgene	16	Prdm10	ok	1.866			
+50000	cellxgene	17	Sat1	ok	1.857			
+50000	cellxgene	18	Thoc3	ok	1.854			
+50000	cellxgene	19	Trpc5	ok	1.872			
+50000	cellxgene	20	Ypel5	ok	1.845	1.013	0.705	
+50000	vitessce	1	3110045C21Rik	ok	2.076	0.028	0.917	
+50000	vitessce	2	5730455P16Rik	ok	2.035			
+50000	vitessce	3	Ccdc71l	ok	2.035			
+50000	vitessce	4	Ccna2	ok	2.024			
+50000	vitessce	5	Dnajc6	ok	2.055			
+50000	vitessce	6	Efcab6	ok	2.03			
+50000	vitessce	7	Fam212b	ok	1.994			
+50000	vitessce	8	Haus8	ok	2.067			
+50000	vitessce	9	Herpud2	ok	2.086			
+50000	vitessce	10	Kcnh2	ok	2.102			
+50000	vitessce	11	Lrpprc	ok	2.0			
+50000	vitessce	12	Mta2	ok	2.057			
+50000	vitessce	13	Myh9	ok	2.005			
+50000	vitessce	14	Ncoa3	ok	2.08			
+50000	vitessce	15	Pcdh15	ok	1.972			
+50000	vitessce	16	Prdm10	ok	2.001			
+50000	vitessce	17	Sat1	ok	1.968			
+50000	vitessce	18	Thoc3	ok	2.097			
+50000	vitessce	19	Trpc5	ok	2.05			
+50000	vitessce	20	Ypel5	ok	1.981	0.028	0.953	
+100000	cerebronexus_embedded	1	3110045C21Rik	ok	2.003	2.697	0.927	
+100000	cerebronexus_embedded	2	5730455P16Rik	ok	1.981			
+100000	cerebronexus_embedded	3	Ccdc71l	ok	1.61			
+100000	cerebronexus_embedded	4	Ccna2	ok	1.501			
+100000	cerebronexus_embedded	5	Dnajc6	ok	1.195			
+100000	cerebronexus_embedded	6	Efcab6	ok	1.56			
+100000	cerebronexus_embedded	7	Fam212b	ok	1.311			
+100000	cerebronexus_embedded	8	Haus8	ok	1.155			
+100000	cerebronexus_embedded	9	Herpud2	ok	1.264			
+100000	cerebronexus_embedded	10	Kcnh2	ok	1.073			
+100000	cerebronexus_embedded	11	Lrpprc	ok	1.695			
+100000	cerebronexus_embedded	12	Mta2	ok	1.169			
+100000	cerebronexus_embedded	13	Myh9	ok	1.078			
+100000	cerebronexus_embedded	14	Ncoa3	ok	1.173			
+100000	cerebronexus_embedded	15	Pcdh15	ok	1.139			
+100000	cerebronexus_embedded	16	Prdm10	ok	1.321			
+100000	cerebronexus_embedded	17	Sat1	ok	1.095			
+100000	cerebronexus_embedded	18	Thoc3	ok	1.261			
+100000	cerebronexus_embedded	19	Trpc5	ok	1.18			
+100000	cerebronexus_embedded	20	Ypel5	ok	1.174	2.794	1.093	
+100000	shinycell	1	3110045C21Rik	ok	2.058	0.544	0.687	
+100000	shinycell	2	5730455P16Rik	ok	2.101			
+100000	shinycell	3	Ccdc71l	ok	1.714			
+100000	shinycell	4	Ccna2	ok	1.642			
+100000	shinycell	5	Dnajc6	ok	1.704			
+100000	shinycell	6	Efcab6	ok	1.689			
+100000	shinycell	7	Fam212b	ok	1.866			
+100000	shinycell	8	Haus8	ok	2.114			
+100000	shinycell	9	Herpud2	ok	2.609			
+100000	shinycell	10	Kcnh2	ok	1.821			
+100000	shinycell	11	Lrpprc	ok	1.797			
+100000	shinycell	12	Mta2	ok	1.675			
+100000	shinycell	13	Myh9	ok	1.722			
+100000	shinycell	14	Ncoa3	ok	1.671			
+100000	shinycell	15	Pcdh15	ok	1.82			
+100000	shinycell	16	Prdm10	ok	1.729			
+100000	shinycell	17	Sat1	ok	1.632			
+100000	shinycell	18	Thoc3	ok	1.695			
+100000	shinycell	19	Trpc5	ok	1.613			
+100000	shinycell	20	Ypel5	ok	1.671	0.488	0.698	
+100000	isee	1	3110045C21Rik	ok	3.14	3.502	0.842	
+100000	isee	2	5730455P16Rik	ok	3.003			
+100000	isee	3	Ccdc71l	ok	2.657			
+100000	isee	4	Ccna2	ok	2.441			
+100000	isee	5	Dnajc6	ok	2.532			
+100000	isee	6	Efcab6	ok	2.491			
+100000	isee	7	Fam212b	ok	2.594			
+100000	isee	8	Haus8	ok	2.482			
+100000	isee	9	Herpud2	ok	2.745			
+100000	isee	10	Kcnh2	ok	2.494			
+100000	isee	11	Lrpprc	ok	2.516			
+100000	isee	12	Mta2	ok	2.4			
+100000	isee	13	Myh9	ok	2.376			
+100000	isee	14	Ncoa3	ok	2.481			
+100000	isee	15	Pcdh15	ok	2.565			
+100000	isee	16	Prdm10	ok	2.574			
+100000	isee	17	Sat1	ok	2.362			
+100000	isee	18	Thoc3	ok	2.485			
+100000	isee	19	Trpc5	ok	2.407			
+100000	isee	20	Ypel5	ok	2.425	3.922	0.943	
+100000	cellxgene	1	3110045C21Rik	ok	1.827	1.756	0.707	
+100000	cellxgene	2	5730455P16Rik	ok	1.857			
+100000	cellxgene	3	Ccdc71l	ok	1.966			
+100000	cellxgene	4	Ccna2	ok	1.804			
+100000	cellxgene	5	Dnajc6	ok	1.829			
+100000	cellxgene	6	Efcab6	ok	1.884			
+100000	cellxgene	7	Fam212b	ok	1.84			
+100000	cellxgene	8	Haus8	ok	1.85			
+100000	cellxgene	9	Herpud2	ok	1.909			
+100000	cellxgene	10	Kcnh2	ok	1.832			
+100000	cellxgene	11	Lrpprc	ok	1.876			
+100000	cellxgene	12	Mta2	ok	2.075			
+100000	cellxgene	13	Myh9	ok	1.891			
+100000	cellxgene	14	Ncoa3	ok	1.85			
+100000	cellxgene	15	Pcdh15	ok	1.805			
+100000	cellxgene	16	Prdm10	ok	1.847			
+100000	cellxgene	17	Sat1	ok	1.913			
+100000	cellxgene	18	Thoc3	ok	1.845			
+100000	cellxgene	19	Trpc5	ok	1.953			
+100000	cellxgene	20	Ypel5	ok	1.992	1.756	0.721	
+100000	vitessce	1	3110045C21Rik	ok	2.148	0.028	0.982	
+100000	vitessce	2	5730455P16Rik	ok	2.13			
+100000	vitessce	3	Ccdc71l	ok	2.178			
+100000	vitessce	4	Ccna2	ok	2.13			
+100000	vitessce	5	Dnajc6	ok	2.211			
+100000	vitessce	6	Efcab6	ok	2.092			
+100000	vitessce	7	Fam212b	ok	2.098			
+100000	vitessce	8	Haus8	ok	2.249			
+100000	vitessce	9	Herpud2	ok	2.131			
+100000	vitessce	10	Kcnh2	ok	2.147			
+100000	vitessce	11	Lrpprc	ok	2.164			
+100000	vitessce	12	Mta2	ok	2.211			
+100000	vitessce	13	Myh9	ok	2.209			
+100000	vitessce	14	Ncoa3	ok	2.117			
+100000	vitessce	15	Pcdh15	ok	2.148			
+100000	vitessce	16	Prdm10	ok	2.221			
+100000	vitessce	17	Sat1	ok	2.095			
+100000	vitessce	18	Thoc3	ok	2.245			
+100000	vitessce	19	Trpc5	ok	2.096			
+100000	vitessce	20	Ypel5	ok	2.153	0.028	1.124	
+1300000	cellxgene	1	3110045C21Rik	ok	1.967	34.215	0.9	
+1300000	cellxgene	2	5730455P16Rik	ok	12.038			
+1300000	cellxgene	3	Ccdc71l	ok	2.322			
+1300000	cellxgene	4	Ccna2	ok	17.905			
+1300000	cellxgene	5	Dnajc6	ok	3.047			
+1300000	cellxgene	6	Efcab6	ok	14.443			
+1300000	cellxgene	7	Fam212b	ok	2.526			
+1300000	cellxgene	8	Haus8	ok	17.705			
+1300000	cellxgene	9	Herpud2	ok	2.721			
+1300000	cellxgene	10	Kcnh2	ok	21.435			
+1300000	cellxgene	11	Lrpprc	ok	2.153			
+1300000	cellxgene	12	Mta2	ok	17.465			
+1300000	cellxgene	13	Myh9	ok	11.421			
+1300000	cellxgene	14	Ncoa3	ok	11.757			
+1300000	cellxgene	15	Pcdh15	ok	12.038			
+1300000	cellxgene	16	Prdm10	ok	11.563			
+1300000	cellxgene	17	Sat1	ok	11.245			
+1300000	cellxgene	18	Thoc3	ok	11.761			
+1300000	cellxgene	19	Trpc5	ok	11.441			
+1300000	cellxgene	20	Ypel5	ok	11.7	20.251	1.284	
+1300000	vitessce	1	3110045C21Rik	ok	7.023	0.028	2.281	
+1300000	vitessce	2	5730455P16Rik	ok	5.189			
+1300000	vitessce	3	Ccdc71l	ok	5.307			
+1300000	vitessce	4	Ccna2	ok	5.267			
+1300000	vitessce	5	Dnajc6	ok	5.308			
+1300000	vitessce	6	Efcab6	ok	5.187			
+1300000	vitessce	7	Fam212b	ok	5.459			
+1300000	vitessce	8	Haus8	ok	5.065			
+1300000	vitessce	9	Herpud2	ok	5.319			
+1300000	vitessce	10	Kcnh2	ok	5.275			
+1300000	vitessce	11	Lrpprc	ok	5.269			
+1300000	vitessce	12	Mta2	ok	5.076			
+1300000	vitessce	13	Myh9	ok	5.185			
+1300000	vitessce	14	Ncoa3	ok	5.156			
+1300000	vitessce	15	Pcdh15	ok	5.129			
+1300000	vitessce	16	Prdm10	ok	5.088			
+1300000	vitessce	17	Sat1	ok	5.168			
+1300000	vitessce	18	Thoc3	ok	5.349			
+1300000	vitessce	19	Trpc5	ok	5.405			
+1300000	vitessce	20	Ypel5	ok	5.125	0.028	2.281	
+5000	cerebronexus_h5	1	3110045C21Rik	ok	1.844	0.357	0.88	
+5000	cerebronexus_h5	2	5730455P16Rik	ok	1.571			
+5000	cerebronexus_h5	3	Ccdc71l	ok	1.348			
+5000	cerebronexus_h5	4	Ccna2	ok	1.102			
+5000	cerebronexus_h5	5	Dnajc6	ok	1.097			
+5000	cerebronexus_h5	6	Efcab6	ok	1.164			
+5000	cerebronexus_h5	7	Fam212b	ok	1.324			
+5000	cerebronexus_h5	8	Haus8	ok	0.855			
+5000	cerebronexus_h5	9	Herpud2	ok	1.224			
+5000	cerebronexus_h5	10	Kcnh2	ok	1.066			
+5000	cerebronexus_h5	11	Lrpprc	ok	1.328			
+5000	cerebronexus_h5	12	Mta2	ok	1.312			
+5000	cerebronexus_h5	13	Myh9	ok	1.299			
+5000	cerebronexus_h5	14	Ncoa3	ok	1.66			
+5000	cerebronexus_h5	15	Pcdh15	ok	1.809			
+5000	cerebronexus_h5	16	Prdm10	ok	1.449			
+5000	cerebronexus_h5	17	Sat1	ok	1.132			
+5000	cerebronexus_h5	18	Thoc3	ok	1.41			
+5000	cerebronexus_h5	19	Trpc5	ok	1.674			
+5000	cerebronexus_h5	20	Ypel5	ok	1.558	0.474	1.073	
+10000	cerebronexus_h5	1	3110045C21Rik	ok	2.3	0.353	0.86	
+10000	cerebronexus_h5	2	5730455P16Rik	ok	1.991			
+10000	cerebronexus_h5	3	Ccdc71l	ok	1.41			
+10000	cerebronexus_h5	4	Ccna2	ok	1.455			
+10000	cerebronexus_h5	5	Dnajc6	ok	1.231			
+10000	cerebronexus_h5	6	Efcab6	ok	1.536			
+10000	cerebronexus_h5	7	Fam212b	ok	1.807			
+10000	cerebronexus_h5	8	Haus8	ok	1.502			
+10000	cerebronexus_h5	9	Herpud2	ok	1.619			
+10000	cerebronexus_h5	10	Kcnh2	ok	1.502			
+10000	cerebronexus_h5	11	Lrpprc	ok	1.461			
+10000	cerebronexus_h5	12	Mta2	ok	1.25			
+10000	cerebronexus_h5	13	Myh9	ok	1.56			
+10000	cerebronexus_h5	14	Ncoa3	ok	1.09			
+10000	cerebronexus_h5	15	Pcdh15	ok	1.208			
+10000	cerebronexus_h5	16	Prdm10	ok	1.614			
+10000	cerebronexus_h5	17	Sat1	ok	1.162			
+10000	cerebronexus_h5	18	Thoc3	ok	1.472			
+10000	cerebronexus_h5	19	Trpc5	ok	1.584			
+10000	cerebronexus_h5	20	Ypel5	ok	1.484	0.443	1.077	
+20000	cerebronexus_h5	1	3110045C21Rik	ok	1.846	0.357	0.895	
+20000	cerebronexus_h5	2	5730455P16Rik	ok	1.652			
+20000	cerebronexus_h5	3	Ccdc71l	ok	0.881			
+20000	cerebronexus_h5	4	Ccna2	ok	1.186			
+20000	cerebronexus_h5	5	Dnajc6	ok	1.103			
+20000	cerebronexus_h5	6	Efcab6	ok	1.216			
+20000	cerebronexus_h5	7	Fam212b	ok	1.317			
+20000	cerebronexus_h5	8	Haus8	ok	1.154			
+20000	cerebronexus_h5	9	Herpud2	ok	1.006			
+20000	cerebronexus_h5	10	Kcnh2	ok	0.769			
+20000	cerebronexus_h5	11	Lrpprc	ok	1.217			
+20000	cerebronexus_h5	12	Mta2	ok	1.271			
+20000	cerebronexus_h5	13	Myh9	ok	1.129			
+20000	cerebronexus_h5	14	Ncoa3	ok	1.328			
+20000	cerebronexus_h5	15	Pcdh15	ok	1.229			
+20000	cerebronexus_h5	16	Prdm10	ok	1.293			
+20000	cerebronexus_h5	17	Sat1	ok	1.089			
+20000	cerebronexus_h5	18	Thoc3	ok	1.197			
+20000	cerebronexus_h5	19	Trpc5	ok	1.144			
+20000	cerebronexus_h5	20	Ypel5	ok	1.334	0.48	1.08	
+50000	cerebronexus_h5	1	3110045C21Rik	ok	1.686	0.314	0.896	
+50000	cerebronexus_h5	2	5730455P16Rik	ok	2.008			
+50000	cerebronexus_h5	3	Ccdc71l	ok	1.712			
+50000	cerebronexus_h5	4	Ccna2	ok	1.463			
+50000	cerebronexus_h5	5	Dnajc6	ok	1.567			
+50000	cerebronexus_h5	6	Efcab6	ok	1.801			
+50000	cerebronexus_h5	7	Fam212b	ok	1.533			
+50000	cerebronexus_h5	8	Haus8	ok	1.538			
+50000	cerebronexus_h5	9	Herpud2	ok	1.526			
+50000	cerebronexus_h5	10	Kcnh2	ok	1.531			
+50000	cerebronexus_h5	11	Lrpprc	ok	1.608			
+50000	cerebronexus_h5	12	Mta2	ok	1.639			
+50000	cerebronexus_h5	13	Myh9	ok	1.154			
+50000	cerebronexus_h5	14	Ncoa3	ok	1.647			
+50000	cerebronexus_h5	15	Pcdh15	ok	1.542			
+50000	cerebronexus_h5	16	Prdm10	ok	1.502			
+50000	cerebronexus_h5	17	Sat1	ok	1.289			
+50000	cerebronexus_h5	18	Thoc3	ok	1.507			
+50000	cerebronexus_h5	19	Trpc5	ok	1.279			
+50000	cerebronexus_h5	20	Ypel5	ok	1.753	0.475	1.079	
+100000	cerebronexus_h5	1	3110045C21Rik	ok	1.637	0.354	0.911	
+100000	cerebronexus_h5	2	5730455P16Rik	ok	1.673			
+100000	cerebronexus_h5	3	Ccdc71l	ok	1.388			
+100000	cerebronexus_h5	4	Ccna2	ok	1.153			
+100000	cerebronexus_h5	5	Dnajc6	ok	1.12			
+100000	cerebronexus_h5	6	Efcab6	ok	1.224			
+100000	cerebronexus_h5	7	Fam212b	ok	1.293			
+100000	cerebronexus_h5	8	Haus8	ok	0.881			
+100000	cerebronexus_h5	9	Herpud2	ok	1.242			
+100000	cerebronexus_h5	10	Kcnh2	ok	1.355			
+100000	cerebronexus_h5	11	Lrpprc	ok	0.964			
+100000	cerebronexus_h5	12	Mta2	ok	2.051			
+100000	cerebronexus_h5	13	Myh9	ok	1.376			
+100000	cerebronexus_h5	14	Ncoa3	ok	1.629			
+100000	cerebronexus_h5	15	Pcdh15	ok	1.546			
+100000	cerebronexus_h5	16	Prdm10	ok	1.603			
+100000	cerebronexus_h5	17	Sat1	ok	1.643			
+100000	cerebronexus_h5	18	Thoc3	ok	1.588			
+100000	cerebronexus_h5	19	Trpc5	ok	1.37			
+100000	cerebronexus_h5	20	Ypel5	ok	1.563	0.47	1.085	
+1300000	cerebronexus_h5	1	3110045C21Rik	ok	1.588	0.457	1.264	
+1300000	cerebronexus_h5	2	5730455P16Rik	ok	1.664			
+1300000	cerebronexus_h5	3	Ccdc71l	ok	1.345			
+1300000	cerebronexus_h5	4	Ccna2	ok	1.319			
+1300000	cerebronexus_h5	5	Dnajc6	ok	1.244			
+1300000	cerebronexus_h5	6	Efcab6	ok	1.255			
+1300000	cerebronexus_h5	7	Fam212b	ok	1.367			
+1300000	cerebronexus_h5	8	Haus8	ok	1.289			
+1300000	cerebronexus_h5	9	Herpud2	ok	1.347			
+1300000	cerebronexus_h5	10	Kcnh2	ok	1.215			
+1300000	cerebronexus_h5	11	Lrpprc	ok	1.23			
+1300000	cerebronexus_h5	12	Mta2	ok	1.557			
+1300000	cerebronexus_h5	13	Myh9	ok	1.205			
+1300000	cerebronexus_h5	14	Ncoa3	ok	1.191			
+1300000	cerebronexus_h5	15	Pcdh15	ok	1.315			
+1300000	cerebronexus_h5	16	Prdm10	ok	1.366			
+1300000	cerebronexus_h5	17	Sat1	ok	1.277			
+1300000	cerebronexus_h5	18	Thoc3	ok	1.51			
+1300000	cerebronexus_h5	19	Trpc5	ok	1.073			
+1300000	cerebronexus_h5	20	Ypel5	ok	1.259	0.682	1.672	

@@ -1,9 +1,0 @@
-{
-  "tool": "CerebroNexus",
-  "dataset": "I1",
-  "route": "h5ad-nogroups",
-  "required_args": "none given (groups omitted on purpose)",
-  "status": "error",
-  "error_message": "`groups` is required. Character/factor columns in colData: louvain",
-  "warnings": []
-}
